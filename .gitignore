@@ -1,0 +1,12 @@
+# === Keep chapters private ===
+chapters/
+
+# === Python environment & metadata ===
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# === System/editor files ===
+.DS_Store
+*.swp
