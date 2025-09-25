@@ -1,0 +1,156 @@
+Yes — **100% correct**: if your goal is a high-quality LLM experience (RAG, character tone, reasoning, internal logic, POV tracking), then:
+
+> ✅ **Chunk by scene**,
+> ❌ Not by chapter
+> ❌ Not by token count
+
+---
+
+## 🧠 Why Scene-Based Chunking is Superior
+
+* Scenes are **semantically coherent**: they have consistent tone, speaker, POV, action.
+* GPT can reason better over *a single scene* than an arbitrary 500-token slice.
+* You avoid “cut-off mid-dialogue” issues that mess with both summarization and retrieval.
+
+So the question becomes:
+
+> **How do you detect where a scene starts and ends — especially if it's not cleanly chapter-bound?**
+
+Let’s break it down:
+
+---
+
+## 🔍 Step-by-Step: How to Detect Scene Boundaries
+
+### ⚙️ 1. **Use Heuristics First (for automation)**
+
+You can get surprisingly far by auto-chunking based on these clues:
+
+| Signal                                    | What it means                                                     |
+| ----------------------------------------- | ----------------------------------------------------------------- |
+| 🧵 Paragraph gap > 1 line                 | Potential scene change                                            |
+| 🗣️ Sudden shift in speaker focus         | e.g. “Meanwhile, Arnold…”                                         |
+| ⏱️ Time skip phrases                      | "Later that day", "After resting for a while", "The next morning" |
+| 📍 Location change                        | “In the city”, “Back at the camp”, “Inside the dungeon”           |
+| 💭 Tone/POV shift                         | From dialogue to introspection, or from Jake to Arnold            |
+| 📦 Tutorial boxes or level-up text blocks | Often signal transitions                                          |
+| 💥 Fights starting/ending                 | Often have a distinct arc, worth isolating                        |
+
+You can detect these via:
+
+* regex on key phrases
+* line spacing
+* “speaker swap” detection (e.g. `“Jake said”` → `“Arnold muttered”`)
+
+#### 💡 Pro tip: Combine multiple weak signals into one stronger rule.
+
+---
+
+### 🤖 2. **Use GPT to label boundaries (semi-automated pass)**
+
+Once you have a first-pass chunking, you can feed it into a prompt like:
+
+```markdown
+### INSTRUCTIONS:
+Mark the text where a new *scene* begins. A scene is a coherent unit of time, place, and character focus. Use `=== SCENE START ===` and `=== SCENE END ===` to mark the boundaries.
+
+Keep scenes relatively short and cohesive (2–10 paragraphs). If a scene continues across a major topic change, treat it as a new scene.
+
+### INPUT:
+Chapter 1165
+
+[chapter text goes here]
+
+### OUTPUT:
+=== SCENE START ===
+[scene text]
+=== SCENE END ===
+...
+```
+
+Or ask for:
+
+* Summary of each scene
+* POV tag
+* Characters present
+* Fight vs. dialogue vs. travel
+
+You can use this output to generate your scene-level `.json` index automatically.
+
+---
+
+### 🧭 3. **How to Handle Multi-Chapter Scenes**
+
+Two options:
+
+#### Option A: **Scene IDs include spanning logic**
+
+```json
+{
+	"scene_id": "1168-1_to_1169-2",
+	"starts_in": 1168,
+	"ends_in": 1169,
+	"start_line": 45,
+	"end_line": 13
+}
+```
+
+#### Option B: **Keep scene chunks in separate files, even if it spans chapters**
+
+E.g. your file structure:
+
+```
+scene_chunks/
+	1165-1.json
+	1165-2.json
+	1166-1.json
+	1166-2_part1.json
+	1166-2_part2.json
+```
+
+And each scene has:
+
+```json
+{
+	"chapter_span": [1166, 1167],
+	"start_line": 122,
+	"end_line": 24,
+	...
+}
+```
+
+That way, even if the text spans chapters, the **scene stays logically grouped**.
+
+---
+
+### 🧼 4. **Final cleanup: Manual review or GPT reflow**
+
+After first-pass chunking:
+
+* Manually spot-check a few key arcs (first big fight, city arrival, Jake vs Sovereign)
+* Use GPT to refine chunk length or rebalance splits
+* Rechunk outliers if needed (e.g. massive scenes or scenes split incorrectly)
+
+---
+
+## 💡 Best Practice: Use Scene Files as Your Unit of Truth
+
+Once chunked:
+
+* Embed each scene as a vector unit
+* Store metadata like `scene_id`, `characters`, `summary`, `pov`, etc.
+* Reference the original chapter+post ID for traceability
+
+That way your RAG system stays tight, grounded, and accurate.
+
+---
+
+## 🧰 Want Help?
+
+I can build you a:
+
+* `scene_chunker.py` script that chunks `.md` files into scenes via regex + heuristics
+* Optional GPT-4-based post-processor to label POV, tone, character presence
+* JSON schema + export tool to save each scene as `.json` or `.md`
+
+Just say the word.
