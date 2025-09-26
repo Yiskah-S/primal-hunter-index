@@ -1,26 +1,26 @@
 {
-	"Basic Archery": {
-		"rarity": "Inferior",
-		"first_learned": {
-			"scene_id": "01-02-01",
-			"day": 0
-		},
-		"source": "Archer starter class"
-	},
-	"Basic One-Handed Weapon": {
-		"rarity": "Inferior",
-		"first_learned": {
-			"scene_id": "01-02-01",
-			"day": 0
-		},
-		"source": "Archer starter class"
-	},
-	"Archer’s Eye": {
-		"rarity": "Common",
-		"first_learned": {
-			"scene_id": "01-02-01",
-			"day": 0
-		},
-		"source": "Archer starter class"
-	}
+  "Basic Archery": {
+    "rarity": "Inferior",
+    "first_learned": {
+      "scene_id": "01-02-01",
+      "day": 0
+    },
+    "source": "Archer starter class"
+  },
+  "Basic One-Handed Weapon": {
+    "rarity": "Inferior",
+    "first_learned": {
+      "scene_id": "01-02-01",
+      "day": 0
+    },
+    "source": "Archer starter class"
+  },
+  "Archer\u2019s Eye": {
+    "rarity": "Common",
+    "first_learned": {
+      "scene_id": "01-02-01",
+      "day": 0
+    },
+    "source": "Archer starter class"
+  }
 }

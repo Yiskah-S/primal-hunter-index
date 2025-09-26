@@ -61,7 +61,7 @@
 						"activation_method": { "type": "string" },
 						"deactivation": { "type": "string" },
 						"instinctive_knowledge": { "type": "boolean" },
-						"feedback": { "type": "string" }
+						"user feedback": { "type": "string" }
 					},
 					"additionalProperties": false
 				},

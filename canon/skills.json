@@ -12,8 +12,8 @@
         "crossbows"
       ],
       "stat_synergy": {
-        "Agi": "minuscule",
-        "Str": "minuscule"
+        "Agi": 0.1,
+        "Str": 0.1
       }
     },
     "first_mentioned_in": {
@@ -35,8 +35,8 @@
         "one-handed weapons"
       ],
       "stat_synergy": {
-        "Agi": "minuscule",
-        "Str": "minuscule"
+        "Agi": 0.1,
+        "Str": 0.1
       }
     },
     "first_mentioned_in": {
@@ -54,7 +54,7 @@
     "description": "Allows the archer to more easily spot prey. Passively gives a minor increase to the effect of Perception on visual organs.",
     "effects": {
       "stat_synergy": {
-        "Per": "minor"
+        "Per": 0.5
       },
       "passive_benefit": "enhanced ability to spot weaknesses or targets"
     },
