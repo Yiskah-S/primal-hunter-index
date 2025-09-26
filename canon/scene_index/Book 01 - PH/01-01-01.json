@@ -1,5 +1,6 @@
 {
-	"scene_id": "0001-1",
+	"scene_id": "01-01-01",
+	"book": 1,
 	"chapter": 1,
 	"title": "Another Monday Morning",
 	"source_file": "chapters/0001_Chapter_1_Another_Monday_Morning.md",

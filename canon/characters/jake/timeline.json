@@ -1,8 +1,8 @@
 [
 	{
 		"day": 0,
-		"scene_id": "0002-1",
-		"source_file": "chapters/0002_Chapter_2_Introduction.md",
+		"scene_id": "01-02-01",
+		"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 		"reason": "System initialization and class selection",
 		"level": 1,
 		"class_level": 1,

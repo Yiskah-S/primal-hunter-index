@@ -12,8 +12,8 @@
 			}
 		},
 		"first_mentioned_in": {
-			"scene_id": "0002-1",
-			"source_file": "chapters/0002_Chapter_2_Introduction.md",
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 111
 		},
 		"flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart."
@@ -32,8 +32,8 @@
 			}
 		},
 		"first_mentioned_in": {
-			"scene_id": "0002-1",
-			"source_file": "chapters/0002_Chapter_2_Introduction.md",
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 113
 		},
 		"flavor": "The Archer may not be a master in the arts of close combat but is far from helpless."
@@ -62,8 +62,8 @@
             "feedback": "Visual clarity increases gradually over ~5 seconds when skill activates"
         },
         "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "scene_id": "01-02-01",
+            "source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
             "line": 115
         },
         "flavor": "The eyes of the Archer are trained to track down and spot the weakness of their foes."
@@ -79,7 +79,7 @@
 		},
 		"first_mentioned_in": {
 			"scene_id": "ch2-intro",
-			"source_file": "0002_Chapter_2_Introduction.md",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 231
 		},
 		"flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
