@@ -1,4 +1,4 @@
-# Run command: make setup-schemas
+# Run command: make [thing]
 # Run command: make all
 
 
@@ -16,3 +16,9 @@ validate:
 	python scripts/validate_metadata.py
 
 all: setup-schemas validate
+
+add-skill:
+	python cli/add_skill.py
+
+validate:
+	python tools/validate_all.py

@@ -170,3 +170,63 @@ You can even use the schema to auto-generate docs or Markdown files showing:
 | `type` | string | Functional type — e.g. "Combat Passive" |
 | `effects` | object | What the skill actually does |
 ...
+
+
+Bonus: Task Automation
+
+Add a Makefile or tasks.py using invoke
+ or make:
+
+Makefile example:
+
+validate:
+	python tools/validate_all.py
+
+add-skill:
+	python cli/add_skill.py
+
+add-plant:
+	python cli/add_plant.py
+
+
+Then from the CLI:
+
+make add-skill
+make validate
+
+Want a Scaffold Generator?
+
+I can generate:
+
+A base directory layout
+
+A boilerplate cli/add_x.py that loads schema + prompts
+
+A core/wizard_runner.py that works generically across any schema
+
+Let me know what kind of schema you'd like to support next (e.g., plants.schema.json?) and I can scaffold it to fit this system.
+
+____
+
+
+Let me know if you want me to:
+
+Scaffold a core/wizard_runner.py to dynamically load any schema
+
+Make a CLI that works for any schema in schemas/
+
+Add a sample test_skills.py file to validate your data/*.json entries
+
+I can drop those in ready to run.
+
+__________
+
+# Remove the file from Git tracking (but not from disk)
+git rm --cached "primal_hunter_index/ask later"
+
+# Add relative path to .gitignore (inside the repo)
+echo "primal_hunter_index/ask later" >> .gitignore
+
+# Commit and push the change
+git commit -am "Remove files from repo and ignore it"
+git push

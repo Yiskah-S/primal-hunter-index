@@ -1,5 +1,8 @@
-# === Keep chapters private ===
+# === Content to keep private ===
 chapters/
+ask later
+overview_and_commands.txt
+file_structure.txt
 
 # === Python environment & metadata ===
 __pycache__/
@@ -10,3 +13,4 @@ __pycache__/
 # === System/editor files ===
 .DS_Store
 *.swp
+primal_hunter_index/ask later

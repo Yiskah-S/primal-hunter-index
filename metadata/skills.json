@@ -67,5 +67,30 @@
             "line": 115
         },
         "flavor": "The eyes of the Archer are trained to track down and spot the weakness of their foes."
-    }
+	},
+	"Identify (Inferior)": {
+		"rarity": "Inferior",
+		"type": "General Utility",
+		"description": "Allows the user to attempt to identify any object or creature by focusing on it.",
+		"effects": {
+			"proficiency_with": [],
+			"stat_synergy": {},
+			"passive_benefit": "Provides information about unknown items or entities upon focus."
+		},
+		"first_mentioned_in": {
+			"scene_id": "ch2-intro",
+			"source_file": "0002_Chapter_2_Introduction.md",
+			"line": 231
+		},
+		"flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
+		"behavior": {
+			"activation_method": "Focus on target object or creature for 3–4 seconds.",
+			"deactivation": "Ends automatically after identification is complete.",
+			"instinctive_knowledge": true,
+			"feedback": "Displays a description popup for the identified object or entity."
+		},
+		"tags": ["identification", "system", "information", "tutorial"],
+		"granted_by": "System Tutorial"
+	}
 }
+
