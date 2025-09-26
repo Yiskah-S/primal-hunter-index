@@ -1,38 +1,45 @@
 # Run command: python scripts/validate_all_metadata.py
+# tools/
+#├── validate_all_metadata.py  ← this should:
+ #    - load all schema files from /schemas
+  #   - validate all data files in /canon
+   #  - call check_known_skills_consistency.py internally
 
-import json
-import os
-from jsonschema import validate, ValidationError
+# tools/validate_all_metadata.py
 
-# Pairs of metadata files and their corresponding schemas
-VALIDATION_TARGETS = [
-	("metadata/skills.json", "schemas/skills.schema.json"),
-	("metadata/classes.json", "schemas/classes.schema.json"),
-	("metadata/titles.json", "schemas/titles.schema.json"),
-	("metadata/tiers.json", "schemas/tiers.schema.json"),
-	("character_timeline/jake.json", "schemas/character_timeline.schema.json"),
-	# Add more as you build them
+from core.schema_utils import validate_json_schema
+from tools.check_known_skills_consistency import check_known_skills_vs_skills
+from pathlib import Path
+
+# === Static validations ===
+STATIC_TARGETS = [
+	("canon/skills.json", "schemas/skills.schema.json"),
+	("canon/classes.json", "schemas/classes.schema.json"),
+	("canon/titles.json", "schemas/titles.schema.json"),
+	("canon/tiers.json", "schemas/tiers.schema.json"),
+	("canon/characters/jake/timeline.json", "schemas/character_timeline.schema.json"),
 ]
 
-def load_json(path):
-	with open(path, "r", encoding="utf-8") as f:
-		return json.load(f)
+def main():
+	# Validate all static targets
+	for meta_path, schema_path in STATIC_TARGETS:
+		p = Path(meta_path)
+		s = Path(schema_path)
+		if p.exists() and s.exists():
+			validate_json_schema(p, s, name=str(p))
+		else:
+			print(f"⚠️ Skipped missing: {p} or {s}")
 
-def validate_json(metadata_path, schema_path):
-	try:
-		data = load_json(metadata_path)
-		schema = load_json(schema_path)
-		validate(instance=data, schema=schema)
-		print(f"✅ {metadata_path} is valid against {schema_path}")
-	except ValidationError as e:
-		print(f"❌ {metadata_path} failed validation")
-		print(f"   → {e.message}")
-	except Exception as e:
-		print(f"⚠️ Error with {metadata_path} or {schema_path}: {e}")
+	# Validate all known_skills.json files
+	for path in Path("canon/characters").rglob("known_skills.json"):
+		validate_json_schema(
+			data_path=path,
+			schema_path=Path("schemas/known_skills.schema.json"),
+			name=str(path)
+		)
+
+	# Cross-schema consistency checks
+	check_known_skills_vs_skills()
 
 if __name__ == "__main__":
-	for meta_file, schema_file in VALIDATION_TARGETS:
-		if os.path.exists(meta_file) and os.path.exists(schema_file):
-			validate_json(meta_file, schema_file)
-		else:
-			print(f"⚠️ Skipped missing: {meta_file} or {schema_file}")
+	main()

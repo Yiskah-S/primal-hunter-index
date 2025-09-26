@@ -25,13 +25,6 @@ setup-schemas:	## create empty schema files for common entities
 validate:	## validate all canon/*.json against schemas where available
 	@$(PY) tools/validate_all_metadata.py
 
-.PHONY: add-skill
-add-skill:	## add a skill to the global catalog via interactive wizard
-	@$(PY) cli/add_skill.py
-
-.PHONY: add-known-skill
-add-known-skill:	## add a skill acquisition to a character ledger
-	@$(PY) cli/add_known_skill.py
 
 .PHONY: validate-known-skills
 validate-known-skills:	## cross-check known skills against catalogs & scene ids
@@ -47,3 +40,16 @@ filetree:	## write pruned tree to ~notes/file_structure.txt
 
 .PHONY: all
 all: setup-schemas validate	## setup schemas (if missing) and validate everything
+
+
+# Run metadata validation
+check:
+	PYTHONPATH=. python tools/validate_all_metadata.py
+
+# Add a new skill to canon/skills.json
+add-skill:
+	PYTHONPATH=. python cli/add_skill.py
+
+# Assign a skill to a character's known_skills.json
+assign-skill:
+	PYTHONPATH=. python cli/assign_skill_to_character.py

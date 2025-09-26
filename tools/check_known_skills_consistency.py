@@ -35,3 +35,21 @@ if mismatched:
 		print(f"  - {s}: got {got}, expected {expected}")
 else:
 	print("✅ All skill rarities match.")
+
+def check_known_skills_vs_skills():
+	from pathlib import Path
+	import json
+
+	skills_path = Path("canon/skills.json")
+	with skills_path.open() as f:
+		skills = json.load(f)
+
+	for path in Path("canon/characters").rglob("known_skills.json"):
+		with path.open() as f:
+			known = json.load(f)
+
+		for skill, meta in known.items():
+			if skill not in skills:
+				print(f"❌ Unknown skill in {path}: {skill}")
+			elif meta["rarity"] != skills[skill]["rarity"]:
+				print(f"❌ Rarity mismatch in {path}: {skill} → {meta['rarity']} (expected {skills[skill]['rarity']})")

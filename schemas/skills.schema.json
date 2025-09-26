@@ -34,10 +34,11 @@
 						},
 						"stat_synergy": {
 							"type": "object",
+							"description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
 							"patternProperties": {
-								".+": { "type": "string" }
+								".+": { "type": "number" }
 							}
-						},
+						},	
 						"passive_benefit": {
 							"type": "string"
 						}
