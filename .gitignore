@@ -1,8 +1,7 @@
 # === Content to keep private ===
 chapters/
-ask later
-overview_and_commands.txt
-file_structure.txt
+~notes/
+
 
 # === Python environment & metadata ===
 __pycache__/
@@ -14,3 +13,7 @@ __pycache__/
 .DS_Store
 *.swp
 primal_hunter_index/ask later
+
+# === Optional build artifacts ===
+*.zip
+*.bak

@@ -20,4 +20,4 @@ def validate_json(instance_path, schema_path):
 		print(f"⚠️ Error loading files: {e}")
 
 if __name__ == "__main__":
-	validate_json("metadata/skills.json", "schemas/skills.schema.json")
+	validate_json("canon/skills.json", "schemas/skills.schema.json")

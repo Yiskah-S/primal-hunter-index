@@ -4,3 +4,4 @@ python-dotenv
 rich
 aiohttp
 backoff
+jsonschema>=4.0.0
