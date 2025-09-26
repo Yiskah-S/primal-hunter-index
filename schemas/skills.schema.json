@@ -2,8 +2,9 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Skill Metadata Schema",
 	"type": "object",
+	"description": "Canonical definitions of all skills, indexed by skill name.",
 	"patternProperties": {
-		".+": {
+		"^.+$": {
 			"type": "object",
 			"required": ["rarity", "type", "description", "effects", "first_mentioned_in", "flavor"],
 			"properties": {
@@ -12,13 +13,18 @@
 					"enum": ["Inferior", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Unique"]
 				},
 				"type": {
-					"type": "string"
+					"type": "string",
+					"description": "General category of the skill (e.g., Combat Passive, General Utility, Sensory Passive)"
 				},
 				"class_recommendations": {
 					"type": "array",
+					"description": "List of classes that naturally benefit from this skill",
 					"items": { "type": "string" }
 				},
-				"description": { "type": "string" },
+				"description": {
+					"type": "string",
+					"description": "System description of the skill's core function"
+				},
 				"effects": {
 					"type": "object",
 					"properties": {
@@ -32,8 +38,11 @@
 								".+": { "type": "string" }
 							}
 						},
-						"passive_benefit": { "type": "string" }
-					}
+						"passive_benefit": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
 				},
 				"resource_cost": {
 					"type": "object",
@@ -42,7 +51,8 @@
 						"activation_cost": { "type": "number" },
 						"maintenance_cost": { "type": "number" },
 						"type": { "type": "string" }
-					}
+					},
+					"additionalProperties": false
 				},
 				"behavior": {
 					"type": "object",
@@ -51,27 +61,40 @@
 						"deactivation": { "type": "string" },
 						"instinctive_knowledge": { "type": "boolean" },
 						"feedback": { "type": "string" }
-					}
+					},
+					"additionalProperties": false
 				},
 				"first_mentioned_in": {
 					"type": "object",
-					"required": ["scene_id", "source_file", "line"],
+					"required": ["scene_id", "line"],
 					"properties": {
-						"scene_id": { "type": "string" },
-						"source_file": { "type": "string" },
-						"line": { "type": "integer" }
-					}
+						"scene_id": {
+							"type": "string",
+							"description": "Scene ID in which this skill first appears"
+						},
+						"line": {
+							"type": "integer",
+							"description": "Line number in the source file where this skill is first mentioned"
+						}
+					},
+					"additionalProperties": false
 				},
-				"flavor": { "type": "string" },
+				"flavor": {
+					"type": "string",
+					"description": "Narrative or flavor-text for the skill"
+				},
 				"tags": {
 					"type": "array",
+					"description": "Optional tags to classify or group skills",
 					"items": { "type": "string" }
 				},
 				"granted_by": {
 					"type": ["string", "array"],
+					"description": "The event or system that grants this skill",
 					"items": { "type": "string" }
 				}
-			}
+			},
+			"additionalProperties": false
 		}
 	},
 	"additionalProperties": false

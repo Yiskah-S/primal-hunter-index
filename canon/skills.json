@@ -1,5 +1,5 @@
 {
-	"Basic Archery (Inferior)": {
+	"Basic Archery": {
 		"rarity": "Inferior",
 		"type": "Combat Passive",
 		"class_recommendations": ["Archer"],
@@ -13,13 +13,11 @@
 		},
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
-			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 111
 		},
 		"flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart."
 	},
-
-	"Basic One-Handed Weapon (Inferior)": {
+	"Basic One-Handed Weapon": {
 		"rarity": "Inferior",
 		"type": "Combat Passive",
 		"class_recommendations": ["Archer", "Warrior (Light)"],
@@ -33,42 +31,40 @@
 		},
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
-			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 113
 		},
 		"flavor": "The Archer may not be a master in the arts of close combat but is far from helpless."
 	},
-    "Archer’s Eye (Common)": {
-        "rarity": "Common",
-        "type": "Sensory Passive",
-        "class_recommendations": ["Archer"],
-        "description": "Allows the archer to more easily spot prey. Passively gives a minor increase to the effect of Perception on visual organs.",
-        "effects": {
-            "stat_synergy": {
-                "Per": "minor"
-            },
-            "passive_benefit": "enhanced ability to spot weaknesses or targets"
-        },
-        "resource_cost": {
-            "resource": "Stamina",
-            "activation_cost": 2,
-            "maintenance_cost": 0,
-            "type": "flat"
-        },
-        "behavior": {
-            "activation_method": "instinctive focus",
-            "deactivation": "manual or automatic on exhaustion",
-            "instinctive_knowledge": true,
-            "feedback": "Visual clarity increases gradually over ~5 seconds when skill activates"
-        },
-        "first_mentioned_in": {
-            "scene_id": "01-02-01",
-            "source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
-            "line": 115
-        },
-        "flavor": "The eyes of the Archer are trained to track down and spot the weakness of their foes."
+	"Archer’s Eye": {
+		"rarity": "Common",
+		"type": "Sensory Passive",
+		"class_recommendations": ["Archer"],
+		"description": "Allows the archer to more easily spot prey. Passively gives a minor increase to the effect of Perception on visual organs.",
+		"effects": {
+			"stat_synergy": {
+				"Per": "minor"
+			},
+			"passive_benefit": "enhanced ability to spot weaknesses or targets"
+		},
+		"resource_cost": {
+			"resource": "Stamina",
+			"activation_cost": 2,
+			"maintenance_cost": 0,
+			"type": "flat"
+		},
+		"behavior": {
+			"activation_method": "instinctive focus",
+			"deactivation": "manual or automatic on exhaustion",
+			"instinctive_knowledge": true,
+			"feedback": "Visual clarity increases gradually over ~5 seconds when skill activates"
+		},
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 115
+		},
+		"flavor": "The eyes of the Archer are trained to track down and spot the weakness of their foes."
 	},
-	"Identify (Inferior)": {
+	"Identify": {
 		"rarity": "Inferior",
 		"type": "General Utility",
 		"description": "Allows the user to attempt to identify any object or creature by focusing on it.",
@@ -79,7 +75,6 @@
 		},
 		"first_mentioned_in": {
 			"scene_id": "ch2-intro",
-			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
 			"line": 231
 		},
 		"flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
@@ -89,8 +84,12 @@
 			"instinctive_knowledge": true,
 			"feedback": "Displays a description popup for the identified object or entity."
 		},
-		"tags": ["identification", "system", "information", "tutorial"],
+		"tags": [
+			"identification",
+			"system",
+			"information",
+			"tutorial"
+		],
 		"granted_by": "System Tutorial"
 	}
 }
-

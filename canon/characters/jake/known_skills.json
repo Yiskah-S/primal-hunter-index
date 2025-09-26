@@ -1,19 +1,26 @@
 {
-	"Jake": {
-		"Basic Archery (Inferior)": {
-			"first_learned_in": "01-02-01",
-			"day": 0,
-			"source": "Archer starter class"
+	"Basic Archery": {
+		"rarity": "Inferior",
+		"first_learned": {
+			"scene_id": "01-02-01",
+			"day": 0
 		},
-		"Basic One-Handed Weapon (Inferior)": {
-			"first_learned_in": "01-02-01",
-			"day": 0,
-			"source": "Archer starter class"
+		"source": "Archer starter class"
+	},
+	"Basic One-Handed Weapon": {
+		"rarity": "Inferior",
+		"first_learned": {
+			"scene_id": "01-02-01",
+			"day": 0
 		},
-		"Archer’s Eye (Common)": {
-			"first_learned_in": "01-02-01",
-			"day": 0,
-			"source": "Archer starter class"
-		}
+		"source": "Archer starter class"
+	},
+	"Archer’s Eye": {
+		"rarity": "Common",
+		"first_learned": {
+			"scene_id": "01-02-01",
+			"day": 0
+		},
+		"source": "Archer starter class"
 	}
 }
