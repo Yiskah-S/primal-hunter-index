@@ -154,3 +154,19 @@ I can build you a:
 * JSON schema + export tool to save each scene as `.json` or `.md`
 
 Just say the word.
+________
+
+
+📄 Option 3: Auto-doc
+
+You can even use the schema to auto-generate docs or Markdown files showing:
+
+
+## Skill Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `rarity` | string | Skill rarity — one of Inferior, Common, Rare, etc |
+| `type` | string | Functional type — e.g. "Combat Passive" |
+| `effects` | object | What the skill actually does |
+...

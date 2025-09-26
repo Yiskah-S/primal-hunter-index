@@ -1,0 +1,132 @@
+{
+	"Warrior (Light)": {
+		"type": "starter",
+		"archetype": "Warrior",
+		"weight_class": "Light",
+		"focus": ["melee", "speed", "evasion", "finesse"],
+		"description": "A light-class warrior focused on quick attacks, evasion, and finesse. While faster than both the medium and heavy variants, it comes with a decrease in attack power and survivability.",
+		"weapons": ["rapiers", "daggers", "small hatchets", "throwing weapons"],
+		"stat_bonus_per_level": {
+			"Agi": 2,
+			"End": 1,
+			"Str": 1,
+			"Vit": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 73
+        },
+		"flavor": "Jake considered it similar to a rogue—fast, deadly, but too up-close for his liking."
+	},
+
+	"Warrior (Medium)": {
+		"type": "starter",
+		"archetype": "Warrior",
+		"weight_class": "Medium",
+		"focus": ["balanced melee"],
+		"description": "A medium-class warrior, focused on a balanced approach to combat, finding a compromise between speed and power.",
+		"weapons": ["light and heavy melee weapons"],
+		"stat_bonus_per_level": {
+			"Agi": 1,
+			"End": 1,
+			"Vit": 1,
+			"Str": 1,
+			"Tough": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 77
+        },
+		"flavor": "The choice of someone unsure how to specialize—a flexible but unfocused option."
+	},
+
+	"Warrior (Heavy)": {
+		"type": "starter",
+		"archetype": "Warrior",
+		"weight_class": "Heavy",
+		"focus": ["tank", "high survivability", "power"],
+		"description": "A heavy-class warrior, focused on power and survivability while sacrificing speed and variance.",
+		"weapons": ["one-handed + shield", "two-handed weapons"],
+		"stat_bonus_per_level": {
+			"Str": 2,
+			"Tough": 1,
+			"Vit": 1,
+			"End": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 81
+        },
+		"flavor": "Jake imagined it as the big, beefy Viking-type class — not for him."
+	},
+
+	"Archer": {
+		"type": "starter",
+		"archetype": "Archer",
+		"focus": ["ranged", "agility", "precision"],
+		"description": "A class focused on ranged combat, mainly using bow and arrow, with light melee backup such as short-swords or daggers.",
+		"weapons": ["bow", "short sword", "dagger"],
+		"stat_bonus_per_level": {
+			"Per": 2,
+			"Agi": 1,
+			"End": 1,
+			"Str": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 85
+        },
+		"flavor": "Jake's clear favorite — a flexible ranged combatant that fits his playstyle."
+	},
+
+	"Caster": {
+		"type": "starter",
+		"archetype": "Caster",
+		"attunement": "None",
+		"focus": ["magic", "destruction", "versatility"],
+		"description": "The caster favors wisdom and knowledge over brawn and speed. The basic version is non-attuned, meaning it has no elemental specialization yet.",
+		"weapons": ["staff", "wand", "idol", "relic"],
+		"stat_bonus_per_level": {
+			"Int": 2,
+			"Wis": 1,
+			"Will": 1,
+			"Per": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 89
+        },
+		"flavor": "Jake was intrigued by the concept of magic, but still preferred the bow over fireballs."
+	},
+
+	"Healer": {
+		"type": "starter",
+		"archetype": "Healer",
+		"attunement": "None",
+		"focus": ["support", "recovery", "amplification"],
+		"description": "Can mend injuries, remove afflictions, and amplify allies. Weak in solo combat but powerful in group support.",
+		"weapons": ["staff", "wand", "relic"],
+		"stat_bonus_per_level": {
+			"Will": 2,
+			"Wis": 2,
+			"Int": 1,
+			"Free point": 1
+		},
+        "first_mentioned_in": {
+            "scene_id": "0002-1",
+            "source_file": "chapters/0002_Chapter_2_Introduction.md",
+            "line": 93
+        },
+		"flavor": "Jake wasn’t interested, but the hint at deific powers piqued his curiosity about priest paths."
+	}
+}

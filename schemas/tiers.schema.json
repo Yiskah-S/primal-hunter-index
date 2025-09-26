@@ -1,0 +1,37 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Tier Progression Schema",
+	"type": "object",
+	"patternProperties": {
+		".+": {
+			"type": "object",
+			"required": ["stat_gain_per_level", "resource_gain", "expected_power_range"],
+			"properties": {
+				"label": { "type": "string" },
+				"stat_gain_per_level": {
+					"type": "object",
+					"patternProperties": {
+						".+": { "type": "number" }
+					}
+				},
+				"resource_gain": {
+					"type": "object",
+					"properties": {
+						"HP": { "type": "number" },
+						"MP": { "type": "number" },
+						"Stamina": { "type": "number" }
+					}
+				},
+				"expected_power_range": {
+					"type": "object",
+					"properties": {
+						"min_level": { "type": "integer" },
+						"max_level": { "type": "integer" },
+						"stat_total_estimate": { "type": "string" }
+					}
+				},
+				"flavor": { "type": "string" }
+			}
+		}
+	}
+}

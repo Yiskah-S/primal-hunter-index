@@ -1,0 +1,78 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Skill Metadata Schema",
+	"type": "object",
+	"patternProperties": {
+		".+": {
+			"type": "object",
+			"required": ["rarity", "type", "description", "effects", "first_mentioned_in", "flavor"],
+			"properties": {
+				"rarity": {
+					"type": "string",
+					"enum": ["Inferior", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Unique"]
+				},
+				"type": {
+					"type": "string"
+				},
+				"class_recommendations": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"description": { "type": "string" },
+				"effects": {
+					"type": "object",
+					"properties": {
+						"proficiency_with": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"stat_synergy": {
+							"type": "object",
+							"patternProperties": {
+								".+": { "type": "string" }
+							}
+						},
+						"passive_benefit": { "type": "string" }
+					}
+				},
+				"resource_cost": {
+					"type": "object",
+					"properties": {
+						"resource": { "type": "string" },
+						"activation_cost": { "type": "number" },
+						"maintenance_cost": { "type": "number" },
+						"type": { "type": "string" }
+					}
+				},
+				"behavior": {
+					"type": "object",
+					"properties": {
+						"activation_method": { "type": "string" },
+						"deactivation": { "type": "string" },
+						"instinctive_knowledge": { "type": "boolean" },
+						"feedback": { "type": "string" }
+					}
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"required": ["scene_id", "source_file", "line"],
+					"properties": {
+						"scene_id": { "type": "string" },
+						"source_file": { "type": "string" },
+						"line": { "type": "integer" }
+					}
+				},
+				"flavor": { "type": "string" },
+				"tags": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"granted_by": {
+					"type": ["string", "array"],
+					"items": { "type": "string" }
+				}
+			}
+		}
+	},
+	"additionalProperties": false
+}

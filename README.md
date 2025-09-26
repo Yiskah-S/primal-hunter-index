@@ -14,3 +14,11 @@ This project tracks character progression, scene-level metadata, and world event
 ## Tools
 
 Scripts will live in `scripts/` – to be added next.
+
+
+### 🛠 Schema Setup
+
+Run this to scaffold empty JSON Schema files:
+
+```bash
+./setup_schemas.sh

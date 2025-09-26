@@ -1,0 +1,43 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Class Metadata Schema",
+	"type": "object",
+	"patternProperties": {
+		".+": {
+			"type": "object",
+			"required": ["type", "archetype", "focus", "stat_bonus_per_level", "description"],
+			"properties": {
+				"type": { "type": "string" },
+				"archetype": { "type": "string" },
+				"weight_class": { "type": "string" },
+				"focus": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"weapons": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"stat_bonus_per_level": {
+					"type": "object",
+					"patternProperties": {
+						".+": { "type": "number" }
+					}
+				},
+				"grants_skills": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"properties": {
+						"scene_id": { "type": "string" },
+						"source_file": { "type": "string" },
+						"line": { "type": "integer" }
+					}
+				},
+				"flavor": { "type": "string" }
+			}
+		}
+	}
+}

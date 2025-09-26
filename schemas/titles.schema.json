@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Title Metadata Schema",
+	"type": "object",
+	"patternProperties": {
+		".+": {
+			"type": "object",
+			"required": ["rarity", "effects"],
+			"properties": {
+				"rarity": {
+					"type": "string",
+					"enum": ["Common", "Uncommon", "Rare", "Epic", "Legendary", "Unique"]
+				},
+				"effects": {
+					"type": "object",
+					"properties": {
+						"stat_bonus": {
+							"type": "object",
+							"patternProperties": {
+								".+": { "type": "number" }
+							}
+						},
+						"skill_bonus": {
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"special_effects": {
+							"type": "array",
+							"items": { "type": "string" }
+						}
+					}
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"properties": {
+						"scene_id": { "type": "string" },
+						"source_file": { "type": "string" },
+						"line": { "type": "integer" }
+					}
+				},
+				"flavor": { "type": "string" }
+			}
+		}
+	}
+}

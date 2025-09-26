@@ -1,0 +1,45 @@
+{
+	"scene_id": "0001-1",
+	"chapter": 1,
+	"title": "Another Monday Morning",
+	"source_file": "chapters/0001_Chapter_1_Another_Monday_Morning.md",
+	"start_line": 1,
+	"end_line": 79,  
+
+	"pov": "Jake",
+	"mood": ["mundane", "introspective", "lightly humorous"],
+	"time_tag": ["Day 0", "pre-system", "Monday"],
+	"chunked_with": "ChatGPT with manual checkup",
+
+	"characters": {
+		"Jake": {
+			"present": "explicit",
+			"level_start": null,
+			"level_end": null,
+			"tier": null
+		},
+		"Jacob": { "present": "explicit" },
+		"Bertram": { "present": "explicit" },
+		"Joanna": { "present": "explicit" },
+		"Caroline": { "present": "explicit" },
+		"Mike": { "present": "explicit" }
+	},
+
+	"events": {
+		"level_ups": [],
+		"tier_changes": [],
+		"loot": [],
+		"titles_gained": []
+	},
+
+	"locations": [
+		"Jake's apartment",
+		"Office building",
+		"Elevator",
+		"Reception desk",
+		"14th floor",
+		"HR department"
+	],
+
+	"summary": "Jake goes through a mundane Monday morning: wakes up, commutes, arrives at work, exchanges pleasantries, and heads to lunch with coworkers. Just before lunch, he is interrupted by the system initializing the 93rd Universe and blacks out as his tutorial begins."
+}

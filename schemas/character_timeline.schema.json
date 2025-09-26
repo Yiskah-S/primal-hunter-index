@@ -1,0 +1,89 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Character Timeline Snapshot",
+	"type": "array",
+	"$defs": {
+		"resource_block": {
+			"type": "object",
+			"properties": {
+				"max": { "type": "number" },
+				"current": { "type": "number" },
+				"derived_from": { "type": ["string", "array"] }
+			}
+		}
+	},
+	"items": {
+		"type": "object",
+		"required": ["day", "scene_id", "level", "tier", "class", "race", "stats"],
+		"properties": {
+			"day": { "type": "number" },
+			"scene_id": { "type": "string" },
+			"source_file": { "type": "string" },
+			"reason": { "type": "string" },
+			"level": { "type": "integer" },
+			"class_level": { "type": "integer" },
+			"race_level": { "type": "integer" },
+			"tier": { "type": "string" },
+			"class": { "type": "string" },
+			"race": { "type": "string" },
+			"titles": {
+				"type": "array",
+				"items": { "type": "string" }
+			},
+			"skills": {
+				"type": "array",
+				"items": { "type": "string" }
+			},
+			"equipment": {
+				"type": "array",
+				"items": { "type": "string" }
+			},
+			"resources": {
+				"type": "object",
+				"properties": {
+					"HP": { "$ref": "#/$defs/resource_block" },
+					"MP": { "$ref": "#/$defs/resource_block" },
+					"Stamina": { "$ref": "#/$defs/resource_block" }
+				}
+			},
+			"stats": {
+				"type": "object",
+				"required": ["total", "sources"],
+				"properties": {
+					"total": {
+						"type": "object",
+						"patternProperties": {
+							".+": { "type": "number" }
+						}
+					},
+					"sources": {
+						"type": "object",
+						"properties": {
+							"base": { "$ref": "#/items/properties/stats/properties/total" },
+							"race": { "$ref": "#/items/properties/stats/properties/total" },
+							"class": { "$ref": "#/items/properties/stats/properties/total" },
+							"titles": { "$ref": "#/items/properties/stats/properties/total" },
+							"equipment": { "$ref": "#/items/properties/stats/properties/total" },
+							"free_allocation": { "$ref": "#/items/properties/stats/properties/total" }
+						}
+					}
+				}
+			},
+			"stat_log": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"source": { "type": "string" },
+						"change": {
+							"type": "object",
+							"patternProperties": {
+								".+": { "type": "number" }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

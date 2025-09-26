@@ -1,0 +1,19 @@
+{
+	"Jake": {
+		"Basic Archery (Inferior)": {
+			"first_learned_in": "0002-1",
+			"day": 0,
+			"source": "Archer starter class"
+		},
+		"Basic One-Handed Weapon (Inferior)": {
+			"first_learned_in": "0002-1",
+			"day": 0,
+			"source": "Archer starter class"
+		},
+		"Archer’s Eye (Common)": {
+			"first_learned_in": "0002-1",
+			"day": 0,
+			"source": "Archer starter class"
+		}
+	}
+}

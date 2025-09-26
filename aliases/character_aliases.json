@@ -8,6 +8,16 @@
 		"origin": "Earth",
 		"relationship_to_jake": "self"
 	},
+	"Introduction Entity": {
+	"aliases": ["Introduction Entity", "synthetic humanoid", "the system voice", "tutorial guide", "androgynous figure"],
+	"ambiguous_aliases": ["the figure", "the voice", "the thing"],
+	"pronouns": ["it", "they"],
+	"gender": "neutral",
+	"type": "system_entity",
+	"origin": "System Initialization Room",
+	"affiliation": "System",
+	"relationship_to_jake": "system_guide"
+	},
 	"Arnold": {
 		"aliases": ["Arnold"],
 		"ambiguous_aliases": [],
