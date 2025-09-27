@@ -1,0 +1,91 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Equipment Metadata Schema",
+	"type": "object",
+	"description": "Canonical definitions of all equipment and items, indexed by name.",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"required": ["type", "rarity"],
+			"properties": {
+				"type": {
+					"type": "string",
+					"description": "Category of item: gear, usable, consumable, ingredient"
+				},
+				"subtype": {
+					"type": "string",
+					"description": "Optional refinement, e.g. 'weapon', 'armor', 'tool', 'potion', 'herb', etc."
+				},
+				"rarity": {
+					"type": "string",
+					"enum": ["Inferior", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Unique"]
+				},
+				"description": {
+					"type": "string",
+					"description": "System description of the item's function or effect"
+				},
+				"flavor": {
+					"type": "string",
+					"description": "Narrative or user-facing flavor text"
+				},
+				"effects": {
+					"type": "object",
+					"description": "Any bonuses, stat gains, skill grants, or healing effects",
+					"properties": {
+						"stat_bonus": {
+							"type": "object",
+							"patternProperties": {
+								".+": { "type": "number" }
+							},
+							"description": "Flat stat increases (e.g., 'Str': 2)"
+						},
+						"grants_skills": {
+							"type": "array",
+							"description": "Skills temporarily or passively granted by item",
+							"items": { "type": "string" }
+						},
+						"healing": {
+							"type": "object",
+							"properties": {
+								"HP": { "type": "number" },
+								"Stamina": { "type": "number" },
+								"MP": { "type": "number" }
+							},
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": false
+				},
+				"uses": {
+					"type": "integer",
+					"description": "Number of times the item can be used (optional for consumables)"
+				},
+				"equippable_slot": {
+					"type": "string",
+					"description": "Slot used if equippable (e.g., 'chest', 'head', 'main_hand', etc.)"
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"required": ["scene_id", "line"],
+					"properties": {
+						"scene_id": { "type": "string" },
+						"line": { "type": "integer" }
+					},
+					"additionalProperties": false
+				},
+				"tags": {
+					"type": "array",
+					"items": { "type": "string" },
+					"description": "Optional for filtering or grouping"
+				},
+                "granted_by": {
+                    "type": ["string", "array"],
+                    "description": "The event or source that granted the item",
+                    "items": { "type": "string" }
+                }
+			},
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

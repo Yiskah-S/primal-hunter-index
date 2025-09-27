@@ -1,0 +1,9 @@
+Command,Description
+make help,Lists all available targets with short descriptions (auto-generated from comments).
+make setup-schemas,Creates empty schema files for known metadata domains if missing.
+make validate,Validates all files in canon/ against their JSON schemas.
+make add-skill,Interactive CLI to define and save a new skill.
+make assign-skill,Logs a skill acquisition event into the character’s timeline.
+make assign-skill-check,Shortcut to assign a skill and immediately validate timeline afterwards.
+make add-equipment,Interactive CLI to define and save new equipment.
+make filetree,Generates a human-readable file tree for notes/debugging.
