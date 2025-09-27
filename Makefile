@@ -59,7 +59,7 @@ filetree:  ## Write pruned tree to ./~notes/file_structure.txt
 	| awk -F/ 'NF<=6' > ./~notes/.treelist
 	@tree --fromfile ./~notes/.treelist > ./~notes/file_structure.txt
 	@rm ./~notes/.treelist
-	@echo "📁 Wrote ./~notes/file_structure.txt"
+	@echo "📁 Wrote ./z_notes/file_structure.txt"
 
 # --- Full Workflow ---
 .PHONY: all
