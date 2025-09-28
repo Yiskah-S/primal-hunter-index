@@ -1,19 +1,19 @@
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Union
+
 from jsonschema import Draft202012Validator, ValidationError
 
-def read_json(path: str | Path) -> Any:
+from core.io_safe import write_json_atomic as _write_json_atomic
+
+def read_json(path: Union[str, Path]) -> Any:
 	path = Path(path)
 	return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
-def write_json_atomic(path: str | Path, data: Any) -> None:
-	p = Path(path)
-	tmp = p.with_suffix(p.suffix + ".tmp")
-	tmp.write_text(json.dumps(data, indent=2))
-	tmp.replace(p)
+def write_json_atomic(path: Union[str, Path], data: Any) -> None:
+	_write_json_atomic(path, data)
 
-def load_schema(path: str | Path) -> Dict[str, Any]:
+def load_schema(path: Union[str, Path]) -> Dict[str, Any]:
 	return read_json(path)
 
 def validate_instance(instance: Any, schema: Dict[str, Any]) -> None:
@@ -29,7 +29,10 @@ def validate_json_schema(data_path: Path, schema_path: Path, name: str = None) -
 		schema = load_schema(schema_path)
 		validator = Draft202012Validator(schema)
 		errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
-
+# TODO(P1): Split validation vs UI responsibilities.
+# - validate_json_schema() should return validation errors
+# - CLI/UI should handle formatting and printing
+# - Enables reuse in tests, CI, and other tools
 		if errors:
 			print(f"\n❌ {name or data_path} failed schema validation:")
 			for e in errors:
