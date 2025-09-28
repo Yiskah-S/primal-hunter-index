@@ -1,1 +1,13 @@
-[]
+[
+	{
+		"day": 0,
+		"scene_id": "01-02-01",
+		"event": "System Introduction Broadcast",
+		"summary": "The multiverse System initiates Universe 93, briefing Jake before transporting him to the tutorial.",
+		"characters": [
+			"Jake",
+			"Introduction Entity"
+		],
+		"location": "System introduction chamber"
+	}
+]

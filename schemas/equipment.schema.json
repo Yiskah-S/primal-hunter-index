@@ -68,7 +68,7 @@
 					"type": "object",
 					"required": ["scene_id", "line"],
 					"properties": {
-						"scene_id": { "type": "string" },
+						"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
 						"line": { "type": "integer" }
 					},
 					"additionalProperties": false

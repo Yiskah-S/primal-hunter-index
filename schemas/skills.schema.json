@@ -71,7 +71,8 @@
 					"properties": {
 						"scene_id": {
 							"type": "string",
-							"description": "Scene ID in which this skill first appears"
+							"description": "Scene ID in which this skill first appears",
+							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
 						},
 						"line": {
 							"type": "integer",

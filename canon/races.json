@@ -1,7 +1,7 @@
 {
 	"Human (G)": {
 		"type": "race",
-		"rarity": "common",
+		"rarity": "Common",
 		"tier": "G",
 		"stat_bonus_per_level": {
 			"Str": 1,
@@ -10,11 +10,11 @@
 			"Vit": 1,
 			"Int": 1,
 			"Wis": 1,
-			"Wil": 1,
+			"Will": 1,
 			"Per": 1,
 			"Free point": 1
 		},
-		"description": "The lowest level of humans in the system. Found only in newly initiated worlds.",
-		"flavor": "The human race is known as one of the most balanced and numerous amongst the myriad races of the multiverse, being able to walk many different roads on their path to power."
+		"description": "The lowest level of humans in the System, found only in newly initiated worlds.",
+		"flavor": "Balanced and numerous, humans can walk many paths on their climb through the multiverse."
 	}
 }

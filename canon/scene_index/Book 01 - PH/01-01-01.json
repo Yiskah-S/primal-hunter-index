@@ -2,43 +2,48 @@
 	"scene_id": "01-01-01",
 	"book": 1,
 	"chapter": 1,
-	"title": "Another Monday Morning",
-	"source_file": "chapters/0001_Chapter_1_Another_Monday_Morning.md",
+	"scene": 1,
+	"title": "Another Monday Morning at the Office",
+	"summary": "Jake follows his usual Monday routine, commuting to the corporate office, greeting coworkers, and sharing an elevator ride before the mysterious System message knocks him out.",
+	"source_file": "chapters/Book 01 - PH/0001_Chapter_1_Another_Monday_Morning.md",
 	"start_line": 1,
-	"end_line": 79,
+	"end_line": 83,
 	"pov": "Jake",
 	"mood": [
 		"mundane",
-		"introspective",
-		"lightly humorous"
+		"routine",
+		"foreshadowing"
 	],
 	"time_tag": [
 		"Day 0",
 		"pre-system",
-		"Monday"
+		"Monday morning"
 	],
-	"chunked_with": "ChatGPT with manual checkup",
+	"chunked_with": "Manual review",
 	"characters": {
-		"Bertram": {
-			"present": "explicit"
-		},
-		"Caroline": {
-			"present": "explicit"
-		},
-		"Jacob": {
-			"present": "explicit"
-		},
 		"Jake": {
 			"present": "explicit",
-			"level_start": null,
-			"level_end": null,
-			"tier": null
+			"notes": "Financial analyst, soon-to-be System initiate."
 		},
 		"Joanna": {
-			"present": "explicit"
+			"present": "explicit",
+			"notes": "Talkative receptionist who shares weekend stories."
+		},
+		"Jacob": {
+			"present": "explicit",
+			"notes": "Jake's sociable supervisor and friend."
+		},
+		"Bertram": {
+			"present": "explicit",
+			"notes": "Jacob's bodyguard-like companion."
+		},
+		"Caroline": {
+			"present": "explicit",
+			"notes": "Coworker from HR; Jake's unspoken crush."
 		},
 		"Mike": {
-			"present": "explicit"
+			"present": "explicit",
+			"notes": "Joanna's husband, seen in the elevator."
 		}
 	},
 	"events": {
@@ -49,12 +54,15 @@
 	},
 	"locations": [
 		"Jake's apartment",
-		"Office building",
-		"Elevator",
-		"Reception desk",
-		"14th floor",
-		"HR department"
+		"City traffic",
+		"Corporate office lobby",
+		"Fourteenth-floor open office",
+		"Elevator"
 	],
-	"summary": "Jake goes through a mundane Monday morning: wakes up, commutes, arrives at work, exchanges pleasantries, and heads to lunch with coworkers. Just before lunch, he is interrupted by the system initializing the 93rd Universe and blacks out as his tutorial begins.",
-	"scene": 1
+	"tags": [
+		"office life",
+		"character introduction",
+		"system foreshadowing"
+	],
+	"skills_gained": []
 }

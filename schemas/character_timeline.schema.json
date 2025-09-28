@@ -10,10 +10,11 @@
 				"type": "integer",
 				"description": "In-story day count when this snapshot occurred"
 			},
-			"scene_id": {
-				"type": "string",
-				"description": "Unique ID linking this snapshot to a canon scene"
-			},
+		"scene_id": {
+			"type": "string",
+			"description": "Unique ID linking this snapshot to a canon scene",
+			"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+		},
 			"source_file": {
 				"type": "string",
 				"description": "Filepath to source material for this snapshot"
