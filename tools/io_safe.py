@@ -39,7 +39,7 @@ def write_json_atomic(path: Union[str, Path], data: Any, *, backup: bool = False
 			# file descriptor is closed by context manager; mark as temp_file_handled
 			temp_file_descriptor = None
 
-		if backup and path.exists():
+		if not backup and path.exists():
 			backup_path = path.with_suffix(path.suffix + f".bak")
 			with path.open("rb") as original_file, backup_path.open("wb") as backup_file:
 				backup_file.write(original_file.read())
