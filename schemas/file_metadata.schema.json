@@ -1,0 +1,68 @@
+{
+	"$id": "https://primal-hunter.local/schemas/file_metadata.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "File Metadata",
+	"type": "object",
+	"properties": {
+		"canon": {
+			"type": "boolean",
+			"description": "Whether the associated JSON file is part of the canonical data set."
+		},
+		"source": {
+			"type": "object",
+			"description": "Provenance information for the canonical data.",
+			"properties": {
+				"book": {
+					"type": ["integer", "string"],
+					"description": "Book identifier (number or slug)."
+				},
+				"chapter": {
+					"type": ["integer", "string", "null"],
+					"description": "Chapter identifier within the book."
+				},
+				"scene": {
+					"type": ["integer", "null"],
+					"minimum": 1,
+					"description": "Scene index within the chapter (1-based)."
+				},
+				"scene_id": {
+					"type": "string",
+					"pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+					"description": "Zero-padded scene identifier (BB-CC-SS)."
+				},
+				"line": {
+					"type": ["integer", "null"],
+					"minimum": 1,
+					"description": "Line number within the source material."
+				},
+				"notes": {
+					"type": "string",
+					"description": "Free-form provenance notes."
+				}
+			},
+			"minProperties": 1,
+			"additionalProperties": false
+		},
+		"entered_by": {
+			"type": "string",
+			"enum": ["human", "assistant"],
+			"description": "Who entered the associated data."
+		},
+		"reviewed_by_human": {
+			"type": "boolean",
+			"description": "Whether a human reviewed this file after generation."
+		},
+		"tags": {
+			"type": "array",
+			"items": { "type": "string" },
+			"uniqueItems": true
+		},
+		"last_updated": {
+			"type": "string",
+			"format": "date",
+			"description": "Calendar date (YYYY-MM-DD) when this metadata was last revised."
+		}
+	},
+	"required": ["canon", "source"],
+	"additionalProperties": false
+}
