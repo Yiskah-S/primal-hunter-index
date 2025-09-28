@@ -1,206 +1,380 @@
 {
 	"Jake": {
-		"aliases": ["Jake", "Jake Thayne", "the Harbinger", "Harbinger of Primeval Origins", "the Chosen", "Lord Thayne"],
-		"ambiguous_aliases": ["Lord"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Jake",
+			"Jake Thayne",
+			"the Harbinger",
+			"Harbinger of Primeval Origins",
+			"the Chosen",
+			"Lord Thayne"
+		],
+		"ambiguous_aliases": [
+			"Lord"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "mortal",
 		"gender": "male",
 		"origin": "Earth",
 		"relationship_to_jake": "self"
 	},
 	"Introduction Entity": {
-	"aliases": ["Introduction Entity", "synthetic humanoid", "the system voice", "tutorial guide", "androgynous figure"],
-	"ambiguous_aliases": ["the figure", "the voice", "the thing"],
-	"pronouns": ["it", "they"],
-	"gender": "neutral",
-	"type": "system_entity",
-	"origin": "System Initialization Room",
-	"affiliation": "System",
-	"relationship_to_jake": "system_guide"
+		"aliases": [
+			"Introduction Entity",
+			"synthetic humanoid",
+			"the system voice",
+			"tutorial guide",
+			"androgynous figure"
+		],
+		"ambiguous_aliases": [
+			"the figure",
+			"the voice",
+			"the thing"
+		],
+		"pronouns": [
+			"it",
+			"they"
+		],
+		"gender": "neutral",
+		"type": "system_entity",
+		"origin": "System Initialization Room",
+		"affiliation": "System",
+		"relationship_to_jake": "system_guide"
 	},
 	"Arnold": {
-		"aliases": ["Arnold"],
+		"aliases": [
+			"Arnold"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["he", "him"],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "mortal",
 		"gender": "male",
 		"origin": "Earth",
 		"relationship_to_jake": "friendly"
 	},
 	"Sylphie": {
-		"aliases": ["Sylphie"],
-		"ambiguous_aliases": ["the bird", "the hawk"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Sylphie"
+		],
+		"ambiguous_aliases": [
+			"the bird",
+			"the hawk"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "beast",
 		"gender": "female",
 		"affiliation": "friendly",
 		"relationship_to_jake": ""
 	},
 	"Malefic Viper": {
-		"aliases": ["Villy", "Malefic Viper", "the Viper"],
-		"ambiguous_aliases": ["the Primordial", "Primordial", "the god", "the Primordial"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Villy",
+			"Malefic Viper",
+			"the Viper"
+		],
+		"ambiguous_aliases": [
+			"the Primordial",
+			"Primordial",
+			"the god"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "god",
 		"gender": "male",
 		"origin": "1st Universe",
 		"relationship_to_jake": "patron"
 	},
 	"Miranda": {
-		"aliases": ["Miranda"],
+		"aliases": [
+			"Miranda"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["she", "her"],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "mortal",
 		"gender": "female",
 		"origin": "Earth",
 		"relationship_to_jake": "friendly"
 	},
 	"Carmen": {
-		"aliases": ["Carmen"],
+		"aliases": [
+			"Carmen"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["she", "her"],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "mortal",
 		"gender": "female",
 		"origin": "Earth",
-		"relationship_to_jake": ["friendly", "sexual partner"]
+		"relationship_to_jake": "friendly, sexual partner"
 	},
 	"Casper": {
-		"aliases": ["Casper"],
+		"aliases": [
+			"Casper"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["he", "him"],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "mortal",
 		"gender": "male",
 		"origin": "Earth",
 		"relationship_to_jake": "friendly"
 	},
 	"Robert Thayne": {
-		"aliases": ["Robert", "Robert Thayne"],
+		"aliases": [
+			"Robert",
+			"Robert Thayne"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["he", "him"],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "family",
 		"gender": "male",
 		"origin": "Earth",
 		"relationship_to_jake": "father"
 	},
 	"Debra Thayne": {
-		"aliases": ["Debra", "Debra Thayne"],
+		"aliases": [
+			"Debra",
+			"Debra Thayne"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["she", "her"],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "family",
 		"gender": "female",
 		"origin": "Earth",
 		"relationship_to_jake": "mother"
 	},
 	"Caleb Thayne": {
-		"aliases": ["Caleb", "Caleb Thayne", "the Judge", "Judge"],
+		"aliases": [
+			"Caleb",
+			"Caleb Thayne",
+			"the Judge",
+			"Judge"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["he", "him"],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "family",
 		"gender": "male",
 		"origin": "Earth",
 		"relationship_to_jake": "younger brother"
 	},
 	"Maja": {
-		"aliases": ["Maja"],
+		"aliases": [
+			"Maja"
+		],
 		"ambiguous_aliases": [],
-		"pronouns": ["she", "her"],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "family",
 		"gender": "female",
 		"origin": "Earth",
 		"relationship_to_jake": "sister-in-law"
 	},
 	"Duskleaf": {
-		"aliases": ["Duskleaf"],
-		"ambiguous_aliases": ["the God"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Duskleaf"
+		],
+		"ambiguous_aliases": [
+			"the God"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"type": "god",
 		"gender": "male",
 		"origin": "",
 		"relationship_to_jake": "friendly"
 	},
 	"Katherine": {
-		"aliases": ["Katherine", ""],
-		"ambiguous_aliases": [""],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Katherine",
+			""
+		],
+		"ambiguous_aliases": [
+			""
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"type": "",
 		"gender": "female",
 		"origin": "",
 		"relationship_to_jake": ""
 	},
 	"Snoarix": {
-		"aliases": ["Snoarix", "Lord Protector", "Snappy"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Snoarix",
+			"Lord Protector",
+			"Snappy"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"gender": "male",
 		"type": "god"
 	},
 	"Viridia": {
-		"aliases": ["Viridia", "Hall Master Viridia"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Viridia",
+			"Hall Master Viridia"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "god"
 	},
 	"Linea": {
-		"aliases": ["Linea"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Linea"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": ""
 	},
 	"Ladies of the Verdant Lagoon": {
-		"aliases": ["Ladies of the Verdant Lagoon"],
-		"pronouns": ["they", "them"],
+		"aliases": [
+			"Ladies of the Verdant Lagoon"
+		],
+		"pronouns": [
+			"they",
+			"them"
+		],
 		"gender": "female",
 		"type": "gods"
 	},
 	"Khanac": {
-		"aliases": ["Khanac"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Khanac"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"gender": "male",
 		"type": "god"
 	},
 	"Fairleigh": {
-		"aliases": ["Fairleigh"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Fairleigh"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"gender": "male",
 		"type": ""
 	},
 	"Alcor": {
-		"aliases": ["Alcor"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Alcor"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"gender": "male",
 		"type": ""
 	},
 	"Sandy": {
-		"aliases": ["Sandy"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Sandy"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "beast"
 	},
 	"Scarlett Allison": {
-		"aliases": ["Scarlett", "Scarlett Allison"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Scarlett",
+			"Scarlett Allison"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "beastkin"
 	},
 	"Draskil": {
-		"aliases": ["Draskil"],
-		"pronouns": ["he", "him"],
+		"aliases": [
+			"Draskil"
+		],
+		"pronouns": [
+			"he",
+			"him"
+		],
 		"gender": "male",
 		"type": "beastkin"
 	},
 	"Bastilla": {
-		"aliases": ["Bastilla"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Bastilla"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "mortal"
 	},
 	"Meira": {
-		"aliases": ["Meira", "Meira Dawnleaf"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Meira",
+			"Meira Dawnleaf"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "mortal"
 	},
 	"Irinixis": {
-		"aliases": ["Irinixis"],
-		"pronouns": ["she", "her"],
+		"aliases": [
+			"Irinixis"
+		],
+		"pronouns": [
+			"she",
+			"her"
+		],
 		"gender": "female",
 		"type": "mortal"
 	}

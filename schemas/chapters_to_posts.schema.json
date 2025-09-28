@@ -1,1 +1,31 @@
-{}
+{
+	"$id": "https://primal-hunter.local/schemas/chapters_to_posts.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Chapter ↔ Post Mapping",
+	"type": "object",
+	"patternProperties": {
+		"^\\d{4}_Chapter_\\d+_.+$": {
+			"type": "object",
+			"properties": {
+				"book": { "type": "integer", "minimum": 1 },
+				"chapter": { "type": "integer", "minimum": 1 },
+				"scene_range": {
+					"type": "array",
+					"items": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
+					"minItems": 1
+				},
+				"novelfire_id": { "type": "integer" },
+				"patreon_id": { "type": "integer" },
+				"urls": {
+					"type": "array",
+					"items": { "type": "string", "format": "uri" },
+					"minItems": 1
+				},
+				"notes": { "type": "string" }
+			},
+			"required": ["book", "chapter"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

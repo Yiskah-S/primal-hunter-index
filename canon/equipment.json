@@ -1,1 +1,22 @@
-[]
+{
+	"Basic Health Potion": {
+		"type": "consumable",
+		"rarity": "Common",
+		"description": "Restores a modest amount of health when consumed.",
+		"effects": {
+			"healing": {
+				"HP": 150
+			}
+		},
+		"uses": 1,
+		"first_mentioned_in": {
+			"scene_id": "01-01-01",
+			"line": 120
+		},
+		"tags": [
+			"healing",
+			"potion"
+		],
+		"granted_by": "Starter tutorial cache"
+	}
+}

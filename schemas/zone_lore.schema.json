@@ -1,0 +1,24 @@
+{
+	"$id": "https://primal-hunter.local/schemas/zone_lore.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Zone Lore Entries",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"properties": {
+				"tier": { "type": "string" },
+				"environment": { "type": "string" },
+				"summary": { "type": "string" },
+				"threats": {
+					"type": "array",
+					"items": { "type": "string" },
+					"uniqueItems": true
+				},
+				"notes": { "type": "string" }
+			},
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

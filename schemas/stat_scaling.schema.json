@@ -1,1 +1,34 @@
-{}
+{
+	"$id": "https://primal-hunter.local/schemas/stat_scaling.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Stat Scaling Definitions",
+	"type": "object",
+	"description": "Defines how stats scale by source (race, class, title, etc.).",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"properties": {
+				"category": {
+					"type": "string",
+					"description": "Grouping such as race, class, title, equipment."
+				},
+				"stat": {
+					"type": "string",
+					"description": "Canonical stat identifier (e.g., Str, Agi)."
+				},
+				"base_value": {
+					"type": "number",
+					"description": "Starting bonus provided by this source."
+				},
+				"per_level": {
+					"type": "number",
+					"description": "Bonus added per level (if applicable)."
+				},
+				"notes": { "type": "string" }
+			},
+			"required": ["category", "stat"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

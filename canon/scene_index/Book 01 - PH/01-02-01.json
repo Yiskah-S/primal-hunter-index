@@ -5,27 +5,33 @@
 	"title": "Introduction",
 	"source_file": "chapters/0002_Chapter_2_Introduction.md",
 	"start_line": 1,
-	"end_line": 157, 
+	"end_line": 157,
 	"chunked_with": "ChatGPT with manual checkup",
-
 	"pov": "Jake",
-	"mood": ["disoriented", "curious", "skeptical", "anxious"],
-    "time_tag": ["Day 0", "pre-system", "Monday"],
-	
+	"mood": [
+		"disoriented",
+		"curious",
+		"skeptical",
+		"anxious"
+	],
+	"time_tag": [
+		"Day 0",
+		"pre-system",
+		"Monday"
+	],
 	"characters": {
+		"Introduction Entity": {
+			"present": "explicit"
+		},
 		"Jake": {
 			"present": "explicit",
 			"level_start": 0,
 			"level_end": 0,
 			"tier": "G",
-            "Health Points (HP)": "90/90",
-            "Mana Points (MP)": "80/80"
-		},
-		"Introduction Entity": {
-			"present": "explicit"
+			"Health Points (HP)": "90/90",
+			"Mana Points (MP)": "80/80"
 		}
 	},
-
 	"events": {
 		"level_ups": [],
 		"tier_changes": [],
@@ -40,14 +46,12 @@
 		],
 		"titles_gained": []
 	},
-
 	"skills_gained": [
 		"Basic Archery (Inferior)",
 		"Basic One-Handed Weapon (Inferior)",
-		"Archer’s Eye (Common)",
+		"Archer\u2019s Eye (Common)",
 		"Identify (Inferior)"
 	],
-
 	"class_chosen": {
 		"name": "Archer",
 		"type": "starter",
@@ -60,8 +64,10 @@
 			"Free": 1
 		}
 	},
-
-	"locations": ["Introduction Room", "System UI"],
-	
-	"summary": "Jake wakes in a void-like room where an androgynous synthetic entity introduces him to the System. He is presented with his status screen and several starter classes. After deliberating, Jake chooses the Archer class. He receives his starting equipment, gains several basic skills, and prepares to be transported to the tutorial phase."
+	"locations": [
+		"Introduction Room",
+		"System UI"
+	],
+	"summary": "Jake wakes in a void-like room where an androgynous synthetic entity introduces him to the System. He is presented with his status screen and several starter classes. After deliberating, Jake chooses the Archer class. He receives his starting equipment, gains several basic skills, and prepares to be transported to the tutorial phase.",
+	"scene": 1
 }

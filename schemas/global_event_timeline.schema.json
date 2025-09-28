@@ -1,1 +1,25 @@
-{}
+{
+	"$id": "https://primal-hunter.local/schemas/global_event_timeline.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Global Event Timeline",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"properties": {
+			"day": { "type": "integer", "minimum": 0 },
+			"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
+			"event": { "type": "string" },
+			"summary": { "type": "string" },
+			"characters": {
+				"type": "array",
+				"items": { "type": "string" },
+				"uniqueItems": true
+			},
+			"location": { "type": "string" },
+			"notes": { "type": "string" }
+		},
+		"required": ["day", "event"],
+		"additionalProperties": false
+	},
+	"additionalProperties": false
+}

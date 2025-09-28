@@ -1,1 +1,47 @@
-{}
+{
+	"$id": "https://primal-hunter.local/schemas/aliases.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Alias Registry",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"properties": {
+				"aliases": {
+					"type": "array",
+					"items": { "type": "string" },
+					"minItems": 1
+				},
+				"ambiguous_aliases": {
+					"type": "array",
+					"items": { "type": "string" },
+					"uniqueItems": true
+				},
+				"pronouns": {
+					"type": "array",
+					"items": { "type": "string" },
+					"minItems": 1
+				},
+				"type": {
+					"type": "string"
+				},
+				"gender": {
+					"type": ["string", "null"],
+					"description": "Gender identity or grammatical gender."
+				},
+				"origin": { "type": ["string", "null"] },
+				"affiliation": { "type": ["string", "null"] },
+				"relationship_to_jake": { "type": ["string", "null"] },
+				"notes": { "type": "string" },
+				"tags": {
+					"type": "array",
+					"items": { "type": "string" },
+					"uniqueItems": true
+				}
+			},
+			"required": ["aliases", "pronouns", "type"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

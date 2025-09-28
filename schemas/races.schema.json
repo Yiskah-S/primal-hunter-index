@@ -1,0 +1,28 @@
+{
+	"$id": "https://primal-hunter.local/schemas/races.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Race Definitions",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"properties": {
+				"type": { "type": "string" },
+				"rarity": { "type": "string" },
+				"tier": { "type": "string" },
+				"stat_bonus_per_level": {
+					"type": "object",
+					"patternProperties": {
+						"^.+$": { "type": "number" }
+					},
+					"additionalProperties": false
+				},
+				"description": { "type": "string" },
+				"flavor": { "type": "string" }
+			},
+			"required": ["type", "rarity"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

@@ -1,0 +1,19 @@
+{
+	"$id": "https://primal-hunter.local/schemas/global_announcement_log.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Global Announcement Log",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"properties": {
+			"timestamp": { "type": "string", "format": "date-time" },
+			"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
+			"message": { "type": "string" },
+			"audience": { "type": "string" },
+			"notes": { "type": "string" }
+		},
+		"required": ["message"],
+		"additionalProperties": false
+	},
+	"additionalProperties": false
+}

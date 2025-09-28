@@ -1,0 +1,20 @@
+{
+	"$id": "https://primal-hunter.local/schemas/system_glossary.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "System Glossary",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"properties": {
+				"description": { "type": "string" },
+				"applies_to": { "type": "string" },
+				"example": { "type": "string" },
+				"notes": { "type": "string" }
+			},
+			"required": ["description"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}
