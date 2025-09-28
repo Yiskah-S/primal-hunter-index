@@ -1,6 +1,7 @@
 # === Content to keep private ===
 chapters/
 z_notes/
+.vscode/
 
 
 # === Python environment & metadata ===
