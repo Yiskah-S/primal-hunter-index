@@ -1,0 +1,80 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Affiliation Definition",
+	"description": "Canonical affiliations such as origins, religions, factions, guilds, or planar allegiances.",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"description": "Single affiliation keyed by its canonical name.",
+			"properties": {
+				"type": {
+					"type": "string",
+					"description": "Affiliation category (e.g., origin, religion, faction, guild, cosmic)."
+				},
+				"alignment": {
+					"type": "string",
+					"description": "Optional worldview or alignment descriptor."
+				},
+				"tier": {
+					"type": "string",
+					"description": "Influence or power tier (e.g., Mortal, Ascended, Transcendent)."
+				},
+				"leaders": {
+					"type": "array",
+					"description": "Key figures or founders associated with this affiliation.",
+					"items": {
+						"type": "string"
+					}
+				},
+				"members": {
+					"type": "array",
+					"description": "Notable characters belonging to this affiliation.",
+					"items": {
+						"type": "string"
+					}
+				},
+				"domains": {
+					"type": "array",
+					"description": "Locations or realms controlled or influenced by the affiliation.",
+					"items": {
+						"type": "string"
+					}
+				},
+				"races": {
+					"type": "array",
+					"description": "Species commonly aligned with this affiliation.",
+					"items": {
+						"type": "string"
+					}
+				},
+				"philosophy": {
+					"type": "string",
+					"description": "Optional motto or guiding belief structure."
+				},
+				"flavor": {
+					"type": "string",
+					"description": "Immersive description, quote, or story about the affiliation."
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"description": "Scene metadata for this affiliation's first appearance.",
+					"properties": {
+						"scene_id": {
+							"type": "string",
+							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+						},
+						"line": {
+							"type": "integer",
+							"minimum": 1
+						}
+					},
+					"required": ["scene_id"]
+				}
+			},
+			"required": ["type"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

@@ -1,22 +1,101 @@
 {
-	"Basic Health Potion": {
-		"type": "consumable",
+	"Wooden Bow": {
+		"type": "gear",
 		"rarity": "Common",
-		"description": "Restores a modest amount of health when consumed.",
-		"effects": {
-			"healing": {
-				"HP": 150
-			}
-		},
-		"uses": 1,
+		"description": "A simple wooden bow issued during the System introduction.",
 		"first_mentioned_in": {
-			"scene_id": "01-01-01",
-			"line": 120
+			"scene_id": "01-02-01",
+			"line": 139
 		},
 		"tags": [
-			"healing",
+			"starter",
+			"bow"
+		],
+		"granted_by": "Introduction Entity"
+	},
+	"Enchanted Quiver (Common)": {
+		"type": "gear",
+		"rarity": "Common",
+		"description": "A quiver enchanted to conjure common arrows when infused with mana. The enchantment allows the quiver to conjure common arrows when infused with mana.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 143
+		},
+		"tags": [
+			"starter",
+			"quiver",
+			"mana"
+		],
+		"granted_by": "Introduction Entity"
+	},
+	"Brown Cloak": {
+		"type": "gear",
+		"rarity": "Common",
+		"description": "A coarse, durable cloak reminiscent of burlap.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 139
+		},
+		"tags": [
+			"starter",
+			"clothing"
+		],
+		"granted_by": "Introduction Entity"
+	},
+	"Knife": {
+		"type": "gear",
+		"rarity": "Common",
+		"description": "Simple steel blade with a wooden handle, issued for close combat.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 139
+		},
+		"tags": [
+			"starter",
+			"weapon"
+		],
+		"granted_by": "Introduction Entity"
+	},
+	"Belt and Satchel": {
+		"type": "gear",
+		"rarity": "Common",
+		"description": "Leather belt with an attached satchel used to store starter potions.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 139
+		},
+		"tags": [
+			"starter",
+			"storage"
+		],
+		"granted_by": "Introduction Entity"
+	},
+	"Health Potion (Inferior)": {
+		"type": "consumable",
+		"rarity": "Inferior",
+		"description": "Restores health when consumed.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 141
+		},
+		"tags": [
+			"starter",
 			"potion"
 		],
-		"granted_by": "Starter tutorial cache"
+		"granted_by": "Introduction Entity"
+	},
+	"Stamina Potion (Inferior)": {
+		"type": "consumable",
+		"rarity": "Inferior",
+		"description": "Restores stamina when consumed.",
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 143
+		},
+		"tags": [
+			"starter",
+			"potion"
+		],
+		"granted_by": "Introduction Entity"
 	}
 }

@@ -1,0 +1,99 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Creature Definition",
+	"description": "Canonical creatures such as monsters, constructs, beasts, and bosses.",
+	"type": "object",
+	"patternProperties": {
+		"^.+$": {
+			"type": "object",
+			"description": "Single creature keyed by canonical name.",
+			"properties": {
+				"type": {
+					"type": "string",
+					"description": "Classification (e.g., beast, humanoid, construct, plant, boss)."
+				},
+				"tier": {
+					"type": "string",
+					"description": "System tier (e.g., G, F, E)."
+				},
+				"race": {
+					"type": "string",
+					"description": "Optional species label."
+				},
+				"level": {
+					"type": "integer",
+					"description": "Typical or canonical level of the creature."
+				},
+				"stats": {
+					"type": "object",
+					"description": "Optional stat block mirroring character stats.",
+					"properties": {
+						"Str": {"type": "integer"},
+						"Agi": {"type": "integer"},
+						"End": {"type": "integer"},
+						"Vit": {"type": "integer"},
+						"Int": {"type": "integer"},
+						"Wis": {"type": "integer"},
+						"Will": {"type": "integer"},
+						"Per": {"type": "integer"}
+					},
+					"additionalProperties": false
+				},
+				"resources": {
+					"type": "object",
+					"description": "Optional resource pools.",
+					"properties": {
+						"HP": {"type": "integer"},
+						"MP": {"type": "integer"},
+						"Stamina": {"type": "integer"}
+					},
+					"additionalProperties": false
+				},
+				"skills": {
+					"type": "array",
+					"description": "Skills known or used by the creature.",
+					"items": {"type": "string"}
+				},
+				"loot": {
+					"type": "array",
+					"description": "Items dropped or harvested from the creature.",
+					"items": {"type": "string"}
+				},
+				"behavior": {
+					"type": "object",
+					"description": "Optional behavioral flags.",
+					"properties": {
+						"hostile": {"type": "boolean"},
+						"intelligent": {"type": "boolean"},
+						"group_tactics": {"type": "boolean"},
+						"ambusher": {"type": "boolean"}
+					},
+					"additionalProperties": false
+				},
+				"first_mentioned_in": {
+					"type": "object",
+					"description": "Scene metadata for the creature's first appearance.",
+					"properties": {
+						"scene_id": {
+							"type": "string",
+							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+						},
+						"line": {
+							"type": "integer",
+							"minimum": 1
+						}
+					},
+					"required": ["scene_id"],
+					"additionalProperties": false
+				},
+				"flavor": {
+					"type": "string",
+					"description": "Optional descriptive text or lore snippet."
+				}
+			},
+			"required": ["type", "tier", "level"],
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

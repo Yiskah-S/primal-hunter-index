@@ -5,7 +5,7 @@
 		"scene_range": [
 			"01-01-01"
 		],
-		"notes": "Prelude on Earth; system activation happens in the next chapter."
+		"notes": "Covers Jake's ordinary Monday routine before the System activates."
 	},
 	"0002_Chapter_2_Introduction.md": {
 		"book": 1,
@@ -13,6 +13,6 @@
 		"scene_range": [
 			"01-02-01"
 		],
-		"notes": "Introduction Entity presents class choice; Jake picks Archer."
+		"notes": "Jake meets the Introduction Entity, selects the Archer class, and gathers starter gear."
 	}
 }

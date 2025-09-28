@@ -1,0 +1,107 @@
+{
+	"Jake's Apartment": {
+		"type": "residence",
+		"tier": "Mortal",
+		"known_inhabitants": [
+			"Jake"
+		],
+		"notable_features": [],
+		"connected_to": [
+			"City Traffic"
+		],
+		"first_mentioned_in": {
+			"scene_id": "01-01-01",
+			"line": 1
+		},
+		"flavor": "Jake's modest apartment on Earth before the System's arrival."
+	},
+	"City Traffic": {
+		"type": "transit",
+		"tier": "Mortal",
+		"known_inhabitants": [
+			"Commuters"
+		],
+		"notable_features": [
+			"Morning rush hour"
+		],
+		"connected_to": [
+			"Corporate Office Building"
+		],
+		"first_mentioned_in": {
+			"scene_id": "01-01-01",
+			"line": 9
+		},
+		"flavor": "Morning traffic corridor Jake navigates on his commute."
+	},
+	"Corporate Office Building": {
+		"type": "workplace",
+		"tier": "Mortal",
+		"known_inhabitants": [
+			"Jake",
+			"Joanna",
+			"Jacob",
+			"Bertram",
+			"Caroline",
+			"Mike"
+		],
+		"notable_features": [
+			"Glass facade",
+			"Reception desk",
+			"Fourteenth-floor open office"
+		],
+		"connected_to": [
+			"Elevator"
+		],
+		"first_mentioned_in": {
+			"scene_id": "01-01-01",
+			"line": 12
+		},
+		"flavor": "The financial firm where Jake works, complete with lobby and shared office floor."
+	},
+	"Elevator": {
+		"type": "transit",
+		"tier": "Mortal",
+		"known_inhabitants": [
+			"Jake",
+			"Joanna",
+			"Mike",
+			"Jacob",
+			"Bertram",
+			"Caroline"
+		],
+		"notable_features": [
+			"Crowded during lunch break"
+		],
+		"connected_to": [
+			"Corporate Office Building"
+		],
+		"first_mentioned_in": {
+			"scene_id": "01-01-01",
+			"line": 63
+		},
+		"flavor": "The cramped elevator ride just before the System announcement."
+	},
+	"System Introduction Chamber": {
+		"type": "system_room",
+		"tier": "System",
+		"environment": {
+			"gravity": "normal",
+			"magic_density": "dense"
+		},
+		"known_inhabitants": [
+			"Jake",
+			"Introduction Entity"
+		],
+		"notable_features": [
+			"Spotlight illumination",
+			"White surfaces",
+			"Two-way window"
+		],
+		"connected_to": [],
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 21
+		},
+		"flavor": "Sterile white room where new initiates receive their briefing before the tutorial."
+	}
+}

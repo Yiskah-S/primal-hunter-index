@@ -1,0 +1,19 @@
+{
+	"Introduction Entity": {
+		"type": "construct",
+		"tier": "System",
+		"race": "System Construct",
+		"level": 0,
+		"behavior": {
+			"hostile": false,
+			"intelligent": true
+		},
+		"skills": [],
+		"loot": [],
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"line": 23
+		},
+		"flavor": "An androgynous, synthetic facilitator assigned to brief new initiates before the tutorial."
+	}
+}

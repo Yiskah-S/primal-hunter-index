@@ -1,6 +1,6 @@
 # 🧠 Primal Hunter Metadata Index
 
-A schema-driven, LLM-friendly metadata system to track character progression, skills, equipment, and world state for *The Primal Hunter* series.
+A schema-driven, metadata system to track character progression, skills, equipment, and world state for *The Primal Hunter* series.
 
 ---
 
@@ -9,7 +9,6 @@ A schema-driven, LLM-friendly metadata system to track character progression, sk
 This project serves as both:
 
 * A **canonical progression tracker** for Jake and others in the *Primal Hunter* universe
-* A **training-grade metadata backend** to feed LLMs accurate, time-stamped, and validated data
 
 It prioritizes:
 

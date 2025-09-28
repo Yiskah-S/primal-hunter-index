@@ -2,14 +2,7 @@
 	"Jake": {
 		"aliases": [
 			"Jake",
-			"Jake Thayne",
-			"the Harbinger",
-			"Harbinger of Primeval Origins",
-			"the Chosen",
-			"Lord Thayne"
-		],
-		"ambiguous_aliases": [
-			"Lord"
+			"Jake Thayne"
 		],
 		"pronouns": [
 			"he",
@@ -17,365 +10,66 @@
 		],
 		"type": "mortal",
 		"gender": "male",
-		"origin": "Earth",
-		"relationship_to_jake": "self"
+		"notes": "Finance analyst and protagonist introduced in chapters 1-2."
 	},
-	"Introduction Entity": {
+	"Joanna": {
 		"aliases": [
-			"Introduction Entity",
-			"synthetic humanoid",
-			"the system voice",
-			"tutorial guide",
-			"androgynous figure"
+			"Joanna"
 		],
-		"ambiguous_aliases": [
-			"the figure",
-			"the voice",
-			"the thing"
-		],
-		"pronouns": [
-			"it",
-			"they"
-		],
-		"gender": "neutral",
-		"type": "system_entity",
-		"origin": "System Initialization Room",
-		"affiliation": "System",
-		"relationship_to_jake": "system_guide"
-	},
-	"Arnold": {
-		"aliases": [
-			"Arnold"
-		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"type": "mortal",
-		"gender": "male",
-		"origin": "Earth",
-		"relationship_to_jake": "friendly"
-	},
-	"Sylphie": {
-		"aliases": [
-			"Sylphie"
-		],
-		"ambiguous_aliases": [
-			"the bird",
-			"the hawk"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"type": "beast",
-		"gender": "female",
-		"affiliation": "friendly",
-		"relationship_to_jake": ""
-	},
-	"Malefic Viper": {
-		"aliases": [
-			"Villy",
-			"Malefic Viper",
-			"the Viper"
-		],
-		"ambiguous_aliases": [
-			"the Primordial",
-			"Primordial",
-			"the god"
-		],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"type": "god",
-		"gender": "male",
-		"origin": "1st Universe",
-		"relationship_to_jake": "patron"
-	},
-	"Miranda": {
-		"aliases": [
-			"Miranda"
-		],
-		"ambiguous_aliases": [],
 		"pronouns": [
 			"she",
 			"her"
 		],
 		"type": "mortal",
 		"gender": "female",
-		"origin": "Earth",
-		"relationship_to_jake": "friendly"
+		"notes": "Talkative receptionist at Jake's office."
 	},
-	"Carmen": {
+	"Jacob": {
 		"aliases": [
-			"Carmen"
+			"Jacob"
 		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"type": "mortal",
-		"gender": "female",
-		"origin": "Earth",
-		"relationship_to_jake": "friendly, sexual partner"
-	},
-	"Casper": {
-		"aliases": [
-			"Casper"
-		],
-		"ambiguous_aliases": [],
 		"pronouns": [
 			"he",
 			"him"
 		],
 		"type": "mortal",
 		"gender": "male",
-		"origin": "Earth",
-		"relationship_to_jake": "friendly"
+		"notes": "Jake's charismatic supervisor."
 	},
-	"Robert Thayne": {
+	"Bertram": {
 		"aliases": [
-			"Robert",
-			"Robert Thayne"
-		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"type": "family",
-		"gender": "male",
-		"origin": "Earth",
-		"relationship_to_jake": "father"
-	},
-	"Debra Thayne": {
-		"aliases": [
-			"Debra",
-			"Debra Thayne"
-		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"type": "family",
-		"gender": "female",
-		"origin": "Earth",
-		"relationship_to_jake": "mother"
-	},
-	"Caleb Thayne": {
-		"aliases": [
-			"Caleb",
-			"Caleb Thayne",
-			"the Judge",
-			"Judge"
-		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"type": "family",
-		"gender": "male",
-		"origin": "Earth",
-		"relationship_to_jake": "younger brother"
-	},
-	"Maja": {
-		"aliases": [
-			"Maja"
-		],
-		"ambiguous_aliases": [],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"type": "family",
-		"gender": "female",
-		"origin": "Earth",
-		"relationship_to_jake": "sister-in-law"
-	},
-	"Duskleaf": {
-		"aliases": [
-			"Duskleaf"
-		],
-		"ambiguous_aliases": [
-			"the God"
+			"Bertram"
 		],
 		"pronouns": [
 			"he",
 			"him"
 		],
-		"type": "god",
+		"type": "mortal",
 		"gender": "male",
-		"origin": "",
-		"relationship_to_jake": "friendly"
+		"notes": "Companion to Jacob with a protective demeanor."
 	},
-	"Katherine": {
+	"Caroline": {
 		"aliases": [
-			"Katherine",
-			""
-		],
-		"ambiguous_aliases": [
-			""
+			"Caroline"
 		],
 		"pronouns": [
 			"she",
 			"her"
 		],
-		"type": "",
+		"type": "mortal",
 		"gender": "female",
-		"origin": "",
-		"relationship_to_jake": ""
+		"notes": "HR coworker and Jake's unspoken crush."
 	},
-	"Snoarix": {
+	"Mike": {
 		"aliases": [
-			"Snoarix",
-			"Lord Protector",
-			"Snappy"
+			"Mike"
 		],
 		"pronouns": [
 			"he",
 			"him"
 		],
+		"type": "mortal",
 		"gender": "male",
-		"type": "god"
-	},
-	"Viridia": {
-		"aliases": [
-			"Viridia",
-			"Hall Master Viridia"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "god"
-	},
-	"Linea": {
-		"aliases": [
-			"Linea"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": ""
-	},
-	"Ladies of the Verdant Lagoon": {
-		"aliases": [
-			"Ladies of the Verdant Lagoon"
-		],
-		"pronouns": [
-			"they",
-			"them"
-		],
-		"gender": "female",
-		"type": "gods"
-	},
-	"Khanac": {
-		"aliases": [
-			"Khanac"
-		],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"gender": "male",
-		"type": "god"
-	},
-	"Fairleigh": {
-		"aliases": [
-			"Fairleigh"
-		],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"gender": "male",
-		"type": ""
-	},
-	"Alcor": {
-		"aliases": [
-			"Alcor"
-		],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"gender": "male",
-		"type": ""
-	},
-	"Sandy": {
-		"aliases": [
-			"Sandy"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "beast"
-	},
-	"Scarlett Allison": {
-		"aliases": [
-			"Scarlett",
-			"Scarlett Allison"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "beastkin"
-	},
-	"Draskil": {
-		"aliases": [
-			"Draskil"
-		],
-		"pronouns": [
-			"he",
-			"him"
-		],
-		"gender": "male",
-		"type": "beastkin"
-	},
-	"Bastilla": {
-		"aliases": [
-			"Bastilla"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "mortal"
-	},
-	"Meira": {
-		"aliases": [
-			"Meira",
-			"Meira Dawnleaf"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "mortal"
-	},
-	"Irinixis": {
-		"aliases": [
-			"Irinixis"
-		],
-		"pronouns": [
-			"she",
-			"her"
-		],
-		"gender": "female",
-		"type": "mortal"
+		"notes": "Joanna's husband, seen in the elevator ride."
 	}
 }
