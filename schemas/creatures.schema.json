@@ -3,8 +3,8 @@
 	"title": "Creature Definition",
 	"description": "Records of creatures such as monsters, constructs, beasts, and bosses.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "Single creature keyed by its records name.",
 			"properties": {
@@ -89,10 +89,22 @@
 				"flavor": {
 					"type": "string",
 					"description": "Optional descriptive text or lore snippet."
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this creature entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
 				}
 			},
-			"required": ["type", "tier", "level"],
+			"required": ["type", "tier", "level", "canon", "source_ref"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

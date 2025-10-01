@@ -14,9 +14,10 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from jsonschema import Draft202012Validator
+from referencing import Registry, Resource
 
 from core.schema_utils import read_json
 
@@ -50,10 +51,44 @@ class ValidationError(Exception):
 
 TAG_NAME_PATTERN = re.compile(r"^[a-z0-9_]+$")
 
+CANONICAL_RECORD_PATHS: tuple[Path, ...] = (
+	RECORDS_ROOT / "skills.json",
+	RECORDS_ROOT / "equipment.json",
+	RECORDS_ROOT / "classes.json",
+	RECORDS_ROOT / "races.json",
+	RECORDS_ROOT / "system_glossary.json",
+	RECORDS_ROOT / "zone_lore.json",
+	RECORDS_ROOT / "stat_scaling.json",
+	RECORDS_ROOT / "global_event_timeline.json",
+	RECORDS_ROOT / "global_announcement_log.json",
+	RECORDS_ROOT / "affiliations.json",
+	RECORDS_ROOT / "creatures.json",
+	RECORDS_ROOT / "titles.json",
+	RECORDS_ROOT / "tiers.json",
+	RECORDS_ROOT / "locations.json"
+)
+
+SHARED_SCHEMA_URIS = {
+	"https://primal-hunter.local/schemas/shared/provenance.schema.json": SCHEMA_ROOT / "shared" / "provenance.schema.json",
+}
+
+def _build_schema_registry() -> Registry:
+	registry = Registry()
+	for uri, path in SHARED_SCHEMA_URIS.items():
+		if path.exists():
+			registry = registry.with_resource(uri, Resource.from_contents(read_json(path)))
+	return registry
+
+
+SCHEMA_REGISTRY = _build_schema_registry()
+
 
 def _collect_schema_errors(data_path: Path, schema_path: Path) -> list[str]:
 	schema_definition = read_json(schema_path)
-	validator = Draft202012Validator(schema_definition)
+	validator = Draft202012Validator(
+		schema_definition,
+		registry=SCHEMA_REGISTRY,
+	)
 	instance_data = read_json(data_path)
 	error_messages: List[str] = []
 	for validation_error in validator.iter_errors(instance_data):
@@ -186,6 +221,145 @@ def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:
 	return errors
 
 
+def _load_scene_bounds() -> tuple[Dict[str, Tuple[int, int, Path]], list[str]]:
+	scene_bounds: Dict[str, Tuple[int, int, Path]] = {}
+	errors: list[str] = []
+	for scene_path in _iter_scene_files():
+		scene_data = read_json(scene_path)
+		scene_id = scene_data.get("scene_id")
+		start_line = scene_data.get("start_line")
+		end_line = scene_data.get("end_line")
+		if not scene_id:
+			errors.append(f"{scene_path}: missing scene_id.")
+			continue
+		if not isinstance(start_line, int) or not isinstance(end_line, int):
+			errors.append(
+				f"{scene_path}: start_line/end_line must be integers to validate provenance ranges."
+			)
+			continue
+		scene_bounds[scene_id] = (start_line, end_line, scene_path)
+	return scene_bounds, errors
+
+
+def _normalize_source_ref(
+	source_ref: object,
+	base_pointer: str,
+	file_path: Path,
+	errors: List[str],
+) -> List[Tuple[str, Dict[str, object]]]:
+	ranges: List[Tuple[str, Dict[str, object]]] = []
+	ref_pointer = f"{base_pointer}/source_ref"
+	if isinstance(source_ref, dict):
+		ranges.append((ref_pointer, source_ref))
+	elif isinstance(source_ref, list):
+		if not source_ref:
+			errors.append(f"{file_path}: {ref_pointer} → source_ref array must contain at least one range.")
+		else:
+			for index, entry in enumerate(source_ref):
+				range_pointer = f"{ref_pointer}/{index}"
+				if not isinstance(entry, dict):
+					errors.append(f"{file_path}: {range_pointer} → source_ref entries must be objects.")
+					continue
+				ranges.append((range_pointer, entry))
+	else:
+		errors.append(f"{file_path}: {ref_pointer} → source_ref must be an object or array of objects.")
+	return ranges
+
+
+def _validate_source_ref_ranges(
+	file_path: Path,
+	base_pointer: str,
+	source_ref: object,
+	scene_bounds: Dict[str, Tuple[int, int, Path]],
+) -> list[str]:
+	errors: list[str] = []
+	for range_pointer, payload in _normalize_source_ref(source_ref, base_pointer, file_path, errors):
+		if not isinstance(payload, dict):
+			continue
+		scene_id = payload.get("scene_id")
+		line_start = payload.get("line_start")
+		line_end = payload.get("line_end")
+		if scene_id is None:
+			errors.append(f"{file_path}: {range_pointer} → scene_id is required.")
+			continue
+		scene_info = scene_bounds.get(scene_id)
+		if scene_info is None:
+			errors.append(f"{file_path}: {range_pointer} → scene_id '{scene_id}' missing from scene index.")
+			continue
+		scene_start, scene_end, scene_path = scene_info
+		if not isinstance(line_start, int) or not isinstance(line_end, int):
+			errors.append(
+				f"{file_path}: {range_pointer} → line_start and line_end must be integers."
+			)
+			continue
+		if line_start < 1 or line_end < 1:
+			errors.append(f"{file_path}: {range_pointer} → line_start/line_end must be positive.")
+			continue
+		if line_start > line_end:
+			errors.append(
+				f"{file_path}: {range_pointer} → line_start ({line_start}) cannot exceed line_end ({line_end})."
+			)
+			continue
+		if line_start < scene_start or line_end > scene_end:
+			errors.append(
+				f"{file_path}: {range_pointer} → lines {line_start}-{line_end} fall outside scene {scene_id} range {scene_start}-{scene_end} ({scene_path})."
+			)
+	return errors
+
+
+def _validate_canonical_record_file(
+	file_path: Path,
+	data: object,
+	scene_bounds: Dict[str, Tuple[int, int, Path]],
+) -> list[str]:
+	errors: list[str] = []
+	if isinstance(data, dict):
+		entries = [(key, value) for key, value in data.items()]
+	elif isinstance(data, list):
+		entries = [(f"entry[{index}]", value) for index, value in enumerate(data)]
+	else:
+		return errors
+	for pointer, entry in entries:
+		if not isinstance(entry, dict):
+			continue
+		canon_value = entry.get("canon")
+		if canon_value is None:
+			errors.append(f"{file_path}: {pointer} → missing 'canon' flag (bool expected).")
+			continue
+		if not isinstance(canon_value, bool):
+			errors.append(f"{file_path}: {pointer} → 'canon' must be a boolean value.")
+			continue
+		source_ref = entry.get("source_ref")
+		if canon_value:
+			if source_ref is None:
+				errors.append(f"{file_path}: {pointer} → canon entries must include source_ref.")
+				continue
+			errors.extend(_validate_source_ref_ranges(file_path, pointer, source_ref, scene_bounds))
+		elif source_ref is not None:
+			errors.extend(_validate_source_ref_ranges(file_path, pointer, source_ref, scene_bounds))
+	return errors
+
+
+def _validate_timeline_provenance(
+	timeline_path: Path,
+	entries: object,
+	scene_bounds: Dict[str, Tuple[int, int, Path]],
+) -> list[str]:
+	errors: list[str] = []
+	if not isinstance(entries, list):
+		return errors
+	for index, entry in enumerate(entries):
+		if not isinstance(entry, dict):
+			continue
+		pointer = f"entry[{index}]"
+		source_ref = entry.get("source_ref")
+		if source_ref is None:
+			errors.append(f"{timeline_path}: {pointer} → timeline entries must include source_ref.")
+			continue
+		errors.extend(_validate_source_ref_ranges(timeline_path, pointer, source_ref, scene_bounds))
+	return errors
+
+
 def validate_all() -> int:
 	validation_errors: List[str] = []
 
@@ -197,6 +371,9 @@ def validate_all() -> int:
 	# Scene index entries
 	for scene_path in _iter_scene_files():
 		validation_errors.extend(_collect_schema_errors(scene_path, SCENE_SCHEMA))
+
+	scene_bounds, scene_bound_errors = _load_scene_bounds()
+	validation_errors.extend(scene_bound_errors)
 
 	# Character timelines and the skills they reference
 	skill_catalog_names = set(read_json(RECORDS_ROOT / "skills.json").keys())
@@ -215,6 +392,9 @@ def validate_all() -> int:
 					validation_errors.append(
 						f"{timeline_path}: entry[{entry_index}].skills → '{timeline_skill}' missing from records/skills.json"
 					)
+		validation_errors.extend(
+			_validate_timeline_provenance(timeline_path, timeline_entries, scene_bounds)
+		)
 
 	# Metadata sidecar files that store provenance
 	for metadata_path in _iter_meta_files():
@@ -223,6 +403,15 @@ def validate_all() -> int:
 	# Tag usage across all record files
 	tag_registry = read_json(RECORDS_ROOT / "tag_registry.json")
 	validation_errors.extend(_validate_tag_usage(RECORDS_ROOT, tag_registry))
+
+	# Canonical record provenance checks
+	for data_path in CANONICAL_RECORD_PATHS:
+		if not data_path.exists():
+			continue
+		entry_data = read_json(data_path)
+		validation_errors.extend(
+			_validate_canonical_record_file(data_path, entry_data, scene_bounds)
+		)
 
 	if validation_errors:
 		print("\n❌ Metadata validation failed:")

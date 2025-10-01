@@ -13,7 +13,13 @@
 			"scene_id": "01-01-01",
 			"line": 1
 		},
-		"flavor": "Jake's modest apartment on Earth before the System's arrival."
+		"flavor": "Jake's modest apartment on Earth before the System's arrival.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 7,
+			"line_end": 13
+		}
 	},
 	"City Traffic": {
 		"type": "transit",
@@ -31,7 +37,13 @@
 			"scene_id": "01-01-01",
 			"line": 9
 		},
-		"flavor": "Morning traffic corridor Jake navigates on his commute."
+		"flavor": "Morning traffic corridor Jake navigates on his commute.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 15,
+			"line_end": 16
+		}
 	},
 	"Corporate Office Building": {
 		"type": "workplace",
@@ -56,7 +68,13 @@
 			"scene_id": "01-01-01",
 			"line": 12
 		},
-		"flavor": "The financial firm where Jake works, complete with lobby and shared office floor."
+		"flavor": "The financial firm where Jake works, complete with lobby and shared office floor.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 17,
+			"line_end": 35
+		}
 	},
 	"Elevator": {
 		"type": "transit",
@@ -79,7 +97,13 @@
 			"scene_id": "01-01-01",
 			"line": 63
 		},
-		"flavor": "The cramped elevator ride just before the System announcement."
+		"flavor": "The cramped elevator ride just before the System announcement.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 61,
+			"line_end": 79
+		}
 	},
 	"System Introduction Chamber": {
 		"type": "system_room",
@@ -102,6 +126,12 @@
 			"scene_id": "01-02-01",
 			"line": 21
 		},
-		"flavor": "Sterile white room where new initiates receive their briefing before the tutorial."
+		"flavor": "Sterile white room where new initiates receive their briefing before the tutorial.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 1,
+			"line_end": 40
+		}
 	}
 }

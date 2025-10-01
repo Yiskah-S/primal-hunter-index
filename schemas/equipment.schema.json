@@ -3,10 +3,10 @@
 	"title": "Equipment Metadata Schema",
 	"type": "object",
 	"description": "Definitions of all equipment and items, indexed by name.",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["type", "rarity"],
+			"required": ["type", "rarity", "canon", "source_ref"],
 			"properties": {
 				"type": {
 					"type": "string",
@@ -82,13 +82,25 @@
 					},
 					"uniqueItems": true
 				},
-                "granted_by": {
-                    "type": ["string", "array"],
-                    "description": "The event or source that granted the item",
-                    "items": { "type": "string" }
-                }
+				"granted_by": {
+					"type": ["string", "array"],
+					"description": "The event or source that granted the item",
+					"items": { "type": "string" }
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this item entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				}
 			},
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

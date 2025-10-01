@@ -18,7 +18,13 @@
 			"character_intro",
 			"system_foreshadowing",
 			"reflection"
-		]
+		],
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 1,
+			"line_end": 83
+		}
 	},
 	{
 		"day": 0,
@@ -38,6 +44,12 @@
 			"skill_gain",
 			"skill_mechanics",
 			"mana_use"
-		]
+		],
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 1,
+			"line_end": 159
+		}
 	}
 ]

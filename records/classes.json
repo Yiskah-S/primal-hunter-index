@@ -13,14 +13,19 @@
 			"Vit": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 73
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 73
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 73,
+			"line_end": 73
+		},
 		"flavor": "Jake considered it similar to a rogue—fast, deadly, but too up-close for his liking."
 	},
-
 	"Warrior (Medium)": {
 		"type": "starter",
 		"archetype": "Warrior",
@@ -36,14 +41,19 @@
 			"Tough": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 77
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 77
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 77,
+			"line_end": 77
+		},
 		"flavor": "The choice of someone unsure how to specialize—a flexible but unfocused option."
 	},
-
 	"Warrior (Heavy)": {
 		"type": "starter",
 		"archetype": "Warrior",
@@ -58,14 +68,19 @@
 			"End": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 81
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 81
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 81,
+			"line_end": 81
+		},
 		"flavor": "Jake imagined it as the big, beefy Viking-type class — not for him."
 	},
-
 	"Archer": {
 		"type": "starter",
 		"archetype": "Archer",
@@ -79,14 +94,19 @@
 			"Str": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 85
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 85
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 85,
+			"line_end": 85
+		},
 		"flavor": "Jake's clear favorite — a flexible ranged combatant that fits his playstyle."
 	},
-
 	"Caster": {
 		"type": "starter",
 		"archetype": "Caster",
@@ -101,14 +121,19 @@
 			"Per": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 89
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 89
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 89,
+			"line_end": 89
+		},
 		"flavor": "Jake was intrigued by the concept of magic, but still preferred the bow over fireballs."
 	},
-
 	"Healer": {
 		"type": "starter",
 		"archetype": "Healer",
@@ -122,11 +147,17 @@
 			"Int": 1,
 			"Free point": 1
 		},
-        "first_mentioned_in": {
-            "scene_id": "0002-1",
-            "source_file": "chapters/0002_Chapter_2_Introduction.md",
-            "line": 93
-        },
+		"first_mentioned_in": {
+			"scene_id": "01-02-01",
+			"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+			"line": 93
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 93,
+			"line_end": 93
+		},
 		"flavor": "Jake wasn’t interested, but the hint at deific powers piqued his curiosity about priest paths."
 	}
 }

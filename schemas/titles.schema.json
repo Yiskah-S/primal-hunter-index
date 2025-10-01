@@ -2,10 +2,10 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Title Metadata Schema",
 	"type": "object",
-	"patternProperties": {
-		".+": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["rarity", "effects"],
+			"required": ["rarity", "effects", "canon", "source_ref"],
 			"properties": {
 				"rarity": {
 					"type": "string",
@@ -38,8 +38,22 @@
 						"line": { "type": "integer" }
 					}
 				},
-				"flavor": { "type": "string" }
-			}
+				"flavor": { "type": "string" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this title entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				}
+			},
+			"additionalProperties": false
 		}
-	}
+	},
+	"patternProperties": {
+		".+": {
+			"$ref": "#/$defs/entry"
+		}
+	},
+	"additionalProperties": false
 }

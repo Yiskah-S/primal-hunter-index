@@ -3,10 +3,19 @@
 	"title": "Skill Metadata Schema",
 	"type": "object",
 	"description": "Records definitions of all skills, indexed by skill name.",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["rarity", "type", "description", "effects", "first_mentioned_in", "flavor"],
+			"required": [
+				"rarity",
+				"type",
+				"description",
+				"effects",
+				"first_mentioned_in",
+				"flavor",
+				"canon",
+				"source_ref"
+			],
 			"properties": {
 				"rarity": {
 					"type": "string",
@@ -16,9 +25,9 @@
 					"type": "string",
 					"description": "General category of the skill (e.g., Combat Passive, General Utility, Sensory Passive)"
 				},
-				"class_recommendations": {
+				"class_associations": {
 					"type": "array",
-					"description": "List of classes that naturally benefit from this skill",
+					"description": "List of classes that could get this skill",
 					"items": { "type": "string" }
 				},
 				"description": {
@@ -98,9 +107,21 @@
 					"type": ["string", "array"],
 					"description": "The event or system that grants this skill",
 					"items": { "type": "string" }
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this entry represents a canon fact that requires provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
 				}
 			},
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

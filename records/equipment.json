@@ -7,6 +7,12 @@
 			"scene_id": "01-02-01",
 			"line": 139
 		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 133,
+			"line_end": 139
+		},
 		"tags": [
 			"starter",
 			"archery"
@@ -20,6 +26,12 @@
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
 			"line": 143
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 141,
+			"line_end": 145
 		},
 		"tags": [
 			"starter",
@@ -36,6 +48,12 @@
 			"scene_id": "01-02-01",
 			"line": 139
 		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 134,
+			"line_end": 134
+		},
 		"tags": [
 			"starter",
 			"clothing"
@@ -49,6 +67,12 @@
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
 			"line": 139
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 137,
+			"line_end": 137
 		},
 		"tags": [
 			"starter",
@@ -64,6 +88,12 @@
 			"scene_id": "01-02-01",
 			"line": 139
 		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 133,
+			"line_end": 137
+		},
 		"tags": [
 			"starter",
 			"storage"
@@ -78,6 +108,12 @@
 			"scene_id": "01-02-01",
 			"line": 141
 		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 141,
+			"line_end": 141
+		},
 		"tags": [
 			"starter",
 			"potion"
@@ -91,6 +127,12 @@
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
 			"line": 143
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 143,
+			"line_end": 143
 		},
 		"tags": [
 			"starter",

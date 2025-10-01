@@ -10,6 +10,12 @@
 		"first_mentioned_in": {
 			"scene_id": "01-01-01",
 			"line": 1
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 1,
+			"line_end": 83
 		}
 	},
 	"The System": {
@@ -21,6 +27,12 @@
 		"first_mentioned_in": {
 			"scene_id": "01-02-01",
 			"line": 23
+		},
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 20,
+			"line_end": 159
 		}
 	}
 }

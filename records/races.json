@@ -15,6 +15,12 @@
 			"Free point": 1
 		},
 		"description": "The lowest level of humans in the System, found only in newly initiated worlds.",
-		"flavor": "The human race is known as one of the most balanced and numerous amongst the myriad races of the multiverse, being able to walk many different roads on their path to power."
+		"flavor": "The human race is known as one of the most balanced and numerous amongst the myriad races of the multiverse, being able to walk many different roads on their path to power.",
+		"canon": true,
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 55,
+			"line_end": 55
+		}
 	}
 }

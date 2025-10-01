@@ -4,7 +4,7 @@
 	"type": "array",
 	"items": {
 		"type": "object",
-		"required": ["day", "scene_id", "stats"],
+		"required": ["day", "scene_id", "stats", "source_ref"],
 		"properties": {
 			"day": {
 				"type": "integer",
@@ -124,6 +124,17 @@
 					"required": ["source", "change"],
 					"additionalProperties": false
 				}
+			},
+			"source_ref": {
+				"description": "Exact scene and line span supporting this snapshot",
+				"oneOf": [
+					{ "$ref": "#/$defs/source_range" },
+					{
+						"type": "array",
+						"items": { "$ref": "#/$defs/source_range" },
+						"minItems": 1
+					}
+				]
 			}
 		},
 		"additionalProperties": false
@@ -136,6 +147,25 @@
 				"max": { "type": "number" },
 				"current": { "type": "number" },
 				"derived_from": { "type": ["string", "array"] }
+			},
+			"additionalProperties": false
+		},
+		"source_range": {
+			"type": "object",
+			"required": ["scene_id", "line_start", "line_end"],
+			"properties": {
+				"scene_id": {
+					"type": "string",
+					"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+				},
+				"line_start": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"line_end": {
+					"type": "integer",
+					"minimum": 1
+				}
 			},
 			"additionalProperties": false
 		}

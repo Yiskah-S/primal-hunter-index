@@ -13,7 +13,12 @@
 		"stats": {
 			"total": {}
 		},
-		"notes": "Normal commute; coworkers introduced; System message flashes at scene end."
+		"notes": "Normal commute; coworkers introduced; System message flashes at scene end.",
+		"source_ref": {
+			"scene_id": "01-01-01",
+			"line_start": 1,
+			"line_end": 83
+		}
 	},
 	{
 		"day": 0,
@@ -120,6 +125,11 @@
 			"skill_mechanics",
 			"mana_use"
 		],
-		"notes": "Meets Introduction Entity, selects Archer, gains starter kit before tutorial transport."
+		"notes": "Meets Introduction Entity, selects Archer, gains starter kit before tutorial transport.",
+		"source_ref": {
+			"scene_id": "01-02-01",
+			"line_start": 1,
+			"line_end": 159
+		}
 	}
 ]

@@ -3,8 +3,8 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Zone Lore Entries",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"properties": {
 				"tier": { "type": "string" },
@@ -15,9 +15,22 @@
 					"items": { "type": "string" },
 					"uniqueItems": true
 				},
-				"notes": { "type": "string" }
+				"notes": { "type": "string" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this zone lore entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				}
 			},
+			"required": ["summary", "canon", "source_ref"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

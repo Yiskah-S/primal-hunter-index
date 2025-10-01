@@ -28,6 +28,46 @@
       entryStrategy: "object"
     },
     {
+      id: "classes",
+      label: "Classes",
+      schemaPath: "../../schemas/classes.schema.json",
+      dataPath: "../../records/classes.json",
+      metaPath: "../../records/classes.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
+      id: "races",
+      label: "Races",
+      schemaPath: "../../schemas/races.schema.json",
+      dataPath: "../../records/races.json",
+      metaPath: "../../records/races.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
+      id: "system-glossary",
+      label: "System Glossary",
+      schemaPath: "../../schemas/system_glossary.schema.json",
+      dataPath: "../../records/system_glossary.json",
+      metaPath: "../../records/system_glossary.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
+      id: "affiliations",
+      label: "Affiliations",
+      schemaPath: "../../schemas/affiliations.schema.json",
+      dataPath: "../../records/affiliations.json",
+      metaPath: "../../records/affiliations.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
+      id: "creatures",
+      label: "Creatures",
+      schemaPath: "../../schemas/creatures.schema.json",
+      dataPath: "../../records/creatures.json",
+      metaPath: "../../records/creatures.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
       id: "timeline-jake",
       label: "Timeline – Jake",
       schemaPath: "../../schemas/character_timeline.schema.json",
@@ -41,6 +81,22 @@
       schemaPath: "../../schemas/tag_registry.schema.json",
       dataPath: "../../records/tag_registry.json",
       metaPath: "../../records/tag_registry.json.meta.json",
+      entryStrategy: "object"
+    },
+    {
+      id: "global-event-timeline",
+      label: "Global Event Timeline",
+      schemaPath: "../../schemas/global_event_timeline.schema.json",
+      dataPath: "../../records/global_event_timeline.json",
+      metaPath: "../../records/global_event_timeline.json.meta.json",
+      entryStrategy: "array"
+    },
+    {
+      id: "locations",
+      label: "Locations",
+      schemaPath: "../../schemas/locations.schema.json",
+      dataPath: "../../records/locations.json",
+      metaPath: "../../records/locations.json.meta.json",
       entryStrategy: "object"
     }
   ];
@@ -60,6 +116,10 @@
   const metaSummary = document.getElementById("meta-summary");
   const datasetMeta = document.getElementById("dataset-meta");
   const toggleRaw = document.getElementById("toggle-raw");
+  const provenancePreview = document.getElementById("provenance-preview");
+
+  const sceneCache = new Map();
+  let provenanceRequestToken = 0;
 
   function setStatus(message, isError) {
     datasetMeta.textContent = message;
@@ -164,9 +224,105 @@
     addRow("entered_by", meta.entered_by);
   }
 
+  function resetProvenancePanel() {
+    if (provenancePreview) {
+      provenancePreview.innerHTML = "";
+    }
+  }
+
+  function normalizeSourceRefValue(sourceRef) {
+    if (!sourceRef) return [];
+    if (Array.isArray(sourceRef)) return sourceRef.filter((item) => item && typeof item === "object");
+    if (typeof sourceRef === "object") return [sourceRef];
+    return [];
+  }
+
+  function scenePathCandidates(sceneId) {
+    if (typeof sceneId !== "string" || sceneId.length < 2) {
+      return [];
+    }
+    const bookCode = sceneId.slice(0, 2);
+    return [
+      `../../records/scene_index/Book ${bookCode} - PH/${sceneId}.json`,
+      `../../records/scene_index/${sceneId}.json`
+    ];
+  }
+
+  async function fetchSceneById(sceneId) {
+    if (sceneCache.has(sceneId)) {
+      return sceneCache.get(sceneId);
+    }
+    const candidates = scenePathCandidates(sceneId);
+    for (const path of candidates) {
+      try {
+        const scene = await fetchJson(path);
+        scene.__source = path;
+        sceneCache.set(sceneId, scene);
+        return scene;
+      } catch (error) {
+        // Try the next candidate
+      }
+    }
+    console.warn(`Scene ${sceneId} not found under known paths.`);
+    sceneCache.set(sceneId, null);
+    return null;
+  }
+
+  async function refreshProvenanceView(entryValue) {
+    if (!provenancePreview) {
+      return;
+    }
+
+    provenanceRequestToken += 1;
+    const requestId = provenanceRequestToken;
+    provenancePreview.innerHTML = "";
+
+    if (!entryValue || typeof entryValue !== "object") {
+      return;
+    }
+
+    const ranges = normalizeSourceRefValue(entryValue.source_ref);
+    if (!ranges.length) {
+      return;
+    }
+
+    const fragments = [];
+    for (const range of ranges) {
+      const sceneId = range.scene_id;
+      const lineStart = range.line_start;
+      const lineEnd = range.line_end;
+
+      if (!sceneId) {
+        fragments.push(`<li><span class="text-error">Missing scene_id on source_ref entry.</span></li>`);
+        continue;
+      }
+
+      const scene = await fetchSceneById(sceneId);
+      if (requestId !== provenanceRequestToken) {
+        return; // stale request
+      }
+
+      if (!scene) {
+        fragments.push(
+          `<li><strong>${sceneId}</strong> · lines ${lineStart ?? "?"}-${lineEnd ?? "?"} · <span class="text-error">scene not found</span></li>`
+        );
+        continue;
+      }
+
+      const summaryBits = [scene.title, scene.summary].filter(Boolean).join(" · ");
+      const lineLabel = lineStart && lineEnd ? `lines ${lineStart}-${lineEnd}` : "lines ?";
+      const sourceHint = scene.__source ? ` <span class="text-gray">(${scene.__source})</span>` : "";
+      const details = summaryBits ? ` · ${summaryBits}` : "";
+      fragments.push(`<li><strong>${sceneId}</strong> · ${lineLabel}${details}${sourceHint}</li>`);
+    }
+
+    provenancePreview.innerHTML = fragments.join("");
+  }
+
   function updatePreview() {
     if (!editor) {
       previewOutput.textContent = "";
+      resetProvenancePanel();
       return;
     }
     try {
@@ -178,8 +334,12 @@
       }
       const indent = toggleRaw.checked ? 0 : 2;
       previewOutput.textContent = JSON.stringify(payload, null, indent);
+      refreshProvenanceView(value).catch((error) => {
+        console.warn("Unable to render provenance preview:", error);
+      });
     } catch (err) {
       previewOutput.textContent = `⚠️ Unable to render preview: ${err.message}`;
+      resetProvenancePanel();
     }
   }
 
@@ -244,6 +404,7 @@
       renderMetaSummary(meta);
       entryNameInput.value = "";
       previewOutput.textContent = "";
+      resetProvenancePanel();
       setStatus(`Loaded schema and ${entries.length} entries`, false);
     } catch (err) {
       console.error(err);
@@ -287,6 +448,7 @@
     editor.setValue({});
     entrySelect.value = "";
     previewOutput.textContent = "";
+    resetProvenancePanel();
   }
 
   function populateDatasets() {

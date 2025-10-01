@@ -3,8 +3,8 @@
 	"title": "Location Definition",
 	"description": "Schema for all named locations, zones, subzones, dungeons, layers, cities, or landmarks. Used for environmental tagging, worldbuilding, and indexing spatial progression.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "A single location or zone, keyed by its name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
 			"properties": {
@@ -66,7 +66,7 @@
 				},
 				"first_mentioned_in": {
 					"type": "object",
-			"description": "Scene metadata for when this location was first described.",
+					"description": "Scene metadata for when this location was first described.",
 					"properties": {
 						"scene_id": {
 							"type": "string",
@@ -86,12 +86,27 @@
 				"flavor": {
 					"type": "string",
 					"description": "Optional quote, tone, or immersive description about this location."
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this location entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
 				}
 			},
 			"required": [
 				"type",
-				"tier"
-			]
+				"tier",
+				"canon",
+				"source_ref"
+			],
+			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

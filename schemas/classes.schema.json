@@ -2,10 +2,18 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Class Metadata Schema",
 	"type": "object",
-	"patternProperties": {
-		".+": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["type", "archetype", "focus", "stat_bonus_per_level", "description"],
+			"required": [
+				"type",
+				"archetype",
+				"focus",
+				"stat_bonus_per_level",
+				"description",
+				"canon",
+				"source_ref"
+			],
 			"properties": {
 				"type": { "type": "string" },
 				"archetype": { "type": "string" },
@@ -31,13 +39,27 @@
 				"first_mentioned_in": {
 					"type": "object",
 					"properties": {
-						"scene_id": { "type": "string" },
+						"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
 						"source_file": { "type": "string" },
 						"line": { "type": "integer" }
 					}
 				},
-				"flavor": { "type": "string" }
-			}
+				"flavor": { "type": "string" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this class entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				}
+			},
+			"additionalProperties": false
 		}
-	}
+	},
+	"patternProperties": {
+		".+": {
+			"$ref": "#/$defs/entry"
+		}
+	},
+	"additionalProperties": false
 }

@@ -3,8 +3,8 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Race Definitions",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"properties": {
 				"type": { "type": "string" },
@@ -18,10 +18,22 @@
 					"additionalProperties": false
 				},
 				"description": { "type": "string" },
-				"flavor": { "type": "string" }
+				"flavor": { "type": "string" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this race entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				}
 			},
-			"required": ["type", "rarity"],
+			"required": ["type", "rarity", "canon", "source_ref"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

@@ -25,9 +25,16 @@
 					"pattern": "^[a-z0-9_]+$"
 				},
 				"uniqueItems": true
+			},
+			"canon": {
+				"type": "boolean",
+				"description": "Whether this entry asserts a canon global event."
+			},
+			"source_ref": {
+				"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
 			}
 		},
-		"required": ["day", "event"],
+		"required": ["day", "event", "canon", "source_ref"],
 		"additionalProperties": false
 	},
 	"additionalProperties": false

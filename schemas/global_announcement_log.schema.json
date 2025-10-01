@@ -10,9 +10,16 @@
 			"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
 			"message": { "type": "string" },
 			"audience": { "type": "string" },
-			"notes": { "type": "string" }
+			"notes": { "type": "string" },
+			"canon": {
+				"type": "boolean",
+				"description": "Whether this announcement represents a canon message."
+			},
+			"source_ref": {
+				"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+			}
 		},
-		"required": ["message"],
+		"required": ["message", "canon", "source_ref"],
 		"additionalProperties": false
 	},
 	"additionalProperties": false

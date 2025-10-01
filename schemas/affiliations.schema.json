@@ -3,8 +3,8 @@
 	"title": "Affiliation Definition",
 	"description": "Records of affiliations such as origins, religions, factions, guilds, or planar allegiances.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "Single affiliation keyed by its records entry name.",
 			"properties": {
@@ -70,10 +70,22 @@
 						}
 					},
 					"required": ["scene_id"]
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this affiliation entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
 				}
 			},
-			"required": ["type"],
+			"required": ["type", "canon", "source_ref"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false
