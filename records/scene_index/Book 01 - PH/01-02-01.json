@@ -51,8 +51,12 @@
 	],
 	"tags": [
 		"system_event",
+		"system_initiation",
 		"class_selection",
-		"tutorial_setup"
+		"tutorial_setup",
+		"skill_gain",
+		"skill_mechanics",
+		"mana_use"
 	],
 	"skills_gained": [
 		"Basic Archery",

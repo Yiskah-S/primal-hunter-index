@@ -1,6 +1,27 @@
 [
 	{
 		"day": 0,
+		"scene_id": "01-01-01",
+		"event": "Monday Office Routine",
+		"summary": "Jake's commute and office interactions set the stage before the System triggers.",
+		"characters": [
+			"Jake",
+			"Joanna",
+			"Jacob",
+			"Bertram",
+			"Caroline",
+			"Mike"
+		],
+		"location": "Corporate office tower",
+		"tags": [
+			"office_life",
+			"character_intro",
+			"system_foreshadowing",
+			"reflection"
+		]
+	},
+	{
+		"day": 0,
 		"scene_id": "01-02-01",
 		"event": "System Introduction Broadcast",
 		"summary": "The multiverse System initiates Universe 93, briefing Jake before transporting him to the tutorial.",
@@ -8,6 +29,15 @@
 			"Jake",
 			"Introduction Entity"
 		],
-		"location": "System introduction chamber"
+		"location": "System introduction chamber",
+		"tags": [
+			"system_event",
+			"system_initiation",
+			"class_selection",
+			"tutorial_setup",
+			"skill_gain",
+			"skill_mechanics",
+			"mana_use"
+		]
 	}
 ]

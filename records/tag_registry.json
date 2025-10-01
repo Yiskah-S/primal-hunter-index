@@ -75,8 +75,7 @@
 		},
 		"archery": {
 			"class": "topic",
-			"description": "Relates to bows, arrows, or archery-centric techniques.",
-			"allow_inferred": true
+			"description": "Anything related to archery, archers, or ranged combat."
 		},
 		"passive": {
 			"class": "function",
@@ -141,11 +140,11 @@
 		},
 		"tutorial_setup": {
 			"class": "system",
-			"description": "Preparation steps leading into a System tutorial or guided sequence."
+			"description": "Scenes covering the start of the tutorial scenario."
 		},
 		"office_life": {
 			"class": "narrative",
-			"description": "Highlights mundane or pre-System office and day-job moments."
+			"description": "Scenes showing Jake's life before the system."
 		},
 		"character_intro": {
 			"class": "narrative",
@@ -179,6 +178,74 @@
 		"potion": {
 			"class": "topic",
 			"description": "Consumables brewed or generated to restore resources or grant effects."
+		},
+		"system_initiation": {
+			"class": "system",
+			"description": "Introduction to the System mechanics or awakening."
+		},
+		"title_gain": {
+			"class": "narrative",
+			"description": "Acquisition of a title by a character."
+		},
+		"skill_gain": {
+			"class": "narrative",
+			"description": "First-time skill acquisition."
+		},
+		"skill_use": {
+			"class": "narrative",
+			"description": "Character uses a skill in a scene."
+		},
+		"combat": {
+			"class": "narrative",
+			"description": "Direct fights with beasts or humans."
+		},
+		"beast_encounter": {
+			"class": "narrative",
+			"description": "First-time or major encounters with beasts."
+		},
+		"first_kill": {
+			"class": "narrative",
+			"description": "First lethal encounter involving the protagonist."
+		},
+		"bloodline_reveal": {
+			"class": "lore",
+			"description": "Revelations about bloodline abilities."
+		},
+		"reflection": {
+			"class": "narrative",
+			"description": "Scenes where a character reflects on their actions."
+		},
+		"team_conflict": {
+			"class": "narrative",
+			"description": "Interpersonal conflict within Jake\u2019s group."
+		},
+		"instinct": {
+			"class": "topic",
+			"description": "References to Jake's instincts or danger sense."
+		},
+		"perception_stat": {
+			"class": "system",
+			"description": "Discussions or effects related to perception."
+		},
+		"skill_mechanics": {
+			"class": "system",
+			"description": "Explanation or implications of how skills work."
+		},
+		"mana_use": {
+			"class": "system",
+			"description": "How mana is used or channeled for skills or gear."
+		},
+		"group_dynamics": {
+			"class": "narrative",
+			"description": "Scenes that highlight team behavior or roles."
+		},
+		"injury": {
+			"class": "narrative",
+			"description": "A character gets injured or has lasting damage."
+		},
+		"tutorial_death": {
+			"class": "narrative",
+			"description": "Mentions or consequences of death within the tutorial."
 		}
 	}
 }

@@ -75,8 +75,12 @@
 				},
 				"tags": {
 					"type": "array",
-					"items": { "type": "string" },
-					"description": "Optional for filtering or grouping"
+					"description": "Optional tag list for filtering or grouping",
+					"items": {
+						"type": "string",
+						"pattern": "^[a-z0-9_]+$"
+					},
+					"uniqueItems": true
 				},
                 "granted_by": {
                     "type": ["string", "array"],

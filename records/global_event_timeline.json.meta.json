@@ -1,12 +1,9 @@
 {
 	"entered_by": "assistant",
 	"reviewed_by_human": false,
-	"last_updated": "2024-10-05",
+	"last_updated": "2025-10-01",
 	"source": {
-		"book": "Book 01 - PH",
-		"chapter": 2,
-		"scene": 1,
-		"scene_id": "01-02-01"
+		"notes": "Compiled from scenes 01-01-01 and 01-02-01"
 	},
 	"records": true
 }

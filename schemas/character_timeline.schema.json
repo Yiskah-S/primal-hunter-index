@@ -19,10 +19,23 @@
 				"type": "string",
 				"description": "Filepath to source material for this snapshot"
 			},
-			"reason": {
+		"reason": {
+			"type": "string",
+			"description": "Short narrative for why this timeline snapshot exists"
+		},
+		"notes": {
+			"type": "string",
+			"description": "Extended commentary or reviewer notes for this snapshot"
+		},
+		"tags": {
+			"type": "array",
+			"description": "Registry-backed tags describing this point on the timeline",
+			"items": {
 				"type": "string",
-				"description": "Short narrative for why this timeline snapshot exists"
+				"pattern": "^[a-z0-9_]+$"
 			},
+			"uniqueItems": true
+		},
 			"level": { "type": "integer" },
 			"class_level": { "type": "integer" },
 			"race_level": { "type": "integer" },

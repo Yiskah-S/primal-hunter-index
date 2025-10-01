@@ -34,6 +34,14 @@
       dataPath: "../../records/characters/jake/timeline.json",
       metaPath: "../../records/characters/jake/timeline.json.meta.json",
       entryStrategy: "array"
+    },
+    {
+      id: "tag-registry",
+      label: "Tag Registry",
+      schemaPath: "../../schemas/tag_registry.schema.json",
+      dataPath: "../../records/tag_registry.json",
+      metaPath: "../../records/tag_registry.json.meta.json",
+      entryStrategy: "object"
     }
   ];
 
@@ -43,6 +51,7 @@
   let entrySchema = null;
   let currentData = null;
   let entries = [];
+  let tagOptionsCache = null;
 
   const datasetSelect = document.getElementById("dataset-select");
   const entrySelect = document.getElementById("entry-select");
@@ -211,7 +220,17 @@
       currentDataset = dataset;
       currentSchema = schema;
       currentData = data;
+      if (dataset.id === "tag-registry") {
+        tagOptionsCache = buildTagOptions(data);
+      }
+
       entrySchema = deriveEntrySchema(schema, dataset.entryStrategy);
+
+      if (dataset.id !== "tag-registry") {
+        const tagOptions = await ensureTagOptions();
+        entrySchema = decorateSchemaWithTags(entrySchema, tagOptions);
+      }
+
       initEditor(entrySchema);
 
       if (Array.isArray(data)) {
@@ -310,3 +329,137 @@
     loadDataset(DATASETS[0].id);
   }
 })();
+  function buildTagOptions(registry) {
+    if (!registry || typeof registry !== "object") {
+      return null;
+    }
+    const classes = registry.tag_classes || {};
+    const tags = registry.tags || {};
+    const values = [];
+    const titles = [];
+    const groups = [];
+
+    const classOrder = Object.keys(classes).sort((a, b) =>
+      (classes[a]?.label || a).localeCompare(classes[b]?.label || b)
+    );
+    const buckets = new Map();
+    for (const classId of classOrder) {
+      buckets.set(classId, []);
+    }
+    for (const [tagId, meta] of Object.entries(tags)) {
+      const classId = typeof meta?.class === "string" ? meta.class : "other";
+      if (!buckets.has(classId)) {
+        buckets.set(classId, []);
+      }
+      buckets.get(classId).push({
+        id: tagId,
+        allowInferred: Boolean(meta?.allow_inferred)
+      });
+    }
+
+    const sortedBuckets = Array.from(buckets.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    for (const [classId, tagList] of sortedBuckets) {
+      if (!tagList.length) continue;
+      const classLabel = (classes[classId]?.description ? classes[classId].description : "").trim();
+      const friendlyClassName = classId.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      tagList.sort((a, b) => a.id.localeCompare(b.id));
+      for (const tag of tagList) {
+        values.push(tag.id);
+        const humanName = tag.id.replace(/_/g, " ");
+        const titleParts = [friendlyClassName, "›", humanName];
+        if (tag.allowInferred) {
+          titleParts.push("(inferred ok)");
+        }
+        titles.push(titleParts.join(" "));
+        groups.push(friendlyClassName);
+      }
+    }
+
+    return { values, titles, groups };
+  }
+
+  async function ensureTagOptions() {
+    if (tagOptionsCache) {
+      return tagOptionsCache;
+    }
+    try {
+      const registry = await fetchJson("../../records/tag_registry.json");
+      tagOptionsCache = buildTagOptions(registry);
+    } catch (error) {
+      console.warn("Failed to load tag registry:", error);
+      tagOptionsCache = null;
+    }
+    return tagOptionsCache;
+  }
+
+  function cloneSchema(node) {
+    return node ? JSON.parse(JSON.stringify(node)) : node;
+  }
+
+  function decorateSchemaWithTags(schema, tagOptions) {
+    if (!schema || !tagOptions || !tagOptions.values?.length) {
+      return schema;
+    }
+
+    const decorated = cloneSchema(schema);
+
+    function walk(node, pointerSegment) {
+      if (!node || typeof node !== "object") {
+        return;
+      }
+
+      if (
+        node.type === "array" &&
+        pointerSegment === "tags" &&
+        (!node.items || typeof node.items === "object")
+      ) {
+        node.items = node.items && typeof node.items === "object" ? node.items : {};
+        node.items.type = node.items.type || "string";
+        node.items.enum = tagOptions.values;
+        node.items.options = node.items.options || {};
+        node.items.options.enum_titles = tagOptions.titles;
+        node.items.options.enum_groups = tagOptions.groups;
+        node.uniqueItems = node.uniqueItems !== undefined ? node.uniqueItems : true;
+        node.format = node.format || "select";
+      }
+
+      if (node.properties && typeof node.properties === "object") {
+        for (const [childKey, childNode] of Object.entries(node.properties)) {
+          walk(childNode, childKey);
+        }
+      }
+
+      if (node.patternProperties && typeof node.patternProperties === "object") {
+        for (const childNode of Object.values(node.patternProperties)) {
+          walk(childNode, pointerSegment);
+        }
+      }
+
+      if (node.items) {
+        if (Array.isArray(node.items)) {
+          node.items.forEach((child) => walk(child, pointerSegment));
+        } else {
+          walk(node.items, pointerSegment);
+        }
+      }
+
+      if (node.anyOf) {
+        node.anyOf.forEach((child) => walk(child, pointerSegment));
+      }
+      if (node.oneOf) {
+        node.oneOf.forEach((child) => walk(child, pointerSegment));
+      }
+      if (node.allOf) {
+        node.allOf.forEach((child) => walk(child, pointerSegment));
+      }
+      if (node.$defs) {
+        Object.values(node.$defs).forEach((child) => walk(child, pointerSegment));
+      }
+      if (node.definitions) {
+        Object.values(node.definitions).forEach((child) => walk(child, pointerSegment));
+      }
+    }
+
+    walk(decorated, "");
+    return decorated;
+  }

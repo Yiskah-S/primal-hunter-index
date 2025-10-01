@@ -88,7 +88,11 @@
 				"tags": {
 					"type": "array",
 					"description": "Optional tags to classify or group skills",
-					"items": { "type": "string" }
+					"items": {
+						"type": "string",
+						"pattern": "^[a-z0-9_]+$"
+					},
+					"uniqueItems": true
 				},
 				"granted_by": {
 					"type": ["string", "array"],

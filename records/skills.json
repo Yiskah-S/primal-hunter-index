@@ -27,7 +27,8 @@
 		"flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart.",
 		"tags": [
 			"starter",
-			"proficiency"
+			"proficiency",
+			"archery"
 		],
 		"granted_by": "Introduction Entity"
 	},
@@ -58,7 +59,8 @@
 		"flavor": "The Archer may not be a master in close combat but is far from helpless.",
 		"tags": [
 			"starter",
-			"proficiency"
+			"proficiency",
+			"weapon"
 		],
 		"granted_by": "Introduction Entity"
 	},
@@ -91,7 +93,8 @@
 		"tags": [
 			"starter",
 			"perception",
-			"utility"
+			"utility",
+			"archery"
 		],
 		"granted_by": "Introduction Entity"
 	},

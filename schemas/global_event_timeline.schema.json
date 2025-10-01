@@ -16,7 +16,16 @@
 				"uniqueItems": true
 			},
 			"location": { "type": "string" },
-			"notes": { "type": "string" }
+			"notes": { "type": "string" },
+			"tags": {
+				"type": "array",
+				"description": "Tag registry identifiers summarising this global event",
+				"items": {
+					"type": "string",
+					"pattern": "^[a-z0-9_]+$"
+				},
+				"uniqueItems": true
+			}
 		},
 		"required": ["day", "event"],
 		"additionalProperties": false
