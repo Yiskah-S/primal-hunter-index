@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Skill Metadata Schema",
 	"type": "object",
-	"description": "Canonical definitions of all skills, indexed by skill name.",
+	"description": "Records definitions of all skills, indexed by skill name.",
 	"patternProperties": {
 		"^.+$": {
 			"type": "object",

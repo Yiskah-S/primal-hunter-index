@@ -2,13 +2,13 @@
 # tools/
 #├── validate_all_metadata.py  ← this should:
  #    - load all schema files from /schemas
-  #   - validate all data files in /canon
+#   - validate all data files in /records
    #  - call check_known_skills_consistency.py internally
 
 # tools/validate_all_metadata.py
 
 #!/usr/bin/env python3
-"""Validate canonical metadata and enforce basic referential integrity."""
+"""Validate record metadata and enforce basic referential integrity."""
 
 import argparse
 import sys
@@ -20,21 +20,21 @@ from jsonschema import Draft202012Validator
 from core.schema_utils import read_json
 
 SCHEMA_ROOT = Path("schemas")
-CANON_ROOT = Path("canon")
-CHARACTER_DIRECTORY = CANON_ROOT / "characters"
+RECORDS_ROOT = Path("records")
+CHARACTER_DIRECTORY = RECORDS_ROOT / "characters"
 
 FILE_TO_SCHEMA_PATHS = {
-	CANON_ROOT / "skills.json": SCHEMA_ROOT / "skills.schema.json",
-	CANON_ROOT / "equipment.json": SCHEMA_ROOT / "equipment.schema.json",
-	CANON_ROOT / "races.json": SCHEMA_ROOT / "races.schema.json",
-	CANON_ROOT / "system_glossary.json": SCHEMA_ROOT / "system_glossary.schema.json",
-	CANON_ROOT / "zone_lore.json": SCHEMA_ROOT / "zone_lore.schema.json",
-	CANON_ROOT / "stat_scaling.json": SCHEMA_ROOT / "stat_scaling.schema.json",
-	CANON_ROOT / "global_event_timeline.json": SCHEMA_ROOT / "global_event_timeline.schema.json",
-	CANON_ROOT / "global_announcement_log.json": SCHEMA_ROOT / "global_announcement_log.schema.json",
-	CANON_ROOT / "chapters_to_posts.json": SCHEMA_ROOT / "chapters_to_posts.schema.json",
-	CANON_ROOT / "aliases" / "character_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
-	CANON_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json"
+	RECORDS_ROOT / "skills.json": SCHEMA_ROOT / "skills.schema.json",
+	RECORDS_ROOT / "equipment.json": SCHEMA_ROOT / "equipment.schema.json",
+	RECORDS_ROOT / "races.json": SCHEMA_ROOT / "races.schema.json",
+	RECORDS_ROOT / "system_glossary.json": SCHEMA_ROOT / "system_glossary.schema.json",
+	RECORDS_ROOT / "zone_lore.json": SCHEMA_ROOT / "zone_lore.schema.json",
+	RECORDS_ROOT / "stat_scaling.json": SCHEMA_ROOT / "stat_scaling.schema.json",
+	RECORDS_ROOT / "global_event_timeline.json": SCHEMA_ROOT / "global_event_timeline.schema.json",
+	RECORDS_ROOT / "global_announcement_log.json": SCHEMA_ROOT / "global_announcement_log.schema.json",
+	RECORDS_ROOT / "chapters_to_posts.json": SCHEMA_ROOT / "chapters_to_posts.schema.json",
+	RECORDS_ROOT / "aliases" / "character_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
+	RECORDS_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json"
 }
 
 TIMELINE_SCHEMA = SCHEMA_ROOT / "character_timeline.schema.json"
@@ -58,7 +58,7 @@ def _collect_schema_errors(data_path: Path, schema_path: Path) -> list[str]:
 
 
 def _iter_scene_files() -> Iterable[Path]:
-	scene_directory = CANON_ROOT / "scene_index"
+	scene_directory = RECORDS_ROOT / "scene_index"
 	for scene_file in scene_directory.rglob("*.json"):
 		if scene_file.name.endswith(".meta.json"):
 			continue
@@ -68,7 +68,7 @@ def _iter_scene_files() -> Iterable[Path]:
 
 
 def _iter_meta_files() -> Iterable[Path]:
-	return CANON_ROOT.rglob("*.meta.json")
+	return RECORDS_ROOT.rglob("*.meta.json")
 
 
 def _iter_timeline_files() -> Iterable[Path]:
@@ -85,7 +85,7 @@ def _iter_timeline_files() -> Iterable[Path]:
 def validate_all() -> int:
 	validation_errors: List[str] = []
 
-	# Canon files with direct schema mappings (skills, equipment, etc.)
+	# Records files with direct schema mappings (skills, equipment, etc.)
 	for data_path, schema_path in FILE_TO_SCHEMA_PATHS.items():
 		if data_path.exists():
 			validation_errors.extend(_collect_schema_errors(data_path, schema_path))
@@ -95,7 +95,7 @@ def validate_all() -> int:
 		validation_errors.extend(_collect_schema_errors(scene_path, SCENE_SCHEMA))
 
 	# Character timelines and the skills they reference
-	skill_catalog_names = set(read_json(CANON_ROOT / "skills.json").keys())
+	skill_catalog_names = set(read_json(RECORDS_ROOT / "skills.json").keys())
 	skill_names_without_rarity = {
 		full_name.split(" (")[0].strip(): full_name for full_name in skill_catalog_names
 	}
@@ -109,7 +109,7 @@ def validate_all() -> int:
 				skill_name_without_rarity = timeline_skill.split(" (")[0].strip()
 				if skill_name_without_rarity not in skill_names_without_rarity:
 					validation_errors.append(
-						f"{timeline_path}: entry[{entry_index}].skills → '{timeline_skill}' missing from canon/skills.json"
+						f"{timeline_path}: entry[{entry_index}].skills → '{timeline_skill}' missing from records/skills.json"
 					)
 
 	# Metadata sidecar files that store provenance

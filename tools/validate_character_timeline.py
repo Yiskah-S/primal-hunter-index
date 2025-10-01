@@ -14,7 +14,7 @@ def validate_timeline(timeline_path: Path, schema_path: Path) -> None:
 		print(e)
 
 if __name__ == "__main__":
-	timeline_file = Path("canon/characters/jake/timeline.json")
+	timeline_file = Path("records/characters/jake/timeline.json")
 	schema_file = Path("schemas/character_timeline.schema.json")
 
 	if not timeline_file.exists():

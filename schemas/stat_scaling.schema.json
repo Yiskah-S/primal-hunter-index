@@ -14,7 +14,7 @@
 				},
 				"stat": {
 					"type": "string",
-					"description": "Canonical stat identifier (e.g., Str, Agi)."
+				"description": "Records stat identifier (e.g., Str, Agi)."
 				},
 				"base_value": {
 					"type": "number",

@@ -4,9 +4,9 @@ import subprocess
 from pathlib import Path
 from core.schema_utils import read_json, write_json_atomic, load_schema, validate_instance
 
-SKILLS_FILE = Path("canon/skills.json")
+SKILLS_FILE = Path("records/skills.json")
 SCHEMA_FILE = Path("schemas/skills.schema.json")
-SCENES_DIR = Path("canon/scene_index")
+SCENES_DIR = Path("records/scene_index")
 
 # --- enums / maps -------------------------------------------------------------
 
@@ -22,7 +22,7 @@ RARITY_MAP = {
 RARITY_ENUM = list(RARITY_MAP.values())
 
 STAT_KEYS = ["Str", "Dex", "End", "Agi", "Per", "Vit", "Int", "Wis", "Cha", "Luk"]
-LOWER_TO_CANON = {k.lower(): k for k in STAT_KEYS}
+LOWER_TO_RECORDS = {k.lower(): k for k in STAT_KEYS}
 
 # --- small io helpers ---------------------------------------------------------
 
@@ -79,7 +79,7 @@ def parse_stat_synergy(raw: str) -> dict:
 			continue
 		key, val = pair.split(":", 1)
 		key = key.strip()
-		key = LOWER_TO_CANON.get(key.lower(), key)
+		key = LOWER_TO_RECORDS.get(key.lower(), key)
 		if key not in STAT_KEYS:
 			print(f"⚠️ Skipping unknown stat '{key}' — must be one of: {', '.join(STAT_KEYS)}")
 			continue
@@ -112,7 +112,7 @@ def prompt_rarity() -> str:
 
 def prompt_scene_id() -> tuple[str, Path]:
 	"""
-	Resolves a scene_id like '01-01-01' anywhere under canon/scene_index/**.
+	Resolves a scene_id like '01-01-01' anywhere under records/scene_index/**.
 	"""
 	while True:
 		scene_id = prompt("Scene ID", "01-01-01")
@@ -155,7 +155,7 @@ def main():
 
 	# Name (unique, non-empty)
 	name = prompt_retry(
-		"Skill name (canonical, e.g., Identify)",
+		"Skill name (records entry, e.g., Identify)",
 		lambda v: bool(v) and v not in skills,
 		"Skill name is required and must not already exist."
 	)
@@ -180,7 +180,7 @@ def main():
 		"deactivation": prompt("Deactivation", "Auto or manual after use"),
 		"instinctive_knowledge": prompt_yes_no("Instinctive knowledge? (y/n)", True),
 		# IMPORTANT: schema key is 'feedback', not 'user feedback'
-		"feedback": prompt("Feedback (what the user experiences; paste from canon if desired)", "")
+		"feedback": prompt("Feedback (what the user experiences; paste from books if desired)", "")
 	}
 
 	tags = parse_csv_list(prompt("Tags (comma-separated)", ""))

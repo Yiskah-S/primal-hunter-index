@@ -2,6 +2,7 @@
 chapters/
 z_notes/
 .vscode/
+.editorconfig
 
 
 # === Python environment & metadata ===

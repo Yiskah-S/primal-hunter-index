@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create a .meta.json sidecar file for a canon JSON file.
+Create a .meta.json sidecar file for a records JSON file.
 Ensures provenance is recorded and validation tooling can run cleanly.
 """
 
@@ -11,8 +11,8 @@ from datetime import date
 from pathlib import Path
 
 def main():
-    parser = argparse.ArgumentParser(description="Create a metadata sidecar for a canon JSON file.")
-    parser.add_argument("target", type=Path, help="Path to the core JSON file (e.g. canon/skills.json)")
+    parser = argparse.ArgumentParser(description="Create a metadata sidecar for a records JSON file.")
+    parser.add_argument("target", type=Path, help="Path to the core JSON file (e.g. records/skills.json)")
     parser.add_argument("--entered-by", type=str, choices=["human", "assistant"], required=True,
                         help="Who is entering this file? Must be 'human' or 'assistant'")
     parser.add_argument("--book", type=str, help="Book name or number (optional)")
@@ -40,7 +40,7 @@ def main():
         sys.exit(1)
 
     sidecar_data = {
-        "canon": False,
+        "records": False,
         "entered_by": args.entered_by,
         "reviewed_by_human": False,
         "last_updated": str(date.today()),

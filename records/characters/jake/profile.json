@@ -1,0 +1,35 @@
+{
+	"name": "Jake Thayne",
+	"aliases": [
+		"Jake"
+	],
+	"occupation": "Business analyst (investments)",
+	"background": {
+		"summary": "Finance professional in a corporate office, skilled at analyzing investments and preferring a quiet routine.",
+		"hobbies": [
+			"Archery",
+			"Gym training"
+		],
+		"personality": "Introverted, analytical, content with life but cautious about attention."
+	},
+	"relationships": {
+		"family": [],
+		"friends": [
+			"Jacob"
+		],
+		"coworkers": [
+			"Joanna",
+			"Caroline",
+			"Bertram",
+			"Mike"
+		]
+	},
+	"physical_description": {
+		"build": "Above-average fitness from archery and gym work",
+		"features": "Short brown hair, brown eyes, average height."
+	},
+	"first_mentioned_in": {
+		"scene_id": "01-01-01",
+		"line": 1
+	}
+}

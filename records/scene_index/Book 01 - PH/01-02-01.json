@@ -1,0 +1,75 @@
+{
+	"scene_id": "01-02-01",
+	"book": 1,
+	"chapter": 2,
+	"scene": 1,
+	"title": "System Introduction and Class Selection",
+	"summary": "Jake wakes in a white interrogation room, meets the synthetic Introduction Entity, reviews his status, chooses the Archer class, gains starter skills, and collects a basic equipment set before transport to the tutorial.",
+	"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+	"start_line": 1,
+	"end_line": 159,
+	"pov": "Jake",
+	"mood": [
+		"disoriented",
+		"analytic",
+		"anticipatory"
+	],
+	"time_tag": [
+		"Day 0",
+		"system introduction"
+	],
+	"chunked_with": "Manual review",
+	"characters": {
+		"Jake": {
+			"present": "explicit",
+			"level_start": 0,
+			"level_end": 0,
+			"tier": "G",
+			"notes": "Selects the Archer class and gains starter skills."
+		},
+		"Introduction Entity": {
+			"present": "explicit",
+			"notes": "System-controlled greeter explaining the tutorial."
+		}
+	},
+	"events": {
+		"level_ups": [],
+		"tier_changes": [],
+		"loot": [
+			"Wooden Bow",
+			"Enchanted Quiver (Common)",
+			"Brown Cloak",
+			"Knife",
+			"Belt and Satchel",
+			"Health Potion (Inferior) x3",
+			"Stamina Potion (Inferior) x3"
+		],
+		"titles_gained": []
+	},
+	"locations": [
+		"System introduction chamber"
+	],
+	"tags": [
+		"system",
+		"class selection",
+		"tutorial prep"
+	],
+	"skills_gained": [
+		"Basic Archery",
+		"Basic One-Handed Weapon",
+		"Archer's Eye",
+		"Identify"
+	],
+	"class_chosen": {
+		"name": "Archer",
+		"type": "starter class",
+		"specialization": "Ranged combat",
+		"bonuses": {
+			"Per": 2,
+			"Agi": 1,
+			"End": 1,
+			"Str": 1,
+			"Free Point": 1
+		}
+	}
+}

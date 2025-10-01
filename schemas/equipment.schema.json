@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Equipment Metadata Schema",
 	"type": "object",
-	"description": "Canonical definitions of all equipment and items, indexed by name.",
+	"description": "Definitions of all equipment and items, indexed by name.",
 	"patternProperties": {
 		"^.+$": {
 			"type": "object",

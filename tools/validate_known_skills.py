@@ -4,7 +4,7 @@ from pathlib import Path
 
 # === File paths ===
 schema_path = Path("schemas/known_skills.schema.json")
-data_path = Path("canon/characters/jake/known_skills.json")
+data_path = Path("records/characters/jake/known_skills.json")
 
 # === Load schema and data ===
 with schema_path.open() as f:

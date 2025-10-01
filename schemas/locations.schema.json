@@ -1,12 +1,12 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Canonical Location Definition",
+	"title": "Location Definition",
 	"description": "Schema for all named locations, zones, subzones, dungeons, layers, cities, or landmarks. Used for environmental tagging, worldbuilding, and indexing spatial progression.",
 	"type": "object",
 	"patternProperties": {
 		"^.+$": {
 			"type": "object",
-			"description": "A single location or zone, keyed by its canonical name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
+			"description": "A single location or zone, keyed by its name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
 			"properties": {
 				"type": {
 					"type": "string",
@@ -45,7 +45,7 @@
 				},
 				"known_inhabitants": {
 					"type": "array",
-					"description": "Canonical races, monsters, or factions commonly found here.",
+					"description": "Records of common races, monsters, or entities in the locatin.",
 					"items": {
 						"type": "string"
 					}
@@ -66,7 +66,7 @@
 				},
 				"first_mentioned_in": {
 					"type": "object",
-					"description": "Scene metadata for when this location was first described in canon.",
+			"description": "Scene metadata for when this location was first described.",
 					"properties": {
 						"scene_id": {
 							"type": "string",

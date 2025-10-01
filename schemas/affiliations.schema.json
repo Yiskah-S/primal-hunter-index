@@ -1,12 +1,12 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "Affiliation Definition",
-	"description": "Canonical affiliations such as origins, religions, factions, guilds, or planar allegiances.",
+	"description": "Records of affiliations such as origins, religions, factions, guilds, or planar allegiances.",
 	"type": "object",
 	"patternProperties": {
 		"^.+$": {
 			"type": "object",
-			"description": "Single affiliation keyed by its canonical name.",
+			"description": "Single affiliation keyed by its records entry name.",
 			"properties": {
 				"type": {
 					"type": "string",

@@ -8,7 +8,7 @@ A schema-driven, metadata system to track character progression, skills, equipme
 
 This project serves as both:
 
-* A **canonical progression tracker** for Jake and others in the *Primal Hunter* universe
+* A **records-driven progression tracker** for Jake and others in the *Primal Hunter* universe
 
 It prioritizes:
 
@@ -23,7 +23,7 @@ It prioritizes:
 
 ```
 primal_hunter_index/
-├── canon/               # Source-of-truth data (skills, equipment, etc)
+├── records/             # Source-of-truth data (skills, equipment, etc)
 │   └── characters/      # Per-character metadata (timeline, known skills)
 ├── cli/                 # Interactive prompt-based data entry tools
 ├── tools/               # Validators, metadata consistency checks
@@ -70,7 +70,7 @@ make setup-schemas
 
 | Command                      | Description                                  |
 | ---------------------------- | -------------------------------------------- |
-| `make validate`              | Validate all `canon/` JSONs against schema   |
+| `make validate`              | Validate all `records/` JSONs against schema |
 | `make validate-timeline`     | Validate all character `timeline.json` files |
 | `make check`                 | Shortcut for `make validate`                 |
 | `make validate-known-skills` | (Legacy) checks consistency of known_skills  |
@@ -93,10 +93,10 @@ We split metadata by purpose:
 
 | File Type                                 | Role                                               |
 | ----------------------------------------- | -------------------------------------------------- |
-| `canon/skills.json`                       | Canonical list of all skills                       |
-| `canon/equipment.json`                    | Canonical list of items, gear, consumables         |
-| `canon/characters/jake/timeline.json`     | Time-stamped logs of Jake's growth, gear, skills   |
-| `canon/characters/jake/known_skills.json` | (Deprecated) summary of known skills               |
+| `records/skills.json`                     | Records list of all skills                         |
+| `records/equipment.json`                  | Records list of items, gear, consumables           |
+| `records/characters/jake/timeline.json`   | Time-stamped logs of Jake's growth, gear, skills   |
+| `records/characters/jake/known_skills.json` | (Deprecated) summary of known skills             |
 | `schemas/*.schema.json`                   | Draft 2020-12 validation specs for every JSON type |
 
 Each `timeline.json` entry can include:
@@ -124,7 +124,7 @@ chmod +x .git/hooks/pre-commit
 
 * `make test` → Run Pytest suite (schema validation, cross checks)
 * `make lint` → Code quality (e.g. Ruff or Flake8)
-* `make release` → Zip + archive `canon/` + schema snapshot
+* `make release` → Zip + archive `records/` + schema snapshot
 
 ---
 
@@ -138,4 +138,3 @@ This is a **solo educational project** intended to practice:
 * 📚 Systematic parsing of complex progression fantasy
 
 LLM training accuracy improves drastically when scenes are backed by structured metadata — and that's exactly what this toolchain is for.
-

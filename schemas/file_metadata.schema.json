@@ -4,13 +4,13 @@
 	"title": "File Metadata",
 	"type": "object",
 	"properties": {
-		"canon": {
+		"records": {
 			"type": "boolean",
-			"description": "Whether the associated JSON file is part of the canonical data set."
+			"description": "Whether the associated JSON file is part of the records data set."
 		},
 		"source": {
 			"type": "object",
-			"description": "Provenance information for the canonical data.",
+			"description": "Provenance information for the records data.",
 			"properties": {
 				"book": {
 					"type": ["integer", "string"],
@@ -63,6 +63,6 @@
 			"description": "Calendar date (YYYY-MM-DD) when this metadata was last revised."
 		}
 	},
-	"required": ["canon", "source"],
+	"required": ["records", "source"],
 	"additionalProperties": false
 }

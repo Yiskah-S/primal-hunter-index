@@ -2,9 +2,9 @@ import json
 from pathlib import Path
 
 # === Config ===
-skills_path = Path("canon/skills.json")
-scene_index_root = Path("canon/scene_index")
-known_skills_root = Path("canon/characters")
+skills_path = Path("records/skills.json")
+scene_index_root = Path("records/scene_index")
+known_skills_root = Path("records/characters")
 
 # === Load all scene_index files into lookup by scene_id
 scene_lookup = {}

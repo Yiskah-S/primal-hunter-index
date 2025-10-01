@@ -1,12 +1,12 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "Creature Definition",
-	"description": "Canonical creatures such as monsters, constructs, beasts, and bosses.",
+	"description": "Records of creatures such as monsters, constructs, beasts, and bosses.",
 	"type": "object",
 	"patternProperties": {
 		"^.+$": {
 			"type": "object",
-			"description": "Single creature keyed by canonical name.",
+			"description": "Single creature keyed by its records name.",
 			"properties": {
 				"type": {
 					"type": "string",
@@ -22,7 +22,7 @@
 				},
 				"level": {
 					"type": "integer",
-					"description": "Typical or canonical level of the creature."
+					"description": "Typical recorded level of the creature."
 				},
 				"stats": {
 					"type": "object",

@@ -64,7 +64,7 @@
 		},
 		"characters": {
 			"type": "object",
-			"description": "Character participation keyed by canonical name.",
+			"description": "Character participation keyed by records entry name.",
 			"patternProperties": {
 				"^.+$": {
 					"type": "object",

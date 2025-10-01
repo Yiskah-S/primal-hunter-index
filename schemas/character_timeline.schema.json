@@ -12,7 +12,7 @@
 			},
 		"scene_id": {
 			"type": "string",
-			"description": "Unique ID linking this snapshot to a canon scene",
+			"description": "Unique ID linking this snapshot to a records scene",
 			"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
 		},
 			"source_file": {

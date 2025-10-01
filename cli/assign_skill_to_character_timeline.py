@@ -3,10 +3,10 @@ import json
 from pathlib import Path
 from core.schema_utils import read_json, write_json_atomic, load_schema, validate_instance
 
-SKILLS_FILE = Path("canon/skills.json")
+SKILLS_FILE = Path("records/skills.json")
 SCHEMA_FILE = Path("schemas/character_timeline.schema.json")
-CHAR_DIR = Path("canon/characters")
-SCENE_DIR = Path("canon/scene_index")
+CHAR_DIR = Path("records/characters")
+SCENE_DIR = Path("records/scene_index")
 
 # ---------- small io helpers ----------
 
@@ -55,7 +55,7 @@ def parse_csv_list(raw: str) -> list[str]:
 
 def resolve_scene_id() -> tuple[str, Path]:
 	"""
-	Ask for a scene_id like '01-02-01', search recursively under canon/scene_index.
+	Ask for a scene_id like '01-02-01', search recursively under records/scene_index.
 	Re-prompt until found.
 	"""
 	while True:
@@ -76,7 +76,7 @@ def choose_skill(skills: dict) -> str:
 	return prompt_retry(
 		"Skill name (exact match in skills.json)",
 		lambda v: bool(v) and v in skills,
-		f"Skill must exist in {SKILLS_FILE}. Use exact canonical name."
+		f"Skill must exist in {SKILLS_FILE}. Use the exact records entry name."
 	)
 
 def choose_nonempty(label: str, default: str = "") -> str:

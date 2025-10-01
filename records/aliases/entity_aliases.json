@@ -1,0 +1,25 @@
+{
+	"Introduction Entity": {
+		"aliases": [
+			"Introduction Entity",
+			"synthetic greeter",
+			"tutorial construct"
+		],
+		"pronouns": [
+			"it",
+			"they"
+		],
+		"type": "system_construct",
+		"notes": "Androgynous construct that guides new initiates through the introduction."
+	},
+	"The System": {
+		"aliases": [
+			"The System"
+		],
+		"type": "metaphysical_framework",
+		"notes": "Reality overlay initiating stats, classes, and skills across newly inducted universes.",
+		"pronouns": [
+			"it"
+		]
+	}
+}
