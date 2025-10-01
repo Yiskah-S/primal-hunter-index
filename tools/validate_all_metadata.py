@@ -14,10 +14,14 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from jsonschema import Draft202012Validator
-from referencing import Registry, Resource
+try:
+	from referencing import Registry, Resource  # type: ignore
+except ImportError:  # pragma: no cover - optional dependency
+	Registry = None  # type: ignore
+	Resource = None  # type: ignore
 
 from core.schema_utils import read_json
 
@@ -37,7 +41,8 @@ FILE_TO_SCHEMA_PATHS = {
 	RECORDS_ROOT / "chapters_to_posts.json": SCHEMA_ROOT / "chapters_to_posts.schema.json",
 	RECORDS_ROOT / "aliases" / "character_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
 	RECORDS_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
-	RECORDS_ROOT / "tag_registry.json": SCHEMA_ROOT / "tag_registry.schema.json"
+	RECORDS_ROOT / "tag_registry.json": SCHEMA_ROOT / "tag_registry.schema.json",
+	RECORDS_ROOT / "skill_types.json": SCHEMA_ROOT / "skill_types.schema.json"
 }
 
 TIMELINE_SCHEMA = SCHEMA_ROOT / "character_timeline.schema.json"
@@ -72,7 +77,9 @@ SHARED_SCHEMA_URIS = {
 	"https://primal-hunter.local/schemas/shared/provenance.schema.json": SCHEMA_ROOT / "shared" / "provenance.schema.json",
 }
 
-def _build_schema_registry() -> Registry:
+def _build_schema_registry():
+	if Registry is None or Resource is None:
+		return None
 	registry = Registry()
 	for uri, path in SHARED_SCHEMA_URIS.items():
 		if path.exists():
@@ -85,10 +92,10 @@ SCHEMA_REGISTRY = _build_schema_registry()
 
 def _collect_schema_errors(data_path: Path, schema_path: Path) -> list[str]:
 	schema_definition = read_json(schema_path)
-	validator = Draft202012Validator(
-		schema_definition,
-		registry=SCHEMA_REGISTRY,
-	)
+	validator_kwargs = {}
+	if SCHEMA_REGISTRY is not None:
+		validator_kwargs["registry"] = SCHEMA_REGISTRY
+	validator = Draft202012Validator(schema_definition, **validator_kwargs)
 	instance_data = read_json(data_path)
 	error_messages: List[str] = []
 	for validation_error in validator.iter_errors(instance_data):
@@ -241,6 +248,15 @@ def _load_scene_bounds() -> tuple[Dict[str, Tuple[int, int, Path]], list[str]]:
 	return scene_bounds, errors
 
 
+def _load_skill_types() -> Set[str]:
+	skill_types_path = RECORDS_ROOT / "skill_types.json"
+	if not skill_types_path.exists():
+		return set()
+	registry = read_json(skill_types_path)
+	types = registry.get("types", [])
+	return {str(type_name) for type_name in types if isinstance(type_name, str)}
+
+
 def _normalize_source_ref(
 	source_ref: object,
 	base_pointer: str,
@@ -362,6 +378,7 @@ def _validate_timeline_provenance(
 
 def validate_all() -> int:
 	validation_errors: List[str] = []
+	skill_types_allowed = _load_skill_types()
 
 	# Records files with direct schema mappings (skills, equipment, etc.)
 	for data_path, schema_path in FILE_TO_SCHEMA_PATHS.items():
@@ -412,6 +429,16 @@ def validate_all() -> int:
 		validation_errors.extend(
 			_validate_canonical_record_file(data_path, entry_data, scene_bounds)
 		)
+		if data_path == RECORDS_ROOT / "skills.json" and skill_types_allowed:
+			if isinstance(entry_data, dict):
+				for skill_name, payload in entry_data.items():
+					if not isinstance(payload, dict):
+						continue
+					skill_type = payload.get("type")
+					if isinstance(skill_type, str) and skill_type not in skill_types_allowed:
+						validation_errors.append(
+							f"{data_path}: {skill_name} → type '{skill_type}' missing from records/skill_types.json"
+						)
 
 	if validation_errors:
 		print("\n❌ Metadata validation failed:")

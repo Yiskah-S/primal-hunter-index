@@ -1,0 +1,9 @@
+{
+    "records": false,
+    "entered_by": "assistant",
+    "reviewed_by_human": false,
+    "last_updated": "2025-10-01",
+    "source": {
+        "notes": "Derived from current skills.json entries; update as new categories appear."
+    }
+}

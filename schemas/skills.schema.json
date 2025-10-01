@@ -11,7 +11,6 @@
 				"type",
 				"description",
 				"effects",
-				"first_mentioned_in",
 				"flavor",
 				"canon",
 				"source_ref"
@@ -25,7 +24,7 @@
 					"type": "string",
 					"description": "General category of the skill (e.g., Combat Passive, General Utility, Sensory Passive)"
 				},
-				"class_associations": {
+				"class_recommendations": {
 					"type": "array",
 					"description": "List of classes that could get this skill",
 					"items": { "type": "string" }
@@ -44,10 +43,19 @@
 						"stat_synergy": {
 							"type": "object",
 							"description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
-							"patternProperties": {
-								".+": { "type": "number" }
-							}
-						},	
+							"properties": {
+								"Str": { "type": "number" },
+								"Agi": { "type": "number" },
+								"End": { "type": "number" },
+								"Vit": { "type": "number" },
+								"Int": { "type": "number" },
+								"Wis": { "type": "number" },
+								"Will": { "type": "number" },
+								"Per": { "type": "number" },
+								"Free point": { "type": "number" }
+							},
+							"additionalProperties": false
+						},
 						"passive_benefit": {
 							"type": "string"
 						}
@@ -97,16 +105,36 @@
 				"tags": {
 					"type": "array",
 					"description": "Optional tags to classify or group skills",
-					"items": {
-						"type": "string",
-						"pattern": "^[a-z0-9_]+$"
-					},
+					"items": { "type": "string" },
 					"uniqueItems": true
 				},
 				"granted_by": {
-					"type": ["string", "array"],
-					"description": "The event or system that grants this skill",
-					"items": { "type": "string" }
+					"type": "array",
+					"description": "One or more origin events that granted this skill",
+					"items": {
+						"type": "object",
+						"required": ["type"],
+						"properties": {
+							"type": {
+								"type": "string",
+								"enum": [
+									"system",
+									"class_upgrade",
+									"title",
+									"item",
+									"blessing",
+									"quest",
+									"other"
+								]
+							},
+							"name": { "type": "string" },
+							"from": { "type": "string" },
+							"to": { "type": "string" },
+							"notes": { "type": "string" }
+						},
+						"additionalProperties": false
+					},
+					"minItems": 1
 				},
 				"canon": {
 					"type": "boolean",

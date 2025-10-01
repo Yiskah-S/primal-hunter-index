@@ -36,7 +36,12 @@
 			"proficiency",
 			"archery"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Basic One-Handed Weapon": {
 		"rarity": "Inferior",
@@ -74,7 +79,12 @@
 			"proficiency",
 			"weapon"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Archers Eye": {
 		"rarity": "Common",
@@ -114,7 +124,12 @@
 			"utility",
 			"archery"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Identify": {
 		"rarity": "Inferior",
@@ -145,6 +160,11 @@
 			"starter",
 			"utility"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	}
 }
