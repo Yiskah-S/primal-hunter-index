@@ -9,7 +9,7 @@
 		},
 		"tags": [
 			"starter",
-			"bow"
+			"archery"
 		],
 		"granted_by": "Introduction Entity"
 	},
@@ -23,7 +23,7 @@
 		},
 		"tags": [
 			"starter",
-			"quiver",
+			"archery",
 			"mana"
 		],
 		"granted_by": "Introduction Entity"

@@ -2,23 +2,48 @@
 	"tag_classes": {
 		"topic": {
 			"description": "Subject matter or thematic focus of the record (affinity, element, discipline, etc.)",
-			"example_tags": ["stealth", "dark_affinity", "archery", "healing"]
+			"example_tags": [
+				"stealth",
+				"dark_affinity",
+				"archery",
+				"healing"
+			]
 		},
 		"entity_type": {
 			"description": "Identifies the kind of record being described (skill, character, scene segment, lore entry).",
-			"example_tags": ["skill", "scene", "lore", "item"]
+			"example_tags": [
+				"skill",
+				"scene",
+				"lore",
+				"item"
+			]
 		},
 		"function": {
 			"description": "Captures mechanical behavior or role, such as passive effects or mobility tools.",
-			"example_tags": ["passive", "aoe", "buff", "mobility"]
+			"example_tags": [
+				"passive",
+				"aoe",
+				"buff",
+				"mobility"
+			]
 		},
 		"narrative": {
 			"description": "Narrative beats or events that occur inside chapters or scenes.",
-			"example_tags": ["skill_usage", "training", "unlock", "level_up"]
+			"example_tags": [
+				"skill_usage",
+				"training",
+				"unlock",
+				"level_up"
+			]
 		},
 		"system": {
 			"description": "Tags that explain rules, provenance, or meta information about the System itself.",
-			"example_tags": ["skill_lore", "mechanic", "tutorial", "tiering"]
+			"example_tags": [
+				"skill_lore",
+				"mechanic",
+				"tutorial",
+				"tiering"
+			]
 		}
 	},
 	"tags": {
@@ -37,7 +62,10 @@
 		"stealth": {
 			"class": "topic",
 			"description": "Involves concealment, detection avoidance, or stealth-based tactics.",
-			"aliases": ["shadow", "concealment"],
+			"aliases": [
+				"shadow",
+				"concealment"
+			],
 			"allow_inferred": true
 		},
 		"dark_affinity": {
@@ -85,6 +113,72 @@
 		"tutorial": {
 			"class": "system",
 			"description": "Describes onboarding events, System prompts, or guided walkthroughs."
+		},
+		"starter": {
+			"class": "narrative",
+			"description": "Marks early progression beats such as tutorial rewards or introductory gear.",
+			"allow_inferred": true
+		},
+		"proficiency": {
+			"class": "function",
+			"description": "Denotes skills or items that confer baseline competence with a weapon or tool."
+		},
+		"perception": {
+			"class": "topic",
+			"description": "Relates to sensory improvements, awareness, or perception-driven effects."
+		},
+		"utility": {
+			"class": "function",
+			"description": "Covers skills or items whose primary role is utility or support rather than damage."
+		},
+		"system_event": {
+			"class": "system",
+			"description": "Captures moments driven by the System interface such as notifications or enforced choices."
+		},
+		"class_selection": {
+			"class": "narrative",
+			"description": "Scenes or entries where a class is chosen, offered, or evaluated."
+		},
+		"tutorial_setup": {
+			"class": "system",
+			"description": "Preparation steps leading into a System tutorial or guided sequence."
+		},
+		"office_life": {
+			"class": "narrative",
+			"description": "Highlights mundane or pre-System office and day-job moments."
+		},
+		"character_intro": {
+			"class": "narrative",
+			"description": "Introduces characters, their backgrounds, or immediate context before major events."
+		},
+		"system_foreshadowing": {
+			"class": "narrative",
+			"description": "Hints or foreshadowing that the System will soon intervene or become visible."
+		},
+		"quiver": {
+			"class": "topic",
+			"description": "Relates to quivers or arrow storage devices used for archery."
+		},
+		"mana": {
+			"class": "topic",
+			"description": "Involves mana usage, storage, or manipulation inside the System.",
+			"allow_inferred": true
+		},
+		"clothing": {
+			"class": "topic",
+			"description": "Apparel-focused items that provide protection or disguise."
+		},
+		"weapon": {
+			"class": "topic",
+			"description": "General weapon categorization for melee or ranged gear."
+		},
+		"storage": {
+			"class": "function",
+			"description": "Items or abilities that expand carrying capacity or organization."
+		},
+		"potion": {
+			"class": "topic",
+			"description": "Consumables brewed or generated to restore resources or grant effects."
 		}
 	}
 }

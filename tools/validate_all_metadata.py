@@ -11,6 +11,7 @@
 """Validate record metadata and enforce basic referential integrity."""
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Iterable, List, Optional
@@ -45,6 +46,9 @@ META_SCHEMA = SCHEMA_ROOT / "file_metadata.schema.json"
 
 class ValidationError(Exception):
 	pass
+
+
+TAG_NAME_PATTERN = re.compile(r"^[a-z0-9_]+$")
 
 
 def _collect_schema_errors(data_path: Path, schema_path: Path) -> list[str]:
@@ -83,6 +87,105 @@ def _iter_timeline_files() -> Iterable[Path]:
 			yield timeline_path
 
 
+def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:
+	errors: list[str] = []
+	tag_definitions = tag_registry.get("tags") if isinstance(tag_registry, dict) else None
+	if not tag_definitions:
+		errors.append("records/tag_registry.json is missing 'tags' definitions.")
+		return errors
+
+	canonical_tags = set(tag_definitions.keys())
+	alias_to_canonical: dict[str, str] = {}
+	allow_inferred_map: dict[str, bool] = {}
+
+	for tag_name, metadata in tag_definitions.items():
+		if not isinstance(metadata, dict):
+			errors.append(f"records/tag_registry.json → tag '{tag_name}' must map to an object definition.")
+			continue
+		allow_inferred_map[tag_name] = bool(metadata.get("allow_inferred"))
+		aliases = metadata.get("aliases", [])
+		if isinstance(aliases, list):
+			for alias in aliases:
+				if isinstance(alias, str):
+					alias_to_canonical[alias] = tag_name
+				else:
+					errors.append(f"records/tag_registry.json → aliases for '{tag_name}' must be strings.")
+		elif aliases is not None:
+			errors.append(f"records/tag_registry.json → aliases for '{tag_name}' must be a list if provided.")
+
+	def validate_tag_list(raw_value, pointer: str, file_path: Path) -> list[str]:
+		issues: list[str] = []
+		if not isinstance(raw_value, list):
+			issues.append(f"{file_path}: {pointer} → tags must be a list.")
+			return issues
+		for index, entry in enumerate(raw_value):
+			element_pointer = f"{pointer}/{index}"
+			if isinstance(entry, str):
+				tag_name = entry
+				inferred = False
+			elif isinstance(entry, dict):
+				tag_name = entry.get("tag")
+				if tag_name is None:
+					issues.append(f"{file_path}: {element_pointer} → tag object missing 'tag' property.")
+					continue
+				if not isinstance(tag_name, str):
+					issues.append(f"{file_path}: {element_pointer} → tag id must be a string.")
+					continue
+				inferred = entry.get("inferred", False)
+				if not isinstance(inferred, bool):
+					issues.append(f"{file_path}: {element_pointer} → 'inferred' must be a boolean if provided.")
+				extra_keys = {k for k in entry.keys() if k not in {"tag", "inferred"}}
+				if extra_keys:
+					issues.append(f"{file_path}: {element_pointer} → unexpected keys {sorted(extra_keys)} in tag object.")
+			else:
+				issues.append(f"{file_path}: {element_pointer} → tag entries must be strings or objects with 'tag'.")
+				continue
+
+			if not TAG_NAME_PATTERN.fullmatch(tag_name):
+				issues.append(f"{file_path}: {element_pointer} → tag '{tag_name}' must be lowercase snake_case.")
+				continue
+
+			canonical = tag_name
+			if tag_name in alias_to_canonical:
+				canonical = alias_to_canonical[tag_name]
+				issues.append(
+					f"{file_path}: {element_pointer} → tag '{tag_name}' is an alias; replace with canonical id '{canonical}'."
+				)
+
+			if canonical not in canonical_tags:
+				issues.append(f"{file_path}: {element_pointer} → tag '{tag_name}' missing from records/tag_registry.json.")
+				continue
+
+			if inferred and not allow_inferred_map.get(canonical, False):
+				issues.append(
+					f"{file_path}: {element_pointer} → tag '{canonical}' cannot be marked inferred (allow_inferred is false)."
+				)
+		return issues
+
+	def walk(node, pointer: str, *, file_path: Path):
+		if isinstance(node, dict):
+			for key, value in node.items():
+				child_pointer = f"{pointer}/{key}" if pointer else key
+				if key == "tags":
+					errors.extend(validate_tag_list(value, child_pointer, file_path))
+				else:
+					walk(value, child_pointer, file_path=file_path)
+		elif isinstance(node, list):
+			for index, item in enumerate(node):
+				child_pointer = f"{pointer}/{index}" if pointer else str(index)
+				walk(item, child_pointer, file_path=file_path)
+
+	for json_path in records_root.rglob("*.json"):
+		if json_path.name.endswith(".meta.json"):
+			continue
+		if json_path.name == "tag_registry.json":
+			continue
+		data = read_json(json_path)
+		walk(data, "", file_path=json_path)
+
+	return errors
+
+
 def validate_all() -> int:
 	validation_errors: List[str] = []
 
@@ -116,6 +219,10 @@ def validate_all() -> int:
 	# Metadata sidecar files that store provenance
 	for metadata_path in _iter_meta_files():
 		validation_errors.extend(_collect_schema_errors(metadata_path, META_SCHEMA))
+
+	# Tag usage across all record files
+	tag_registry = read_json(RECORDS_ROOT / "tag_registry.json")
+	validation_errors.extend(_validate_tag_usage(RECORDS_ROOT, tag_registry))
 
 	if validation_errors:
 		print("\n❌ Metadata validation failed:")

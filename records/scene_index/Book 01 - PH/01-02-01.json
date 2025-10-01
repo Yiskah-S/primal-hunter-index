@@ -50,9 +50,9 @@
 		"System introduction chamber"
 	],
 	"tags": [
-		"system",
-		"class selection",
-		"tutorial prep"
+		"system_event",
+		"class_selection",
+		"tutorial_setup"
 	],
 	"skills_gained": [
 		"Basic Archery",
