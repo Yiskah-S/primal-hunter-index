@@ -1,0 +1,109 @@
+body {
+  background: #f5f7fa;
+  color: #2d2d2d;
+}
+
+.container {
+  padding: 1.5rem 1rem 3rem;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.app-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6c7a89;
+}
+
+.navbar {
+  margin-bottom: 1.5rem;
+}
+
+.navbar-section button + button {
+  margin-left: 0.5rem;
+}
+
+.grid {
+  gap: 1.5rem;
+}
+
+.editor {
+  min-height: 420px;
+  border: 1px solid #dadee4;
+  border-radius: 4px;
+  background: #ffffff;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.preview {
+  margin-top: 1rem;
+  background: #ffffff;
+  border: 1px solid #dadee4;
+  border-radius: 4px;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dadee4;
+  padding: 0.6rem 0.9rem;
+}
+
+.preview-output {
+  margin: 0;
+  padding: 0.9rem;
+  max-height: 280px;
+  overflow: auto;
+  font-size: 0.85rem;
+  background: #fafbfe;
+}
+
+.editor-meta {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #dadee4;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.meta-heading {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.editor-meta dl {
+  margin: 0;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem 0;
+  border-bottom: 1px dashed #eceff4;
+}
+
+.meta-row:last-child {
+  border-bottom: none;
+}
+
+.meta-row dt {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.meta-row dd {
+  margin: 0;
+  text-align: right;
+  color: #4c566a;
+}
+
+@media (max-width: 840px) {
+  .preview-output {
+    max-height: none;
+  }
+}

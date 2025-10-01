@@ -50,6 +50,14 @@ assign-skill-check:  ## Assign then validate timeline
 add-equipment:  ## Launch interactive equipment CLI (if available)
 	PYTHONPATH=. $(PY) cli/add_equipment.py
 
+# --- Web Helpers ---
+.PHONY: json-editor
+json-editor:  ## Launch records JSON editor (http://localhost:8000/tools/json_editor/)
+	(sleep 1 && $(PY) -m webbrowser -t "http://localhost:8000/tools/json_editor/") &
+	$(PY) -m http.server 8000
+
+
+
 # --- File Tree Logging ---
 .PHONY: filetree
 filetree:  ## Write pruned tree to ./~notes/file_structure.txt

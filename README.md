@@ -63,6 +63,7 @@ make setup-schemas
 | `make add-skill`     | Add a skill (and optionally assign to Jake) |
 | `make assign-skill`  | Add skill to character timeline             |
 | `make add-equipment` | Add a new item to equipment.json            |
+| `make json-editor`   | Launch JSON editor UI at http://localhost:8000/tools/json_editor/ |
 
 ---
 
@@ -74,6 +75,17 @@ make setup-schemas
 | `make validate-timeline`     | Validate all character `timeline.json` files |
 | `make check`                 | Shortcut for `make validate`                 |
 | `make validate-known-skills` | (Legacy) checks consistency of known_skills  |
+
+---
+
+## 🌐 JSON Editor
+
+```bash
+make json-editor
+open http://localhost:8000/tools/json_editor/
+```
+
+The helper serves the repo root, so the page reads schemas and records directly from `schemas/` and `records/`. Pick a dataset (skills, equipment, Jake's timeline), tweak the generated form, then download a ready-to-merge JSON snippet. Preview mode mirrors the exact payload so you can paste or script it into the records before committing.
 
 ---
 
