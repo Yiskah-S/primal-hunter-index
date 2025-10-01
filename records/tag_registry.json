@@ -1,0 +1,90 @@
+{
+	"tag_classes": {
+		"topic": {
+			"description": "Subject matter or thematic focus of the record (affinity, element, discipline, etc.)",
+			"example_tags": ["stealth", "dark_affinity", "archery", "healing"]
+		},
+		"entity_type": {
+			"description": "Identifies the kind of record being described (skill, character, scene segment, lore entry).",
+			"example_tags": ["skill", "scene", "lore", "item"]
+		},
+		"function": {
+			"description": "Captures mechanical behavior or role, such as passive effects or mobility tools.",
+			"example_tags": ["passive", "aoe", "buff", "mobility"]
+		},
+		"narrative": {
+			"description": "Narrative beats or events that occur inside chapters or scenes.",
+			"example_tags": ["skill_usage", "training", "unlock", "level_up"]
+		},
+		"system": {
+			"description": "Tags that explain rules, provenance, or meta information about the System itself.",
+			"example_tags": ["skill_lore", "mechanic", "tutorial", "tiering"]
+		}
+	},
+	"tags": {
+		"skill": {
+			"class": "entity_type",
+			"description": "Applies to definitions or discussions of skills rather than their usage."
+		},
+		"scene": {
+			"class": "entity_type",
+			"description": "Used when tagging scene index entries or summaries."
+		},
+		"lore": {
+			"class": "entity_type",
+			"description": "Marks records that primarily deliver background lore or world information."
+		},
+		"stealth": {
+			"class": "topic",
+			"description": "Involves concealment, detection avoidance, or stealth-based tactics.",
+			"aliases": ["shadow", "concealment"],
+			"allow_inferred": true
+		},
+		"dark_affinity": {
+			"class": "topic",
+			"description": "Pertains to dark affinity revelations, bonuses, or mechanics.",
+			"allow_inferred": true
+		},
+		"archery": {
+			"class": "topic",
+			"description": "Relates to bows, arrows, or archery-centric techniques.",
+			"allow_inferred": true
+		},
+		"passive": {
+			"class": "function",
+			"description": "Denotes abilities that provide ongoing effects without manual activation."
+		},
+		"mobility": {
+			"class": "function",
+			"description": "Marks skills or scenes emphasizing movement, repositioning, or escape tools."
+		},
+		"skill_usage": {
+			"class": "narrative",
+			"description": "A scene or excerpt where a specific skill is put into practice."
+		},
+		"training": {
+			"class": "narrative",
+			"description": "Focuses on practice, drills, or character development sessions."
+		},
+		"unlock": {
+			"class": "narrative",
+			"description": "Represents moments when a new capability, title, or skill becomes available."
+		},
+		"level_up": {
+			"class": "narrative",
+			"description": "Captures explicit level increases or System notifications awarding levels."
+		},
+		"skill_lore": {
+			"class": "system",
+			"description": "Explains how skills operate within the System, including flavor text or rules."
+		},
+		"mechanic": {
+			"class": "system",
+			"description": "Details a rule, calculation, or persistent mechanic within the System."
+		},
+		"tutorial": {
+			"class": "system",
+			"description": "Describes onboarding events, System prompts, or guided walkthroughs."
+		}
+	}
+}

@@ -1,0 +1,78 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Tag Registry",
+	"description": "Defines allowable tag classes and individual tags used across records.",
+	"type": "object",
+	"required": ["tag_classes", "tags"],
+	"properties": {
+		"tag_classes": {
+			"type": "object",
+			"description": "Dictionary of tag classes keyed by class id (snake_case).",
+			"minProperties": 1,
+			"patternProperties": {
+				"^[a-z0-9_]+$": {
+					"type": "object",
+					"required": ["description"],
+					"properties": {
+						"description": {
+							"type": "string",
+							"minLength": 1
+						},
+						"example_tags": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"pattern": "^[a-z0-9_]+$"
+							},
+							"uniqueItems": true
+						},
+						"notes": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"additionalProperties": false
+		},
+		"tags": {
+			"type": "object",
+			"description": "Canonical tag definitions keyed by tag id (snake_case).",
+			"minProperties": 1,
+			"patternProperties": {
+				"^[a-z0-9_]+$": {
+					"type": "object",
+					"required": ["class", "description"],
+					"properties": {
+						"class": {
+							"type": "string",
+							"pattern": "^[a-z0-9_]+$"
+						},
+						"description": {
+							"type": "string",
+							"minLength": 1
+						},
+						"aliases": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"pattern": "^[a-z0-9_]+$"
+							},
+							"uniqueItems": true
+						},
+						"allow_inferred": {
+							"type": "boolean",
+							"description": "If true, downstream tooling may tag inferred instances heuristically."
+						},
+						"notes": {
+							"type": "string"
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"additionalProperties": false
+		}
+	},
+	"additionalProperties": false
+}

@@ -4,9 +4,7 @@
 		"applies_to": "All newly initiated worlds",
 		"example": "Jake's status screen showing Human (G) level 0 during chapter 2.",
 		"notes": "Explained by the Introduction Entity during the first tutorial scene."
-	}
-}
-{
+	},
 	"skill_acquisition": {
 		"description": "When a skill is granted to a being by the System, basic functional knowledge of how to use that skill is intuitively provided. This includes activation mechanisms, general use cases, and passive awareness of effects.",
 		"applies_to": "All races and classes, unless explicitly blocked",

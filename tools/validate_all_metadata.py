@@ -34,7 +34,8 @@ FILE_TO_SCHEMA_PATHS = {
 	RECORDS_ROOT / "global_announcement_log.json": SCHEMA_ROOT / "global_announcement_log.schema.json",
 	RECORDS_ROOT / "chapters_to_posts.json": SCHEMA_ROOT / "chapters_to_posts.schema.json",
 	RECORDS_ROOT / "aliases" / "character_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
-	RECORDS_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json"
+	RECORDS_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
+	RECORDS_ROOT / "tag_registry.json": SCHEMA_ROOT / "tag_registry.schema.json"
 }
 
 TIMELINE_SCHEMA = SCHEMA_ROOT / "character_timeline.schema.json"
