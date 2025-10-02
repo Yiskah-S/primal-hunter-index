@@ -6,7 +6,7 @@
 	"$defs": {
 		"entry": {
 			"type": "object",
-			"required": ["type", "rarity", "canon", "source_ref"],
+			"required": ["type", "rarity", "canon", "source_ref", "index_meta"],
 			"properties": {
 				"type": {
 					"type": "string",
@@ -25,8 +25,7 @@
 					"description": "System description of the item's function or effect"
 				},
 				"flavor": {
-					"type": "string",
-					"description": "Narrative or user-facing flavor text"
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
 				"effects": {
 					"type": "object",
@@ -64,23 +63,8 @@
 					"type": "string",
 					"description": "Slot used if equippable (e.g., 'chest', 'head', 'main_hand', etc.)"
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"required": ["scene_id", "line"],
-					"properties": {
-						"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
-						"line": { "type": "integer" }
-					},
-					"additionalProperties": false
-				},
 				"tags": {
-					"type": "array",
-					"description": "Optional tag list for filtering or grouping",
-					"items": {
-						"type": "string",
-						"pattern": "^[a-z0-9_]+$"
-					},
-					"uniqueItems": true
+					"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
 				},
 				"granted_by": {
 					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
@@ -91,6 +75,9 @@
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"additionalProperties": false

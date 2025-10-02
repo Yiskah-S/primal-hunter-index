@@ -17,9 +17,12 @@
 			},
 			"source_ref": {
 				"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+			},
+			"index_meta": {
+				"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 			}
 		},
-		"required": ["message", "canon", "source_ref"],
+		"required": ["message", "canon", "source_ref", "index_meta"],
 		"additionalProperties": false
 	},
 	"additionalProperties": false

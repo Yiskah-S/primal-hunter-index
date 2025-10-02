@@ -12,7 +12,8 @@
 				"stat_bonus_per_level",
 				"description",
 				"canon",
-				"source_ref"
+				"source_ref",
+				"index_meta"
 			],
 			"properties": {
 				"type": { "type": "string" },
@@ -36,21 +37,16 @@
 					"type": "array",
 					"items": { "type": "string" }
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"properties": {
-						"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
-						"source_file": { "type": "string" },
-						"line": { "type": "integer" }
-					}
-				},
-				"flavor": { "type": "string" },
+				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
 				"canon": {
 					"type": "boolean",
 					"description": "Whether this class entry asserts canon facts requiring provenance."
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"additionalProperties": false

@@ -119,3 +119,43 @@ add-timeline:  ## Append a timeline entry for a character
 	 CMD="PYTHONPATH=. $(PY) cli/add_timeline_entry.py $(CHARACTER)"; \
 	 if [ -n "$(POSITION)" ]; then CMD="$$CMD --position $(POSITION)"; fi; \
 	 eval "$$CMD"
+
+
+# ---- Search bundle wrapper for tools/search_term_mentions.py ----
+# Usage:
+#   make search-term SEARCH='Race: [Human'
+#   make search-term SEARCH='Identify' CONTEXT=2
+#   make search-term SEARCH='Identify II' REGEX=1       # treat SEARCH as regex
+#
+# Optional vars:
+#   CHAPTERS=chapters            # where your chapter files live
+#   OUT=search_results           # where bundles are written
+#   CONTEXT=0                    # lines of context in manifest
+#   EXT='.md,.txt'               # file extensions to scan
+#   SLUG=Race_Human              # override output folder name (else auto from term)
+
+SEARCH       ?=
+REGEX        ?= 0
+CHAPTERS     ?= chapters
+OUT          ?= search_results
+CONTEXT      ?= 0
+EXT          ?= .md,.txt
+SLUG         ?=
+
+.PHONY: search-term
+
+search-term:
+	@if [ -z "$(SEARCH)" ]; then \
+		echo "Error: provide SEARCH. Example:"; \
+		echo "  make search-term SEARCH='Race: [Human'"; \
+		exit 1; \
+	fi
+	@python3 tools/search_term_mentions.py \
+		$(if $(filter 1,$(REGEX)),--regex,) \
+		--chapters-root '$(CHAPTERS)' \
+		--output-root '$(OUT)' \
+		--context-lines '$(CONTEXT)' \
+		--extensions '$(EXT)' \
+		$(if $(SLUG),--slug '$(SLUG)',) \
+		'$(SEARCH)'
+

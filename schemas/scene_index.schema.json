@@ -100,9 +100,7 @@
 			"uniqueItems": true
 		},
 		"tags": {
-			"type": "array",
-			"items": { "type": "string" },
-			"uniqueItems": true
+			"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
 		},
 		"skills_gained": {
 			"type": "array",

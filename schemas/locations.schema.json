@@ -64,28 +64,8 @@
 						"type": "string"
 					}
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"description": "Scene metadata for when this location was first described.",
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"description": "Scene ID where this location appears.",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"description": "Approximate line number where the location is introduced."
-						}
-					},
-					"required": [
-						"scene_id"
-					],
-					"additionalProperties": false
-				},
 				"flavor": {
-					"type": "string",
-					"description": "Optional quote, tone, or immersive description about this location."
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
 				"canon": {
 					"type": "boolean",
@@ -93,13 +73,17 @@
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"required": [
 				"type",
 				"tier",
 				"canon",
-				"source_ref"
+				"source_ref",
+				"index_meta"
 			],
 			"additionalProperties": false
 		}

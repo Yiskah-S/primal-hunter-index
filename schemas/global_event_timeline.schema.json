@@ -2,10 +2,10 @@
 	"$id": "https://primal-hunter.local/schemas/global_event_timeline.schema.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Global Event Timeline",
-	"type": "array",
-	"items": {
-		"type": "object",
-		"properties": {
+		"type": "array",
+		"items": {
+			"type": "object",
+			"properties": {
 			"day": { "type": "integer", "minimum": 0 },
 			"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
 			"event": { "type": "string" },
@@ -18,13 +18,7 @@
 			"location": { "type": "string" },
 			"notes": { "type": "string" },
 			"tags": {
-				"type": "array",
-				"description": "Tag registry identifiers summarising this global event",
-				"items": {
-					"type": "string",
-					"pattern": "^[a-z0-9_]+$"
-				},
-				"uniqueItems": true
+				"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
 			},
 			"canon": {
 				"type": "boolean",
@@ -32,9 +26,12 @@
 			},
 			"source_ref": {
 				"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+			},
+			"index_meta": {
+				"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 			}
 		},
-		"required": ["day", "event", "canon", "source_ref"],
+		"required": ["day", "event", "canon", "source_ref", "index_meta"],
 		"additionalProperties": false
 	},
 	"additionalProperties": false

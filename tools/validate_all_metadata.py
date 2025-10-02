@@ -75,6 +75,10 @@ CANONICAL_RECORD_PATHS: tuple[Path, ...] = (
 
 SHARED_SCHEMA_URIS = {
 	"https://primal-hunter.local/schemas/shared/granted_by.schema.json": SCHEMA_ROOT / "shared" / "granted_by.schema.json",
+	"https://primal-hunter.local/schemas/shared/flavor.schema.json": SCHEMA_ROOT / "shared" / "flavor.schema.json",
+	"https://primal-hunter.local/schemas/shared/index_meta.schema.json": SCHEMA_ROOT / "shared" / "index_meta.schema.json",
+	"https://primal-hunter.local/schemas/shared/resource_block.schema.json": SCHEMA_ROOT / "shared" / "resource_block.schema.json",
+	"https://primal-hunter.local/schemas/shared/tags.schema.json": SCHEMA_ROOT / "shared" / "tags.schema.json",
 	"https://primal-hunter.local/schemas/shared/provenance.schema.json": SCHEMA_ROOT / "shared" / "provenance.schema.json",
 }
 

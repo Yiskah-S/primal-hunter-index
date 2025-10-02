@@ -18,16 +18,19 @@
 					"additionalProperties": false
 				},
 				"description": { "type": "string" },
-				"flavor": { "type": "string" },
+				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
 				"canon": {
 					"type": "boolean",
 					"description": "Whether this race entry asserts canon facts requiring provenance."
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
-			"required": ["type", "rarity", "canon", "source_ref"],
+			"required": ["type", "rarity", "canon", "source_ref", "index_meta"],
 			"additionalProperties": false
 		}
 	},

@@ -19,9 +19,19 @@ This guide distils the working notes for capturing canon skill data into repeata
 
 ## Provenance & Scene IDs
 
-- `first_mentioned_in.scene_id` is the first canonical mention; keep it in `BB-CC-SS` format.
-- `source_ref` must span the exact quote where the skill or its grant appears. Err on the side of tighter spans—you can extend later.
+- `source_ref.scene_id` is the canonical scene identifier; keep it in `BB-CC-SS` format.
+- Capture the precise quote span with `line_start` and `line_end`. If the mention is a single line, set both to the same value.
 - When provenance comes from dialogue describing a previous event, cite the dialogue scene, not the flashback location, and clarify the context in `notes`.
+
+## Index Metadata (`index_meta`)
+
+- Required for every entry, regardless of canon status.
+- Use consistent slugs:
+  - `added_by`: `human`, `assistant`, etc.
+  - `method`: `manual`, `manual_backfill`, `search_skill_mentions`, `json_editor`, etc.
+- `added_on` defaults to today’s date; update if backdating a batch import.
+- `review_status`: `pending` until a human signs off; promote to `approved` (with `reviewed_by`) after validation. Use `rejected` for rollbacks or superseded data.
+- Add short `notes` when context matters (e.g., “Backfilled during index_meta rollout”, “LLM proposal awaiting review”).
 
 ## Effects Block
 

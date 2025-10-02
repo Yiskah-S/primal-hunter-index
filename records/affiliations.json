@@ -1,38 +1,44 @@
 {
-	"Earth": {
-		"type": "origin",
-		"tier": "Mortal",
-		"races": [
-			"Human"
-		],
-		"philosophy": "A mundane world orbiting an ordinary star, yet home to countless potential System initiates.",
-		"flavor": "A blue-green world where Jake lived an unremarkable but content life.",
-		"first_mentioned_in": {
-			"scene_id": "01-01-01",
-			"line": 1
-		},
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-01-01",
-			"line_start": 1,
-			"line_end": 83
-		}
-	},
-	"The System": {
-		"type": "cosmic",
-		"alignment": "Neutral Mechanistic",
-		"tier": "Transcendent",
-		"philosophy": "Elevate universes through structured challenges and progression.",
-		"flavor": "An all-encompassing framework that overlays initiated worlds, granting classes, skills, and quests.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 23
-		},
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 20,
-			"line_end": 159
-		}
-	}
+  "Earth": {
+    "type": "origin",
+    "tier": "Mortal",
+    "races": [
+      "Human"
+    ],
+    "philosophy": "A mundane world orbiting an ordinary star, yet home to countless potential System initiates.",
+    "flavor": "A blue-green world where Jake lived an unremarkable but content life.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-01-01",
+      "line_start": 1,
+      "line_end": 83
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "The System": {
+    "type": "cosmic",
+    "alignment": "Neutral Mechanistic",
+    "tier": "Transcendent",
+    "philosophy": "Elevate universes through structured challenges and progression.",
+    "flavor": "An all-encompassing framework that overlays initiated worlds, granting classes, skills, and quests.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 20,
+      "line_end": 159
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

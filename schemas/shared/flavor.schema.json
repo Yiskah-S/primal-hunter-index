@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/flavor.schema.json",
+  "title": "Flavor Fragment",
+  "description": "Reusable description block capturing evocative or lore-friendly prose for canon entries.",
+  "$defs": {
+    "flavor": {
+      "type": "string",
+      "description": "Immersive description, quote, or narrative hook associated with the entry.",
+      "minLength": 1
+    }
+  }
+}

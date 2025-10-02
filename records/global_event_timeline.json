@@ -1,55 +1,69 @@
 [
-	{
-		"day": 0,
-		"scene_id": "01-01-01",
-		"event": "Monday Office Routine",
-		"summary": "Jake's commute and office interactions set the stage before the System triggers.",
-		"characters": [
-			"Jake",
-			"Joanna",
-			"Jacob",
-			"Bertram",
-			"Caroline",
-			"Mike"
-		],
-		"location": "Corporate office tower",
-		"tags": [
-			"office_life",
-			"character_intro",
-			"system_foreshadowing",
-			"reflection"
-		],
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-01-01",
-			"line_start": 1,
-			"line_end": 83
-		}
-	},
-	{
-		"day": 0,
-		"scene_id": "01-02-01",
-		"event": "System Introduction Broadcast",
-		"summary": "The multiverse System initiates Universe 93, briefing Jake before transporting him to the tutorial.",
-		"characters": [
-			"Jake",
-			"Introduction Entity"
-		],
-		"location": "System introduction chamber",
-		"tags": [
-			"system_event",
-			"system_initiation",
-			"class_selection",
-			"tutorial_setup",
-			"skill_gain",
-			"skill_mechanics",
-			"mana_use"
-		],
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 1,
-			"line_end": 159
-		}
-	}
+  {
+    "day": 0,
+    "scene_id": "01-01-01",
+    "event": "Monday Office Routine",
+    "summary": "Jake's commute and office interactions set the stage before the System triggers.",
+    "characters": [
+      "Jake",
+      "Joanna",
+      "Jacob",
+      "Bertram",
+      "Caroline",
+      "Mike"
+    ],
+    "location": "Corporate office tower",
+    "tags": [
+      "office_life",
+      "character_intro",
+      "system_foreshadowing",
+      "reflection"
+    ],
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-01-01",
+      "line_start": 1,
+      "line_end": 83
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  {
+    "day": 0,
+    "scene_id": "01-02-01",
+    "event": "System Introduction Broadcast",
+    "summary": "The multiverse System initiates Universe 93, briefing Jake before transporting him to the tutorial.",
+    "characters": [
+      "Jake",
+      "Introduction Entity"
+    ],
+    "location": "System introduction chamber",
+    "tags": [
+      "system_event",
+      "system_initiation",
+      "class_selection",
+      "tutorial_setup",
+      "skill_gain",
+      "skill_mechanics",
+      "mana_use"
+    ],
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 1,
+      "line_end": 159
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 ]

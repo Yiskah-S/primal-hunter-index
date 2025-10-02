@@ -1,170 +1,182 @@
 {
-	"Basic Archery": {
-		"rarity": "Inferior",
-		"type": "Combat Passive",
-		"class_recommendations": [
-			"Archer"
-		],
-		"description": "Unlocks basic proficiency with bows and crossbows and slightly increases agility and strength scaling when using ranged weapons.",
-		"effects": {
-			"proficiency_with": [
-				"bows",
-				"crossbows"
-			],
-			"stat_synergy": {},
-			"passive_benefit": "Minor boost to ranged attacks derived from Agility and Strength."
-		},
-		"behavior": {
-			"activation_method": "Passive",
-			"deactivation": "Always active",
-			"instinctive_knowledge": true,
-			"user feedback": "Provides intuitive understanding of basic archery techniques."
-		},
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 111
-		},
-		"flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart.",
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 111,
-			"line_end": 111
-		},
-		"tags": [
-			"starter",
-			"proficiency",
-			"archery"
-		],
-		"granted_by": [
-			{
-				"type": "system",
-				"name": "Introduction Entity"
-			}
-		]
-	},
-	"Basic One-Handed Weapon": {
-		"rarity": "Inferior",
-		"type": "Combat Passive",
-		"class_recommendations": [
-			"Archer"
-		],
-		"description": "Grants simple proficiency with most one-handed weapons and slightly improves agility and strength scaling when wielding them.",
-		"effects": {
-			"proficiency_with": [
-				"one-handed weapons"
-			],
-			"stat_synergy": {},
-			"passive_benefit": "Minor boost to melee effectiveness when using appropriate light weapons."
-		},
-		"behavior": {
-			"activation_method": "Passive",
-			"deactivation": "Always active",
-			"instinctive_knowledge": true,
-			"user feedback": "Provides intuitive familiarity with one-handed weapons."
-		},
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 113
-		},
-		"flavor": "The Archer may not be a master in close combat but is far from helpless.",
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 113,
-			"line_end": 113
-		},
-		"tags": [
-			"starter",
-			"proficiency",
-			"weapon"
-		],
-		"granted_by": [
-			{
-				"type": "system",
-				"name": "Introduction Entity"
-			}
-		]
-	},
-	"Archers Eye": {
-		"rarity": "Common",
-		"type": "Sensory Active",
-		"class_recommendations": [
-			"Archer"
-		],
-		"description": "Enhances vision to track prey and spot weaknesses, providing clearer sight while active.",
-		"effects": {
-			"passive_benefit": "Minor increase to the effect of Perception on vision when focusing."
-		},
-		"behavior": {
-			"activation_method": "Focus on a target",
-			"deactivation": "Manual release or resource depletion",
-			"instinctive_knowledge": true,
-			"user feedback": "Vision sharpens from normal to high clarity at a small stamina cost."
-		},
-		"resource_cost": {
-			"resource": "Stamina",
-			"activation_cost": 2,
-			"type": "drain"
-		},
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 115
-		},
-		"flavor": "The eyes of the Archer track prey and reveal weaknesses.",
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 115,
-			"line_end": 115
-		},
-		"tags": [
-			"starter",
-			"perception",
-			"utility",
-			"archery"
-		],
-		"granted_by": [
-			{
-				"type": "system",
-				"name": "Introduction Entity"
-			}
-		]
-	},
-	"Identify": {
-		"rarity": "Inferior",
-		"type": "Utility Active",
-		"class_recommendations": [],
-		"description": "Basic identification skill known by nearly all races, allowing the user to attempt identifying focused objects or creatures.",
-		"effects": {
-			"passive_benefit": "Reveals fundamental information about items and entities when used."
-		},
-		"behavior": {
-			"activation_method": "Focus on the target for several seconds",
-			"deactivation": "Automatic after information is retrieved",
-			"instinctive_knowledge": true,
-			"user feedback": "Displays an information panel after a short delay."
-		},
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 127
-		},
-		"flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
-		"canon": true,
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 127,
-			"line_end": 127
-		},
-		"tags": [
-			"starter",
-			"utility"
-		],
-		"granted_by": [
-			{
-				"type": "system",
-				"name": "Introduction Entity"
-			}
-		]
-	}
+  "Basic Archery": {
+    "rarity": "Inferior",
+    "type": "Combat Passive",
+    "class_recommendations": [
+      "Archer"
+    ],
+    "description": "Unlocks basic proficiency with bows and crossbows and slightly increases agility and strength scaling when using ranged weapons.",
+    "effects": {
+      "proficiency_with": [
+        "bows",
+        "crossbows"
+      ],
+      "stat_synergy": {},
+      "passive_benefit": "Minor boost to ranged attacks derived from Agility and Strength."
+    },
+    "behavior": {
+      "activation_method": "Passive",
+      "deactivation": "Always active",
+      "instinctive_knowledge": true,
+      "user feedback": "Provides intuitive understanding of basic archery techniques."
+    },
+    "flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 111,
+      "line_end": 111
+    },
+    "tags": [
+      "starter",
+      "proficiency",
+      "archery"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Basic One-Handed Weapon": {
+    "rarity": "Inferior",
+    "type": "Combat Passive",
+    "class_recommendations": [
+      "Archer"
+    ],
+    "description": "Grants simple proficiency with most one-handed weapons and slightly improves agility and strength scaling when wielding them.",
+    "effects": {
+      "proficiency_with": [
+        "one-handed weapons"
+      ],
+      "stat_synergy": {},
+      "passive_benefit": "Minor boost to melee effectiveness when using appropriate light weapons."
+    },
+    "behavior": {
+      "activation_method": "Passive",
+      "deactivation": "Always active",
+      "instinctive_knowledge": true,
+      "user feedback": "Provides intuitive familiarity with one-handed weapons."
+    },
+    "flavor": "The Archer may not be a master in close combat but is far from helpless.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 113,
+      "line_end": 113
+    },
+    "tags": [
+      "starter",
+      "proficiency",
+      "weapon"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Archers Eye": {
+    "rarity": "Common",
+    "type": "Sensory Active",
+    "class_recommendations": [
+      "Archer"
+    ],
+    "description": "Enhances vision to track prey and spot weaknesses, providing clearer sight while active.",
+    "effects": {
+      "passive_benefit": "Minor increase to the effect of Perception on vision when focusing."
+    },
+    "behavior": {
+      "activation_method": "Focus on a target",
+      "deactivation": "Manual release or resource depletion",
+      "instinctive_knowledge": true,
+      "user feedback": "Vision sharpens from normal to high clarity at a small stamina cost."
+    },
+    "resource_cost": {
+      "resource": "Stamina",
+      "activation_cost": 2,
+      "type": "drain"
+    },
+    "flavor": "The eyes of the Archer track prey and reveal weaknesses.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 115,
+      "line_end": 115
+    },
+    "tags": [
+      "starter",
+      "perception",
+      "utility",
+      "archery"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Identify": {
+    "rarity": "Inferior",
+    "type": "Utility Active",
+    "class_recommendations": [],
+    "description": "Basic identification skill known by nearly all races, allowing the user to attempt identifying focused objects or creatures.",
+    "effects": {
+      "passive_benefit": "Reveals fundamental information about items and entities when used."
+    },
+    "behavior": {
+      "activation_method": "Focus on the target for several seconds",
+      "deactivation": "Automatic after information is retrieved",
+      "instinctive_knowledge": true,
+      "user feedback": "Displays an information panel after a short delay."
+    },
+    "flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 127,
+      "line_end": 127
+    },
+    "tags": [
+      "starter",
+      "utility"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

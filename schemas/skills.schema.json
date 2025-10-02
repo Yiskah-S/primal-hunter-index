@@ -13,7 +13,8 @@
 				"effects",
 				"flavor",
 				"canon",
-				"source_ref"
+				"source_ref",
+				"index_meta"
 			],
 			"properties": {
 				"rarity": {
@@ -82,31 +83,11 @@
 					},
 					"additionalProperties": false
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"required": ["scene_id", "line"],
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"description": "Scene ID in which this skill first appears",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"description": "Line number in the source file where this skill is first mentioned"
-						}
-					},
-					"additionalProperties": false
-				},
 				"flavor": {
-					"type": "string",
-					"description": "Narrative or flavor-text for the skill"
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
 				"tags": {
-					"type": "array",
-					"description": "Optional tags to classify or group skills",
-					"items": { "type": "string" },
-					"uniqueItems": true
+					"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
 				},
 				"granted_by": {
 					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
@@ -117,6 +98,9 @@
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"additionalProperties": false
