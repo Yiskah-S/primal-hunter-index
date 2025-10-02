@@ -1,19 +1,28 @@
 {
-	"Introduction Entity": {
-		"type": "construct",
-		"tier": "System",
-		"race": "System Construct",
-		"level": 0,
-		"behavior": {
-			"hostile": false,
-			"intelligent": true
-		},
-		"skills": [],
-		"loot": [],
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 23
-		},
-		"flavor": "An androgynous, synthetic facilitator assigned to brief new initiates before the tutorial."
-	}
+  "Introduction Entity": {
+    "type": "construct",
+    "tier": "System",
+    "race": "System Construct",
+    "level": 0,
+    "behavior": {
+      "hostile": false,
+      "intelligent": true
+    },
+    "skills": [],
+    "loot": [],
+    "flavor": "An androgynous, synthetic facilitator assigned to brief new initiates before the tutorial.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 10,
+      "line_end": 125
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

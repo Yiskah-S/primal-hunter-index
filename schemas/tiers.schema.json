@@ -2,10 +2,17 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Tier Progression Schema",
 	"type": "object",
-	"patternProperties": {
-		".+": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["stat_gain_per_level", "resource_gain", "expected_power_range"],
+			"required": [
+				"stat_gain_per_level",
+				"resource_gain",
+				"expected_power_range",
+				"canon",
+				"source_ref",
+				"index_meta"
+			],
 			"properties": {
 				"label": { "type": "string" },
 				"stat_gain_per_level": {
@@ -30,8 +37,25 @@
 						"stat_total_estimate": { "type": "string" }
 					}
 				},
-				"flavor": { "type": "string" }
-			}
+				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this tier entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
+				}
+			},
+			"additionalProperties": false
 		}
-	}
+	},
+	"patternProperties": {
+		".+": {
+			"$ref": "#/$defs/entry"
+		}
+	},
+	"additionalProperties": false
 }

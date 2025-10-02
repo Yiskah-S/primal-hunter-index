@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/index_meta.schema.json",
+  "title": "Indexing Metadata Fragment",
+  "description": "Tracks who added a record entry, how it was added, and the review status. Use stable slugs (e.g., added_by='assistant', method='manual', method='search_skill_mentions').",
+  "$defs": {
+    "index_meta": {
+      "type": "object",
+      "properties": {
+        "added_by": {
+          "type": "string",
+          "description": "Tool or human responsible for adding this record (use consistent slugs such as 'assistant', 'human')."
+        },
+        "added_on": {
+          "type": "string",
+          "format": "date",
+          "description": "Date (YYYY-MM-DD) this entry was added to the dataset."
+        },
+        "method": {
+          "type": "string",
+          "description": "Workflow or tooling used to add this entry (e.g., 'manual', 'search_skill_mentions')."
+        },
+        "reviewed_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Human who validated this entry, if any (null when pending)."
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "approved",
+            "rejected"
+          ],
+          "description": "Outcome of human review for this entry."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Context or rationale for this addition (optional)."
+        }
+      },
+      "required": [
+        "added_by",
+        "added_on",
+        "method"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

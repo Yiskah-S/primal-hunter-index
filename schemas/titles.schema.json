@@ -2,10 +2,10 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Title Metadata Schema",
 	"type": "object",
-	"patternProperties": {
-		".+": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["rarity", "effects"],
+			"required": ["rarity", "effects", "canon", "source_ref", "index_meta"],
 			"properties": {
 				"rarity": {
 					"type": "string",
@@ -30,16 +30,25 @@
 						}
 					}
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"properties": {
-						"scene_id": { "type": "string" },
-						"source_file": { "type": "string" },
-						"line": { "type": "integer" }
-					}
+				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this title entry asserts canon facts requiring provenance."
 				},
-				"flavor": { "type": "string" }
-			}
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
+				}
+			},
+			"additionalProperties": false
 		}
-	}
+	},
+	"patternProperties": {
+		".+": {
+			"$ref": "#/$defs/entry"
+		}
+	},
+	"additionalProperties": false
 }

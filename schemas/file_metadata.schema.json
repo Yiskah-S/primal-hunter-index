@@ -61,6 +61,49 @@
 			"type": "string",
 			"format": "date",
 			"description": "Calendar date (YYYY-MM-DD) when this metadata was last revised."
+		},
+		"record_log": {
+			"type": "array",
+			"description": "Audit trail of record entry batches for this file.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"entry_keys": {
+						"type": "array",
+						"items": { "type": "string" },
+						"uniqueItems": true,
+						"description": "Keys (or identifiers) of the entries touched in this batch."
+					},
+					"added_by": {
+						"type": "string",
+						"description": "Tool or human that performed this batch (use consistent slugs)."
+					},
+					"date": {
+						"type": "string",
+						"format": "date",
+						"description": "Date this batch was applied."
+					},
+					"method": {
+						"type": "string",
+						"description": "Workflow or tooling used (e.g., 'manual', 'search_skill_mentions')."
+					},
+					"reviewed_by": {
+						"type": ["string", "null"],
+						"description": "Reviewer of this batch, if any."
+					},
+					"review_status": {
+						"type": "string",
+						"enum": ["pending", "approved", "rejected"],
+						"description": "Review outcome for this batch."
+					},
+					"notes": {
+						"type": "string",
+						"description": "Context or rationale for this batch."
+					}
+				},
+				"required": ["entry_keys", "added_by", "date", "method"],
+				"additionalProperties": false
+			}
 		}
 	},
 	"required": ["records", "source"],

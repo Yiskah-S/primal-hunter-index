@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/granted_by.schema.json",
+  "title": "Granted By Fragment",
+  "description": "Reusable definitions for capturing the origin events that grant a skill, item, or similar asset.",
+  "$defs": {
+    "grant": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Category of the grant source (system, quest, title, etc.).",
+          "enum": [
+            "system",
+            "class_upgrade",
+            "title",
+            "item",
+            "blessing",
+            "quest",
+            "loot",
+            "crafting",
+            "vendor",
+            "other"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Specific name of the granting source (e.g., quest title, item name)."
+        },
+        "from": {
+          "type": "string",
+          "description": "Optional source identifier (e.g., previous class or skill)."
+        },
+        "to": {
+          "type": "string",
+          "description": "Optional target identifier when the grant upgrades or replaces something."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Clarifying details that don’t fit other structured fields."
+        }
+      },
+      "additionalProperties": false
+    },
+    "granted_by": {
+      "type": "array",
+      "description": "One or more origin events that granted the entity.",
+      "items": {
+        "$ref": "#/$defs/grant"
+      },
+      "minItems": 1
+    }
+  }
+}

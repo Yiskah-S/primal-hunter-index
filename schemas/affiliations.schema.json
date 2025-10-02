@@ -3,8 +3,8 @@
 	"title": "Affiliation Definition",
 	"description": "Records of affiliations such as origins, religions, factions, guilds, or planar allegiances.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "Single affiliation keyed by its records entry name.",
 			"properties": {
@@ -53,27 +53,26 @@
 					"description": "Optional motto or guiding belief structure."
 				},
 				"flavor": {
-					"type": "string",
-					"description": "Immersive description, quote, or story about the affiliation."
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"description": "Scene metadata for this affiliation's first appearance.",
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"minimum": 1
-						}
-					},
-					"required": ["scene_id"]
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this affiliation entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
-			"required": ["type"],
+			"required": ["type", "canon", "source_ref", "index_meta"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

@@ -1,12 +1,29 @@
 {
-	"entered_by": "assistant",
-	"reviewed_by_human": false,
-	"last_updated": "2024-10-05",
-	"source": {
-		"book": "Book 01 - PH",
-		"chapter": 2,
-		"scene": 1,
-		"scene_id": "01-02-01"
-	},
-	"records": true
+  "entered_by": "assistant",
+  "reviewed_by_human": false,
+  "last_updated": "2024-10-05",
+  "source": {
+    "book": "Book 01 - PH",
+    "chapter": 2,
+    "scene": 1,
+    "scene_id": "01-02-01"
+  },
+  "records": true,
+  "record_log": [
+    {
+      "entry_keys": [
+        "Archer",
+        "Caster",
+        "Healer",
+        "Warrior (Heavy)",
+        "Warrior (Light)",
+        "Warrior (Medium)"
+      ],
+      "added_by": "assistant",
+      "date": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  ]
 }

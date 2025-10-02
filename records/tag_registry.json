@@ -1,0 +1,251 @@
+{
+	"tag_classes": {
+		"topic": {
+			"description": "Subject matter or thematic focus of the record (affinity, element, discipline, etc.)",
+			"example_tags": [
+				"stealth",
+				"dark_affinity",
+				"archery",
+				"healing"
+			]
+		},
+		"entity_type": {
+			"description": "Identifies the kind of record being described (skill, character, scene segment, lore entry).",
+			"example_tags": [
+				"skill",
+				"scene",
+				"lore",
+				"item"
+			]
+		},
+		"function": {
+			"description": "Captures mechanical behavior or role, such as passive effects or mobility tools.",
+			"example_tags": [
+				"passive",
+				"aoe",
+				"buff",
+				"mobility"
+			]
+		},
+		"narrative": {
+			"description": "Narrative beats or events that occur inside chapters or scenes.",
+			"example_tags": [
+				"skill_usage",
+				"training",
+				"unlock",
+				"level_up"
+			]
+		},
+		"system": {
+			"description": "Tags that explain rules, provenance, or meta information about the System itself.",
+			"example_tags": [
+				"skill_lore",
+				"mechanic",
+				"tutorial",
+				"tiering"
+			]
+		}
+	},
+	"tags": {
+		"skill": {
+			"class": "entity_type",
+			"description": "Applies to definitions or discussions of skills rather than their usage."
+		},
+		"scene": {
+			"class": "entity_type",
+			"description": "Used when tagging scene index entries or summaries."
+		},
+		"lore": {
+			"class": "entity_type",
+			"description": "Marks records that primarily deliver background lore or world information."
+		},
+		"stealth": {
+			"class": "topic",
+			"description": "Involves concealment, detection avoidance, or stealth-based tactics.",
+			"aliases": [
+				"shadow",
+				"concealment"
+			],
+			"allow_inferred": true
+		},
+		"dark_affinity": {
+			"class": "topic",
+			"description": "Pertains to dark affinity revelations, bonuses, or mechanics.",
+			"allow_inferred": true
+		},
+		"archery": {
+			"class": "topic",
+			"description": "Anything related to archery, archers, or ranged combat."
+		},
+		"passive": {
+			"class": "function",
+			"description": "Denotes abilities that provide ongoing effects without manual activation."
+		},
+		"mobility": {
+			"class": "function",
+			"description": "Marks skills or scenes emphasizing movement, repositioning, or escape tools."
+		},
+		"skill_usage": {
+			"class": "narrative",
+			"description": "A scene or excerpt where a specific skill is put into practice."
+		},
+		"training": {
+			"class": "narrative",
+			"description": "Focuses on practice, drills, or character development sessions."
+		},
+		"unlock": {
+			"class": "narrative",
+			"description": "Represents moments when a new capability, title, or skill becomes available."
+		},
+		"level_up": {
+			"class": "narrative",
+			"description": "Captures explicit level increases or System notifications awarding levels."
+		},
+		"skill_lore": {
+			"class": "system",
+			"description": "Explains how skills operate within the System, including flavor text or rules."
+		},
+		"mechanic": {
+			"class": "system",
+			"description": "Details a rule, calculation, or persistent mechanic within the System."
+		},
+		"tutorial": {
+			"class": "system",
+			"description": "Describes onboarding events, System prompts, or guided walkthroughs."
+		},
+		"starter": {
+			"class": "narrative",
+			"description": "Marks early progression beats such as tutorial rewards or introductory gear.",
+			"allow_inferred": true
+		},
+		"proficiency": {
+			"class": "function",
+			"description": "Denotes skills or items that confer baseline competence with a weapon or tool."
+		},
+		"perception": {
+			"class": "topic",
+			"description": "Relates to sensory improvements, awareness, or perception-driven effects."
+		},
+		"utility": {
+			"class": "function",
+			"description": "Covers skills or items whose primary role is utility or support rather than damage."
+		},
+		"system_event": {
+			"class": "system",
+			"description": "Captures moments driven by the System interface such as notifications or enforced choices."
+		},
+		"class_selection": {
+			"class": "narrative",
+			"description": "Scenes or entries where a class is chosen, offered, or evaluated."
+		},
+		"tutorial_setup": {
+			"class": "system",
+			"description": "Scenes covering the start of the tutorial scenario."
+		},
+		"office_life": {
+			"class": "narrative",
+			"description": "Scenes showing Jake's life before the system."
+		},
+		"character_intro": {
+			"class": "narrative",
+			"description": "Introduces characters, their backgrounds, or immediate context before major events."
+		},
+		"system_foreshadowing": {
+			"class": "narrative",
+			"description": "Hints or foreshadowing that the System will soon intervene or become visible."
+		},
+		"quiver": {
+			"class": "topic",
+			"description": "Relates to quivers or arrow storage devices used for archery."
+		},
+		"mana": {
+			"class": "topic",
+			"description": "Involves mana usage, storage, or manipulation inside the System.",
+			"allow_inferred": true
+		},
+		"clothing": {
+			"class": "topic",
+			"description": "Apparel-focused items that provide protection or disguise."
+		},
+		"weapon": {
+			"class": "topic",
+			"description": "General weapon categorization for melee or ranged gear."
+		},
+		"storage": {
+			"class": "function",
+			"description": "Items or abilities that expand carrying capacity or organization."
+		},
+		"potion": {
+			"class": "topic",
+			"description": "Consumables brewed or generated to restore resources or grant effects."
+		},
+		"system_initiation": {
+			"class": "system",
+			"description": "Introduction to the System mechanics or awakening."
+		},
+		"title_gain": {
+			"class": "narrative",
+			"description": "Acquisition of a title by a character."
+		},
+		"skill_gain": {
+			"class": "narrative",
+			"description": "First-time skill acquisition."
+		},
+		"skill_use": {
+			"class": "narrative",
+			"description": "Character uses a skill in a scene."
+		},
+		"combat": {
+			"class": "narrative",
+			"description": "Direct fights with beasts or humans."
+		},
+		"beast_encounter": {
+			"class": "narrative",
+			"description": "First-time or major encounters with beasts."
+		},
+		"first_kill": {
+			"class": "narrative",
+			"description": "First lethal encounter involving the protagonist."
+		},
+		"bloodline_reveal": {
+			"class": "lore",
+			"description": "Revelations about bloodline abilities."
+		},
+		"reflection": {
+			"class": "narrative",
+			"description": "Scenes where a character reflects on their actions."
+		},
+		"team_conflict": {
+			"class": "narrative",
+			"description": "Interpersonal conflict within Jake\u2019s group."
+		},
+		"instinct": {
+			"class": "topic",
+			"description": "References to Jake's instincts or danger sense."
+		},
+		"perception_stat": {
+			"class": "system",
+			"description": "Discussions or effects related to perception."
+		},
+		"skill_mechanics": {
+			"class": "system",
+			"description": "Explanation or implications of how skills work."
+		},
+		"mana_use": {
+			"class": "system",
+			"description": "How mana is used or channeled for skills or gear."
+		},
+		"group_dynamics": {
+			"class": "narrative",
+			"description": "Scenes that highlight team behavior or roles."
+		},
+		"injury": {
+			"class": "narrative",
+			"description": "A character gets injured or has lasting damage."
+		},
+		"tutorial_death": {
+			"class": "narrative",
+			"description": "Mentions or consequences of death within the tutorial."
+		}
+	}
+}

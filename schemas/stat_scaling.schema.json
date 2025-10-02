@@ -4,8 +4,8 @@
 	"title": "Stat Scaling Definitions",
 	"type": "object",
 	"description": "Defines how stats scale by source (race, class, title, etc.).",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"properties": {
 				"category": {
@@ -14,7 +14,7 @@
 				},
 				"stat": {
 					"type": "string",
-				"description": "Records stat identifier (e.g., Str, Agi)."
+					"description": "Records stat identifier (e.g., Str, Agi)."
 				},
 				"base_value": {
 					"type": "number",
@@ -24,10 +24,25 @@
 					"type": "number",
 					"description": "Bonus added per level (if applicable)."
 				},
-				"notes": { "type": "string" }
+				"notes": { "type": "string" },
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this stat scaling entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
+				}
 			},
-			"required": ["category", "stat"],
+			"required": ["category", "stat", "canon", "source_ref", "index_meta"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

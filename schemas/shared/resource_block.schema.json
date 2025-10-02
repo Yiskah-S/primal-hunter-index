@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/resource_block.schema.json",
+  "title": "Resource Block Fragment",
+  "description": "Reusable structure for tracking derived combat resources (HP, MP, stamina, etc.).",
+  "$defs": {
+    "resource_block": {
+      "type": "object",
+      "required": ["max", "current", "derived_from"],
+      "properties": {
+        "max": {
+          "type": "number",
+          "description": "Maximum value for the resource at this snapshot."
+        },
+        "current": {
+          "type": "number",
+          "description": "Current value observed in the cited scene."
+        },
+        "derived_from": {
+          "type": ["string", "array"],
+          "description": "Source(s) that determine this resource (e.g., stats, items, titles)."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

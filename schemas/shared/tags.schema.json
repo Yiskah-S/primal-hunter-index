@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/tags.schema.json",
+  "title": "Tags Fragment",
+  "description": "Reusable definition for tag arrays constrained to the project registry style.",
+  "$defs": {
+    "tags": {
+      "type": "array",
+      "description": "List of lowercase snake_case tags with unique values.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+$"
+      },
+      "uniqueItems": true
+    }
+  }
+}

@@ -4,7 +4,7 @@
 	"type": "array",
 	"items": {
 		"type": "object",
-		"required": ["day", "scene_id", "stats"],
+		"required": ["day", "scene_id", "stats", "source_ref"],
 		"properties": {
 			"day": {
 				"type": "integer",
@@ -19,10 +19,17 @@
 				"type": "string",
 				"description": "Filepath to source material for this snapshot"
 			},
-			"reason": {
-				"type": "string",
-				"description": "Short narrative for why this timeline snapshot exists"
-			},
+		"reason": {
+			"type": "string",
+			"description": "Short narrative for why this timeline snapshot exists"
+		},
+		"notes": {
+			"type": "string",
+			"description": "Extended commentary or reviewer notes for this snapshot"
+		},
+		"tags": {
+			"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
+		},
 			"level": { "type": "integer" },
 			"class_level": { "type": "integer" },
 			"race_level": { "type": "integer" },
@@ -60,15 +67,15 @@
 				"description": "List of equipped or held gear at this moment",
 				"items": { "type": "string" }
 			},
-			"resources": {
-				"type": "object",
-				"properties": {
-					"HP": { "$ref": "#/$defs/resource_block" },
-					"MP": { "$ref": "#/$defs/resource_block" },
-					"Stamina": { "$ref": "#/$defs/resource_block" }
-				},
-				"additionalProperties": false
+		"resources": {
+			"type": "object",
+			"properties": {
+				"HP": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" },
+				"MP": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" },
+				"Stamina": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" }
 			},
+			"additionalProperties": false
+		},
 			"stats": {
 				"type": "object",
 				"required": ["total"],
@@ -111,18 +118,38 @@
 					"required": ["source", "change"],
 					"additionalProperties": false
 				}
+			},
+			"source_ref": {
+				"description": "Exact scene and line span supporting this snapshot",
+				"oneOf": [
+					{ "$ref": "#/$defs/source_range" },
+					{
+						"type": "array",
+						"items": { "$ref": "#/$defs/source_range" },
+						"minItems": 1
+					}
+				]
 			}
 		},
 		"additionalProperties": false
 	},
 	"$defs": {
-		"resource_block": {
+		"source_range": {
 			"type": "object",
-			"required": ["max", "current", "derived_from"],
+			"required": ["scene_id", "line_start", "line_end"],
 			"properties": {
-				"max": { "type": "number" },
-				"current": { "type": "number" },
-				"derived_from": { "type": ["string", "array"] }
+				"scene_id": {
+					"type": "string",
+					"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+				},
+				"line_start": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"line_end": {
+					"type": "integer",
+					"minimum": 1
+				}
 			},
 			"additionalProperties": false
 		}

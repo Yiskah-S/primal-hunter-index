@@ -87,6 +87,8 @@ open http://localhost:8000/tools/json_editor/
 
 The helper serves the repo root, so the page reads schemas and records directly from `schemas/` and `records/`. Pick a dataset (skills, equipment, Jake's timeline), tweak the generated form, then download a ready-to-merge JSON snippet. Preview mode mirrors the exact payload so you can paste or script it into the records before committing.
 
+Any `tags[]` field now renders as a dropdown backed by `records/tag_registry.json`, grouped by tag class (for example, `Topic › stealth`).
+
 ---
 
 ## 📂 Visualization

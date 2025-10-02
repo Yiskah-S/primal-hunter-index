@@ -3,8 +3,8 @@
 	"title": "Location Definition",
 	"description": "Schema for all named locations, zones, subzones, dungeons, layers, cities, or landmarks. Used for environmental tagging, worldbuilding, and indexing spatial progression.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "A single location or zone, keyed by its name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
 			"properties": {
@@ -64,34 +64,33 @@
 						"type": "string"
 					}
 				},
-				"first_mentioned_in": {
-					"type": "object",
-			"description": "Scene metadata for when this location was first described.",
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"description": "Scene ID where this location appears.",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"description": "Approximate line number where the location is introduced."
-						}
-					},
-					"required": [
-						"scene_id"
-					],
-					"additionalProperties": false
-				},
 				"flavor": {
-					"type": "string",
-					"description": "Optional quote, tone, or immersive description about this location."
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this location entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"required": [
 				"type",
-				"tier"
-			]
+				"tier",
+				"canon",
+				"source_ref",
+				"index_meta"
+			],
+			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

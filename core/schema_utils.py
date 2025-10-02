@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Any, Dict, List, Union
 
 from jsonschema import Draft202012Validator, ValidationError
 
@@ -23,27 +23,16 @@ def validate_instance(instance: Any, schema: Dict[str, Any]) -> None:
 		msg = "\n".join(f"- {'/'.join(map(str, e.path)) or '<root>'}: {e.message}" for e in errors)
 		raise ValueError(f"Schema validation failed:\n{msg}")
 
-def validate_json_schema(data_path: Path, schema_path: Path, name: str = None) -> None:
-	try:
-		data = read_json(data_path)
-		schema = load_schema(schema_path)
-		validator = Draft202012Validator(schema)
-		errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
-# TODO(P1): Split validation vs UI responsibilities.
-# - validate_json_schema() should return validation errors
-# - CLI/UI should handle formatting and printing
-# - Enables reuse in tests, CI, and other tools
-		if errors:
-			print(f"\n❌ {name or data_path} failed schema validation:")
-			for e in errors:
-				location = " → ".join(str(x) for x in e.absolute_path) or "<root>"
-				print(f"   • {location}: {e.message}")
-		else:
-			print(f"✅ {name or data_path} passed validation.")
+def validate_json_schema(data_path: Path, schema_path: Path) -> List[ValidationError]:
+	data_path = Path(data_path)
+	schema_path = Path(schema_path)
 
-	except FileNotFoundError:
-		print(f"⚠️ File not found: {data_path} or {schema_path}")
-	except ValidationError as e:
-		print(f"❌ {name or data_path} failed: {e.message}")
-	except Exception as e:
-		print(f"⚠️ Unexpected error validating {name or data_path}: {e}")
+	missing = [p for p in (data_path, schema_path) if not p.exists()]
+	if missing:
+		missing_str = ", ".join(str(p) for p in missing)
+		raise FileNotFoundError(f"Missing file(s): {missing_str}")
+
+	data = read_json(data_path)
+	schema = load_schema(schema_path)
+	validator = Draft202012Validator(schema)
+	return sorted(validator.iter_errors(data), key=lambda e: e.path)

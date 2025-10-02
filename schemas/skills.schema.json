@@ -3,10 +3,19 @@
 	"title": "Skill Metadata Schema",
 	"type": "object",
 	"description": "Records definitions of all skills, indexed by skill name.",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
-			"required": ["rarity", "type", "description", "effects", "first_mentioned_in", "flavor"],
+			"required": [
+				"rarity",
+				"type",
+				"description",
+				"effects",
+				"flavor",
+				"canon",
+				"source_ref",
+				"index_meta"
+			],
 			"properties": {
 				"rarity": {
 					"type": "string",
@@ -18,7 +27,7 @@
 				},
 				"class_recommendations": {
 					"type": "array",
-					"description": "List of classes that naturally benefit from this skill",
+					"description": "List of classes that could get this skill",
 					"items": { "type": "string" }
 				},
 				"description": {
@@ -35,10 +44,19 @@
 						"stat_synergy": {
 							"type": "object",
 							"description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
-							"patternProperties": {
-								".+": { "type": "number" }
-							}
-						},	
+							"properties": {
+								"Str": { "type": "number" },
+								"Agi": { "type": "number" },
+								"End": { "type": "number" },
+								"Vit": { "type": "number" },
+								"Int": { "type": "number" },
+								"Wis": { "type": "number" },
+								"Will": { "type": "number" },
+								"Per": { "type": "number" },
+								"Free point": { "type": "number" }
+							},
+							"additionalProperties": false
+						},
 						"passive_benefit": {
 							"type": "string"
 						}
@@ -65,38 +83,32 @@
 					},
 					"additionalProperties": false
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"required": ["scene_id", "line"],
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"description": "Scene ID in which this skill first appears",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"description": "Line number in the source file where this skill is first mentioned"
-						}
-					},
-					"additionalProperties": false
-				},
 				"flavor": {
-					"type": "string",
-					"description": "Narrative or flavor-text for the skill"
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
 				"tags": {
-					"type": "array",
-					"description": "Optional tags to classify or group skills",
-					"items": { "type": "string" }
+					"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
 				},
 				"granted_by": {
-					"type": ["string", "array"],
-					"description": "The event or system that grants this skill",
-					"items": { "type": "string" }
+					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this entry represents a canon fact that requires provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

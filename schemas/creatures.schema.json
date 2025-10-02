@@ -3,8 +3,8 @@
 	"title": "Creature Definition",
 	"description": "Records of creatures such as monsters, constructs, beasts, and bosses.",
 	"type": "object",
-	"patternProperties": {
-		"^.+$": {
+	"$defs": {
+		"entry": {
 			"type": "object",
 			"description": "Single creature keyed by its records name.",
 			"properties": {
@@ -43,9 +43,9 @@
 					"type": "object",
 					"description": "Optional resource pools.",
 					"properties": {
-						"HP": {"type": "integer"},
-						"MP": {"type": "integer"},
-						"Stamina": {"type": "integer"}
+						"HP": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"},
+						"MP": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"},
+						"Stamina": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"}
 					},
 					"additionalProperties": false
 				},
@@ -70,29 +70,27 @@
 					},
 					"additionalProperties": false
 				},
-				"first_mentioned_in": {
-					"type": "object",
-					"description": "Scene metadata for the creature's first appearance.",
-					"properties": {
-						"scene_id": {
-							"type": "string",
-							"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-						},
-						"line": {
-							"type": "integer",
-							"minimum": 1
-						}
-					},
-					"required": ["scene_id"],
-					"additionalProperties": false
-				},
 				"flavor": {
-					"type": "string",
-					"description": "Optional descriptive text or lore snippet."
+					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+				},
+				"canon": {
+					"type": "boolean",
+					"description": "Whether this creature entry asserts canon facts requiring provenance."
+				},
+				"source_ref": {
+					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+				},
+				"index_meta": {
+					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
-			"required": ["type", "tier", "level"],
+			"required": ["type", "tier", "level", "canon", "source_ref", "index_meta"],
 			"additionalProperties": false
+		}
+	},
+	"patternProperties": {
+		"^.+$": {
+			"$ref": "#/$defs/entry"
 		}
 	},
 	"additionalProperties": false

@@ -1,101 +1,199 @@
 {
-	"Wooden Bow": {
-		"type": "gear",
-		"rarity": "Common",
-		"description": "A simple wooden bow issued during the System introduction.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 139
-		},
-		"tags": [
-			"starter",
-			"bow"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Enchanted Quiver (Common)": {
-		"type": "gear",
-		"rarity": "Common",
-		"description": "A quiver enchanted to conjure common arrows when infused with mana. The enchantment allows the quiver to conjure common arrows when infused with mana.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 143
-		},
-		"tags": [
-			"starter",
-			"quiver",
-			"mana"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Brown Cloak": {
-		"type": "gear",
-		"rarity": "Common",
-		"description": "A coarse, durable cloak reminiscent of burlap.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 139
-		},
-		"tags": [
-			"starter",
-			"clothing"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Knife": {
-		"type": "gear",
-		"rarity": "Common",
-		"description": "Simple steel blade with a wooden handle, issued for close combat.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 139
-		},
-		"tags": [
-			"starter",
-			"weapon"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Belt and Satchel": {
-		"type": "gear",
-		"rarity": "Common",
-		"description": "Leather belt with an attached satchel used to store starter potions.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 139
-		},
-		"tags": [
-			"starter",
-			"storage"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Health Potion (Inferior)": {
-		"type": "consumable",
-		"rarity": "Inferior",
-		"description": "Restores health when consumed.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 141
-		},
-		"tags": [
-			"starter",
-			"potion"
-		],
-		"granted_by": "Introduction Entity"
-	},
-	"Stamina Potion (Inferior)": {
-		"type": "consumable",
-		"rarity": "Inferior",
-		"description": "Restores stamina when consumed.",
-		"first_mentioned_in": {
-			"scene_id": "01-02-01",
-			"line": 143
-		},
-		"tags": [
-			"starter",
-			"potion"
-		],
-		"granted_by": "Introduction Entity"
-	}
+  "Wooden Bow": {
+    "type": "gear",
+    "rarity": "Common",
+    "description": "A simple wooden bow issued during the System introduction.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 133,
+      "line_end": 139
+    },
+    "tags": [
+      "starter",
+      "archery"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Enchanted Quiver (Common)": {
+    "type": "gear",
+    "rarity": "Common",
+    "description": "A quiver enchanted to conjure common arrows when infused with mana. The enchantment allows the quiver to conjure common arrows when infused with mana.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 141,
+      "line_end": 145
+    },
+    "tags": [
+      "starter",
+      "archery",
+      "mana"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Brown Cloak": {
+    "type": "gear",
+    "rarity": "Common",
+    "description": "A coarse, durable cloak reminiscent of burlap.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 134,
+      "line_end": 134
+    },
+    "tags": [
+      "starter",
+      "clothing"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Knife": {
+    "type": "gear",
+    "rarity": "Common",
+    "description": "Simple steel blade with a wooden handle, issued for close combat.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 137,
+      "line_end": 137
+    },
+    "tags": [
+      "starter",
+      "weapon"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Belt and Satchel": {
+    "type": "gear",
+    "rarity": "Common",
+    "description": "Leather belt with an attached satchel used to store starter potions.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 133,
+      "line_end": 137
+    },
+    "tags": [
+      "starter",
+      "storage"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Health Potion (Inferior)": {
+    "type": "consumable",
+    "rarity": "Inferior",
+    "description": "Restores health when consumed.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 141,
+      "line_end": 141
+    },
+    "tags": [
+      "starter",
+      "potion"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "Stamina Potion (Inferior)": {
+    "type": "consumable",
+    "rarity": "Inferior",
+    "description": "Restores stamina when consumed.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 143,
+      "line_end": 143
+    },
+    "tags": [
+      "starter",
+      "potion"
+    ],
+    "granted_by": [
+      {
+        "type": "system",
+        "name": "Introduction Entity"
+      }
+    ],
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2025-10-01",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

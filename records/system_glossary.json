@@ -1,15 +1,39 @@
 {
-	"The System": {
-		"description": "Reality overlay introduced to Jake's universe, providing status screens, classes, and skills governed by the multiverse.",
-		"applies_to": "All newly initiated worlds",
-		"example": "Jake's status screen showing Human (G) level 0 during chapter 2.",
-		"notes": "Explained by the Introduction Entity during the first tutorial scene."
-	}
-}
-{
-	"skill_acquisition": {
-		"description": "When a skill is granted to a being by the System, basic functional knowledge of how to use that skill is intuitively provided. This includes activation mechanisms, general use cases, and passive awareness of effects.",
-		"applies_to": "All races and classes, unless explicitly blocked",
-		"example": "Jake instinctively knew how to activate Archer's Eye and understood what it did upon acquisition."
-	}
+  "The System": {
+    "description": "Reality overlay introduced to Jake's universe, providing status screens, classes, and skills governed by the multiverse.",
+    "applies_to": "All newly initiated worlds",
+    "example": "Jake's status screen showing Human (G) level 0 during chapter 2.",
+    "notes": "Explained by the Introduction Entity during the first tutorial scene.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 20,
+      "line_end": 159
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  },
+  "skill_acquisition": {
+    "description": "When a skill is granted to a being by the System, basic functional knowledge of how to use that skill is intuitively provided. This includes activation mechanisms, general use cases, and passive awareness of effects.",
+    "applies_to": "All races and classes, unless explicitly blocked",
+    "example": "Jake instinctively knew how to activate Archer's Eye and understood what it did upon acquisition.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 119,
+      "line_end": 119
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

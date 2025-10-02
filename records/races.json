@@ -1,20 +1,33 @@
 {
-	"Human (G)": {
-		"type": "race",
-		"rarity": "Common",
-		"tier": "G",
-		"stat_bonus_per_level": {
-			"Str": 1,
-			"Agi": 1,
-			"End": 1,
-			"Vit": 1,
-			"Int": 1,
-			"Wis": 1,
-			"Will": 1,
-			"Per": 1,
-			"Free point": 1
-		},
-		"description": "The lowest level of humans in the System, found only in newly initiated worlds.",
-		"flavor": "The human race is known as one of the most balanced and numerous amongst the myriad races of the multiverse, being able to walk many different roads on their path to power."
-	}
+  "Human (G)": {
+    "type": "race",
+    "rarity": "Common",
+    "tier": "G",
+    "stat_bonus_per_level": {
+      "Str": 1,
+      "Agi": 1,
+      "End": 1,
+      "Vit": 1,
+      "Int": 1,
+      "Wis": 1,
+      "Will": 1,
+      "Per": 1,
+      "Free point": 1
+    },
+    "description": "The lowest level of humans in the System, found only in newly initiated worlds.",
+    "flavor": "The human race is known as one of the most balanced and numerous amongst the myriad races of the multiverse, being able to walk many different roads on their path to power.",
+    "canon": true,
+    "source_ref": {
+      "scene_id": "01-02-01",
+      "line_start": 55,
+      "line_end": 55
+    },
+    "index_meta": {
+      "added_by": "assistant",
+      "added_on": "2024-10-05",
+      "method": "manual_backfill",
+      "review_status": "pending",
+      "notes": "Backfilled during index_meta rollout"
+    }
+  }
 }

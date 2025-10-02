@@ -71,6 +71,30 @@ body {
   background: #ffffff;
 }
 
+.provenance-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #dadee4;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.provenance-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.provenance-panel li {
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed #eceff4;
+}
+
+.provenance-panel li:last-child {
+  border-bottom: none;
+}
+
 .meta-heading {
   margin-top: 0;
   font-size: 1rem;

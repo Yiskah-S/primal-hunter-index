@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import subprocess
+from datetime import date
 from pathlib import Path
 from core.schema_utils import read_json, write_json_atomic, load_schema, validate_instance
 
@@ -23,6 +24,18 @@ RARITY_ENUM = list(RARITY_MAP.values())
 
 STAT_KEYS = ["Str", "Dex", "End", "Agi", "Per", "Vit", "Int", "Wis", "Cha", "Luk"]
 LOWER_TO_RECORDS = {k.lower(): k for k in STAT_KEYS}
+GRANT_TYPES = [
+	"system",
+	"class_upgrade",
+	"title",
+	"item",
+	"blessing",
+	"quest",
+	"loot",
+	"crafting",
+	"vendor",
+	"other",
+]
 
 # --- small io helpers ---------------------------------------------------------
 
@@ -98,6 +111,68 @@ def prompt_stat_synergy() -> dict:
 		# Always a dict; we already warn and skip bad pairs.
 		return result
 
+
+def prompt_granted_by() -> list[dict]:
+	print("Enter grant sources (blank grant type to finish).")
+	entries: list[dict] = []
+	while True:
+		default_type = "system" if not entries else ""
+		type_raw = prompt(
+			f"Grant type ({', '.join(GRANT_TYPES)})",
+			default_type,
+		)
+		if not type_raw.strip():
+			if entries:
+				break
+			print("⚠️ At least one grant source is required.")
+			continue
+		grant_type = type_raw.strip().lower()
+		if grant_type not in GRANT_TYPES:
+			print(f"❌ Invalid grant type '{grant_type}'. Options: {', '.join(GRANT_TYPES)}")
+			continue
+		name = prompt("Grant name/title (optional)", "").strip()
+		from_value = prompt("Grant from / previous state (optional)", "").strip()
+		to_value = prompt("Grant to / new state (optional)", "").strip()
+		notes = prompt("Grant notes (optional)", "").strip()
+		entry: dict = {"type": grant_type}
+		if name:
+			entry["name"] = name
+		if from_value:
+			entry["from"] = from_value
+		if to_value:
+			entry["to"] = to_value
+		if notes:
+			entry["notes"] = notes
+		entries.append(entry)
+		if not prompt_yes_no("Add another grant source? (y/n)", False):
+			break
+	return entries
+
+
+def prompt_index_meta() -> dict:
+	default_added_by = prompt("Index added_by (slug)", "human").strip() or "human"
+	default_date = date.today().isoformat()
+	added_on = prompt("Index added_on (YYYY-MM-DD)", default_date).strip() or default_date
+	method = prompt("Index method (slug)", "manual").strip() or "manual"
+	while True:
+		review_status = prompt("Review status (pending/approved/rejected)", "pending").strip().lower() or "pending"
+		if review_status in {"pending", "approved", "rejected"}:
+			break
+		print("❌ Review status must be pending, approved, or rejected.")
+	reviewed_by = prompt("Reviewed by (blank if none)", "").strip()
+	notes = prompt("Index notes (optional)", "").strip()
+	index_meta = {
+		"added_by": default_added_by,
+		"added_on": added_on,
+		"method": method,
+		"review_status": review_status,
+	}
+	if reviewed_by:
+		index_meta["reviewed_by"] = reviewed_by
+	if notes:
+		index_meta["notes"] = notes
+	return index_meta
+
 def prompt_rarity() -> str:
 	while True:
 		raw = prompt("Rarity (Inferior, Common, Uncommon, Rare, Epic, Legendary, Unique)", "Inferior").strip()
@@ -171,7 +246,21 @@ def main():
 	passive_benefit = prompt("Passive benefit (optional)", "")
 
 	scene_id, _scene_file = prompt_scene_id()
-	line = prompt_int("Line number", default=0, min_val=0)
+	line_start = prompt_int("Source line start", default=1, min_val=1)
+	while True:
+		line_end_raw = prompt("Source line end (blank to reuse start)", "")
+		if not line_end_raw.strip():
+			line_end = line_start
+			break
+		try:
+			line_end = int(line_end_raw.strip())
+		except ValueError:
+			print("❌ Line end must be an integer.")
+			continue
+		if line_end < line_start:
+			print("❌ Line end must be ≥ line start.")
+			continue
+		break
 
 	flavor = prompt("Flavor text / observer opinion")
 
@@ -179,12 +268,18 @@ def main():
 		"activation_method": prompt("Activation method", "Focus on target"),
 		"deactivation": prompt("Deactivation", "Auto or manual after use"),
 		"instinctive_knowledge": prompt_yes_no("Instinctive knowledge? (y/n)", True),
-		# IMPORTANT: schema key is 'feedback', not 'user feedback'
-		"feedback": prompt("Feedback (what the user experiences; paste from books if desired)", "")
+		"user feedback": prompt("Feedback (what the user experiences; paste from books if desired)", "")
 	}
 
 	tags = parse_csv_list(prompt("Tags (comma-separated)", ""))
-	granted_by = prompt("Granted by (e.g., 'System Tutorial', 'Class Reward')", "System Tutorial")
+	granted_by = prompt_granted_by()
+	canon = prompt_yes_no("Canonical entry? (y/n)", True)
+	index_meta = prompt_index_meta()
+	source_ref = {
+		"scene_id": scene_id,
+		"line_start": line_start,
+		"line_end": line_end,
+	}
 
 	# Assemble record
 	record = {
@@ -197,20 +292,20 @@ def main():
 			"stat_synergy": stat_synergy,
 			"passive_benefit": passive_benefit
 		},
-		"first_mentioned_in": {
-			"scene_id": scene_id,
-			"line": line
-		},
 		"flavor": flavor,
 		"behavior": behavior,
 		"tags": tags,
-		"granted_by": granted_by
+		"granted_by": granted_by,
+		"canon": canon,
+		"source_ref": source_ref
 	}
 
 	# Optional resource cost (validated by schema at the end)
 	rc = build_resource_cost()
 	if rc:
 		record["resource_cost"] = rc
+
+	record["index_meta"] = index_meta
 
 	# Preview & confirm before saving
 	print("\n— Preview —")
