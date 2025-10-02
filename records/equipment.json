@@ -17,7 +17,12 @@
 			"starter",
 			"archery"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Enchanted Quiver (Common)": {
 		"type": "gear",
@@ -38,7 +43,12 @@
 			"archery",
 			"mana"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Brown Cloak": {
 		"type": "gear",
@@ -58,7 +68,12 @@
 			"starter",
 			"clothing"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Knife": {
 		"type": "gear",
@@ -78,7 +93,12 @@
 			"starter",
 			"weapon"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Belt and Satchel": {
 		"type": "gear",
@@ -98,7 +118,12 @@
 			"starter",
 			"storage"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Health Potion (Inferior)": {
 		"type": "consumable",
@@ -118,7 +143,12 @@
 			"starter",
 			"potion"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	},
 	"Stamina Potion (Inferior)": {
 		"type": "consumable",
@@ -138,6 +168,11 @@
 			"starter",
 			"potion"
 		],
-		"granted_by": "Introduction Entity"
+		"granted_by": [
+			{
+				"type": "system",
+				"name": "Introduction Entity"
+			}
+		]
 	}
 }

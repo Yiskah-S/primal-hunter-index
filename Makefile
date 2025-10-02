@@ -59,6 +59,11 @@ json-editor:  ## Launch records JSON editor (http://localhost:8000/tools/json_ed
 	(sleep 1 && $(PY) -m webbrowser -t "http://localhost:8000/tools/json_editor/") &
 	$(PY) -m http.server 8000
 
+# --- Status Logs ---
+.PHONY: sync_status
+sync_status:  ## Copy latest z_codex_context/status_*.md into docs/logs/
+	@PYTHONPATH=. $(PY) tools/sync_status.py
+
 # --- File Tree Logging ---
 .PHONY: filetree
 filetree:  ## Write pruned tree to ./~notes/file_structure.txt

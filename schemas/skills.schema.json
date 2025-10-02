@@ -109,32 +109,7 @@
 					"uniqueItems": true
 				},
 				"granted_by": {
-					"type": "array",
-					"description": "One or more origin events that granted this skill",
-					"items": {
-						"type": "object",
-						"required": ["type"],
-						"properties": {
-							"type": {
-								"type": "string",
-								"enum": [
-									"system",
-									"class_upgrade",
-									"title",
-									"item",
-									"blessing",
-									"quest",
-									"other"
-								]
-							},
-							"name": { "type": "string" },
-							"from": { "type": "string" },
-							"to": { "type": "string" },
-							"notes": { "type": "string" }
-						},
-						"additionalProperties": false
-					},
-					"minItems": 1
+					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
 				},
 				"canon": {
 					"type": "boolean",

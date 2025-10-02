@@ -83,9 +83,7 @@
 					"uniqueItems": true
 				},
 				"granted_by": {
-					"type": ["string", "array"],
-					"description": "The event or source that granted the item",
-					"items": { "type": "string" }
+					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
 				},
 				"canon": {
 					"type": "boolean",
