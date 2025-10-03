@@ -15,13 +15,6 @@
       "scene_id": "01-01-01",
       "line_start": 7,
       "line_end": 13
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   },
   "City Traffic": {
@@ -42,13 +35,6 @@
       "scene_id": "01-01-01",
       "line_start": 15,
       "line_end": 16
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   },
   "Corporate Office Building": {
@@ -76,13 +62,6 @@
       "scene_id": "01-01-01",
       "line_start": 17,
       "line_end": 35
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   },
   "Elevator": {
@@ -108,13 +87,6 @@
       "scene_id": "01-01-01",
       "line_start": 61,
       "line_end": 79
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   },
   "System Introduction Chamber": {
@@ -140,13 +112,6 @@
       "scene_id": "01-02-01",
       "line_start": 1,
       "line_end": 40
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   }
 }

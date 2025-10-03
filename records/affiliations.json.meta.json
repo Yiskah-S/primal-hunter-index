@@ -7,19 +7,6 @@
     "chapter": 2,
     "scene": 1,
     "scene_id": "01-02-01"
-  },
-  "records": true,
-  "record_log": [
-    {
-      "entry_keys": [
-        "Earth",
-        "The System"
-      ],
-      "added_by": "assistant",
-      "date": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+  }
   ]
 }

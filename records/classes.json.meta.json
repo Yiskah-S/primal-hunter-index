@@ -18,12 +18,6 @@
         "Warrior (Heavy)",
         "Warrior (Light)",
         "Warrior (Medium)"
-      ],
-      "added_by": "assistant",
-      "date": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+      ]
   ]
 }

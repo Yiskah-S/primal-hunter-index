@@ -16,12 +16,6 @@
         "Basic Archery",
         "Basic One-Handed Weapon",
         "Identify"
-      ],
-      "added_by": "assistant",
-      "date": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+      ]
   ]
 }

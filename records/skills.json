@@ -37,14 +37,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Basic One-Handed Weapon": {
     "rarity": "Inferior",
@@ -83,14 +76,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Archers Eye": {
     "rarity": "Common",
@@ -131,14 +117,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Identify": {
     "rarity": "Inferior",
@@ -170,13 +149,6 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   }
 }

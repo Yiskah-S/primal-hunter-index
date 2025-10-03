@@ -148,31 +148,6 @@ def prompt_granted_by() -> list[dict]:
 			break
 	return entries
 
-
-def prompt_index_meta() -> dict:
-	default_added_by = prompt("Index added_by (slug)", "human").strip() or "human"
-	default_date = date.today().isoformat()
-	added_on = prompt("Index added_on (YYYY-MM-DD)", default_date).strip() or default_date
-	method = prompt("Index method (slug)", "manual").strip() or "manual"
-	while True:
-		review_status = prompt("Review status (pending/approved/rejected)", "pending").strip().lower() or "pending"
-		if review_status in {"pending", "approved", "rejected"}:
-			break
-		print("❌ Review status must be pending, approved, or rejected.")
-	reviewed_by = prompt("Reviewed by (blank if none)", "").strip()
-	notes = prompt("Index notes (optional)", "").strip()
-	index_meta = {
-		"added_by": default_added_by,
-		"added_on": added_on,
-		"method": method,
-		"review_status": review_status,
-	}
-	if reviewed_by:
-		index_meta["reviewed_by"] = reviewed_by
-	if notes:
-		index_meta["notes"] = notes
-	return index_meta
-
 def prompt_rarity() -> str:
 	while True:
 		raw = prompt("Rarity (Inferior, Common, Uncommon, Rare, Epic, Legendary, Unique)", "Inferior").strip()
@@ -274,12 +249,6 @@ def main():
 	tags = parse_csv_list(prompt("Tags (comma-separated)", ""))
 	granted_by = prompt_granted_by()
 	canon = prompt_yes_no("Canonical entry? (y/n)", True)
-	index_meta = prompt_index_meta()
-	source_ref = {
-		"scene_id": scene_id,
-		"line_start": line_start,
-		"line_end": line_end,
-	}
 
 	# Assemble record
 	record = {
@@ -305,7 +274,6 @@ def main():
 	if rc:
 		record["resource_cost"] = rc
 
-	record["index_meta"] = index_meta
 
 	# Preview & confirm before saving
 	print("\n— Preview —")

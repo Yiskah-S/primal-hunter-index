@@ -24,13 +24,6 @@
       "scene_id": "01-01-01",
       "line_start": 1,
       "line_end": 83
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   },
   {
@@ -57,13 +50,6 @@
       "scene_id": "01-02-01",
       "line_start": 1,
       "line_end": 159
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   }
 ]

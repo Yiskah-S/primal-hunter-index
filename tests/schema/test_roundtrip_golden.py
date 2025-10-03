@@ -17,7 +17,7 @@ PROVENANCE_SCHEMA_PATH = Path("schemas/shared/provenance.schema.json")
 GRANTED_BY_SCHEMA_PATH = Path("schemas/shared/granted_by.schema.json")
 FLAVOR_SCHEMA_PATH = Path("schemas/shared/flavor.schema.json")
 TAGS_SCHEMA_PATH = Path("schemas/shared/tags.schema.json")
-INDEX_META_SCHEMA_PATH = Path("schemas/shared/index_meta.schema.json")
+
 
 
 def test_basic_archery_round_trip_and_validation():
@@ -38,8 +38,7 @@ def test_basic_archery_round_trip_and_validation():
         "https://primal-hunter.local/schemas/shared/provenance.schema.json": read_json(PROVENANCE_SCHEMA_PATH),
         "https://primal-hunter.local/schemas/shared/granted_by.schema.json": read_json(GRANTED_BY_SCHEMA_PATH),
         "https://primal-hunter.local/schemas/shared/flavor.schema.json": read_json(FLAVOR_SCHEMA_PATH),
-        "https://primal-hunter.local/schemas/shared/tags.schema.json": read_json(TAGS_SCHEMA_PATH),
-        "https://primal-hunter.local/schemas/shared/index_meta.schema.json": read_json(INDEX_META_SCHEMA_PATH),
+        "https://primal-hunter.local/schemas/shared/tags.schema.json": read_json(TAGS_SCHEMA_PATH)
     }
 
     resolver = RefResolver.from_schema(skill_schema, store=schema_store)

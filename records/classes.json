@@ -29,14 +29,7 @@
       "line_start": 73,
       "line_end": 73
     },
-    "flavor": "Jake considered it similar to a rogue. fast, deadly, but too up-close for his liking.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "Jake considered it similar to a rogue. fast, deadly, but too up-close for his liking."
   },
   "Warrior (Medium)": {
     "type": "starter",
@@ -63,14 +56,7 @@
       "line_start": 77,
       "line_end": 77
     },
-    "flavor": "The choice of someone unsure how to specialize. a flexible but unfocused option.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "The choice of someone unsure how to specialize. a flexible but unfocused option."
   },
   "Warrior (Heavy)": {
     "type": "starter",
@@ -99,14 +85,7 @@
       "line_start": 81,
       "line_end": 81
     },
-    "flavor": "Jake imagined it as the big, beefy Viking-type class. not for him.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "Jake imagined it as the big, beefy Viking-type class. not for him."
   },
   "Archer": {
     "type": "starter",
@@ -135,14 +114,7 @@
       "line_start": 85,
       "line_end": 85
     },
-    "flavor": "Jake's clear favorite. a flexible ranged combatant that fits his playstyle.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "Jake's clear favorite. a flexible ranged combatant that fits his playstyle."
   },
   "Caster": {
     "type": "starter",
@@ -173,14 +145,7 @@
       "line_start": 89,
       "line_end": 89
     },
-    "flavor": "Jake was intrigued by the concept of magic, but still preferred the bow over fireballs.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "Jake was intrigued by the concept of magic, but still preferred the bow over fireballs."
   },
   "Healer": {
     "type": "starter",
@@ -209,13 +174,6 @@
       "line_start": 93,
       "line_end": 93
     },
-    "flavor": "Jake wasn't interested, but the hint at deific powers piqued his curiosity about priest paths.",
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    "flavor": "Jake wasn't interested, but the hint at deific powers piqued his curiosity about priest paths."
   }
 }

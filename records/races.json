@@ -21,13 +21,6 @@
       "scene_id": "01-02-01",
       "line_start": 55,
       "line_end": 55
-    },
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2024-10-05",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
     }
   }
 }

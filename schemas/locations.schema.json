@@ -73,17 +73,13 @@
 				},
 				"source_ref": {
 					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				},
-				"index_meta": {
-					"$ref": "https://primal-hunter.local/schemas/shared/index_meta.schema.json#/$defs/index_meta"
 				}
 			},
 			"required": [
 				"type",
 				"tier",
 				"canon",
-				"source_ref",
-				"index_meta"
+				"source_ref"
 			],
 			"additionalProperties": false
 		}

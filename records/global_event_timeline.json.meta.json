@@ -4,19 +4,6 @@
   "last_updated": "2025-10-01",
   "source": {
     "notes": "Compiled from scenes 01-01-01 and 01-02-01"
-  },
-  "records": true,
-  "record_log": [
-    {
-      "entry_keys": [
-        "01-01-01",
-        "01-02-01"
-      ],
-      "added_by": "assistant",
-      "date": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+  }
   ]
 }

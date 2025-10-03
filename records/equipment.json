@@ -18,14 +18,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Enchanted Quiver (Common)": {
     "type": "gear",
@@ -47,14 +40,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Brown Cloak": {
     "type": "gear",
@@ -75,14 +61,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Knife": {
     "type": "gear",
@@ -103,14 +82,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Belt and Satchel": {
     "type": "gear",
@@ -131,14 +103,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Health Potion (Inferior)": {
     "type": "consumable",
@@ -159,14 +124,7 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   },
   "Stamina Potion (Inferior)": {
     "type": "consumable",
@@ -187,13 +145,6 @@
         "type": "system",
         "name": "Introduction Entity"
       }
-    ],
-    "index_meta": {
-      "added_by": "assistant",
-      "added_on": "2025-10-01",
-      "method": "manual_backfill",
-      "review_status": "pending",
-      "notes": "Backfilled during index_meta rollout"
-    }
+    ]
   }
 }
