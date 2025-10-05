@@ -1,10 +1,13 @@
 # === Content to keep private ===
 chapters/
 z_codex_context
+z_codex_context/archived/
 z_notes/
-z_codex_context
+
 .vscode/
 .editorconfig
+.codexignore
+
 
 
 # === Python environment & metadata ===
@@ -12,12 +15,21 @@ __pycache__/
 *.pyc
 .venv/
 .env
+.idea/
+__sandbox__/
+fixtures/
+.DS_Store
+.pre-commit-config.yaml
 
 # === System/editor files ===
 .DS_Store
 *.swp
-primal_hunter_index/ask later
 
 # === Optional build artifacts ===
 *.zip
 *.bak
+
+# local copies or compiled wheels
+*.whl
+*.egg-info
+

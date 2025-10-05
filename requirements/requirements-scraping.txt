@@ -1,0 +1,13 @@
+beautifulsoup4
+soupsieve
+cloudscraper
+playwright
+selenium
+webdriver-manager
+trio
+trio-websocket
+websocket-client
+pyee
+outcome
+h11
+sniffio

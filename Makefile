@@ -66,14 +66,20 @@ sync_status:  ## Copy latest z_codex_context/status_*.md into docs/logs/
 
 # --- File Tree Logging ---
 .PHONY: filetree
-filetree:  ## Write pruned tree to ./~notes/file_structure.txt
-	@mkdir -p ./~notes
-	@find . \
-		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './~notes/*' \) -prune -o -print \
-	| awk -F/ 'NF<=6' > ./~notes/.treelist
-	@tree --fromfile ./~notes/.treelist > ./~notes/file_structure.txt
-	@rm ./~notes/.treelist
-	@echo "📁 Wrote ./z_notes/file_structure.txt"
+filetree:  ## Write pruned tree to ~/Projects/z_notes/file_structure.txt
+	@TREE_OUT=~/Projects/z_notes/file_structure.txt ; \
+	TREELIST=~/Projects/z_notes/.treelist ; \
+	mkdir -p "$$(dirname $$TREE_OUT)" ; \
+	find . \
+		-type d \( -name '.git' -o -name '.venv' -o -name '__pycache__' -o -name 'node_modules' \) -prune -false \
+		-o -type f ! -lname '*' \
+		! -name '.DS_Store' \
+		-print | awk -F/ 'NF<=6' > "$$TREELIST" ; \
+	tree --fromfile "$$TREELIST" > "$$TREE_OUT" ; \
+	rm "$$TREELIST" ; \
+	echo "📁 Wrote file tree to $$TREE_OUT"
+
+
 
 # --- Full Workflow ---
 .PHONY: all
@@ -159,3 +165,6 @@ search-term:
 		$(if $(SLUG),--slug '$(SLUG)',) \
 		'$(SEARCH)'
 
+.PHONY: zip_bundle
+zip_bundle:  ## Build uploadable zip in ./dist/
+	python3 tools/make_upload_bundle.py

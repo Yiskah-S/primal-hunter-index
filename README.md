@@ -47,8 +47,10 @@ cd primal_hunter_index
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# 📦 Install dependencies
+pip install -r requirements/schema.txt
+pip install -r requirements/dev.txt
+
 
 # Bootstrap missing schema stubs
 make setup-schemas
@@ -122,6 +124,11 @@ Each `timeline.json` entry can include:
 * 🧬 Resource max/current tracking
 * 👹 Enemies defeated (planned)
 * 🔄 Scene + day pointers for chronology
+
+### 🧪 What’s NOT Canon:
+- Any file in `fixtures/` or `sandbox/`
+- Any skill/gear/event without `source_ref[]`
+- Any `.json` without a passing schema validation
 
 ---
 
