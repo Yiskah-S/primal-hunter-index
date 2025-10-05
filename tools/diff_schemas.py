@@ -7,10 +7,9 @@ import argparse
 import json
 import subprocess
 import sys
+from difflib import unified_diff
 from pathlib import Path
 from typing import Any
-
-from difflib import unified_diff
 
 
 def _read_local_schema(schema_dir: Path, schema_name: str) -> Any:

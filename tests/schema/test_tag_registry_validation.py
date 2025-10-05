@@ -2,13 +2,13 @@ import json
 import sys
 from pathlib import Path
 
-import pytest
+from tools.validate_all_metadata import _validate_tag_usage
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from tools.validate_all_metadata import _validate_tag_usage
+
 
 
 def write_json(path: Path, payload):

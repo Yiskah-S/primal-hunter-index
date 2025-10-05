@@ -1,16 +1,16 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-if PROJECT_ROOT.as_posix() not in sys.path:
-    sys.path.append(PROJECT_ROOT.as_posix())
 
 from tools.validate_all_metadata import (
     _load_scene_bounds,
     _validate_canonical_record_file,
 )
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if PROJECT_ROOT.as_posix() not in sys.path:
+    sys.path.append(PROJECT_ROOT.as_posix())
 
 
 @pytest.fixture(scope="module")

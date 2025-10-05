@@ -1,7 +1,6 @@
+import json
 from pathlib import Path
 
-import json
-import pytest
 from jsonschema import Draft202012Validator
 
 SCHEMA_PATH = Path("schemas/character_timeline.schema.json")

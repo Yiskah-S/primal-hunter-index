@@ -10,6 +10,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+
 def main():
     parser = argparse.ArgumentParser(description="Create a metadata sidecar for a records JSON file.")
     parser.add_argument("target", type=Path, help="Path to the core JSON file (e.g. records/skills.json)")

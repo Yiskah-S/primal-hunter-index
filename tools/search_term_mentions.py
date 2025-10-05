@@ -11,12 +11,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import shutil
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
 
 SUPPORTED_EXTENSIONS = {".md", ".txt"}
 

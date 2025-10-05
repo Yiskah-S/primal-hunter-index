@@ -5,11 +5,12 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator, RefResolver
 
+from core.schema_utils import read_json
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if PROJECT_ROOT.as_posix() not in sys.path:
     sys.path.append(PROJECT_ROOT.as_posix())
 
-from core.schema_utils import read_json
 
 SKILLS_PATH = Path("records/skills.json")
 SKILL_SCHEMA_PATH = Path("schemas/skills.schema.json")

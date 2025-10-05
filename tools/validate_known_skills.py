@@ -1,6 +1,7 @@
 import json
-from jsonschema import validate, ValidationError, Draft202012Validator
 from pathlib import Path
+
+from jsonschema import Draft202012Validator
 
 # === File paths ===
 schema_path = Path("schemas/known_skills.schema.json")
@@ -8,10 +9,10 @@ data_path = Path("records/characters/jake/known_skills.json")
 
 # === Load schema and data ===
 with schema_path.open() as f:
-	schema = json.load(f)
+    schema = json.load(f)
 
 with data_path.open() as f:
-	data = json.load(f)
+    data = json.load(f)
 
 # === Create validator (Draft 2020-12) ===
 validator = Draft202012Validator(schema)
@@ -20,9 +21,9 @@ validator = Draft202012Validator(schema)
 errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
 
 if errors:
-	print(f"❌ Validation failed with {len(errors)} error(s):")
-	for err in errors:
-		location = " → ".join(str(x) for x in err.absolute_path)
-		print(f"  • {location}: {err.message}")
+    print(f"❌ Validation failed with {len(errors)} error(s):")
+    for err in errors:
+        location = " → ".join(str(x) for x in err.absolute_path)
+        print(f"  • {location}: {err.message}")
 else:
-	print("✅ Validation passed! File conforms to schema.")
+    print("✅ Validation passed! File conforms to schema.")
