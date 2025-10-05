@@ -1,13 +1,70 @@
+
+# === Primal Hunter Index Project ===
+# Useful CLI commands for development, validation, and packaging
+
+# ─── Help ─────────────────────────────────────────────────────────────────
+
+.PHONY: help
+help:  ## Show all available make targets
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+
+# ─── Linting & Validation ────────────────────────────────────────────────
+
+.PHONY: lint
+lint:  ## Run Ruff linter and fix issues
+	ruff check . --fix
+
+
+# ─── JSON Schema Testing ─────────────────────────────────────────────────
+
+.PHONY: test_schemas
+test_schemas:  ## Run schema tests via pytest
+	pytest tests/schema
+
+
+# ─── Upload Bundle Creation ──────────────────────────────────────────────
+
+.PHONY: zip_bundle
+zip_bundle:  ## Create upload ZIP bundle using manifest file
+	python3 tools/make_upload_bundle.py
+
+
+# ─── Clean Commit (Safe Push) ────────────────────────────────────────────
+
+.PHONY: commit_clean
+commit_clean:  ## Commit known clean files with conventional message
+	git add .editorconfig .gitignore Makefile README.md
+	git add requirements/requirements-*.txt
+	git add schemas/*.schema.json
+	git commit -m "chore: clean commit of config and schemas"
+	git push
+
+
+# ─── File Tree Logging ───────────────────────────────────────────────────
+
+.PHONY: filetree
+filetree:  ## Write pruned file tree to ./z_notes/file_structure.txt
+	@mkdir -p ./z_notes
+	@find . \
+		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './z_notes/*' \) -prune -o -print \
+	| awk -F/ 'NF<=6' > ./z_notes/.treelist
+	@tree --fromfile ./z_notes/.treelist > ./z_notes/file_structure.txt
+	@rm ./z_notes/.treelist
+	@echo "📁 Wrote ./z_notes/file_structure.txt"
+
+
 # --- Makefile Header ---
 SHELL := /bin/bash
 .SHELLFLAGS := -eu -o pipefail -c
 PY := $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; elif command -v python >/dev/null 2>&1; then echo python; else command -v python3; fi)
 .DEFAULT_GOAL := help
 
-# --- Help ---
-.PHONY: help
-help:  ## Show available commands
-	@awk 'BEGIN{FS=":.*## "; print "\nCommands:"} /^[a-zA-Z0-9_.-]+:.*## /{printf "  %-24s %s\n", $$1, $$2}' $(MAKEFILE_LIST); echo
+.PHONY: validate_all
+validate_all: lint test_schemas zip_bundle  ## Run linter, tests, and bundler
+	@echo "✅ All validations complete."
+
+
 
 # --- Schema Setup ---
 .PHONY: setup-schemas
@@ -63,21 +120,6 @@ json-editor:  ## Launch records JSON editor (http://localhost:8000/tools/json_ed
 .PHONY: sync_status
 sync_status:  ## Copy latest z_codex_context/status_*.md into docs/logs/
 	@PYTHONPATH=. $(PY) tools/sync_status.py
-
-# --- File Tree Logging ---
-.PHONY: filetree
-filetree:  ## Write pruned tree to ~/Projects/z_notes/file_structure.txt
-	@TREE_OUT=~/Projects/z_notes/file_structure.txt ; \
-	TREELIST=~/Projects/z_notes/.treelist ; \
-	mkdir -p "$$(dirname $$TREE_OUT)" ; \
-	find . \
-		-type d \( -name '.git' -o -name '.venv' -o -name '__pycache__' -o -name 'node_modules' \) -prune -false \
-		-o -type f ! -lname '*' \
-		! -name '.DS_Store' \
-		-print | awk -F/ 'NF<=6' > "$$TREELIST" ; \
-	tree --fromfile "$$TREELIST" > "$$TREE_OUT" ; \
-	rm "$$TREELIST" ; \
-	echo "📁 Wrote file tree to $$TREE_OUT"
 
 
 
@@ -165,6 +207,3 @@ search-term:
 		$(if $(SLUG),--slug '$(SLUG)',) \
 		'$(SEARCH)'
 
-.PHONY: zip_bundle
-zip_bundle:  ## Build uploadable zip in ./dist/
-	python3 tools/make_upload_bundle.py
