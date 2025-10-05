@@ -2,6 +2,8 @@
 # === Primal Hunter Index Project ===
 # Useful CLI commands for development, validation, and packaging
 
+PYTHON := $(shell which python3)
+
 # ─── Help ─────────────────────────────────────────────────────────────────
 
 .PHONY: help
@@ -215,3 +217,10 @@ search-term:
 		$(if $(SLUG),--slug '$(SLUG)',) \
 		'$(SEARCH)'
 
+.PHONY: scrape_categories
+scrape_categories:
+	python3 tools/extract_tag_targets.py --mode categories
+
+.PHONY: scrape_tag_pages
+scrape_tag_pages:
+	python3 tools/extract_tag_targets.py --mode pages
