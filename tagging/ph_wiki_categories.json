@@ -1,0 +1,430 @@
+{
+  "source": "https://the-primal-hunter.fandom.com/api.php",
+  "count": 106,
+  "categories": [
+    {
+      "name": "Alive",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Alive"
+    },
+    {
+      "name": "Antagonists",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Antagonists"
+    },
+    {
+      "name": "Avians",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Avians"
+    },
+    {
+      "name": "Beastkin",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Beastkin"
+    },
+    {
+      "name": "Beasts",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Beasts"
+    },
+    {
+      "name": "Blessings",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Blessings"
+    },
+    {
+      "name": "Blightwraith",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Blightwraith"
+    },
+    {
+      "name": "Blog posts",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Blog_posts"
+    },
+    {
+      "name": "Bloodline",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Bloodline"
+    },
+    {
+      "name": "Bloodline Holder",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Bloodline_Holder"
+    },
+    {
+      "name": "Books",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Books"
+    },
+    {
+      "name": "Candidates for deletion",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Candidates_for_deletion"
+    },
+    {
+      "name": "Challenge Dungeons",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Challenge_Dungeons"
+    },
+    {
+      "name": "Characters",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Characters"
+    },
+    {
+      "name": "Chosen",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Chosen"
+    },
+    {
+      "name": "Cities",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Cities"
+    },
+    {
+      "name": "City Owner",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:City_Owner"
+    },
+    {
+      "name": "Classes",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Classes"
+    },
+    {
+      "name": "Combat Events",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Combat_Events"
+    },
+    {
+      "name": "Community",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Community"
+    },
+    {
+      "name": "Dead",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Dead"
+    },
+    {
+      "name": "Disambiguations",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Disambiguations"
+    },
+    {
+      "name": "Documentation templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Documentation_templates"
+    },
+    {
+      "name": "Dragons",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Dragons"
+    },
+    {
+      "name": "Dryads",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Dryads"
+    },
+    {
+      "name": "Dungeons",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Dungeons"
+    },
+    {
+      "name": "Earthlings",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Earthlings"
+    },
+    {
+      "name": "Ectognamorph",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Ectognamorph"
+    },
+    {
+      "name": "Elementals",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Elementals"
+    },
+    {
+      "name": "Elves",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Elves"
+    },
+    {
+      "name": "Enemies",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Enemies"
+    },
+    {
+      "name": "Enlightened Races",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Enlightened_Races"
+    },
+    {
+      "name": "Epic",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Epic"
+    },
+    {
+      "name": "Equipment",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Equipment"
+    },
+    {
+      "name": "Events",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Events"
+    },
+    {
+      "name": "Events for 93rd Universe",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Events_for_93rd_Universe"
+    },
+    {
+      "name": "Ex-Humans",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Ex-Humans"
+    },
+    {
+      "name": "Factions",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Factions"
+    },
+    {
+      "name": "Female Characters",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Female_Characters"
+    },
+    {
+      "name": "General wiki templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:General_wiki_templates"
+    },
+    {
+      "name": "Gods",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Gods"
+    },
+    {
+      "name": "Grades",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Grades"
+    },
+    {
+      "name": "Hatnote templates with errors",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Hatnote_templates_with_errors"
+    },
+    {
+      "name": "Holy Spirit",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Holy_Spirit"
+    },
+    {
+      "name": "Humans",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Humans"
+    },
+    {
+      "name": "Image license templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Image_license_templates"
+    },
+    {
+      "name": "Images",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Images"
+    },
+    {
+      "name": "Infobox templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Infobox_templates"
+    },
+    {
+      "name": "Item",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Item"
+    },
+    {
+      "name": "Items",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Items"
+    },
+    {
+      "name": "Jake's Professions",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Jake's_Professions"
+    },
+    {
+      "name": "Legendary",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Legendary"
+    },
+    {
+      "name": "Locations",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Locations"
+    },
+    {
+      "name": "Maintenance",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Maintenance"
+    },
+    {
+      "name": "Male",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Male"
+    },
+    {
+      "name": "Male Characters",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Male_Characters"
+    },
+    {
+      "name": "Mana",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Mana"
+    },
+    {
+      "name": "Mask",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Mask"
+    },
+    {
+      "name": "Media",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Media"
+    },
+    {
+      "name": "Mentioned, Not Seen",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Mentioned,_Not_Seen"
+    },
+    {
+      "name": "Monsters",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Monsters"
+    },
+    {
+      "name": "Navbox templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Navbox_templates"
+    },
+    {
+      "name": "Necklace",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Necklace"
+    },
+    {
+      "name": "Nevermore",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Nevermore"
+    },
+    {
+      "name": "Nevermore Floors",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Nevermore_Floors"
+    },
+    {
+      "name": "Nobility",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Nobility"
+    },
+    {
+      "name": "Noble",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Noble"
+    },
+    {
+      "name": "Non-Combat Event",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Non-Combat_Event"
+    },
+    {
+      "name": "Non-Humanoids",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Non-Humanoids"
+    },
+    {
+      "name": "Notice templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Notice_templates"
+    },
+    {
+      "name": "Organizations",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Organizations"
+    },
+    {
+      "name": "Pages with broken file links",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Pages_with_broken_file_links"
+    },
+    {
+      "name": "Political Event",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Political_Event"
+    },
+    {
+      "name": "Primordials",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Primordials"
+    },
+    {
+      "name": "Professions",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Professions"
+    },
+    {
+      "name": "Progenitor",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Progenitor"
+    },
+    {
+      "name": "Quote templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Quote_templates"
+    },
+    {
+      "name": "Races",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Races"
+    },
+    {
+      "name": "Redirect Pages",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Redirect_Pages"
+    },
+    {
+      "name": "Risen",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Risen"
+    },
+    {
+      "name": "Rising Star",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Rising_Star"
+    },
+    {
+      "name": "Rogues",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Rogues"
+    },
+    {
+      "name": "Screenshots",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Screenshots"
+    },
+    {
+      "name": "Shapeshifter",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Shapeshifter"
+    },
+    {
+      "name": "Skills",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Skills"
+    },
+    {
+      "name": "Snake",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Snake"
+    },
+    {
+      "name": "Soul",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Soul"
+    },
+    {
+      "name": "Stubs",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Stubs"
+    },
+    {
+      "name": "System Events",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:System_Events"
+    },
+    {
+      "name": "System Mechanics",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:System_Mechanics"
+    },
+    {
+      "name": "Template documentation",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Template_documentation"
+    },
+    {
+      "name": "Templates",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Templates"
+    },
+    {
+      "name": "The Primal Hunter Wiki",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:The_Primal_Hunter_Wiki"
+    },
+    {
+      "name": "Titles",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Titles"
+    },
+    {
+      "name": "Trade Event",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Trade_Event"
+    },
+    {
+      "name": "Transcendent",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Transcendent"
+    },
+    {
+      "name": "Treasure Hunt",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Treasure_Hunt"
+    },
+    {
+      "name": "Trolls",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Trolls"
+    },
+    {
+      "name": "True Royal",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:True_Royal"
+    },
+    {
+      "name": "True Standout",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:True_Standout"
+    },
+    {
+      "name": "Unattributed files",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Unattributed_files"
+    },
+    {
+      "name": "Unique Lifeforms",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Unique_Lifeforms"
+    },
+    {
+      "name": "Vampires",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Vampires"
+    },
+    {
+      "name": "Videos",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Videos"
+    },
+    {
+      "name": "Warcriminals",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Warcriminals"
+    },
+    {
+      "name": "Wiki skin images",
+      "url": "https://the-primal-hunter.fandom.com/wiki/Category:Wiki_skin_images"
+    }
+  ]
+}
