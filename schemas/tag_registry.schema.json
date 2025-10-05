@@ -1,77 +1,56 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Tag Registry",
-	"description": "Defines allowable tag classes and individual tags used across records.",
+	"description": "Validates the canonical tag registry grouped by tag class with lifecycle metadata for each tag entry.",
 	"type": "object",
-	"required": ["tag_classes", "tags"],
-	"properties": {
-		"tag_classes": {
-			"type": "object",
-			"description": "Dictionary of tag classes keyed by class id (snake_case).",
-			"minProperties": 1,
-			"patternProperties": {
-				"^[a-z0-9_]+$": {
-					"type": "object",
-					"required": ["description"],
-					"properties": {
-						"description": {
-							"type": "string",
-							"minLength": 1
-						},
-						"example_tags": {
-							"type": "array",
-							"items": {
-								"type": "string",
-								"pattern": "^[a-z0-9_]+$"
-							},
-							"uniqueItems": true
-						},
-						"notes": {
-							"type": "string"
-						}
+	"minProperties": 1,
+	"patternProperties": {
+		"^[a-z0-9_]+$": {
+			"type": "array",
+			"description": "Collection of tag definitions for this class (e.g., skills, scene_type).",
+			"items": {
+				"type": "object",
+				"required": [
+					"tag", 
+					"status",
+    			    "allow_inferred"
+				],
+				"properties": {
+					"tag": {
+						"type": "string",
+						"pattern": "^[a-z0-9_]+$",
+						"description": "Snake_case identifier for the tag."
 					},
-					"additionalProperties": false
-				}
-			},
-			"additionalProperties": false
-		},
-		"tags": {
-			"type": "object",
-			"description": "Canonical tag definitions keyed by tag id (snake_case).",
-			"minProperties": 1,
-			"patternProperties": {
-				"^[a-z0-9_]+$": {
-					"type": "object",
-					"required": ["class", "description"],
-					"properties": {
-						"class": {
+					"status": {
+						"type": "string",
+						"enum": [
+							"candidate",
+							"approved",
+							"rejected"
+						],
+						"description": "Lifecycle state controlling whether the tag can be used in canon datasets."
+					},
+					"allow_inferred": {
+						"type": "boolean",
+						"description": "If true, tooling may auto-suggest this tag during heuristic passes."
+					},
+					"aliases": {
+						"type": "array",
+						"description": "Optional list of alternate strings recognised by scrapers/taggers.",
+						"items": {
 							"type": "string",
 							"pattern": "^[a-z0-9_]+$"
 						},
-						"description": {
-							"type": "string",
-							"minLength": 1
-						},
-						"aliases": {
-							"type": "array",
-							"items": {
-								"type": "string",
-								"pattern": "^[a-z0-9_]+$"
-							},
-							"uniqueItems": true
-						},
-						"allow_inferred": {
-							"type": "boolean",
-							"description": "If true, downstream tooling may tag inferred instances heuristically."
-						},
-						"notes": {
-							"type": "string"
-						}
+						"uniqueItems": true
 					},
-					"additionalProperties": false
-				}
+					"notes": {
+						"type": "string",
+						"description": "Reviewer notes or context for this tag."
+					}
+				},
+				"additionalProperties": false
 			},
-			"additionalProperties": false
+			"uniqueItems": true
 		}
 	},
 	"additionalProperties": false
