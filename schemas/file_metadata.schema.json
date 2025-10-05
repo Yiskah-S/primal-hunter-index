@@ -53,9 +53,7 @@
 			"description": "Whether a human reviewed this file after generation."
 		},
 		"tags": {
-			"type": "array",
-			"items": { "type": "string" },
-			"uniqueItems": true
+			"$ref": "shared/tags.schema.json"
 		},
 		"last_updated": {
 			"type": "string",

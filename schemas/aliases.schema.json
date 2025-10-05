@@ -34,9 +34,7 @@
 				"relationship_to_jake": { "type": ["string", "null"] },
 				"notes": { "type": "string" },
 				"tags": {
-					"type": "array",
-					"items": { "type": "string" },
-					"uniqueItems": true
+					"$ref": "shared/tags.schema.json"
 				}
 			},
 			"required": ["aliases", "pronouns", "type"],

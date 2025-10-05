@@ -18,7 +18,7 @@
 			"location": { "type": "string" },
 			"notes": { "type": "string" },
 			"tags": {
-				"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
+				"$ref": "shared/tags.schema.json"
 			},
 			"canon": {
 				"type": "boolean",

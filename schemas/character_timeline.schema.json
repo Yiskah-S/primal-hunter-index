@@ -28,7 +28,7 @@
 			"description": "Extended commentary or reviewer notes for this snapshot"
 		},
 		"tags": {
-			"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
+			"$ref": "shared/tags.schema.json"
 		},
 			"level": { "type": "integer" },
 			"class_level": { "type": "integer" },

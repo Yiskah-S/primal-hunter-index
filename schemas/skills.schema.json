@@ -86,7 +86,7 @@
 					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
 				},
 				"tags": {
-					"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
+					"$ref": "shared/tags.schema.json"
 				},
 				"granted_by": {
 					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"

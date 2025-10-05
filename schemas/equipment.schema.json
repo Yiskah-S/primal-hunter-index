@@ -64,7 +64,7 @@
 					"description": "Slot used if equippable (e.g., 'chest', 'head', 'main_hand', etc.)"
 				},
 				"tags": {
-					"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json#/$defs/tags"
+					"$ref": "shared/tags.schema.json"
 				},
 				"granted_by": {
 					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"

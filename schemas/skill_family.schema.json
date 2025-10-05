@@ -27,11 +27,7 @@
             "description": "General type classification, e.g. 'Utility', 'Combat', 'Passive'"
         },
         "tags": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "Classifiers or keywords for grouping"
+            "$ref": "shared/tags.schema.json"
         },
         "flavor": {
             "type": "string",
