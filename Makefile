@@ -44,7 +44,7 @@ commit_clean:  ## Commit known clean files with conventional message
 # ─── File Tree Logging ───────────────────────────────────────────────────
 
 .PHONY: filetree
-filetree:  ## Write pruned file tree to ./z_notes/file_structure.txt
+filetree:  ## Write pruned file tree to /Users/jessica/Projects/z_notes
 	@mkdir -p ./z_notes
 	@find . \
 		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './z_notes/*' \) -prune -o -print \
