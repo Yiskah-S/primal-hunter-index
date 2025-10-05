@@ -27,7 +27,18 @@ test_schemas:  ## Run schema tests via pytest
 
 .PHONY: zip_bundle
 zip_bundle:  ## Create upload ZIP bundle using manifest file
+	pre-commit run --all-files
 	python3 tools/make_upload_bundle.py
+
+.PHONY: zip_bundle_dry
+zip_bundle_dry:  ## Dry-run: show what would go in the zip
+	pre-commit run --all-files
+	python3 tools/make_upload_bundle.py --dry-run
+
+.PHONY: zip_bundle_force
+zip_bundle_force:  ## Force zip even if tab check fails
+	python3 tools/make_upload_bundle.py --force
+
 
 
 # ─── Clean Commit (Safe Push) ────────────────────────────────────────────
@@ -44,14 +55,14 @@ commit_clean:  ## Commit known clean files with conventional message
 # ─── File Tree Logging ───────────────────────────────────────────────────
 
 .PHONY: filetree
-filetree:  ## Write pruned file tree to /Users/jessica/Projects/z_notes
-	@mkdir -p ./z_notes
+filetree:  ## Write file tree to ../z_notes/project_zips
+	@mkdir -p ../z_notes/project_zips
 	@find . \
 		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './z_notes/*' \) -prune -o -print \
-	| awk -F/ 'NF<=6' > ./z_notes/.treelist
-	@tree --fromfile ./z_notes/.treelist > ./z_notes/file_structure.txt
-	@rm ./z_notes/.treelist
-	@echo "📁 Wrote ./z_notes/file_structure.txt"
+	| awk -F/ 'NF<=6' > ../z_notes/.treelist
+	@tree --fromfile ../z_notes/.treelist > ../z_notes/project_zips/file_structure.txt
+	@rm ../z_notes/.treelist
+	@echo "📁 Wrote ../z_notes/project_zips/file_structure.txt"
 
 
 # --- Makefile Header ---
@@ -74,9 +85,6 @@ setup-schemas:  ## Create empty schema files for common entities (if missing)
 		test -f "schemas/$$file.schema.json" || touch "schemas/$$file.schema.json"; \
 		echo "✅ schemas/$$file.schema.json"; \
 	done
-
-zip:  ## Create archive of repository (excludes common noise directories)
-	zip -r ../primal_hunter_index.zip . -x "*.git*" "*.venv*" "*__pycache__*" "*.DS_Store*" "*.zip"
 
 # --- Validators ---
 .PHONY: validate
