@@ -55,43 +55,12 @@
                 },
                 "additionalProperties": true
             }
-        },
-        "param_rules": {
-            "type": "array",
-            "description": "Rules for how parameters behave in this node",
-            "items": {
-                "type": "object",
-                "required": [
-                    "param"
-                ],
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "heuristic",
-                            "formula"
-                        ]
-                    },
-                    "param": {
-                        "type": "string"
-                    },
-                    "text": {
-                        "type": "string"
-                    },
-                    "confidence": {
-                        "type": "string",
-                        "enum": [
-                            "low",
-                            "medium",
-                            "high"
-                        ]
-                    },
-                    "when": {
-                        "type": "object"
-                    },
-                    "expr": {
-                        "type": "string"
-                    }
+        },"param_rules": {
+            "type": "object",
+            "patternProperties": {
+                "^.*$": {
+                    "$ref": "shared/param_rule.schema.json#/$defs/param_rule"
+                }
                 },
                 "additionalProperties": false
             }

@@ -1,0 +1,27 @@
+{
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Param Rule Fragment",
+	"type": "object",
+	"$defs": {
+		"param_rule": {
+			"type": "object",
+			"required": ["type", "rule"],
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": ["formula", "fuzzy"],
+					"description": "Whether this rule is logic-based or qualitative"
+				},
+				"rule": {
+					"type": "string",
+					"description": "Descriptive text or a formula (e.g. '10 + (Int * 2)')"
+				},
+				"source_ref": {
+					"$ref": "source_ref.schema.json"
+				}
+			},
+			"additionalProperties": false
+		}
+	}
+}
