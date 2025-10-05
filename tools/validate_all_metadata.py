@@ -28,6 +28,7 @@ from core.schema_utils import read_json
 
 SCHEMA_ROOT = Path("schemas")
 RECORDS_ROOT = Path("records")
+TAG_REGISTRY_PATH = Path("tagging") / "tag_registry.json"
 CHARACTER_DIRECTORY = RECORDS_ROOT / "characters"
 
 FILE_TO_SCHEMA_PATHS = {
@@ -42,7 +43,7 @@ FILE_TO_SCHEMA_PATHS = {
     RECORDS_ROOT / "chapters_to_posts.json": SCHEMA_ROOT / "chapters_to_posts.schema.json",
     RECORDS_ROOT / "aliases" / "character_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
     RECORDS_ROOT / "aliases" / "entity_aliases.json": SCHEMA_ROOT / "aliases.schema.json",
-    RECORDS_ROOT / "tag_registry.json": SCHEMA_ROOT / "tag_registry.schema.json",
+    TAG_REGISTRY_PATH: SCHEMA_ROOT / "tag_registry.schema.json",
     RECORDS_ROOT / "skill_types.json": SCHEMA_ROOT / "skill_types.schema.json"
 }
 
@@ -147,11 +148,34 @@ def _iter_timeline_files() -> Iterable[Path]:
             yield timeline_path
 
 
+def _flatten_tag_registry(tag_registry: dict) -> dict[str, dict]:
+    if not isinstance(tag_registry, dict):
+        return {}
+    if "tags" in tag_registry and isinstance(tag_registry["tags"], dict):
+        return {
+            name: metadata
+            for name, metadata in tag_registry["tags"].items()
+            if isinstance(metadata, dict)
+        }
+
+    flattened: dict[str, dict] = {}
+    for class_name, entries in tag_registry.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            tag_name = entry.get("tag")
+            if isinstance(tag_name, str):
+                flattened[tag_name] = entry
+    return flattened
+
+
 def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:  # noqa: C901
     errors: list[str] = []
-    tag_definitions = tag_registry.get("tags") if isinstance(tag_registry, dict) else None
+    tag_definitions = _flatten_tag_registry(tag_registry)
     if not tag_definitions:
-        errors.append("records/tag_registry.json is missing 'tags' definitions.")
+        errors.append(f"{TAG_REGISTRY_PATH}: does not contain any tag definitions.")
         return errors
 
     canonical_tags = set(tag_definitions.keys())
@@ -160,7 +184,7 @@ def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:  #
 
     for tag_name, metadata in tag_definitions.items():
         if not isinstance(metadata, dict):
-            errors.append(f"records/tag_registry.json → tag '{tag_name}' must map to an object definition.")
+            errors.append(f"{TAG_REGISTRY_PATH}: tag '{tag_name}' must map to an object definition.")
             continue
         allow_inferred_map[tag_name] = bool(metadata.get("allow_inferred"))
         aliases = metadata.get("aliases", [])
@@ -169,9 +193,9 @@ def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:  #
                 if isinstance(alias, str):
                     alias_to_canonical[alias] = tag_name
                 else:
-                    errors.append(f"records/tag_registry.json → aliases for '{tag_name}' must be strings.")
+                    errors.append(f"{TAG_REGISTRY_PATH}: aliases for '{tag_name}' must be strings.")
         elif aliases is not None:
-            errors.append(f"records/tag_registry.json → aliases for '{tag_name}' must be a list if provided.")
+            errors.append(f"{TAG_REGISTRY_PATH}: aliases for '{tag_name}' must be a list if provided.")
 
     def validate_tag_list(raw_value, pointer: str, file_path: Path) -> list[str]:  # noqa: C901
         issues: list[str] = []
@@ -218,8 +242,7 @@ def _validate_tag_usage(records_root: Path, tag_registry: dict) -> list[str]:  #
 
             if canonical not in canonical_tags:
                 issues.append(
-                    f"{file_path}: {element_pointer} → tag '{tag_name}' missing from "
-                    "records/tag_registry.json."
+                    f"{file_path}: {element_pointer} → tag '{tag_name}' missing from {TAG_REGISTRY_PATH}."
                 )
                 continue
 
@@ -447,7 +470,7 @@ def validate_all() -> int:  # noqa: C901
         validation_errors.extend(_collect_schema_errors(metadata_path, META_SCHEMA))
 
     # Tag usage across all record files
-    tag_registry = read_json(RECORDS_ROOT / "tag_registry.json")
+    tag_registry = read_json(TAG_REGISTRY_PATH)
     validation_errors.extend(_validate_tag_usage(RECORDS_ROOT, tag_registry))
 
     # Canonical record provenance checks
