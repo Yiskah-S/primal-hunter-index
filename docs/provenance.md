@@ -2,7 +2,18 @@
 
 Every canonical dataset in this repository adheres to a simple rule:
 
-> **If it asserts a canon fact, it must include a `source_ref` block.**
+> **If it asserts a canon fact, it must include a `source_ref` block pointing back to it from somewhere.**
+
+---
+
+## 🗂 Planned Sidecar Types
+
+| Sidecar              | Role |
+|----------------------|------|
+| `.meta.json`         | Who created the file, when, current `record_log[]`, review status |
+| `.review.json`       | Tracks reviewer decisions, Codex results, human QA notes |
+| `.provenance.json`   | (Optional) Maps which scenes contribute to which data entries |
+
 
 That block records the scene and line span in the source text so every fact can be quote-backed.
 

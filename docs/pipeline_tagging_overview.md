@@ -1,6 +1,8 @@
-# 🧠 Tagging & Provenance Pipeline – PHI Project Overview
+# 🧠 Tagging Pipeline
 
 This document captures the finalized strategy for heuristic tagging, sidecar structure, and provenance management prior to the Golden Slice.
+
+See [`tagging_contract.md`](./tagging_contract.md) for all tagging design rules.
 
 ---
 
@@ -22,16 +24,6 @@ This document captures the finalized strategy for heuristic tagging, sidecar str
 
 ---
 
-## 🗂 Planned Sidecar Types
-
-| Sidecar              | Role |
-|----------------------|------|
-| `.meta.json`         | Who created the file, when, current `record_log[]`, review status |
-| `.review.json`       | Tracks reviewer decisions, Codex results, human QA notes |
-| `.provenance.json`   | (Optional) Maps which scenes contribute to which data entries |
-
----
-
 ## 🏷 Heuristic Tagging Pipeline (Pre–Golden Slice)
 
 ### Goal:
@@ -46,17 +38,7 @@ Tag early chapters with characters, gods, skills, locations, etc., using a hybri
 | ⚙️ Heuristic tagger| Match vocab in chapter text |
 | 🤖 LLM pass        | Classify context: POV mention, ability used, historical, etc. |
 | 👩‍💻 Human review  | Final approve/edit |
-| ✅ Save tags       | Output `tags` per scene file, validated via `tags.schema.json` |
-
-### Tag Output Format (per scene):
-```json
-"tags": {
-  "characters": ["Jake", "Caleb"],
-  "gods": ["Malefic Viper"],
-  "skills": ["Meditation", "Basic Archery"],
-  "locations": ["Starter Zone"]
-}
-```
+| ✅ Save tags       | Output `tags` per scene file, validated via `tags.schema.json`
 
 ---
 
@@ -78,4 +60,4 @@ Tag early chapters with characters, gods, skills, locations, etc., using a hybri
 
 ---
 
-_Last updated: 2025-10-06_
+_Last updated: 2025-10-07_
