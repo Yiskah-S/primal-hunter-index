@@ -1,0 +1,5 @@
+line-length = 120
+
+# Optional: only enable core rules
+# select = ["E", "F", "I", "W"]
+# ignore = ["E501"]  # Uncomment to completely disable line length enforcementg
