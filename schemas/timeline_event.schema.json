@@ -1,0 +1,85 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Timeline Event",
+    "description": "Represents a change in a character's state over time, such as acquiring a skill, leveling up, or observing a stat.",
+    "type": "object",
+    "required": [
+        "event_id",
+        "type",
+        "character",
+        "source_ref"
+    ],
+    "properties": {
+        "event_id": {
+            "type": "string",
+            "pattern": "^evt:[a-zA-Z0-9_:\\-]+$",
+            "description": "Unique ID for the event (e.g. timestamped or deterministic)"
+        },
+        "type": {
+            "type": "string",
+            "description": "Type of event (e.g., skill_acquired, skill_upgraded, param_observed, class_changed, tier_changed)"
+        },
+        "character": {
+            "type": "string",
+            "description": "Name or ID of the character"
+        },
+        "family_id": {
+            "type": "string",
+            "pattern": "^skill:[a-z0-9_\\-]+$",
+            "description": "ID of the skill family affected (if applicable)"
+        },
+        "node_id": {
+            "type": "string",
+            "pattern": "^node:[a-z0-9_\\-.]+$",
+            "description": "ID of the node involved (if applicable)"
+        },
+        "param": {
+            "type": "string",
+            "description": "Name of the parameter observed or affected (e.g., resource_cost.mana)"
+        },
+        "value": {
+            "description": "Value of the parameter, if applicable"
+        },
+        "context": {
+            "type": "object",
+            "description": "Optional contextual information (e.g., level, affinity, class)",
+            "additionalProperties": true
+        },
+        "inference": {
+            "type": "object",
+            "required": [
+                "derived_from",
+                "justification",
+                "confidence"
+            ],
+            "properties": {
+                "derived_from": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "justification": {
+                    "type": "string"
+                },
+                "confidence": {
+                    "type": "string",
+                    "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "source_ref": {
+            "type": "array",
+            "description": "Where this change was observed in canon",
+            "items": {
+                "$ref": "shared/source_ref.schema.json"
+            }
+        }
+    },
+    "additionalProperties": false
+}
