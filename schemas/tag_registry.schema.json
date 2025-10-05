@@ -11,9 +11,9 @@
 			"items": {
 				"type": "object",
 				"required": [
-					"tag", 
+					"tag",
 					"status",
-    			    "allow_inferred"
+					"allow_inferred"
 				],
 				"properties": {
 					"tag": {
@@ -32,7 +32,7 @@
 					},
 					"allow_inferred": {
 						"type": "boolean",
-						"description": "If true, tooling may auto-suggest this tag during heuristic passes."
+						"description": "Explicitly flags whether tooling may auto-suggest this tag during heuristic passes."
 					},
 					"aliases": {
 						"type": "array",

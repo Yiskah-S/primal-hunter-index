@@ -1,4 +1,8 @@
 line-length = 120
 
+[format]
+indent-style = "tab"
+
 [lint]
 select = ["E", "F", "I", "W", "C90", "UP", "YTT"]
+ignore = ["W191"]  # <— you need this
