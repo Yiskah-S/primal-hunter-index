@@ -1,0 +1,57 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Skill Family",
+    "description": "Defines the core concept of a skill, excluding per-character behavior or upgrades.",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "type",
+        "tags",
+        "flavor",
+        "canon",
+        "source_ref"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "pattern": "^skill:[a-z0-9_\\-]+$",
+            "description": "Unique identifier for the skill family, e.g. 'skill:meditation'"
+        },
+        "name": {
+            "type": "string",
+            "description": "Display name for the skill, e.g. 'Meditation'"
+        },
+        "type": {
+            "type": "string",
+            "description": "General type classification, e.g. 'Utility', 'Combat', 'Passive'"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Classifiers or keywords for grouping"
+        },
+        "flavor": {
+            "type": "string",
+            "description": "Short poetic/tonal one-liner (e.g. tooltip text)"
+        },
+        "canon": {
+            "type": "boolean",
+            "description": "True if this record has valid source_ref and is considered canonical"
+        },
+        "source_ref": {
+            "type": "array",
+            "items": {
+                "$ref": "shared/source_ref.schema.json"
+            },
+            "description": "Where this skill was first observed or introduced"
+        },
+        "description": {
+            "type": "string",
+            "description": "Optional longer prose explanation (non-canon safe)"
+        }
+    },
+    "additionalProperties": false
+}
