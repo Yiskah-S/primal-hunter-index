@@ -224,3 +224,20 @@ scrape_categories:
 .PHONY: scrape_tag_pages
 scrape_tag_pages:
 	python3 tools/extract_tag_targets.py --mode pages
+
+## Promote selected tags from candidates → registry (dry-run by default)
+promote-tags:
+	python3 -m tools.promote_tags --grep "$(grep)" $(args)
+
+## Commit a full promotion of all candidates (use with care)
+promote-tags-all:
+	python3 -m tools.promote_tags --all --commit --backup
+
+## Provenance guardrail check (fails the build on violations)
+validate-provenance:
+	python3 -m tools.validate_provenance
+
+## One-shot: lint + schema + provenance validators
+validate_all: lint
+	python3 -m tools.validate_all_metadata
+	$(MAKE) validate-provenance
