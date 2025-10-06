@@ -60,3 +60,13 @@ def write_json_atomic(path: Union[str, Path], data: Any, *, backup: bool = False
     finally:
         if parent_directory_descriptor is not None:
             os.close(parent_directory_descriptor)
+
+def write_json_atomic_safe(path: Union[str, Path], data: Any, schema_path: Union[str, Path], *, backup: bool = False,
+    ensure_ascii: bool = False,
+) -> None:
+    """Validate data against a schema and atomically write to disk if valid."""
+    from core.schema_utils import load_schema, validate_instance
+
+    schema = load_schema(schema_path)
+    validate_instance(data, schema)
+    write_json_atomic(path, data, backup=backup, ensure_ascii=ensure_ascii)

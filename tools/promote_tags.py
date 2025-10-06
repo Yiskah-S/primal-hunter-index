@@ -15,7 +15,7 @@ import re
 import unicodedata
 from pathlib import Path
 
-from core.io_safe import write_json_atomic
+from core.io_safe import write_json_atomic_safe
 from core.schema_utils import validate_json_file
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -137,9 +137,12 @@ def main():
 	validate_json_file(new_registry, SCHEMA)
 
 	if args.commit:
-		write_json_atomic(REGISTRY, new_registry, make_backup=args.backup)
+		write_json_atomic_safe(REGISTRY, new_registry, schema_path=SCHEMA, backup=args.backup)
 		print(f"Committed {len(to_promote)} new tags.")
 	else:
 		print(f"Dry-run: would add {len(to_promote)} new tags:")
 		for _, original, slug in selected:
 			print(f"  {original} → {slug}")
+
+if __name__ == "__main__":
+	main()

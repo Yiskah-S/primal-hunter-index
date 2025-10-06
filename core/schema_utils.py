@@ -52,3 +52,8 @@ def validate_json_file(data: Any, schema_path: Path) -> None:
     schema = load_schema(schema_path)
     validate_instance(data, schema)
 
+def load_json(path: Path) -> dict:
+	if path.stat().st_size == 0:
+		return {}
+	with path.open("r", encoding="utf-8") as f:
+		return json.load(f)

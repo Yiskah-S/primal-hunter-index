@@ -229,6 +229,9 @@ scrape_tag_pages:
 promote-tags:
 	python3 -m tools.promote_tags --all
 
+promote-tags-grep:
+	python3 -m tools.promote_tags --grep "$(grep)"
+
 ## Commit a full promotion of all candidates (use with care)
 promote-tags-all:
 	python3 -m tools.promote_tags --all --commit --backup
