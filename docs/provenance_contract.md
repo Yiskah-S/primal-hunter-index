@@ -2,6 +2,14 @@
 
 **Updated:** 2025-10-05
 
+All referencable entries must carry a stable ID
+
+Format: type.segment.segment, lowercase snake_case
+
+Example: tag.skills.teleportation
+
+Regex: ^(sn|sf|eq|cl|rc|pc|loc|tag|ev)\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$
+
 ---
 
 ## TL;DR

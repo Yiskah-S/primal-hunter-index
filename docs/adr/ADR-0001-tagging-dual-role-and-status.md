@@ -1,5 +1,13 @@
 # 🏷 Tagging Outline – PHI (Summary View)
 
+ADR-0001: Split status vs tag_role for tags
+Date: 2025‑10‑06
+Status: Accepted
+Context: …
+Decision: …
+Consequences: …
+
+
 This file is a quick checklist / cheat sheet for tagging logic.
 For full rules, see [`tagging_contract.md`](./tagging_contract.md)
 
