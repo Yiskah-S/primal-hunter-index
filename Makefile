@@ -73,9 +73,9 @@ SHELL := /bin/bash
 PY := $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; elif command -v python >/dev/null 2>&1; then echo python; else command -v python3; fi)
 .DEFAULT_GOAL := help
 
-.PHONY: validate_all
-validate_all: lint test_schemas zip_bundle  ## Run linter, tests, and bundler
-	@echo "✅ All validations complete."
+#.PHONY: validate_all
+#validate_all: lint test_schemas zip_bundle  ## Run linter, tests, and bundler
+#	@echo "✅ All validations complete."
 
 
 

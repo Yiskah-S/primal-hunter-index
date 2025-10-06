@@ -1,57 +1,96 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Tag Registry",
-	"description": "Validates the canonical tag registry grouped by tag class with lifecycle metadata for each tag entry.",
-	"type": "object",
-	"minProperties": 1,
-	"patternProperties": {
-		"^[a-z0-9_]+$": {
-			"type": "array",
-			"description": "Collection of tag definitions for this class (e.g., skills, scene_type).",
-			"items": {
-				"type": "object",
-				"required": [
-					"tag",
-					"status",
-					"allow_inferred"
-				],
-				"properties": {
-					"tag": {
-						"type": "string",
-						"pattern": "^[a-z0-9_]+$",
-						"description": "Snake_case identifier for the tag."
-					},
-					"status": {
-						"type": "string",
-						"enum": [
-							"candidate",
-							"approved",
-							"rejected"
-						],
-						"description": "Lifecycle state controlling whether the tag can be used in canon datasets."
-					},
-					"allow_inferred": {
-						"type": "boolean",
-						"description": "Explicitly flags whether tooling may auto-suggest this tag during heuristic passes."
-					},
-					"aliases": {
-						"type": "array",
-						"description": "Optional list of alternate strings recognised by scrapers/taggers.",
-						"items": {
-							"type": "string",
-							"pattern": "^[a-z0-9_]+$"
-						},
-						"uniqueItems": true
-					},
-					"notes": {
-						"type": "string",
-						"description": "Reviewer notes or context for this tag."
-					}
-				},
-				"additionalProperties": false
-			},
-			"uniqueItems": true
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tag Registry v0.3",
+  "description": "Validates canonical tag registry grouped by tag class with lifecycle metadata.",
+  "type": "object",
+  "minProperties": 1,
+  "patternProperties": {
+    "^[a-z0-9_]+$": {
+      "type": "array",
+      "description": "Tag definitions for this namespace (e.g., skills, scene_type, affinity).",
+      "items": {
+        "type": "object",
+        "required": [
+          "tag_id",
+          "tag",
+          "type",
+          "tag_role",
+          "status",
+          "approved",
+          "allow_inferred",
+          "description"
+        ],
+        "properties": {
+          "tag_id": {
+            "type": "string",
+            "pattern": "^tag\\.[a-z0-9_]+\\.[a-z0-9_]+$",
+            "description": "Stable ID for this tag (e.g. tag.skills.basic_archery)."
+          },
+          "tag": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "description": "Short slug used inline (e.g. basic_archery)."
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "description": "Namespace of this tag (e.g. skills, topic, scene_type)."
+          },
+          "tag_role": {
+            "type": "string",
+            "enum": ["heuristic", "canonical", "test_data", "inferred_only", "manual_only"],
+            "description": "Role or function of the tag in the tagging pipeline."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["candidate", "approved", "rejected"],
+            "description": "Tag approval status for canon use."
+          },
+          "approved": {
+            "type": "boolean",
+            "description": "Redundant boolean gate; must be true iff status is approved."
+          },
+          "allow_inferred": {
+            "type": "boolean",
+            "description": "If true, tag can be applied via context even if not explicitly quoted."
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable summary or label."
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            },
+            "uniqueItems": true
+          },
+          "source": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "reviewed_by": {
+            "type": "string"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "const": "approved" } } },
+            "then": { "properties": { "approved": { "const": true } } },
+            "else": { "properties": { "approved": { "const": false } } }
+          }
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
 }

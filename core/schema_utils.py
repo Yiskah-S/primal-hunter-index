@@ -43,3 +43,12 @@ def validate_json_schema(
     schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)
     return sorted(validator.iter_errors(data), key=lambda e: e.path)
+
+def validate_json_file(data: Any, schema_path: Path) -> None:
+    """
+    Lightweight inline validator for tools.
+    Raises ValueError if validation fails.
+    """
+    schema = load_schema(schema_path)
+    validate_instance(data, schema)
+
