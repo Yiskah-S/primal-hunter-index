@@ -227,7 +227,7 @@ scrape_tag_pages:
 
 ## Promote selected tags from candidates → registry (dry-run by default)
 promote-tags:
-	python3 -m tools.promote_tags --grep "$(grep)" $(args)
+	python3 -m tools.promote_tags --all
 
 ## Commit a full promotion of all candidates (use with care)
 promote-tags-all:

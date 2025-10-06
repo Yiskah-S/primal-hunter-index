@@ -1,26 +1,22 @@
-# tools/promote_tags.py
 #!/usr/bin/env python3
-r"""
-Promote tag candidates into the approved tag registry.
+"""
+Promote cleaned tag candidates into tag_registry.json.
+Handles casing, punctuation, and messy human input.
 
 Usage:
-  python -m tools.promote_tags --all --commit
-  python -m tools.promote_tags --ids skill.meditation,entity.jake
-  python -m tools.promote_tags --grep "skill\."
-
-Notes:
-- Validates output against schemas/tag_registry.schema.json.
-- Writes atomically via core.io_safe.write_json_atomic.
+  python -m tools.promote_tags --all [--commit]
+  python -m tools.promote_tags --grep "viper" --commit
+  python -m tools.promote_tags --ids skills.basic_archery,scene_type.romantic_scene
 """
-from __future__ import annotations
 
 import argparse
 import json
 import re
+import unicodedata
 from pathlib import Path
 
-from core.io_safe import write_json_atomic  # tabs > spaces, keep your style
-from core.schema_utils import validate_json_file  # assumes you have a helper
+from core.io_safe import write_json_atomic
+from core.schema_utils import validate_json_file
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CANDIDATES = REPO_ROOT / "tagging" / "tag_candidates.json"
@@ -34,68 +30,116 @@ def load_json(path: Path) -> dict:
 
 
 def parse_args() -> argparse.Namespace:
-	p = argparse.ArgumentParser(description="Promote tag candidates into registry.")
+	p = argparse.ArgumentParser(description="Promote reviewed tags to registry.")
 	grp = p.add_mutually_exclusive_group(required=True)
-	grp.add_argument("--all", action="store_true", help="Promote all candidates.")
-	grp.add_argument("--ids", type=str, help="Comma-separated list of candidate IDs to promote.")
-	grp.add_argument("--grep", type=str, help="Promote candidates whose ID matches this regex.")
-	p.add_argument("--commit", action="store_true", help="Write changes (otherwise dry-run).")
-	p.add_argument("--backup", action="store_true", help="Write .bak timestamped file alongside commits.")
+	grp.add_argument("--all", action="store_true", help="Promote all entries.")
+	grp.add_argument("--ids", type=str, help="Comma-separated list like 'skills.foo,scene_type.bar'")
+	grp.add_argument("--grep", type=str, help="Regex match on tag IDs.")
+	p.add_argument("--commit", action="store_true", help="Actually write changes.")
+	p.add_argument("--backup", action="store_true", help="Backup registry before overwrite.")
 	return p.parse_args()
 
 
-def select_ids(candidates: dict, args: argparse.Namespace) -> list[str]:
-	ids = list(candidates.keys())
+def slugify(text: str) -> str:
+	"""Turn 'Blood of the Malefic Viper' → 'blood_of_the_malefic_viper'"""
+	text = unicodedata.normalize("NFKD", text)
+	text = re.sub(r"[’']", "", text)  # remove apostrophes
+	text = re.sub(r"[^a-zA-Z0-9]+", "_", text)
+	text = re.sub(r"_+", "_", text)
+	return text.strip("_").lower()
+
+
+def normalize_section(section: str) -> str:
+	return slugify(section)
+
+
+def normalize_candidates(raw: dict) -> list[tuple[str, str, str]]:
+	"""Returns list of (section, original, slug) tuples"""
+	cleaned = []
+	for raw_section, values in raw.items():
+		section = normalize_section(raw_section)
+		for entry in values:
+			if isinstance(entry, str):
+				original = entry.strip()
+				slug = slugify(original)
+				cleaned.append((section, original, slug))
+	return cleaned
+
+
+def filter_ids(all_tags: list[tuple[str, str, str]], args: argparse.Namespace) -> list[tuple[str, str, str]]:
 	if args.all:
-		return ids
+		return all_tags
+
 	if args.ids:
-		want = [s.strip() for s in args.ids.split(",") if s.strip()]
-		missing = [w for w in want if w not in candidates]
-		if missing:
-			raise SystemExit(f"IDs not found in candidates: {missing}")
-		return want
+		targets = [s.strip() for s in args.ids.split(",")]
+		return [t for t in all_tags if f"{t[0]}.{t[2]}" in targets]
+
 	if args.grep:
-		reg = re.compile(args.grep)
-		return [i for i in ids if reg.search(i)]
-	raise AssertionError("one of --all/--ids/--grep must be provided")
+		pat = re.compile(args.grep)
+		return [t for t in all_tags if pat.search(f"{t[0]}.{t[2]}")]
+
+	return []
 
 
-def merge_into_registry(registry: dict, candidates: dict, chosen: list[str]) -> tuple[dict, list[str]]:
-	added = []
-	for tid in chosen:
-		if tid in registry:
-			# Idempotent: skip if identical; replace if different
-			if registry[tid] != candidates[tid]:
-				registry[tid] = candidates[tid]
-				added.append(tid)
-		else:
-			registry[tid] = candidates[tid]
-			added.append(tid)
-	return registry, added
+def promote_object(section: str, original: str, slug: str) -> dict:
+	return {
+		"tag_id": f"tag.{section}.{slug}",
+		"tag": slug,
+		"type": section,
+		"tag_role": "heuristic",
+		"status": "candidate",
+		"approved": False,
+		"allow_inferred": False,
+		"description": original,
+		"source": "manual_review",
+		"notes": "Promoted from tag_candidates.json"
+	}
 
 
-def main() -> None:
+def merge_into_registry(existing: dict, new_objs: list[dict]) -> dict:
+	merged = dict(existing)
+	added = 0
+
+	for obj in new_objs:
+		section = obj["type"]
+		tag_id = obj["tag_id"]
+
+		if section not in merged:
+			merged[section] = []
+
+		if any(t["tag_id"] == tag_id for t in merged[section]):
+			continue
+
+		merged[section].append(obj)
+		added += 1
+
+	print(f"Prepared {added} new tags for promotion.")
+	return merged
+
+
+def main():
 	args = parse_args()
-	cands = load_json(CANDIDATES)
-	reg = load_json(REGISTRY)
-	chosen = select_ids(cands, args)
+	candidates = load_json(CANDIDATES)
+	registry = load_json(REGISTRY)
 
-	new_reg, changed = merge_into_registry(reg, cands, chosen)
-	if not changed:
-		print("No changes (already present / identical).")
+	all_clean = normalize_candidates(candidates)
+	selected = filter_ids(all_clean, args)
+
+	if not selected:
+		print("No matching tags found.")
 		return
 
-	# Validate against schema before writing
-	validate_json_file(new_reg, SCHEMA)
+	# Build tag objects
+	to_promote = [promote_object(sec, orig, slug) for sec, orig, slug in selected]
+	new_registry = merge_into_registry(registry, to_promote)
+
+	# Validate output before writing
+	validate_json_file(new_registry, SCHEMA)
 
 	if args.commit:
-		write_json_atomic(REGISTRY, new_reg, make_backup=args.backup)
-		print(f"Committed {len(changed)} tags → {REGISTRY}")
+		write_json_atomic(REGISTRY, new_registry, make_backup=args.backup)
+		print(f"Committed {len(to_promote)} new tags.")
 	else:
-		print(f"Dry-run: would add/replace {len(changed)} tags:")
-		for tid in changed:
-			print(f"  - {tid}")
-
-
-if __name__ == "__main__":
-	main()
+		print(f"Dry-run: would add {len(to_promote)} new tags:")
+		for _, original, slug in selected:
+			print(f"  {original} → {slug}")
