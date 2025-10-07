@@ -47,3 +47,9 @@ For full rules, see [`tagging_contract.md`](./tagging_contract.md)
 - All scene/timeline tags must match the registry
 - Registry must validate against `tag_registry.schema.json`
 - Scene tags validated by `$ref: tags.schema.json`
+
+
+**Superseded By:** [`contracts/tagging_contract.md`](../contracts/tagging_contract.md)  
+**Decision Summary:** Tag lifecycle (`status`) is decoupled from purpose (`tag_role`) to support heuristic vs canonical flows in tagging pipeline v0.4.
+For implementation details, see [`tagging_contract.md`](../contracts/tagging_contract.md) v0.4  
+and [`provenance_contract.md`](../contracts/provenance_contract.md) for how tags are quote-backed.

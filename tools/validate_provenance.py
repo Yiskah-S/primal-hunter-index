@@ -6,7 +6,7 @@ Provenance validator — enforces guardrails from provenance_contract.md.
 Rules:
   1) Timeline events MUST have source_ref[] with scene_id + line range.
   2) Warn if timeline event has no 'quote' nor 'inference' flag (soft guidance).
-  3) Canon payloads in records/* (non-timeline) MUST NOT include inline source_ref[].
+  3) Canon payloads in records/** (non-timeline) MUST NOT include inline source_ref[].
      Exception: *.meta.json sidecars (file-level provenance) are allowed.
   4) .meta.json must carry a well-formed record_log[] if present.
   5) scene_id strings must match ^\\d{2}-\\d{2}-\\d{2}$.

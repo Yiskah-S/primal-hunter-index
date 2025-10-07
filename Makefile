@@ -90,7 +90,7 @@ setup-schemas:  ## Create empty schema files for common entities (if missing)
 
 # --- Validators ---
 .PHONY: validate
-validate:  ## Validate all records/*.json against schemas
+validate:  ## Validate all records/**.json against schemas
 	@PYTHONPATH=. $(PY) tools/validate_all_metadata.py
 
 .PHONY: validate-known-skills

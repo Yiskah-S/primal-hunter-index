@@ -4,7 +4,7 @@
 File roles
 contracts/ = the source of truth; schema and code must follow.
 
-designs/ = explanatory docs, diagrams, system narratives (stable but non‑normative).
+design/ = explanatory docs, diagrams, system narratives (stable but non‑normative).
 
 adr/ = immutable decisions with context & alternatives (short, dated).
 
