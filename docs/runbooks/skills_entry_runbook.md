@@ -1,4 +1,7 @@
-# Skill Entry Usage Guide
+Title: Skill Entry Runbook (PHI)  
+Status: Living  
+Linked Schema: schemas/skills.schema.json  
+Updated: 2025-10-08  
 
 This guide distils the working notes for capturing canon skill data into repeatable steps you can follow while reading chapters.
 
