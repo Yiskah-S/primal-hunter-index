@@ -1,12 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://primal-hunter.local/schemas/shared/granted_by.schema.json",
   "title": "Granted By Fragment",
   "description": "Reusable definitions for capturing the origin events that grant a skill, item, or similar asset.",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$id": "https://primal-hunter.local/schemas/shared/granted_by.schema.json",
   "$defs": {
     "grant": {
       "type": "object",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -38,7 +41,7 @@
         },
         "notes": {
           "type": "string",
-          "description": "Clarifying details that don’t fit other structured fields."
+          "description": "Clarifying details that don\u2019t fit other structured fields."
         }
       },
       "additionalProperties": false

@@ -1,11 +1,25 @@
 import json
 from pathlib import Path
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, RefResolver
 
 SCHEMA_PATH = Path("schemas/character_timeline.schema.json")
 SCHEMA = json.loads(SCHEMA_PATH.read_text())
-VALIDATOR = Draft202012Validator(SCHEMA)
+
+_SHARED_STORE = {
+	"https://primal-hunter.local/schemas/shared/resource_block.schema.json": json.loads(
+		(SCHEMA_PATH.parent / "shared" / "resource_block.schema.json").read_text()
+	),
+	"https://primal-hunter.local/schemas/shared/provenance.schema.json": json.loads(
+		(SCHEMA_PATH.parent / "shared" / "provenance.schema.json").read_text()
+	),
+	"https://primal-hunter.local/schemas/shared/source_ref.schema.json": json.loads(
+		(SCHEMA_PATH.parent / "shared" / "source_ref.schema.json").read_text()
+	),
+}
+
+RESOLVER = RefResolver.from_schema(SCHEMA, store=_SHARED_STORE)
+VALIDATOR = Draft202012Validator(SCHEMA, resolver=RESOLVER)
 
 
 def _collect_errors(instance_data):
@@ -25,7 +39,15 @@ def test_valid_timeline_entry_passes():
             },
             "resources": {
                 "HP": {"max": 90, "current": 90, "derived_from": "Vit"}
-            }
+            },
+            "source_ref": [
+                {
+                    "type": "scene",
+                    "scene_id": "01-02-01",
+                    "line_start": 100,
+                    "line_end": 120
+                }
+            ]
         }
     ]
     assert _collect_errors(minimal_timeline) == []

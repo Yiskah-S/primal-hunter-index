@@ -1,111 +1,167 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Skill Metadata Schema",
-	"type": "object",
-	"description": "Records definitions of all skills, indexed by skill name.",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"required": [
-				"rarity",
-				"type",
-				"description",
-				"effects",
-				"flavor",
-				"canon",
-				"source_ref"
-			],
-			"properties": {
-				"rarity": {
-					"type": "string",
-					"enum": ["Inferior", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Unique"]
-				},
-				"type": {
-					"type": "string",
-					"description": "General category of the skill (e.g., Combat Passive, General Utility, Sensory Passive)"
-				},
-				"class_recommendations": {
-					"type": "array",
-					"description": "List of classes that could get this skill",
-					"items": { "type": "string" }
-				},
-				"description": {
-					"type": "string",
-					"description": "System description of the skill's core function"
-				},
-				"effects": {
-					"type": "object",
-					"properties": {
-						"proficiency_with": {
-							"type": "array",
-							"items": { "type": "string" }
-						},
-						"stat_synergy": {
-							"type": "object",
-							"description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
-							"properties": {
-								"Str": { "type": "number" },
-								"Agi": { "type": "number" },
-								"End": { "type": "number" },
-								"Vit": { "type": "number" },
-								"Int": { "type": "number" },
-								"Wis": { "type": "number" },
-								"Will": { "type": "number" },
-								"Per": { "type": "number" },
-								"Free point": { "type": "number" }
-							},
-							"additionalProperties": false
-						},
-						"passive_benefit": {
-							"type": "string"
-						}
-					},
-					"additionalProperties": false
-				},
-				"resource_cost": {
-					"type": "object",
-					"properties": {
-						"resource": { "type": "string" },
-						"activation_cost": { "type": "number" },
-						"maintenance_cost": { "type": "number" },
-						"type": { "type": "string" }
-					},
-					"additionalProperties": false
-				},
-				"behavior": {
-					"type": "object",
-					"properties": {
-						"activation_method": { "type": "string" },
-						"deactivation": { "type": "string" },
-						"instinctive_knowledge": { "type": "boolean" },
-						"user feedback": { "type": "string" }
-					},
-					"additionalProperties": false
-				},
-				"flavor": {
-					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
-				},
-				"tags": {
-					"$ref": "shared/tags.schema.json"
-				},
-				"granted_by": {
-					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
-				},
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this entry represents a canon fact that requires provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Metadata Schema",
+  "description": "Records definitions of all skills, indexed by skill name.",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "rarity",
+        "type",
+        "description",
+        "effects",
+        "flavor",
+        "canon",
+        "source_ref"
+      ],
+      "properties": {
+        "rarity": {
+          "type": "string",
+          "enum": [
+            "Inferior",
+            "Common",
+            "Uncommon",
+            "Rare",
+            "Epic",
+            "Legendary",
+            "Unique"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "General category of the skill (e.g., Combat Passive, General Utility, Sensory Passive)"
+        },
+        "class_recommendations": {
+          "type": "array",
+          "description": "List of classes that could get this skill",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "System description of the skill's core function"
+        },
+        "effects": {
+          "type": "object",
+          "properties": {
+            "proficiency_with": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "stat_synergy": {
+              "type": "object",
+              "description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
+              "properties": {
+                "Str": {
+                  "type": "number"
+                },
+                "Agi": {
+                  "type": "number"
+                },
+                "End": {
+                  "type": "number"
+                },
+                "Vit": {
+                  "type": "number"
+                },
+                "Int": {
+                  "type": "number"
+                },
+                "Wis": {
+                  "type": "number"
+                },
+                "Will": {
+                  "type": "number"
+                },
+                "Per": {
+                  "type": "number"
+                },
+                "Free point": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "passive_benefit": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "resource_cost": {
+          "type": "object",
+          "properties": {
+            "resource": {
+              "type": "string"
+            },
+            "activation_cost": {
+              "type": "number"
+            },
+            "maintenance_cost": {
+              "type": "number"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "behavior": {
+          "type": "object",
+          "properties": {
+            "activation_method": {
+              "type": "string"
+            },
+            "deactivation": {
+              "type": "string"
+            },
+            "instinctive_knowledge": {
+              "type": "boolean"
+            },
+            "user feedback": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "flavor": {
+          "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+            },
+            {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            }
+          ]
+        },
+        "granted_by": {
+          "$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this entry represents a canon fact that requires provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

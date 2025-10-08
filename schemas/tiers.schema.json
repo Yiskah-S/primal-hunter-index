@@ -1,6 +1,7 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "Tier Progression Schema",
+	"$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
 	"type": "object",
 	"$defs": {
 		"entry": {
@@ -18,7 +19,8 @@
 					"type": "object",
 					"patternProperties": {
 						".+": { "type": "number" }
-					}
+					},
+					"additionalProperties": false
 				},
 				"resource_gain": {
 					"type": "object",
@@ -26,7 +28,8 @@
 						"HP": { "type": "number" },
 						"MP": { "type": "number" },
 						"Stamina": { "type": "number" }
-					}
+					},
+					"additionalProperties": false
 				},
 				"expected_power_range": {
 					"type": "object",
@@ -34,7 +37,8 @@
 						"min_level": { "type": "integer" },
 						"max_level": { "type": "integer" },
 						"stat_total_estimate": { "type": "string" }
-					}
+					},
+					"additionalProperties": false
 				},
 				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
 				"canon": {

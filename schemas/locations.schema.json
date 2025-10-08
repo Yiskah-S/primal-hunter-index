@@ -1,93 +1,95 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Location Definition",
-	"description": "Schema for all named locations, zones, subzones, dungeons, layers, cities, or landmarks. Used for environmental tagging, worldbuilding, and indexing spatial progression.",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"description": "A single location or zone, keyed by its name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
-			"properties": {
-				"type": {
-					"type": "string",
-					"description": "Category of the location (e.g., 'zone', 'subzone', 'dungeon', 'layer', 'city', 'region')."
-				},
-				"tier": {
-					"type": "string",
-					"description": "System-assigned tier of the location (e.g., 'G', 'F', 'E'). Used to sort danger and rewards."
-				},
-				"recommended_level_range": {
-					"type": "array",
-					"description": "Optional level range of adventurers typically found here (e.g., [1, 10]).",
-					"items": {
-						"type": "integer"
-					},
-					"minItems": 2,
-					"maxItems": 2
-				},
-				"environment": {
-					"type": "object",
-					"description": "Environmental attributes and world properties of this location.",
-					"properties": {
-						"gravity": {
-							"type": "string",
-							"description": "Gravity level (e.g., 'normal', 'low', 'high')."
-						},
-						"magic_density": {
-							"type": "string",
-							"description": "Ambient magic density (e.g., 'normal', 'dense', 'chaotic')."
-						},
-						"danger_rating": {
-							"type": "integer",
-							"description": "Internal danger score for balance purposes (e.g., 1\u201310 scale)."
-						}
-					}
-				},
-				"known_inhabitants": {
-					"type": "array",
-					"description": "Records of common races, monsters, or entities in the locatin.",
-					"items": {
-						"type": "string"
-					}
-				},
-				"notable_features": {
-					"type": "array",
-					"description": "Landmarks or points of interest in the location (e.g., 'Poison Swamp', 'Ancient Obelisk').",
-					"items": {
-						"type": "string"
-					}
-				},
-				"connected_to": {
-					"type": "array",
-					"description": "List of other locations this zone directly links to (used for pathfinding, invasion events, or map generation).",
-					"items": {
-						"type": "string"
-					}
-				},
-				"flavor": {
-					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
-				},
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this location entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": [
-				"type",
-				"tier",
-				"canon",
-				"source_ref"
-			],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Location Definition",
+  "description": "Schema for all named locations, zones, subzones, dungeons, layers, cities, or landmarks. Used for environmental tagging, worldbuilding, and indexing spatial progression.",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "description": "A single location or zone, keyed by its name (e.g., 'Tutorial Zone', 'Valley of Opportunity').",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Category of the location (e.g., 'zone', 'subzone', 'dungeon', 'layer', 'city', 'region')."
+        },
+        "tier": {
+          "type": "string",
+          "description": "System-assigned tier of the location (e.g., 'G', 'F', 'E'). Used to sort danger and rewards."
+        },
+        "recommended_level_range": {
+          "type": "array",
+          "description": "Optional level range of adventurers typically found here (e.g., [1, 10]).",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "environment": {
+          "type": "object",
+          "description": "Environmental attributes and world properties of this location.",
+          "properties": {
+            "gravity": {
+              "type": "string",
+              "description": "Gravity level (e.g., 'normal', 'low', 'high')."
+            },
+            "magic_density": {
+              "type": "string",
+              "description": "Ambient magic density (e.g., 'normal', 'dense', 'chaotic')."
+            },
+            "danger_rating": {
+              "type": "integer",
+              "description": "Internal danger score for balance purposes (e.g., 1-10 scale)."
+            }
+          },
+          "additionalProperties": false
+        },
+        "known_inhabitants": {
+          "type": "array",
+          "description": "Records of common races, monsters, or entities in the locatin.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notable_features": {
+          "type": "array",
+          "description": "Landmarks or points of interest in the location (e.g., 'Poison Swamp', 'Ancient Obelisk').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connected_to": {
+          "type": "array",
+          "description": "List of other locations this zone directly links to (used for pathfinding, invasion events, or map generation).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flavor": {
+          "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this location entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "type",
+        "tier",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

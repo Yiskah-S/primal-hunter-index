@@ -1,24 +1,26 @@
 {
+  "records": true,
   "entered_by": "assistant",
   "reviewed_by_human": false,
-  "last_updated": "2025-10-01",
+  "last_updated": "2025-10-07",
   "source": {
-    "book": "Book 01 - PH",
-    "chapter": 2,
-    "scene": 1,
-    "scene_id": "01-02-01"
+    "book": "Book 01 - PH"
   },
-  "records": true,
   "record_log": [
     {
       "entry_keys": [
-        "Belt and Satchel",
-        "Brown Cloak",
+        "Wooden Bow",
         "Enchanted Quiver (Common)",
-        "Health Potion (Inferior)",
+        "Brown Cloak",
         "Knife",
-        "Stamina Potion (Inferior)",
-        "Wooden Bow"
-      ]
+        "Belt and Satchel",
+        "Health Potion (Inferior)",
+        "Stamina Potion (Inferior)"
+      ],
+      "added_by": "assistant",
+      "date": "2025-10-07",
+      "method": "manual_seed",
+      "review_status": "pending"
+    }
   ]
 }

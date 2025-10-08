@@ -8,7 +8,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 20,
-      "line_end": 159
+      "line_end": 159,
+      "type": "scene"
     }
   },
   "skill_acquisition": {
@@ -19,7 +20,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 119,
-      "line_end": 119
+      "line_end": 119,
+      "type": "scene"
     }
   }
 }

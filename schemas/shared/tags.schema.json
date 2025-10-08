@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://primal-hunter.local/schemas/shared/tags.schema.json",
   "title": "Tags Fragment",
+  "$comment": "See docs/contracts/tagging_contract_v0.4.md#inline-usage-in-records--timelines",
   "description": "Reusable definition for tag arrays constrained to the project registry style.",
   "type": "object",
   "patternProperties": {

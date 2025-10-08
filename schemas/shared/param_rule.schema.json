@@ -1,7 +1,8 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://primal-hunter.local/schemas/shared/param_rule.schema.json",
 	"title": "Param Rule Fragment",
-	"type": "object",
+	"$comment": "See docs/runbooks/context_summary.md#parameters-are-fuzzy-rules-not-fixed-numbers",
 	"$defs": {
 		"param_rule": {
 			"type": "object",
@@ -17,7 +18,7 @@
 					"description": "Descriptive text or a formula (e.g. '10 + (Int * 2)')"
 				},
 				"source_ref": {
-					"$ref": "source_ref.schema.json"
+					"$ref": "https://primal-hunter.local/schemas/shared/source_ref.schema.json"
 				}
 			},
 			"additionalProperties": false

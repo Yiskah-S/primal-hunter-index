@@ -1,46 +1,54 @@
 {
-	"$id": "https://primal-hunter.local/schemas/stat_scaling.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Stat Scaling Definitions",
-	"type": "object",
-	"description": "Defines how stats scale by source (race, class, title, etc.).",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"properties": {
-				"category": {
-					"type": "string",
-					"description": "Grouping such as race, class, title, equipment."
-				},
-				"stat": {
-					"type": "string",
-					"description": "Records stat identifier (e.g., Str, Agi)."
-				},
-				"base_value": {
-					"type": "number",
-					"description": "Starting bonus provided by this source."
-				},
-				"per_level": {
-					"type": "number",
-					"description": "Bonus added per level (if applicable)."
-				},
-				"notes": { "type": "string" },
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this stat scaling entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["category", "stat", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stat Scaling Definitions",
+  "description": "Defines how stats scale by source (race, class, title, etc.).",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#parameters-are-fuzzy-rules-not-fixed-numbers",
+  "$id": "https://primal-hunter.local/schemas/stat_scaling.schema.json",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Grouping such as race, class, title, equipment."
+        },
+        "stat": {
+          "type": "string",
+          "description": "Records stat identifier (e.g., Str, Agi)."
+        },
+        "base_value": {
+          "type": "number",
+          "description": "Starting bonus provided by this source."
+        },
+        "per_level": {
+          "type": "number",
+          "description": "Bonus added per level (if applicable)."
+        },
+        "notes": {
+          "type": "string"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this stat scaling entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "category",
+        "stat",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

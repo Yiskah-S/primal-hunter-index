@@ -1,37 +1,52 @@
 {
-	"$id": "https://primal-hunter.local/schemas/zone_lore.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Zone Lore Entries",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"properties": {
-				"tier": { "type": "string" },
-				"environment": { "type": "string" },
-				"summary": { "type": "string" },
-				"threats": {
-					"type": "array",
-					"items": { "type": "string" },
-					"uniqueItems": true
-				},
-				"notes": { "type": "string" },
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this zone lore entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["summary", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Zone Lore Entries",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$id": "https://primal-hunter.local/schemas/zone_lore.schema.json",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "notes": {
+          "type": "string"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this zone lore entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "summary",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

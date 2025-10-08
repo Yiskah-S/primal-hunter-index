@@ -1,144 +1,250 @@
-# tools/validate_provenance.py
 #!/usr/bin/env python3
-"""
-Provenance validator — enforces guardrails from provenance_contract.md.
+"""Validate provenance guardrails across the repository.
 
-Rules:
-  1) Timeline events MUST have source_ref[] with scene_id + line range.
-  2) Warn if timeline event has no 'quote' nor 'inference' flag (soft guidance).
-  3) Canon payloads in records/** (non-timeline) MUST NOT include inline source_ref[].
-     Exception: *.meta.json sidecars (file-level provenance) are allowed.
-  4) .meta.json must carry a well-formed record_log[] if present.
-  5) scene_id strings must match ^\\d{2}-\\d{2}-\\d{2}$.
+This script enforces the contract expectations from
+`docs/contracts/provenance_contract_v2.0.md` by checking that:
 
-Exit codes: 0 = ok, 1 = violations.
+* Character timelines include a non-empty `source_ref[]` for every entry.
+* Citations contain the required fields when `type = scene`.
+* Low-certainty and inferred citations surface as warnings.
+* Canonical record payloads do not embed inline `source_ref` blocks.
+
+The validator prints human-readable error messages and exits with status 1
+if any hard violations are found.
 """
+
 from __future__ import annotations
 
-import json
+import argparse
 import re
 import sys
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-RECORDS = REPO_ROOT / "records"
-SCENE_ID_RE = re.compile(r"^\d{2}-\d{2}-\d{2}$")
+from core.schema_utils import read_json
 
-Violation = tuple[str, Path, str]  # (level, path, message)
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+	sys.path.insert(0, str(REPO_ROOT))
 
-
-def load_json(p: Path) -> dict | list:
-	with p.open("r", encoding="utf-8") as f:
-		return json.load(f)
-
-
-def iter_json_files(root: Path) -> Iterator[Path]:
-    yield from sorted(root.rglob("*.json"))
-
-def is_timeline_file(p: Path) -> bool:
-	return "timeline" in p.stem or p.name == "timeline.json"
+RECORDS_DIR = Path("records")
+CHARACTERS_DIR = RECORDS_DIR / "characters"
+ALLOWED_INLINE_FILENAMES = {"timeline.json"}
+SOURCE_REF_ALLOWED_ROOTS = {
+	RECORDS_DIR / "characters",
+	Path("tagging"),
+}
+SCENE_ID_PATTERN = re.compile(r"^\d{2}-\d{2}-\d{2}$")
 
 
-def is_meta_sidecar(p: Path) -> bool:
-	return p.name.endswith(".meta.json")
+@dataclass
+class Finding:
+	path: Path
+	message: str
+
+	def render(self, prefix: str) -> str:
+		return f"{prefix}: {self.path}: {self.message}"
 
 
-def check_scene_id(scene_id: str) -> bool:
-	return bool(SCENE_ID_RE.match(scene_id))
-
-
-def check_timeline_file(path: Path, payload) -> list[Violation]:
-	violations: list[Violation] = []
-	if not isinstance(payload, list):
-		violations.append(("fail", path, "timeline should be a JSON array of events"))
-		return violations
-
-	for idx, ev in enumerate(payload):
-		loc = f"event[{idx}]"
-		sr = ev.get("source_ref")
-		if not isinstance(sr, list) or not sr:
-			violations.append(("fail", path, f"{loc}: missing source_ref[]"))
+def _iter_timeline_files() -> Iterator[Path]:
+	if not CHARACTERS_DIR.exists():
+		return
+	for character_dir in CHARACTERS_DIR.iterdir():
+		if not character_dir.is_dir():
 			continue
-		for j, ref in enumerate(sr):
-			rpath = f"{loc}.source_ref[{j}]"
-			sid = ref.get("scene_id")
-			if not isinstance(sid, str) or not check_scene_id(sid):
-				violations.append(("fail", path, f"{rpath}: invalid scene_id '{sid}'"))
-			for key in ("line_start", "line_end"):
-				if not isinstance(ref.get(key), int):
-					violations.append(("fail", path, f"{rpath}: {key} must be int"))
-
-		# Soft guidance: warn if neither quote nor inference flags exist
-		has_quote = any("quote" in r for r in sr)
-		has_inference = bool(ev.get("inference")) or any(r.get("inference") for r in sr if isinstance(r, dict))
-		if not (has_quote or has_inference):
-			violations.append(("warn", path, f"{loc}: no quotes or inference hints provided"))
-	return violations
+		timeline_path = character_dir / "timeline.json"
+		if timeline_path.exists():
+			yield timeline_path
 
 
-def scan_for_inline_source_ref(path: Path, payload) -> list[Violation]:
-	"""
-	Walk any dict/list payload and report if 'source_ref' appears where it shouldn't.
-	Allowed: timelines (handled separately) and *.meta.json.
-	"""
-	violations: list[Violation] = []
+def _normalize_path(path: Path) -> Path:
+	try:
+		return path.relative_to(Path.cwd())
+	except ValueError:
+		return path
 
-	def _walk(node, trail: str = "$"):
+
+def _is_relative_to(path: Path, other: Path) -> bool:
+	try:
+		path.relative_to(other)
+		return True
+	except ValueError:
+		return False
+
+def _check_source_ref_fields(ref: dict[str, Any], ref_prefix: str, path: Path, errors: list[Finding],
+							warnings: list[Finding]) -> tuple[list[Finding], list[Finding]]:
+    """Validate individual source_ref object."""
+    scene_id = ref.get("scene_id")
+    line_start = ref.get("line_start")
+    line_end = ref.get("line_end")
+
+    if not isinstance(ref, dict):
+        errors.append(Finding(_normalize_path(path), f"{ref_prefix} must be an object"))
+        return errors, warnings
+
+    ref_type = ref.get("type")
+    if ref_type != "scene":
+        # Soft rule: if inferred, must have inference_note
+        if ref_type == "inferred" and not ref.get("inference_note"):
+            warnings.append(Finding(_normalize_path(path), f"{ref_prefix} inferred but missing inference_note"))
+        return errors, warnings
+
+    # Hard validation for scene refs
+    if not isinstance(scene_id, str) or not SCENE_ID_PATTERN.match(scene_id):
+        errors.append(Finding(_normalize_path(path), f"{ref_prefix}.scene_id '{scene_id}' must match BB-CC-SS"))
+    if not isinstance(line_start, int) or not isinstance(line_end, int):
+        errors.append(Finding(_normalize_path(path), f"{ref_prefix}.line_start and line_end must be ints"))
+    elif line_start > line_end:
+        errors.append(
+            Finding(
+                _normalize_path(path),
+                f"{ref_prefix}.line_start ({line_start}) cannot exceed line_end ({line_end})"
+            )
+        )
+
+    # Soft guidance: review low certainty
+    if ref.get("certainty") == "low":
+        warnings.append(Finding(_normalize_path(path), f"{ref_prefix} marked certainty=low; ensure manual review"))
+
+    return errors, warnings
+
+def _validate_timeline_file(path: Path) -> tuple[list[Finding], list[Finding]]:
+    """Validate a character timeline file structure and source_ref compliance."""
+    data = read_json(path)
+    errors, warnings = [], []
+
+    if not isinstance(data, list):
+        errors.append(Finding(_normalize_path(path), "timeline must be a JSON array of events"))
+        return errors, warnings
+
+    for index, entry in enumerate(data):
+        if not isinstance(entry, dict):
+            errors.append(Finding(_normalize_path(path), f"event[{index}] must be an object"))
+            continue
+
+        entry_prefix = f"event[{index}]"
+        ev_errors, ev_warnings = _check_event_source_refs(entry, entry_prefix, path)
+        errors.extend(ev_errors)
+        warnings.extend(ev_warnings)
+
+    return errors, warnings
+
+
+def _check_event_source_refs(
+    entry: dict[str, Any],
+    entry_prefix: str,
+    path: Path
+) -> tuple[list[Finding], list[Finding]]:
+    """Validate all source_ref[] entries for a single event."""
+    errors, warnings = [], []
+    source_refs = entry.get("source_ref")
+
+    # Hard fail: must be non-empty list
+    if not isinstance(source_refs, list) or not source_refs:
+        errors.append(Finding(_normalize_path(path), f"{entry_prefix} missing non-empty source_ref[]"))
+        return errors, warnings
+
+    for i, ref in enumerate(source_refs):
+        ref_prefix = f"{entry_prefix}.source_ref[{i}]"
+        errors, warnings = _check_source_ref_fields(ref, ref_prefix, path, errors, warnings)
+
+    # Soft guidance: if none have quotes or inference flags
+    has_quote = any(isinstance(r, dict) and "quote" in r for r in source_refs)
+    has_inference = any(isinstance(r, dict) and r.get("inference") for r in source_refs)
+    if not (has_quote or has_inference):
+        warnings.append(Finding(_normalize_path(path), f"{entry_prefix} has no quotes or inference hints"))
+
+    return errors, warnings
+
+
+def _iter_canonical_files() -> Iterable[Path]:
+	for json_path in RECORDS_DIR.rglob("*.json"):
+		name = json_path.name
+		if name.endswith((".meta.json", ".review.json", ".provenance.json")):
+			continue
+		if name in ALLOWED_INLINE_FILENAMES:
+			continue
+		if any(_is_relative_to(json_path, root) for root in SOURCE_REF_ALLOWED_ROOTS):
+			continue
+		yield json_path
+
+
+def _discover_inline_source_refs(path: Path) -> list[str]:
+	data = read_json(path)
+	stack: list[tuple[Any, str]] = [(data, "<root>")]
+	citations: list[str] = []
+
+	while stack:
+		node, location = stack.pop()
 		if isinstance(node, dict):
-			if "source_ref" in node:
-				violations.append(("fail", path, f"inline source_ref found at {trail}"))
-			for k, v in node.items():
-				_walk(v, f"{trail}.{k}")
+			for key, value in node.items():
+				next_location = f"{location}.{key}" if location != "<root>" else key
+				if key == "source_ref":
+					citations.append(next_location)
+				stack.append((value, next_location))
 		elif isinstance(node, list):
-			for i, v in enumerate(node):
-				_walk(v, f"{trail}[{i}]")
-
-	_walk(payload)
-	return violations
+			for idx, item in enumerate(node):
+				stack.append((item, f"{location}[{idx}]"))
+	return citations
 
 
-def check_meta_sidecar(path: Path, payload) -> list[Violation]:
-	violations: list[Violation] = []
-	# record_log[] is optional but if present must be an array of objects with minimal fields
-	log = payload.get("record_log")
-	if log is None:
-		return violations
-	if not isinstance(log, list):
-		violations.append(("fail", path, "record_log must be an array"))
-		return violations
-	for i, entry in enumerate(log):
-		if not isinstance(entry, dict):
-			violations.append(("fail", path, f"record_log[{i}] must be an object"))
-			continue
-		if "timestamp" not in entry or "action" not in entry:
-			violations.append(("fail", path, f"record_log[{i}] missing 'timestamp' or 'action'"))
-	return violations
+def _validate_inline_source_refs() -> list[Finding]:
+	findings: list[Finding] = []
+	for path in _iter_canonical_files():
+		citations = _discover_inline_source_refs(path)
+		if citations:
+			for location in citations:
+				findings.append(
+					Finding(
+						_normalize_path(path),
+						f"inline source_ref found at {location}; move to sidecar or timeline",
+					)
+				)
+	return findings
 
 
-def main() -> int:
-	violations: list[Violation] = []
-	for p in iter_json_files(RECORDS):
-		payload = load_json(p)
-		if is_timeline_file(p) and not is_meta_sidecar(p):
-			violations.extend(check_timeline_file(p, payload))
-			continue
-		if is_meta_sidecar(p):
-			violations.extend(check_meta_sidecar(p, payload))
-			continue
-		# Regular canon files: must NOT contain inline source_ref anywhere
-		violations.extend(scan_for_inline_source_ref(p, payload))
+def parse_args(argv: list[str]) -> argparse.Namespace:
+	parser = argparse.ArgumentParser(description="Validate provenance guardrails.")
+	parser.add_argument(
+		"--allow-inline",
+		action="store_true",
+		help="Downgrade inline source_ref findings to warnings (temporary migration aid).",
+	)
+	return parser.parse_args(argv)
 
-	# Print and choose exit code
-	has_fail = False
-	for level, path, msg in violations:
-		prefix = "FAIL" if level == "fail" else "WARN"
-		if level == "fail":
-			has_fail = True
-		print(f"[{prefix}] {path.relative_to(REPO_ROOT)} :: {msg}")
 
-	return 1 if has_fail else 0
+def main(argv: list[str] | None = None) -> int:
+	ns = parse_args(argv or sys.argv[1:])
+	errors: list[Finding] = []
+	warnings: list[Finding] = []
+
+	for timeline_path in _iter_timeline_files():
+		timeline_errors, timeline_warnings = _validate_timeline_file(timeline_path)
+		errors.extend(timeline_errors)
+		warnings.extend(timeline_warnings)
+
+	inline_findings = _validate_inline_source_refs()
+	if ns.allow_inline:
+		warnings.extend(inline_findings)
+	else:
+		errors.extend(inline_findings)
+
+	for warning in warnings:
+		print(warning.render("WARN"), file=sys.stderr)
+
+	if errors:
+		for error in errors:
+			print(error.render("ERROR"), file=sys.stderr)
+		return 1
+
+	if warnings:
+		print("Provenance validation passed with warnings.", file=sys.stdout)
+	else:
+		print("Provenance validation passed.", file=sys.stdout)
+	return 0
 
 
 if __name__ == "__main__":
-	sys.exit(main())
+	raise SystemExit(main())

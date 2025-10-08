@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://primal-hunter.local/schemas/shared/index_meta.schema.json",
   "title": "Indexing Metadata Fragment",
   "description": "Tracks who added a record entry, how it was added, and the review status. Use stable slugs (e.g., added_by='assistant', method='manual', method='search_skill_mentions').",
+  "$comment": "See docs/contracts/record_log_contract_v1.1.md#storage-location",
+  "$id": "https://primal-hunter.local/schemas/shared/index_meta.schema.json",
   "$defs": {
     "index_meta": {
       "type": "object",

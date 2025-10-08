@@ -1,109 +1,143 @@
 {
-	"$id": "https://primal-hunter.local/schemas/file_metadata.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "File Metadata",
-	"type": "object",
-	"properties": {
-		"records": {
-			"type": "boolean",
-			"description": "Whether the associated JSON file is part of the records data set."
-		},
-		"source": {
-			"type": "object",
-			"description": "Provenance information for the records data.",
-			"properties": {
-				"book": {
-					"type": ["integer", "string"],
-					"description": "Book identifier (number or slug)."
-				},
-				"chapter": {
-					"type": ["integer", "string", "null"],
-					"description": "Chapter identifier within the book."
-				},
-				"scene": {
-					"type": ["integer", "null"],
-					"minimum": 1,
-					"description": "Scene index within the chapter (1-based)."
-				},
-				"scene_id": {
-					"type": "string",
-					"pattern": "^\\d{2}-\\d{2}-\\d{2}$",
-					"description": "Zero-padded scene identifier (BB-CC-SS)."
-				},
-				"line": {
-					"type": ["integer", "null"],
-					"minimum": 1,
-					"description": "Line number within the source material."
-				},
-				"notes": {
-					"type": "string",
-					"description": "Free-form provenance notes."
-				}
-			},
-			"minProperties": 1,
-			"additionalProperties": false
-		},
-		"entered_by": {
-			"type": "string",
-			"enum": ["human", "assistant"],
-			"description": "Who entered the associated data."
-		},
-		"reviewed_by_human": {
-			"type": "boolean",
-			"description": "Whether a human reviewed this file after generation."
-		},
-		"tags": {
-			"$ref": "shared/tags.schema.json"
-		},
-		"last_updated": {
-			"type": "string",
-			"format": "date",
-			"description": "Calendar date (YYYY-MM-DD) when this metadata was last revised."
-		},
-		"record_log": {
-			"type": "array",
-			"description": "Audit trail of record entry batches for this file.",
-			"items": {
-				"type": "object",
-				"properties": {
-					"entry_keys": {
-						"type": "array",
-						"items": { "type": "string" },
-						"uniqueItems": true,
-						"description": "Keys (or identifiers) of the entries touched in this batch."
-					},
-					"added_by": {
-						"type": "string",
-						"description": "Tool or human that performed this batch (use consistent slugs)."
-					},
-					"date": {
-						"type": "string",
-						"format": "date",
-						"description": "Date this batch was applied."
-					},
-					"method": {
-						"type": "string",
-						"description": "Workflow or tooling used (e.g., 'manual', 'search_skill_mentions')."
-					},
-					"reviewed_by": {
-						"type": ["string", "null"],
-						"description": "Reviewer of this batch, if any."
-					},
-					"review_status": {
-						"type": "string",
-						"enum": ["pending", "approved", "rejected"],
-						"description": "Review outcome for this batch."
-					},
-					"notes": {
-						"type": "string",
-						"description": "Context or rationale for this batch."
-					}
-				},
-				"required": ["entry_keys", "added_by", "date", "method"],
-				"additionalProperties": false
-			}
-		}
-	},
-	"required": ["records", "source"],
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "File Metadata",
+  "type": "object",
+  "$comment": "See docs/contracts/record_log_contract_v1.1.md#storage-location",
+  "$id": "https://primal-hunter.local/schemas/file_metadata.schema.json",
+  "properties": {
+    "records": {
+      "type": "boolean",
+      "description": "Whether the associated JSON file is part of the records data set."
+    },
+    "source": {
+      "type": "object",
+      "description": "Provenance information for the records data.",
+      "properties": {
+        "book": {
+          "type": [
+            "integer",
+            "string"
+          ],
+          "description": "Book identifier (number or slug)."
+        },
+        "chapter": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ],
+          "description": "Chapter identifier within the book."
+        },
+        "scene": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Scene index within the chapter (1-based)."
+        },
+        "scene_id": {
+          "type": "string",
+          "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+          "description": "Zero-padded scene identifier (BB-CC-SS)."
+        },
+        "line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Line number within the source material."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-form provenance notes."
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "entered_by": {
+      "type": "string",
+      "enum": [
+        "human",
+        "assistant"
+      ],
+      "description": "Who entered the associated data."
+    },
+    "reviewed_by_human": {
+      "type": "boolean",
+      "description": "Whether a human reviewed this file after generation."
+    },
+    "tags": {
+      "$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Calendar date (YYYY-MM-DD) when this metadata was last revised."
+    },
+    "record_log": {
+      "type": "array",
+      "description": "Audit trail of record entry batches for this file.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entry_keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "description": "Keys (or identifiers) of the entries touched in this batch."
+          },
+          "added_by": {
+            "type": "string",
+            "description": "Tool or human that performed this batch (use consistent slugs)."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date this batch was applied."
+          },
+          "method": {
+            "type": "string",
+            "description": "Workflow or tooling used (e.g., 'manual', 'search_skill_mentions')."
+          },
+          "reviewed_by": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Reviewer of this batch, if any."
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "description": "Review outcome for this batch."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Context or rationale for this batch."
+          }
+        },
+        "required": [
+          "entry_keys",
+          "added_by",
+          "date",
+          "method"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "records",
+    "source"
+  ],
+  "additionalProperties": false
 }

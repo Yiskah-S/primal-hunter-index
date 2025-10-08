@@ -1,32 +1,45 @@
 {
-	"$id": "https://primal-hunter.local/schemas/system_glossary.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "System Glossary",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"properties": {
-				"description": { "type": "string" },
-				"applies_to": { "type": "string" },
-				"example": { "type": "string" },
-				"notes": { "type": "string" },
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this glossary definition asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["description", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Glossary",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$id": "https://primal-hunter.local/schemas/system_glossary.schema.json",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "applies_to": {
+          "type": "string"
+        },
+        "example": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this glossary definition asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "description",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

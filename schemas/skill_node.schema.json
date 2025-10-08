@@ -1,103 +1,127 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Skill Node",
-    "description": "Represents a specific form or upgrade of a skill within a skill family.",
-    "type": "object",
-    "required": [
-        "id",
-        "family_id",
-        "label",
-        "rarity",
-        "canon",
-        "source_ref"
-    ],
-    "properties": {
-        "id": {
-            "type": "string",
-            "pattern": "^node:[a-z0-9_\\-.]+$",
-            "description": "Unique node identifier, e.g. 'node:meditation.common'"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Node",
+  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
+  "description": "Represents a specific form or upgrade of a skill within a skill family.",
+  "type": "object",
+  "required": [
+    "id",
+    "family_id",
+    "label",
+    "rarity",
+    "canon",
+    "source_ref"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
         },
-        "family_id": {
-            "type": "string",
-            "pattern": "^skill:[a-z0-9_\\-]+$",
-            "description": "Which skill family this node belongs to"
-        },
-        "label": {
-            "type": "string",
-            "description": "Readable label for the node, e.g. 'Meditation [Common]'"
-        },
-        "rarity": {
-            "type": "string",
-            "enum": [
-                "Inferior",
-                "Common",
-                "Uncommon",
-                "Rare",
-                "Epic",
-                "Legendary",
-                "Unique",
-                "Transcendent"
-            ]
-        },
-        "prereqs": {
-            "type": "array",
-            "description": "Conditions required to unlock or upgrade to this node",
-            "items": {
-                "type": "object",
-                "required": [
-                    "type"
-                ],
-                "properties": {
-                    "type": {
-                        "type": "string"
-                    },
-                    "value": {}
-                },
-                "additionalProperties": true
-            }
-        },"param_rules": {
-            "type": "object",
-            "patternProperties": {
-                "^.*$": {
-                    "$ref": "shared/param_rule.schema.json#/$defs/param_rule"
-                }
-                },
-                "additionalProperties": false
-            }
-        },
-        "upgrades_to": {
-            "type": "array",
-            "description": "Possible upgrades from this node",
-            "items": {
-                "type": "object",
-                "required": [
-                    "node_id"
-                ],
-                "properties": {
-                    "node_id": {
-                        "type": "string"
-                    },
-                    "conditions": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            }
-        },
-        "canon": {
-            "type": "boolean",
-            "description": "Marks this node as quote-backed and accepted"
-        },
-        "source_ref": {
-            "type": "array",
-            "items": {
-                "$ref": "shared/source_ref.schema.json"
-            },
-            "description": "Quote-based evidence of this node's existence"
+        {
+          "pattern": "^sn\\."
         }
+      ],
+      "description": "Stable node identifier (sn.*)."
     },
-    "additionalProperties": false
+    "family_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sf\\."
+        }
+      ],
+      "description": "Which skill family this node belongs to"
+    },
+    "label": {
+      "type": "string",
+      "description": "Readable label for the node, e.g. 'Meditation [Common]'"
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "Inferior",
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Unique",
+        "Transcendent"
+      ]
+    },
+    "prereqs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "param_rules": {
+      "type": "object",
+      "patternProperties": {
+        "^.+$": {
+          "$ref": "https://primal-hunter.local/schemas/shared/param_rule.schema.json#/$defs/param_rule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "upgrades_to": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "properties": {
+          "node_id": {
+            "allOf": [
+              {
+                "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+              },
+              {
+                "pattern": "^sn\\."
+              }
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "canon": {
+      "type": "boolean",
+      "description": "Marks this node as quote-backed and accepted"
+    },
+    "source_ref": {
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+    }
+  },
+  "additionalProperties": false
 }

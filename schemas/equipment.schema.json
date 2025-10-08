@@ -1,6 +1,7 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Equipment Metadata Schema",
+		"$schema": "https://json-schema.org/draft/2020-12/schema",
+		"title": "Equipment Metadata Schema",
+		"$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
 	"type": "object",
 	"description": "Definitions of all equipment and items, indexed by name.",
 	"$defs": {
@@ -31,13 +32,14 @@
 					"type": "object",
 					"description": "Any bonuses, stat gains, skill grants, or healing effects",
 					"properties": {
-						"stat_bonus": {
-							"type": "object",
-							"patternProperties": {
-								".+": { "type": "number" }
+							"stat_bonus": {
+								"type": "object",
+								"patternProperties": {
+									".+": { "type": "number" }
+								},
+								"description": "Flat stat increases (e.g., 'Str': 2)",
+								"additionalProperties": false
 							},
-							"description": "Flat stat increases (e.g., 'Str': 2)"
-						},
 						"grants_skills": {
 							"type": "array",
 							"description": "Skills temporarily or passively granted by item",
@@ -63,9 +65,18 @@
 					"type": "string",
 					"description": "Slot used if equippable (e.g., 'chest', 'head', 'main_hand', etc.)"
 				},
-				"tags": {
-					"$ref": "shared/tags.schema.json"
-				},
+					"tags": {
+						"oneOf": [
+							{
+								"$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+							},
+							{
+								"type": "array",
+								"items": { "type": "string" },
+								"uniqueItems": true
+							}
+						]
+					},
 				"granted_by": {
 					"$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
 				},

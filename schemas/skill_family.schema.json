@@ -1,53 +1,59 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Skill Family",
-    "description": "Defines the core concept of a skill, excluding per-character behavior or upgrades.",
-    "type": "object",
-    "required": [
-        "id",
-        "name",
-        "type",
-        "tags",
-        "flavor",
-        "canon",
-        "source_ref"
-    ],
-    "properties": {
-        "id": {
-            "type": "string",
-            "pattern": "^skill:[a-z0-9_\\-]+$",
-            "description": "Unique identifier for the skill family, e.g. 'skill:meditation'"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Family",
+  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "tags",
+    "flavor",
+    "canon",
+    "source_ref"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
         },
-        "name": {
-            "type": "string",
-            "description": "Display name for the skill, e.g. 'Meditation'"
-        },
-        "type": {
-            "type": "string",
-            "description": "General type classification, e.g. 'Utility', 'Combat', 'Passive'"
-        },
-        "tags": {
-            "$ref": "shared/tags.schema.json"
-        },
-        "flavor": {
-            "type": "string",
-            "description": "Short poetic/tonal one-liner (e.g. tooltip text)"
-        },
-        "canon": {
-            "type": "boolean",
-            "description": "True if this record has valid source_ref and is considered canonical"
-        },
-        "source_ref": {
-            "type": "array",
-            "items": {
-                "$ref": "shared/source_ref.schema.json"
-            },
-            "description": "Where this skill was first observed or introduced"
-        },
-        "description": {
-            "type": "string",
-            "description": "Optional longer prose explanation (non-canon safe)"
+        {
+          "pattern": "^sf\\."
         }
+      ],
+      "description": "Stable skill family identifier (sf.*)."
     },
-    "additionalProperties": false
+    "name": {
+      "type": "string",
+      "description": "Display name for the skill, e.g. 'Meditation'"
+    },
+    "type": {
+      "type": "string",
+      "description": "General type classification, e.g. 'Utility', 'Combat', 'Passive'"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Topic or mechanic tags applied to the family."
+    },
+    "flavor": {
+      "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+    },
+    "canon": {
+      "type": "boolean",
+      "description": "True if this record has valid provenance and is considered canonical"
+    },
+    "source_ref": {
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional longer prose explanation (non-canon safe)"
+    }
+  },
+  "additionalProperties": false
 }

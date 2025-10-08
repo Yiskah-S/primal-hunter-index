@@ -16,13 +16,7 @@ import sys
 from collections.abc import Iterable
 from pathlib import Path
 
-from jsonschema import Draft202012Validator
-
-try:
-    from referencing import Registry, Resource  # type: ignore
-except ImportError:  # pragma: no cover - optional dependency
-    Registry = None  # type: ignore
-    Resource = None  # type: ignore
+from jsonschema import Draft202012Validator, RefResolver
 
 from core.schema_utils import read_json
 
@@ -78,43 +72,35 @@ CANONICAL_RECORD_PATHS: tuple[Path, ...] = (
     RECORDS_ROOT / "locations.json"
 )
 
-SHARED_SCHEMA_URIS = {
-    "https://primal-hunter.local/schemas/shared/granted_by.schema.json": (
+SHARED_SCHEMA_STORE = {
+    "https://primal-hunter.local/schemas/shared/granted_by.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "granted_by.schema.json"
     ),
-    "https://primal-hunter.local/schemas/shared/flavor.schema.json": (
+    "https://primal-hunter.local/schemas/shared/flavor.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "flavor.schema.json"
     ),
-    "https://primal-hunter.local/schemas/shared/resource_block.schema.json": (
+    "https://primal-hunter.local/schemas/shared/resource_block.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "resource_block.schema.json"
     ),
-    "https://primal-hunter.local/schemas/shared/tags.schema.json": (
+    "https://primal-hunter.local/schemas/shared/tags.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "tags.schema.json"
     ),
-    "https://primal-hunter.local/schemas/shared/provenance.schema.json": (
+    "https://primal-hunter.local/schemas/shared/provenance.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "provenance.schema.json"
     ),
+    "https://primal-hunter.local/schemas/shared/source_ref.schema.json": read_json(
+        SCHEMA_ROOT / "shared" / "source_ref.schema.json"
+    ),
+    "https://primal-hunter.local/schemas/shared/id.schema.json": read_json(
+        SCHEMA_ROOT / "shared" / "id.schema.json"
+    ),
 }
-
-def _build_schema_registry():
-    if Registry is None or Resource is None:
-        return None
-    registry = Registry()
-    for uri, path in SHARED_SCHEMA_URIS.items():
-        if path.exists():
-            registry = registry.with_resource(uri, Resource.from_contents(read_json(path)))
-    return registry
-
-
-SCHEMA_REGISTRY = _build_schema_registry()
 
 
 def _collect_schema_errors(data_path: Path, schema_path: Path) -> list[str]:
     schema_definition = read_json(schema_path)
-    validator_kwargs = {}
-    if SCHEMA_REGISTRY is not None:
-        validator_kwargs["registry"] = SCHEMA_REGISTRY
-    validator = Draft202012Validator(schema_definition, **validator_kwargs)
+    resolver = RefResolver.from_schema(schema_definition, store=SHARED_SCHEMA_STORE)
+    validator = Draft202012Validator(schema_definition, resolver=resolver)
     instance_data = read_json(data_path)
     error_messages: list[str] = []
     for validation_error in validator.iter_errors(instance_data):

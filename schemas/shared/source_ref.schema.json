@@ -1,33 +1,66 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "source_ref",
-    "description": "Points to a specific quote-backed line span in a canon scene.",
-    "type": "object",
-    "required": [
-        "scene_id",
-        "line_start",
-        "line_end"
-    ],
-    "properties": {
-        "scene_id": {
-            "type": "string",
-            "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",
-            "description": "Scene identifier in BB-CC-SS format (Book, Chapter, Scene)"
-        },
-        "line_start": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "First line number of the quoted span"
-        },
-        "line_end": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Last line number of the quoted span"
-        },
-        "quote": {
-            "type": "string",
-            "description": "Optional direct quote text for context"
-        }
-    },
-    "additionalProperties": false
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://primal-hunter.local/schemas/shared/source_ref.schema.json",
+	"title": "source_ref",
+	"$comment": "See docs/contracts/source_ref_contract_v1.1.md#object-definition",
+	"type": "object",
+	"description": "Canonical citation object proving a fact, event, or tag.",
+	"required": ["type"],
+	"properties": {
+		"type": {
+			"type": "string",
+			"enum": ["scene", "wiki", "user", "inferred", "external"],
+			"description": "Where this citation originates."
+		},
+		"scene_id": {
+			"type": "string",
+			"pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+			"description": "Scene identifier in BB-CC-SS format (Book, Chapter, Scene)."
+		},
+		"line_start": {
+			"type": "integer",
+			"minimum": 1,
+			"description": "First line number (inclusive) backing this reference."
+		},
+		"line_end": {
+			"type": "integer",
+			"minimum": 1,
+			"description": "Last line number (inclusive) backing this reference."
+		},
+		"quote": {
+			"type": "string",
+			"maxLength": 320,
+			"description": "Optional quote excerpt to provide immediate context."
+		},
+		"certainty": {
+			"type": "string",
+			"enum": ["low", "medium", "high"],
+			"description": "Confidence rating for inferred or external citations."
+		},
+		"inference_type": {
+			"type": "string",
+			"enum": ["character_assumption", "system_behavior_guess", "narrative_foreshadow", "other"],
+			"description": "Why this reference is inferred rather than explicit."
+		},
+		"inference_note": {
+			"type": "string",
+			"minLength": 3,
+			"description": "Supporting explanation for inferred references."
+		}
+	},
+	"allOf": [
+		{
+			"if": { "properties": { "type": { "const": "scene" } }, "required": ["type"] },
+			"then": { "required": ["scene_id", "line_start", "line_end"] }
+		},
+		{
+			"if": { "properties": { "type": { "const": "inferred" } }, "required": ["type"] },
+			"then": { "required": ["inference_note"] }
+		},
+		{
+			"if": { "required": ["inference_type"] },
+			"then": { "required": ["inference_note"] }
+		}
+	],
+	"additionalProperties": false
 }

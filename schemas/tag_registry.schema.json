@@ -3,6 +3,7 @@
   "title": "Tag Registry v0.3",
   "description": "Validates canonical tag registry grouped by tag class with lifecycle metadata.",
   "type": "object",
+  "$comment": "See docs/contracts/tagging_contract_v0.4.md#2-taggingtag_registryjson",
   "minProperties": 1,
   "patternProperties": {
     "^[a-z0-9_]+$": {
@@ -22,8 +23,14 @@
         ],
         "properties": {
           "tag_id": {
-            "type": "string",
-            "pattern": "^tag\\.[a-z0-9_]+\\.[a-z0-9_]+$",
+            "allOf": [
+              {
+                "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+              },
+              {
+                "pattern": "^tag\\."
+              }
+            ],
             "description": "Stable ID for this tag (e.g. tag.skills.basic_archery)."
           },
           "tag": {
@@ -38,12 +45,22 @@
           },
           "tag_role": {
             "type": "string",
-            "enum": ["heuristic", "canonical", "test_data", "inferred_only", "manual_only"],
+            "enum": [
+              "heuristic",
+              "canonical",
+              "test_data",
+              "inferred_only",
+              "manual_only"
+            ],
             "description": "Role or function of the tag in the tagging pipeline."
           },
           "status": {
             "type": "string",
-            "enum": ["candidate", "approved", "rejected"],
+            "enum": [
+              "candidate",
+              "approved",
+              "rejected"
+            ],
             "description": "Tag approval status for canon use."
           },
           "approved": {
@@ -82,9 +99,27 @@
         },
         "allOf": [
           {
-            "if": { "properties": { "status": { "const": "approved" } } },
-            "then": { "properties": { "approved": { "const": true } } },
-            "else": { "properties": { "approved": { "const": false } } }
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "approved"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "approved": {
+                  "const": true
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "approved": {
+                  "const": false
+                }
+              }
+            }
           }
         ],
         "additionalProperties": false

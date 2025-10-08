@@ -11,7 +11,8 @@
     "source_ref": {
       "scene_id": "01-01-01",
       "line_start": 1,
-      "line_end": 83
+      "line_end": 83,
+      "type": "scene"
     }
   },
   "The System": {
@@ -24,7 +25,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 20,
-      "line_end": 159
+      "line_end": 159,
+      "type": "scene"
     }
   }
 }

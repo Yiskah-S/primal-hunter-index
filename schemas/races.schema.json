@@ -1,40 +1,58 @@
 {
-	"$id": "https://primal-hunter.local/schemas/races.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Race Definitions",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"properties": {
-				"type": { "type": "string" },
-				"rarity": { "type": "string" },
-				"tier": { "type": "string" },
-				"stat_bonus_per_level": {
-					"type": "object",
-					"patternProperties": {
-						"^.+$": { "type": "number" }
-					},
-					"additionalProperties": false
-				},
-				"description": { "type": "string" },
-				"flavor": { "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor" },
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this race entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["type", "rarity", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Race Definitions",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$id": "https://primal-hunter.local/schemas/races.schema.json",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "rarity": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "stat_bonus_per_level": {
+          "type": "object",
+          "patternProperties": {
+            "^.+$": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "flavor": {
+          "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this race entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "type",
+        "rarity",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

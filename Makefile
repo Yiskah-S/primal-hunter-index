@@ -101,6 +101,10 @@ validate-known-skills:  ## Cross-check known skills against catalog and scene ID
 validate-timeline:  ## Validate character timeline files
 	@PYTHONPATH=. $(PY) tools/validate_character_timeline.py
 
+.PHONY: validate-provenance
+validate-provenance:  ## Enforce provenance contract guardrails
+	@PYTHONPATH=. $(PY) tools/validate_provenance.py
+
 check: validate  ## Alias for validate
 
 # --- CLI Scripts ---

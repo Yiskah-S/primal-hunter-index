@@ -27,7 +27,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 73,
-      "line_end": 73
+      "line_end": 73,
+      "type": "scene"
     },
     "flavor": "Jake considered it similar to a rogue. fast, deadly, but too up-close for his liking."
   },
@@ -54,7 +55,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 77,
-      "line_end": 77
+      "line_end": 77,
+      "type": "scene"
     },
     "flavor": "The choice of someone unsure how to specialize. a flexible but unfocused option."
   },
@@ -83,7 +85,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 81,
-      "line_end": 81
+      "line_end": 81,
+      "type": "scene"
     },
     "flavor": "Jake imagined it as the big, beefy Viking-type class. not for him."
   },
@@ -112,7 +115,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 85,
-      "line_end": 85
+      "line_end": 85,
+      "type": "scene"
     },
     "flavor": "Jake's clear favorite. a flexible ranged combatant that fits his playstyle."
   },
@@ -143,7 +147,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 89,
-      "line_end": 89
+      "line_end": 89,
+      "type": "scene"
     },
     "flavor": "Jake was intrigued by the concept of magic, but still preferred the bow over fireballs."
   },
@@ -172,7 +177,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 93,
-      "line_end": 93
+      "line_end": 93,
+      "type": "scene"
     },
     "flavor": "Jake wasn't interested, but the hint at deific powers piqued his curiosity about priest paths."
   }

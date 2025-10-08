@@ -1,76 +1,81 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Affiliation Definition",
-	"description": "Records of affiliations such as origins, religions, factions, guilds, or planar allegiances.",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"description": "Single affiliation keyed by its records entry name.",
-			"properties": {
-				"type": {
-					"type": "string",
-					"description": "Affiliation category (e.g., origin, religion, faction, guild, cosmic)."
-				},
-				"alignment": {
-					"type": "string",
-					"description": "Optional worldview or alignment descriptor."
-				},
-				"tier": {
-					"type": "string",
-					"description": "Influence or power tier (e.g., Mortal, Ascended, Transcendent)."
-				},
-				"leaders": {
-					"type": "array",
-					"description": "Key figures or founders associated with this affiliation.",
-					"items": {
-						"type": "string"
-					}
-				},
-				"members": {
-					"type": "array",
-					"description": "Notable characters belonging to this affiliation.",
-					"items": {
-						"type": "string"
-					}
-				},
-				"domains": {
-					"type": "array",
-					"description": "Locations or realms controlled or influenced by the affiliation.",
-					"items": {
-						"type": "string"
-					}
-				},
-				"races": {
-					"type": "array",
-					"description": "Species commonly aligned with this affiliation.",
-					"items": {
-						"type": "string"
-					}
-				},
-				"philosophy": {
-					"type": "string",
-					"description": "Optional motto or guiding belief structure."
-				},
-				"flavor": {
-					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
-				},
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this affiliation entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["type", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Affiliation Definition",
+  "description": "Records of affiliations such as origins, religions, factions, guilds, or planar allegiances.",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "description": "Single affiliation keyed by its records entry name.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Affiliation category (e.g., origin, religion, faction, guild, cosmic)."
+        },
+        "alignment": {
+          "type": "string",
+          "description": "Optional worldview or alignment descriptor."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Influence or power tier (e.g., Mortal, Ascended, Transcendent)."
+        },
+        "leaders": {
+          "type": "array",
+          "description": "Key figures or founders associated with this affiliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "members": {
+          "type": "array",
+          "description": "Notable characters belonging to this affiliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "description": "Locations or realms controlled or influenced by the affiliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "races": {
+          "type": "array",
+          "description": "Species commonly aligned with this affiliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "philosophy": {
+          "type": "string",
+          "description": "Optional motto or guiding belief structure."
+        },
+        "flavor": {
+          "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this affiliation entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "type",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

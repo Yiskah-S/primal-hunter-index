@@ -1,6 +1,7 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Class Metadata Schema",
+		"$schema": "https://json-schema.org/draft/2020-12/schema",
+		"title": "Class Metadata Schema",
+		"$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
 	"type": "object",
 	"$defs": {
 		"entry": {
@@ -26,12 +27,13 @@
 					"type": "array",
 					"items": { "type": "string" }
 				},
-				"stat_bonus_per_level": {
-					"type": "object",
-					"patternProperties": {
-						".+": { "type": "number" }
-					}
-				},
+					"stat_bonus_per_level": {
+						"type": "object",
+						"patternProperties": {
+							".+": { "type": "number" }
+						},
+						"additionalProperties": false
+					},
 				"grants_skills": {
 					"type": "array",
 					"items": { "type": "string" }

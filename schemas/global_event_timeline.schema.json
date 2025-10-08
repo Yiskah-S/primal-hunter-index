@@ -1,35 +1,68 @@
 {
-	"$id": "https://primal-hunter.local/schemas/global_event_timeline.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Global Event Timeline",
-		"type": "array",
-		"items": {
-			"type": "object",
-			"properties": {
-			"day": { "type": "integer", "minimum": 0 },
-			"scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
-			"event": { "type": "string" },
-			"summary": { "type": "string" },
-			"characters": {
-				"type": "array",
-				"items": { "type": "string" },
-				"uniqueItems": true
-			},
-			"location": { "type": "string" },
-			"notes": { "type": "string" },
-			"tags": {
-				"$ref": "shared/tags.schema.json"
-			},
-			"canon": {
-				"type": "boolean",
-				"description": "Whether this entry asserts a canon global event."
-			},
-			"source_ref": {
-				"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-			}
-		},
-		"required": ["day", "event", "canon", "source_ref"],
-		"additionalProperties": false
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Global Event Timeline",
+  "type": "array",
+  "$comment": "See docs/contracts/provenance_contract_v2.0.md#2-provenance-requirements",
+  "$id": "https://primal-hunter.local/schemas/global_event_timeline.schema.json",
+  "items": {
+    "type": "object",
+    "properties": {
+      "day": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "scene_id": {
+        "type": "string",
+        "pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+      },
+      "event": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "characters": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "location": {
+        "type": "string"
+      },
+      "notes": {
+        "type": "string"
+      },
+      "tags": {
+        "oneOf": [
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        ]
+      },
+      "canon": {
+        "type": "boolean",
+        "description": "Whether this entry asserts a canon global event."
+      },
+      "source_ref": {
+        "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+      }
+    },
+    "required": [
+      "day",
+      "event",
+      "canon",
+      "source_ref"
+    ],
+    "additionalProperties": false
+  },
+  "additionalProperties": false
 }

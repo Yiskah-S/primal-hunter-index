@@ -1,94 +1,135 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Creature Definition",
-	"description": "Records of creatures such as monsters, constructs, beasts, and bosses.",
-	"type": "object",
-	"$defs": {
-		"entry": {
-			"type": "object",
-			"description": "Single creature keyed by its records name.",
-			"properties": {
-				"type": {
-					"type": "string",
-					"description": "Classification (e.g., beast, humanoid, construct, plant, boss)."
-				},
-				"tier": {
-					"type": "string",
-					"description": "System tier (e.g., G, F, E)."
-				},
-				"race": {
-					"type": "string",
-					"description": "Optional species label."
-				},
-				"level": {
-					"type": "integer",
-					"description": "Typical recorded level of the creature."
-				},
-				"stats": {
-					"type": "object",
-					"description": "Optional stat block mirroring character stats.",
-					"properties": {
-						"Str": {"type": "integer"},
-						"Agi": {"type": "integer"},
-						"End": {"type": "integer"},
-						"Vit": {"type": "integer"},
-						"Int": {"type": "integer"},
-						"Wis": {"type": "integer"},
-						"Will": {"type": "integer"},
-						"Per": {"type": "integer"}
-					},
-					"additionalProperties": false
-				},
-				"resources": {
-					"type": "object",
-					"description": "Optional resource pools.",
-					"properties": {
-						"HP": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"},
-						"MP": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"},
-						"Stamina": {"$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"}
-					},
-					"additionalProperties": false
-				},
-				"skills": {
-					"type": "array",
-					"description": "Skills known or used by the creature.",
-					"items": {"type": "string"}
-				},
-				"loot": {
-					"type": "array",
-					"description": "Items dropped or harvested from the creature.",
-					"items": {"type": "string"}
-				},
-				"behavior": {
-					"type": "object",
-					"description": "Optional behavioral flags.",
-					"properties": {
-						"hostile": {"type": "boolean"},
-						"intelligent": {"type": "boolean"},
-						"group_tactics": {"type": "boolean"},
-						"ambusher": {"type": "boolean"}
-					},
-					"additionalProperties": false
-				},
-				"flavor": {
-					"$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
-				},
-				"canon": {
-					"type": "boolean",
-					"description": "Whether this creature entry asserts canon facts requiring provenance."
-				},
-				"source_ref": {
-					"$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
-				}
-			},
-			"required": ["type", "tier", "level", "canon", "source_ref"],
-			"additionalProperties": false
-		}
-	},
-	"patternProperties": {
-		"^.+$": {
-			"$ref": "#/$defs/entry"
-		}
-	},
-	"additionalProperties": false
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Creature Definition",
+  "description": "Records of creatures such as monsters, constructs, beasts, and bosses.",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "description": "Single creature keyed by its records name.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Classification (e.g., beast, humanoid, construct, plant, boss)."
+        },
+        "tier": {
+          "type": "string",
+          "description": "System tier (e.g., G, F, E)."
+        },
+        "race": {
+          "type": "string",
+          "description": "Optional species label."
+        },
+        "level": {
+          "type": "integer",
+          "description": "Typical recorded level of the creature."
+        },
+        "stats": {
+          "type": "object",
+          "description": "Optional stat block mirroring character stats.",
+          "properties": {
+            "Str": {
+              "type": "integer"
+            },
+            "Agi": {
+              "type": "integer"
+            },
+            "End": {
+              "type": "integer"
+            },
+            "Vit": {
+              "type": "integer"
+            },
+            "Int": {
+              "type": "integer"
+            },
+            "Wis": {
+              "type": "integer"
+            },
+            "Will": {
+              "type": "integer"
+            },
+            "Per": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "resources": {
+          "type": "object",
+          "description": "Optional resource pools.",
+          "properties": {
+            "HP": {
+              "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+            },
+            "MP": {
+              "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+            },
+            "Stamina": {
+              "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+            }
+          },
+          "additionalProperties": false
+        },
+        "skills": {
+          "type": "array",
+          "description": "Skills known or used by the creature.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "loot": {
+          "type": "array",
+          "description": "Items dropped or harvested from the creature.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "behavior": {
+          "type": "object",
+          "description": "Optional behavioral flags.",
+          "properties": {
+            "hostile": {
+              "type": "boolean"
+            },
+            "intelligent": {
+              "type": "boolean"
+            },
+            "group_tactics": {
+              "type": "boolean"
+            },
+            "ambusher": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "flavor": {
+          "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
+        },
+        "canon": {
+          "type": "boolean",
+          "description": "Whether this creature entry asserts canon facts requiring provenance."
+        },
+        "source_ref": {
+          "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+        }
+      },
+      "required": [
+        "type",
+        "tier",
+        "level",
+        "canon",
+        "source_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^.+$": {
+      "$ref": "#/$defs/entry"
+    }
+  },
+  "additionalProperties": false
 }

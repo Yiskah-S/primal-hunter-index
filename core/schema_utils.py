@@ -2,9 +2,46 @@ import json
 from pathlib import Path
 from typing import Any, Union
 
-from jsonschema import Draft202012Validator, ValidationError
+from jsonschema import Draft202012Validator, RefResolver, ValidationError
 
 from core.io_safe import write_json_atomic as _write_json_atomic
+
+_SCHEMA_ROOT = Path(__file__).resolve().parents[1] / "schemas"
+_SHARED_SCHEMA_URIS = {
+	"https://primal-hunter.local/schemas/shared/granted_by.schema.json": \
+        _SCHEMA_ROOT / "shared" / "granted_by.schema.json",
+	"https://primal-hunter.local/schemas/shared/flavor.schema.json": \
+        _SCHEMA_ROOT / "shared" / "flavor.schema.json",
+	"https://primal-hunter.local/schemas/shared/resource_block.schema.json": \
+        _SCHEMA_ROOT / "shared" / "resource_block.schema.json",
+	"https://primal-hunter.local/schemas/shared/tags.schema.json": \
+        _SCHEMA_ROOT / "shared" / "tags.schema.json",
+	"https://primal-hunter.local/schemas/shared/provenance.schema.json": \
+        _SCHEMA_ROOT / "shared" / "provenance.schema.json",
+	"https://primal-hunter.local/schemas/shared/source_ref.schema.json": \
+        _SCHEMA_ROOT / "shared" / "source_ref.schema.json",
+	"https://primal-hunter.local/schemas/shared/id.schema.json": \
+        _SCHEMA_ROOT / "shared" / "id.schema.json",
+	"https://primal-hunter.local/schemas/shared/param_rule.schema.json": \
+        _SCHEMA_ROOT / "shared" / "param_rule.schema.json",
+}
+
+
+def _load_shared_store() -> dict[str, Any]:
+	store: dict[str, Any] = {}
+	for uri, path in _SHARED_SCHEMA_URIS.items():
+		if path.exists():
+			with path.open(encoding="utf-8") as handle:
+				store[uri] = json.load(handle)
+	return store
+
+
+_SHARED_SCHEMA_STORE = _load_shared_store()
+
+
+def _build_validator(schema: dict[str, Any]) -> Draft202012Validator:
+	resolver = RefResolver.from_schema(schema, store=_SHARED_SCHEMA_STORE)
+	return Draft202012Validator(schema, resolver=resolver)
 
 
 def read_json(path: Union[str, Path]) -> Any:
@@ -19,7 +56,7 @@ def load_schema(path: Union[str, Path]) -> dict[str, Any]:
 
 
 def validate_instance(instance: Any, schema: dict[str, Any]) -> None:
-    validator = Draft202012Validator(schema)
+    validator = _build_validator(schema)
     errors = sorted(validator.iter_errors(instance), key=lambda e: e.path)
     if errors:
         msg = "\n".join(
@@ -41,7 +78,7 @@ def validate_json_schema(
 
     data = read_json(data_path)
     schema = load_schema(schema_path)
-    validator = Draft202012Validator(schema)
+    validator = _build_validator(schema)
     return sorted(validator.iter_errors(data), key=lambda e: e.path)
 
 def validate_json_file(data: Any, schema_path: Path) -> None:

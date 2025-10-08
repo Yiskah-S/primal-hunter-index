@@ -1,135 +1,141 @@
 [
-	{
-		"day": 0,
-		"scene_id": "01-01-01",
-		"source_file": "chapters/Book 01 - PH/0001_Chapter_1_Another_Monday_Morning.md",
-		"reason": "Pre-System routine (office life)",
-		"tags": [
-			"office_life",
-			"character_intro",
-			"system_foreshadowing",
-			"reflection"
-		],
-		"stats": {
-			"total": {}
-		},
-		"notes": "Normal commute; coworkers introduced; System message flashes at scene end.",
-		"source_ref": {
-			"scene_id": "01-01-01",
-			"line_start": 1,
-			"line_end": 83
-		}
-	},
-	{
-		"day": 0,
-		"scene_id": "01-02-01",
-		"source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
-		"reason": "Initial System introduction, class selection, and starter equipment received.",
-		"level": 0,
-		"class_level": 0,
-		"race_level": 0,
-		"tier": "G",
-		"race": "Human (G)",
-		"class": "Archer",
-		"titles": [],
-		"skills": [
-			"Basic Archery",
-			"Basic One-Handed Weapon",
-			"Archers Eye",
-			"Identify"
-		],
-		"skill_log": [
-			{
-				"skill": "Basic Archery",
-				"source": "Introduction Entity",
-				"line": 111
-			},
-			{
-				"skill": "Basic One-Handed Weapon",
-				"source": "Introduction Entity",
-				"line": 113
-			},
-			{
-				"skill": "Archer's Eye",
-				"source": "Introduction Entity",
-				"line": 115
-			},
-			{
-				"skill": "Identify",
-				"source": "Introduction Entity",
-				"line": 127
-			}
-		],
-		"equipment": [
-			"Wooden Bow",
-			"Enchanted Quiver (Common)",
-			"Brown Cloak",
-			"Knife",
-			"Belt and Satchel",
-			"Health Potion (Inferior) x3",
-			"Stamina Potion (Inferior) x3"
-		],
-		"resources": {
-			"HP": {
-				"max": 90,
-				"current": 90,
-				"derived_from": "Vit"
-			},
-			"MP": {
-				"max": 80,
-				"current": 80,
-				"derived_from": [
-					"Int",
-					"Wis"
-				]
-			},
-			"Stamina": {
-				"max": 70,
-				"current": 68,
-				"derived_from": "End"
-			}
-		},
-		"stats": {
-			"total": {
-				"Str": 7,
-				"Agi": 8,
-				"End": 8,
-				"Vit": 9,
-				"Int": 8,
-				"Wis": 8,
-				"Will": 6,
-				"Per": 10,
-				"Free point": 0
-			},
-			"sources": {
-				"base": {
-					"Str": 7,
-					"Agi": 8,
-					"End": 8,
-					"Vit": 9,
-					"Int": 8,
-					"Wis": 8,
-					"Will": 6,
-					"Per": 10,
-					"Free point": 0
-				}
-			}
-		},
-		"stat_log": [],
-		"tags": [
-			"system_event",
-			"system_initiation",
-			"class_selection",
-			"tutorial_setup",
-			"skill_gain",
-			"skill_mechanics",
-			"mana_use"
-		],
-		"notes": "Meets Introduction Entity, selects Archer, gains starter kit before tutorial transport.",
-		"source_ref": {
-			"scene_id": "01-02-01",
-			"line_start": 1,
-			"line_end": 159
-		}
-	}
+  {
+    "day": 0,
+    "scene_id": "01-01-01",
+    "source_file": "chapters/Book 01 - PH/0001_Chapter_1_Another_Monday_Morning.md",
+    "reason": "Pre-System routine (office life)",
+    "tags": [
+      "office_life",
+      "character_intro",
+      "system_foreshadowing",
+      "reflection"
+    ],
+    "stats": {
+      "total": {}
+    },
+    "notes": "Normal commute; coworkers introduced; System message flashes at scene end.",
+    "source_ref": [
+      {
+        "scene_id": "01-01-01",
+        "line_start": 1,
+        "line_end": 83,
+        "type": "scene"
+      }
+    ]
+  },
+  {
+    "day": 0,
+    "scene_id": "01-02-01",
+    "source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
+    "reason": "Initial System introduction, class selection, and starter equipment received.",
+    "level": 0,
+    "class_level": 0,
+    "race_level": 0,
+    "tier": "G",
+    "race": "Human (G)",
+    "class": "Archer",
+    "titles": [],
+    "skills": [
+      "Basic Archery",
+      "Basic One-Handed Weapon",
+      "Archers Eye",
+      "Identify"
+    ],
+    "skill_log": [
+      {
+        "skill": "Basic Archery",
+        "source": "Introduction Entity",
+        "line": 111
+      },
+      {
+        "skill": "Basic One-Handed Weapon",
+        "source": "Introduction Entity",
+        "line": 113
+      },
+      {
+        "skill": "Archer's Eye",
+        "source": "Introduction Entity",
+        "line": 115
+      },
+      {
+        "skill": "Identify",
+        "source": "Introduction Entity",
+        "line": 127
+      }
+    ],
+    "equipment": [
+      "Wooden Bow",
+      "Enchanted Quiver (Common)",
+      "Brown Cloak",
+      "Knife",
+      "Belt and Satchel",
+      "Health Potion (Inferior) x3",
+      "Stamina Potion (Inferior) x3"
+    ],
+    "resources": {
+      "HP": {
+        "max": 90,
+        "current": 90,
+        "derived_from": "Vit"
+      },
+      "MP": {
+        "max": 80,
+        "current": 80,
+        "derived_from": [
+          "Int",
+          "Wis"
+        ]
+      },
+      "Stamina": {
+        "max": 70,
+        "current": 68,
+        "derived_from": "End"
+      }
+    },
+    "stats": {
+      "total": {
+        "Str": 7,
+        "Agi": 8,
+        "End": 8,
+        "Vit": 9,
+        "Int": 8,
+        "Wis": 8,
+        "Will": 6,
+        "Per": 10,
+        "Free point": 0
+      },
+      "sources": {
+        "base": {
+          "Str": 7,
+          "Agi": 8,
+          "End": 8,
+          "Vit": 9,
+          "Int": 8,
+          "Wis": 8,
+          "Will": 6,
+          "Per": 10,
+          "Free point": 0
+        }
+      }
+    },
+    "stat_log": [],
+    "tags": [
+      "system_event",
+      "system_initiation",
+      "class_selection",
+      "tutorial_setup",
+      "skill_gain",
+      "skill_mechanics",
+      "mana_use"
+    ],
+    "notes": "Meets Introduction Entity, selects Archer, gains starter kit before tutorial transport.",
+    "source_ref": [
+      {
+        "scene_id": "01-02-01",
+        "line_start": 1,
+        "line_end": 159,
+        "type": "scene"
+      }
+    ]
+  }
 ]

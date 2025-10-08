@@ -1,157 +1,220 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Character Timeline Snapshot",
-	"type": "array",
-	"items": {
-		"type": "object",
-		"required": ["day", "scene_id", "stats", "source_ref"],
-		"properties": {
-			"day": {
-				"type": "integer",
-				"description": "In-story day count when this snapshot occurred"
-			},
-		"scene_id": {
-			"type": "string",
-			"description": "Unique ID linking this snapshot to a records scene",
-			"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-		},
-			"source_file": {
-				"type": "string",
-				"description": "Filepath to source material for this snapshot"
-			},
-		"reason": {
-			"type": "string",
-			"description": "Short narrative for why this timeline snapshot exists"
-		},
-		"notes": {
-			"type": "string",
-			"description": "Extended commentary or reviewer notes for this snapshot"
-		},
-		"tags": {
-			"$ref": "shared/tags.schema.json"
-		},
-			"level": { "type": "integer" },
-			"class_level": { "type": "integer" },
-			"race_level": { "type": "integer" },
-			"tier": { "type": "string" },
-			"class": { "type": "string" },
-			"race": { "type": "string" },
-			"titles": {
-				"type": "array",
-				"items": { "type": "string" }
-			},
-			"skills": {
-				"type": "array",
-				"description": "Current active skills as strings with rarity (e.g. 'Basic Archery (Inferior)')",
-				"items": { "type": "string" }
-			},
-			"skill_log": {
-				"type": "array",
-				"description": "Log of skill acquisition or upgrade events",
-				"items": {
-					"type": "object",
-					"required": ["skill", "source"],
-					"properties": {
-						"skill": { "type": "string" },
-						"source": { "type": "string" },
-						"line": {
-							"type": "integer",
-							"description": "Optional line number in the source material"
-						}
-					},
-					"additionalProperties": false
-				}
-			},
-			"equipment": {
-				"type": "array",
-				"description": "List of equipped or held gear at this moment",
-				"items": { "type": "string" }
-			},
-		"resources": {
-			"type": "object",
-			"properties": {
-				"HP": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" },
-				"MP": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" },
-				"Stamina": { "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block" }
-			},
-			"additionalProperties": false
-		},
-			"stats": {
-				"type": "object",
-				"required": ["total"],
-				"properties": {
-					"total": {
-						"type": "object",
-						"patternProperties": {
-							".+": { "type": "number" }
-						}
-					},
-					"sources": {
-						"type": "object",
-						"properties": {
-							"base":   { "$ref": "#/items/properties/stats/properties/total" },
-							"race":   { "$ref": "#/items/properties/stats/properties/total" },
-							"class":  { "$ref": "#/items/properties/stats/properties/total" },
-							"titles": { "$ref": "#/items/properties/stats/properties/total" },
-							"equipment": { "$ref": "#/items/properties/stats/properties/total" },
-							"free_allocation": { "$ref": "#/items/properties/stats/properties/total" }
-						},
-						"additionalProperties": false
-					}
-				},
-				"additionalProperties": false
-			},
-			"stat_log": {
-				"type": "array",
-				"description": "Discrete changes to stats from titles, classes, items, etc",
-				"items": {
-					"type": "object",
-					"properties": {
-						"source": { "type": "string" },
-						"change": {
-							"type": "object",
-							"patternProperties": {
-								".+": { "type": "number" }
-							}
-						}
-					},
-					"required": ["source", "change"],
-					"additionalProperties": false
-				}
-			},
-			"source_ref": {
-				"description": "Exact scene and line span supporting this snapshot",
-				"oneOf": [
-					{ "$ref": "#/$defs/source_range" },
-					{
-						"type": "array",
-						"items": { "$ref": "#/$defs/source_range" },
-						"minItems": 1
-					}
-				]
-			}
-		},
-		"additionalProperties": false
-	},
-	"$defs": {
-		"source_range": {
-			"type": "object",
-			"required": ["scene_id", "line_start", "line_end"],
-			"properties": {
-				"scene_id": {
-					"type": "string",
-					"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-				},
-				"line_start": {
-					"type": "integer",
-					"minimum": 1
-				},
-				"line_end": {
-					"type": "integer",
-					"minimum": 1
-				}
-			},
-			"additionalProperties": false
-		}
-	}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Character Timeline Snapshot",
+  "$comment": "See docs/contracts/provenance_contract_v2.0.md#2-provenance-requirements",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "day",
+      "scene_id",
+      "stats",
+      "source_ref"
+    ],
+    "properties": {
+      "day": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "In-story day count when this snapshot occurred"
+      },
+      "scene_id": {
+        "type": "string",
+        "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+        "description": "Unique ID linking this snapshot to a records scene"
+      },
+      "event_id": {
+        "type": "string",
+        "description": "Stable timeline event identifier (prefix ev.)."
+      },
+      "source_file": {
+        "type": "string",
+        "description": "Filepath to source material for this snapshot"
+      },
+      "reason": {
+        "type": "string",
+        "description": "Short narrative for why this timeline snapshot exists"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Extended commentary or reviewer notes for this snapshot"
+      },
+      "tags": {
+        "description": "Timeline tags remain array until registry refactor.",
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+          }
+        ]
+      },
+      "level": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "class_level": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "race_level": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "tier": {
+        "type": "string"
+      },
+      "class": {
+        "type": "string"
+      },
+      "race": {
+        "type": "string"
+      },
+      "titles": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "skill_log": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "skill",
+            "source"
+          ],
+          "properties": {
+            "skill": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Optional line number in the source material"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "equipment": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "resources": {
+        "type": "object",
+        "properties": {
+          "HP": {
+            "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+          },
+          "MP": {
+            "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+          },
+          "Stamina": {
+            "$ref": "https://primal-hunter.local/schemas/shared/resource_block.schema.json#/$defs/resource_block"
+          }
+        },
+        "additionalProperties": false
+      },
+      "stats": {
+        "type": "object",
+        "required": [
+          "total"
+        ],
+        "properties": {
+          "total": {
+            "type": "object",
+            "patternProperties": {
+              ".+": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          },
+          "sources": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "$ref": "#/$defs/stat_block"
+              },
+              "race": {
+                "$ref": "#/$defs/stat_block"
+              },
+              "class": {
+                "$ref": "#/$defs/stat_block"
+              },
+              "titles": {
+                "$ref": "#/$defs/stat_block"
+              },
+              "equipment": {
+                "$ref": "#/$defs/stat_block"
+              },
+              "free_allocation": {
+                "$ref": "#/$defs/stat_block"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "stat_log": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "source",
+            "change"
+          ],
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "change": {
+              "type": "object",
+              "patternProperties": {
+                ".+": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "source_ref": {
+        "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array"
+      }
+    },
+    "additionalProperties": false
+  },
+  "$defs": {
+    "stat_block": {
+      "type": "object",
+      "patternProperties": {
+        ".+": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }

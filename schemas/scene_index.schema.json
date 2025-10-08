@@ -1,128 +1,204 @@
 {
-	"$id": "https://primal-hunter.local/schemas/scene_index.schema.json",
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Scene Index Entry",
-	"type": "object",
-	"required": [
-		"scene_id",
-		"book",
-		"chapter",
-		"scene",
-		"title",
-		"summary",
-		"characters"
-	],
-	"properties": {
-		"scene_id": {
-			"type": "string",
-			"pattern": "^\\d{2}-\\d{2}-\\d{2}$"
-		},
-		"book": {
-			"type": "integer",
-			"minimum": 1
-		},
-		"chapter": {
-			"type": "integer",
-			"minimum": 1
-		},
-		"scene": {
-			"type": "integer",
-			"minimum": 1
-		},
-		"title": {
-			"type": "string"
-		},
-		"summary": {
-			"type": "string"
-		},
-		"source_file": {
-			"type": "string"
-		},
-		"start_line": {
-			"type": "integer",
-			"minimum": 1
-		},
-		"end_line": {
-			"type": "integer",
-			"minimum": 1
-		},
-		"pov": {
-			"type": "string"
-		},
-		"mood": {
-			"type": "array",
-			"items": { "type": "string" },
-			"uniqueItems": true
-		},
-		"time_tag": {
-			"type": "array",
-			"items": { "type": "string" },
-			"uniqueItems": true
-		},
-		"chunked_with": {
-			"type": "string"
-		},
-		"characters": {
-			"type": "object",
-			"description": "Character participation keyed by records entry name.",
-			"patternProperties": {
-				"^.+$": {
-					"type": "object",
-					"properties": {
-						"present": {
-							"type": "string",
-							"enum": ["explicit", "implicit", "referenced"]
-						},
-						"level_start": { "type": ["integer", "null"] },
-						"level_end": { "type": ["integer", "null"] },
-						"tier": { "type": ["string", "null"] },
-						"notes": { "type": "string" }
-					},
-					"required": ["present"],
-					"additionalProperties": true
-				}
-			},
-			"additionalProperties": false
-		},
-		"events": {
-			"type": "object",
-			"properties": {
-				"level_ups": { "type": "array", "items": { "type": "string" } },
-				"tier_changes": { "type": "array", "items": { "type": "string" } },
-				"loot": { "type": "array", "items": { "type": "string" } },
-				"titles_gained": { "type": "array", "items": { "type": "string" } }
-			},
-			"additionalProperties": false
-		},
-		"locations": {
-			"type": "array",
-			"items": { "type": "string" },
-			"uniqueItems": true
-		},
-		"tags": {
-			"$ref": "shared/tags.schema.json"
-		},
-		"skills_gained": {
-			"type": "array",
-			"items": { "type": "string" }
-		},
-		"class_chosen": {
-			"type": "object",
-			"properties": {
-				"name": { "type": "string" },
-				"type": { "type": "string" },
-				"specialization": { "type": "string" },
-				"bonuses": {
-					"type": "object",
-					"patternProperties": {
-						"^.+$": { "type": ["integer", "number"] }
-					},
-					"additionalProperties": false
-				}
-			},
-			"additionalProperties": false,
-			"required": ["name"]
-		}
-	},
-	"additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scene Index Entry",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#character-state-is-logged-not-snapshotted",
+  "$id": "https://primal-hunter.local/schemas/scene_index.schema.json",
+  "required": [
+    "scene_id",
+    "book",
+    "chapter",
+    "scene",
+    "title",
+    "summary",
+    "characters"
+  ],
+  "properties": {
+    "scene_id": {
+      "type": "string",
+      "pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+    },
+    "book": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scene": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "source_file": {
+      "type": "string"
+    },
+    "start_line": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "end_line": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "pov": {
+      "type": "string"
+    },
+    "mood": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "time_tag": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "chunked_with": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "object",
+      "description": "Character participation keyed by records entry name.",
+      "patternProperties": {
+        "^.+$": {
+          "type": "object",
+          "properties": {
+            "present": {
+              "type": "string",
+              "enum": [
+                "explicit",
+                "implicit",
+                "referenced"
+              ]
+            },
+            "level_start": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "level_end": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "tier": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "present"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "level_ups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tier_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "loot": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "titles_gained": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "tags": {
+      "oneOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/tags.schema.json"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "skills_gained": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "class_chosen": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "specialization": {
+          "type": "string"
+        },
+        "bonuses": {
+          "type": "object",
+          "patternProperties": {
+            "^.+$": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "additionalProperties": false
 }

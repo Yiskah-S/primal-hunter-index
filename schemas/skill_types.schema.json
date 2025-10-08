@@ -1,16 +1,21 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Skill Type Registry",
-    "description": "Enumerates the allowed skill category labels.",
-    "type": "object",
-    "properties": {
-        "types": {
-            "type": "array",
-            "items": { "type": "string" },
-            "minItems": 1,
-            "uniqueItems": true
-        }
-    },
-    "required": ["types"],
-    "additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Type Registry",
+  "description": "Enumerates the allowed skill category labels.",
+  "type": "object",
+  "$comment": "See docs/runbooks/context_summary.md#structure-is-separate-from-content",
+  "properties": {
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "types"
+  ],
+  "additionalProperties": false
 }

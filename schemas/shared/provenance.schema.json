@@ -1,41 +1,30 @@
 {
-    "$id": "https://primal-hunter.local/schemas/shared/provenance.schema.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Provenance Fragments",
-    "description": "Reusable definitions for provenance blocks shared across record schemas.",
-    "$defs": {
-        "source_range": {
-            "type": "object",
-            "required": ["scene_id", "line_start", "line_end"],
-            "properties": {
-                "scene_id": {
-                    "type": "string",
-                    "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
-                    "description": "Zero-padded scene identifier (BB-CC-SS)."
-                },
-                "line_start": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "description": "First line (inclusive) in the source scene that supports the fact."
-                },
-                "line_end": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "description": "Last line (inclusive) in the source scene that supports the fact."
-                }
-            },
-            "additionalProperties": false
-        },
-        "source_ref": {
-            "description": "Exact scene and line span backing a canonical assertion.",
-            "oneOf": [
-                { "$ref": "#/$defs/source_range" },
-                {
-                    "type": "array",
-                    "items": { "$ref": "#/$defs/source_range" },
-                    "minItems": 1
-                }
-            ]
-        }
-    }
+	"$id": "https://primal-hunter.local/schemas/shared/provenance.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Provenance Fragments",
+	"$comment": "See docs/contracts/provenance_contract_v2.0.md#2-provenance-requirements",
+	"description": "Reusable blocks that enforce provenance expectations across canon data.",
+	"$defs": {
+		"source_ref_object": {
+			"$ref": "https://primal-hunter.local/schemas/shared/source_ref.schema.json"
+		},
+		"source_ref": {
+			"description": "Accepts either a single citation object or a non-empty array of citations.",
+			"oneOf": [
+				{ "$ref": "#/$defs/source_ref_object" },
+				{
+					"type": "array",
+					"items": { "$ref": "#/$defs/source_ref_object" },
+					"minItems": 1,
+					"uniqueItems": false
+				}
+			]
+		},
+		"source_ref_array": {
+			"type": "array",
+			"items": { "$ref": "#/$defs/source_ref_object" },
+			"minItems": 1,
+			"uniqueItems": false
+		}
+	}
 }

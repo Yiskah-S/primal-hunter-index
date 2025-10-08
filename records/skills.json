@@ -25,7 +25,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 111,
-      "line_end": 111
+      "line_end": 111,
+      "type": "scene"
     },
     "tags": [
       "starter",
@@ -64,7 +65,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 113,
-      "line_end": 113
+      "line_end": 113,
+      "type": "scene"
     },
     "tags": [
       "starter",
@@ -104,7 +106,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 115,
-      "line_end": 115
+      "line_end": 115,
+      "type": "scene"
     },
     "tags": [
       "starter",
@@ -138,7 +141,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 127,
-      "line_end": 127
+      "line_end": 127,
+      "type": "scene"
     },
     "tags": [
       "starter",

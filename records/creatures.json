@@ -15,7 +15,8 @@
     "source_ref": {
       "scene_id": "01-02-01",
       "line_start": 10,
-      "line_end": 125
+      "line_end": 125,
+      "type": "scene"
     }
   }
 }
