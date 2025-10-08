@@ -1,6 +1,10 @@
 # 🧠 Primal Hunter Metadata Index
 
-A schema-driven, metadata system to track character progression, skills, equipment, and world state for *The Primal Hunter* series.
+A schema-driven, metadata system to track character progression, skills, equipment, and world state for *The Primal
+Hunter* series.
+
+PHI models diegetic knowledge across time by tracking each agent’s epistemic state and the synchronized outputs of self-
+replicating processes (clones, partitions, instances).
 
 ---
 
@@ -21,7 +25,7 @@ It prioritizes:
 
 ## 🧰 Directory Layout
 
-```
+```text
 primal_hunter_index/
 ├── records/             # Source-of-truth data (skills, equipment, etc)
 │   └── characters/      # Per-character metadata (timeline, known skills)
@@ -65,7 +69,7 @@ make setup-schemas
 | `make add-skill`     | Add a skill (and optionally assign to Jake) |
 | `make assign-skill`  | Add skill to character timeline             |
 | `make add-equipment` | Add a new item to equipment.json            |
-| `make json-editor`   | Launch JSON editor UI at http://localhost:8000/tools/json_editor/ |
+| `make json-editor`   | Launch JSON editor UI at <http://localhost:8000/tools/json_editor/> |
 
 ---
 
@@ -87,9 +91,12 @@ make json-editor
 open http://localhost:8000/tools/json_editor/
 ```
 
-The helper serves the repo root, so the page reads schemas and records directly from `schemas/` and `records/`. Pick a dataset (skills, equipment, Jake's timeline), tweak the generated form, then download a ready-to-merge JSON snippet. Preview mode mirrors the exact payload so you can paste or script it into the records before committing.
+The helper serves the repo root, so the page reads schemas and records directly from `schemas/` and `records/`.
+Pick a dataset (skills, equipment, Jake's timeline), tweak the generated form, then download a ready-to-merge JSON
+snippet. Preview mode mirrors the exact payload so you can paste or script it into the records before committing.
 
-Any `tags[]` field now renders as a dropdown backed by `records/tag_registry.json`, grouped by tag class (for example, `Topic › stealth`).
+Any `tags[]` field now renders as a dropdown backed by `records/tag_registry.json`, grouped by tag class (for
+example, `Topic › stealth`).
 
 ---
 
@@ -125,10 +132,11 @@ Each `timeline.json` entry can include:
 * 👹 Enemies defeated (planned)
 * 🔄 Scene + day pointers for chronology
 
-### 🧪 What’s NOT Canon:
-- Any file in `fixtures/` or `sandbox/`
-- Any skill/gear/event without `source_ref[]`
-- Any `.json` without a passing schema validation
+### 🧪 What’s NOT Canon
+
+* Any file in `fixtures/` or `sandbox/`
+* Any skill/gear/event without `source_ref[]`
+* Any `.json` without a passing schema validation
 
 ---
 
@@ -158,4 +166,5 @@ This is a **solo educational project** intended to practice:
 * 🛠 Best practices in project structure and CLI design
 * 📚 Systematic parsing of complex progression fantasy
 
-LLM training accuracy improves drastically when scenes are backed by structured metadata — and that's exactly what this toolchain is for.
+LLM training accuracy improves drastically when scenes are backed by structured metadata — and that's exactly what this
+toolchain is for.

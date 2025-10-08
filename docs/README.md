@@ -1,24 +1,30 @@
 # Documentation Map
 
-This index helps you locate authoritative repo docs, understand their intent, and keep naming/metadata conventions consistent. Treat it as the single source of truth for documentation hygiene.
+This index helps you locate authoritative repo docs, understand their intent, and keep naming/metadata conventions
+consistent. Treat it as the single source of truth for documentation hygiene.
 
 ---
 
 ## Directory Roles
 
 `contracts/` — Normative specifications that the codebase and schemas must follow.
+
 - Versioned filenames are required (`*_contract_vX.Y.md`).
 
 `design/` — System narratives, diagrams, and long-form reasoning.
+
 - Use `Status: Informational` unless the doc is still evolving.
 
 `adr/` — Architectural Decision Records.
+
 - Immutable snapshots; never rewrite history.
 
 `runbooks/` — Operational guides for day-to-day workflows.
+
 - Update as processes change; keep examples current.
 
 `archive/` — Deprecated material retained for context.
+
 - Do not link from living docs unless called out as history.
 
 ---
@@ -45,7 +51,8 @@ Decision: …
 Consequences: …
 ````
 
-Runbooks and designs generally use `Status: Living` while in active use, and shift to `Status: Deprecated` when archived.
+Runbooks and designs generally use `Status: Living` while in active use, and shift to `Status: Deprecated` when
+archived.
 
 ---
 
@@ -80,7 +87,8 @@ Runbooks and designs generally use `Status: Living` while in active use, and shi
 - `adr/ADR-0001.md` — Split `status` vs `tag_role` for tags (2025-10-06).  
 - `adr/ADR-0002.md` — Reserved for the next accepted decision.
 
-Other helpful material: the repo root `README.md` for onboarding, plus the `docs/design/pattern_grounded_hallucination.md` exploration of retrieval guardrails.
+Other helpful material: the repo root `README.md` for onboarding, plus the
+`docs/design/pattern_grounded_hallucination.md` exploration of retrieval guardrails.
 
 ---
 
@@ -105,4 +113,4 @@ Other helpful material: the repo root `README.md` for onboarding, plus the `docs
 
 ---
 
-*Last updated: 2025-10-08*
+**Last updated:** 2025-10-08

@@ -1,15 +1,16 @@
 # 📐 `schemas/` Directory – Primal Hunter Index
 
-This folder defines the shape of all canonical data used in the Primal Hunter Index project.  
-Everything in `canon/`, `records/`, and `fixtures/` must validate against these schemas before being committed.
+This folder defines the shape of all canonical data used in the Primal Hunter Index project. Everything in `canon/`,
+`records/`, and `fixtures/` must validate against these schemas before being committed.
 
 ---
 
 ## 🧱 Core Concepts
 
 ### ✅ `skill_family.schema.json`
-Represents the *idea* of a skill. Global, not character-specific.  
-Think: "Meditation exists and is considered a Utility skill."
+
+Represents the *idea* of a skill. Global, not character-specific. Think: "Meditation exists and is considered a Utility
+skill."
 
 - `id`: `"skill:meditation"`
 - `tags`: Useful for grouping (e.g. `["focus", "mind"]`)
@@ -18,8 +19,8 @@ Think: "Meditation exists and is considered a Utility skill."
 ---
 
 ### 🌱 `skill_node.schema.json`
-Represents a specific *variant or evolution* of a skill.  
-Example: `"Meditation [Common]"`, `"Meditation [Apex]"`
+
+Represents a specific *variant or evolution* of a skill. Example: `"Meditation [Common]"`, `"Meditation [Apex]"`
 
 - `param_rules[]`: Describes how cost or effects scale (via formula or heuristic)
 - `upgrades_to[]`: Lists valid evolution paths and their conditions
@@ -28,8 +29,8 @@ Example: `"Meditation [Common]"`, `"Meditation [Apex]"`
 ---
 
 ### 📘 `timeline_event.schema.json`
-Character-specific log of state changes over time.  
-Tracks things like:
+
+Character-specific log of state changes over time. Tracks things like:
 
 - Skill acquisitions
 - Observed param values
@@ -38,7 +39,7 @@ Tracks things like:
 
 Used in per-character files like:
 
-```
+```text
 records/characters/Jake/timeline.json
 fixtures/arnold/story_timeline.json
 ```
@@ -51,6 +52,7 @@ Also supports:
 ---
 
 ### 🔍 `shared/source_ref.schema.json`
+
 Shared object for all quote-backed facts.
 
 - `scene_id`: `"BB-CC-SS"` format (e.g. `"01-02-03"`)
@@ -58,6 +60,7 @@ Shared object for all quote-backed facts.
 - `quote` (optional): Direct quote for human use or GPT scaffolding
 
 Used in:
+
 - `skill_family`
 - `skill_node`
 - `timeline_event`
@@ -66,8 +69,8 @@ Used in:
 
 ## 🧪 How to Validate
 
-Use `validate_instance()` or `tools/validate_all_metadata.py`  
-All commits must pass schema validation via pre-commit hook before merging.
+Use `validate_instance()` or `tools/validate_all_metadata.py` All commits must pass schema validation via pre-commit
+hook before merging.
 
 ---
 
@@ -83,5 +86,5 @@ All commits must pass schema validation via pre-commit hook before merging.
 
 Because 3 months from now you won't remember what `param_rules[].when` was supposed to do.
 
-This README is your brain's external backup for schema intent, boundaries, and design assumptions.  
-Codex also uses it to write helpers, test data, and generators without hallucinating.
+This README is your brain's external backup for schema intent, boundaries, and design assumptions. Codex also uses it to
+write helpers, test data, and generators without hallucinating.
