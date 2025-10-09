@@ -9,8 +9,8 @@
 
 ## 📘 Purpose
 
-This contract defines the **stable ID system** used across the Primal Hunter Index (PHI).
-Stable IDs are machine-parseable, cross-referencable, immutable labels that uniquely identify all core entities in the canonical corpus.
+This contract defines the **stable ID system** used across the Primal Hunter Index (PHI). Stable IDs are machine-
+parseable, cross-referencable, immutable labels that uniquely identify all core entities in the canonical corpus.
 
 They enable:
 
@@ -64,7 +64,7 @@ They enable:
 
 ## 🔐 Immutability & Linking
 
-### ❗ IDs are **immutable** once created.
+### ❗ IDs are **immutable** once created
 
 If an ID is renamed:
 
@@ -213,8 +213,7 @@ Stable IDs are:
 * Explicit enough for humans to trace
 * Rigid enough to prevent corruption or ambiguity
 
-This is not just a naming convention.
-This is your **referential integrity layer.**
+This is not just a naming convention. This is your **referential integrity layer.**
 
 ---
 
