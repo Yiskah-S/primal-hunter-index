@@ -7,14 +7,17 @@ SCHEMA_PATH = Path("schemas/character_timeline.schema.json")
 SCHEMA = json.loads(SCHEMA_PATH.read_text())
 
 _SHARED_STORE = {
-	"https://primal-hunter.local/schemas/shared/resource_block.schema.json": json.loads(
-		(SCHEMA_PATH.parent / "shared" / "resource_block.schema.json").read_text()
+	"https://primal-hunter.local/schemas/timeline_event.schema.json": json.loads(
+		(SCHEMA_PATH.parent / "timeline_event.schema.json").read_text()
 	),
 	"https://primal-hunter.local/schemas/shared/provenance.schema.json": json.loads(
 		(SCHEMA_PATH.parent / "shared" / "provenance.schema.json").read_text()
 	),
 	"https://primal-hunter.local/schemas/shared/source_ref.schema.json": json.loads(
 		(SCHEMA_PATH.parent / "shared" / "source_ref.schema.json").read_text()
+	),
+	"https://primal-hunter.local/schemas/shared/id.schema.json": json.loads(
+		(SCHEMA_PATH.parent / "shared" / "id.schema.json").read_text()
 	),
 }
 
@@ -27,43 +30,36 @@ def _collect_errors(instance_data):
 
 
 def test_valid_timeline_entry_passes():
-    minimal_timeline = [
-        {
-            "day": 1,
-            "scene_id": "01-02-01",
-            "stats": {
-                "total": {"Str": 5},
-                "sources": {
-                    "base": {"Str": 5}
-                }
-            },
-            "resources": {
-                "HP": {"max": 90, "current": 90, "derived_from": "Vit"}
-            },
-            "source_ref": [
-                {
-                    "type": "scene",
-                    "scene_id": "01-02-01",
-                    "line_start": 100,
-                    "line_end": 120
-                }
-            ]
-        }
-    ]
-    assert _collect_errors(minimal_timeline) == []
+	minimal_timeline = [
+		{
+			"event_id": "ev.jake.01_02_01.acquire_meditation",
+			"scene_id": "01-02-01",
+			"order": 1,
+			"type": "skill_acquired",
+			"skill_id": "sn.meditation.rank1",
+			"tags": ["tag.timeline.system_message"],
+			"source_ref": [
+				{
+					"type": "scene",
+					"scene_id": "01-02-01",
+					"line_start": 100,
+					"line_end": 120
+				}
+			]
+		}
+	]
+	assert _collect_errors(minimal_timeline) == []
 
 
 def test_missing_stats_fails():
-    timeline_missing_stats = [
-        {
-            "day": 1,
-            "scene_id": "01-02-01"
-        }
-    ]
-    collected_errors = _collect_errors(timeline_missing_stats)
-    assert collected_errors
-    assert any(
-        "stats" in "".join(str(path_part) for path_part in error.path)
-        or error.message.startswith("'stats'")
-        for error in collected_errors
-    )
+	timeline_missing_fields = [
+		{
+			"event_id": "ev.jake.01_02_01.acquire_meditation",
+			"scene_id": "01-02-01",
+			"order": 1,
+			"type": "skill_acquired"
+		}
+	]
+	collected_errors = _collect_errors(timeline_missing_fields)
+	assert collected_errors
+	assert any(error.message.startswith("'source_ref'") for error in collected_errors)
