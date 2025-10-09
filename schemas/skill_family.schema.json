@@ -1,19 +1,53 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/skill_family.schema.json",
   "title": "Skill Family",
-  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
+  "$comment": "See docs/contracts/skills_contract_v1.0.md#21-skill-family-sf",
   "type": "object",
   "required": [
-    "id",
+    "family_id",
     "name",
-    "type",
-    "tags",
-    "flavor",
-    "canon",
-    "source_ref"
+    "category",
+    "source_ref",
+    "record_log"
   ],
+  "$defs": {
+    "core_effects": {
+      "type": "object",
+      "description": "Qualitative effects shared across all manifestations of the family.",
+      "properties": {
+        "stat_synergy": {
+          "type": "object",
+          "description": "Baseline stat relationships (qualitative or numeric hints).",
+          "patternProperties": {
+            "^[A-Za-z0-9_]+$": {
+              "type": [
+                "number",
+                "string"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "proficiency_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "passive_benefit": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
   "properties": {
-    "id": {
+    "family_id": {
       "allOf": [
         {
           "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
@@ -22,37 +56,46 @@
           "pattern": "^sf\\."
         }
       ],
-      "description": "Stable skill family identifier (sf.*)."
+      "description": "Stable identifier for the skill family (sf.*)."
     },
     "name": {
       "type": "string",
-      "description": "Display name for the skill, e.g. 'Meditation'"
+      "description": "Canonical display name for the family."
     },
-    "type": {
+    "category": {
       "type": "string",
-      "description": "General type classification, e.g. 'Utility', 'Combat', 'Passive'"
+      "description": "High-level category such as Combat Passive, Utility, Support, etc."
+    },
+    "description": {
+      "type": "string",
+      "description": "Narrative summary of the family's purpose."
+    },
+    "core_effects": {
+      "$ref": "#/$defs/core_effects"
     },
     "tags": {
       "type": "array",
+      "description": "Optional semantic tags referencing the tag registry.",
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "^tag\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$"
       },
-      "uniqueItems": true,
-      "description": "Topic or mechanic tags applied to the family."
+      "uniqueItems": true
     },
     "flavor": {
       "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
     },
-    "canon": {
-      "type": "boolean",
-      "description": "True if this record has valid provenance and is considered canonical"
-    },
     "source_ref": {
-      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
+      "description": "First canonical appearance of the family in the text."
     },
-    "description": {
+    "record_log": {
+      "$ref": "https://primal-hunter.local/schemas/shared/record_log.schema.json#/$defs/record_log",
+      "description": "Audit trail per the Record Log contract."
+    },
+    "notes": {
       "type": "string",
-      "description": "Optional longer prose explanation (non-canon safe)"
+      "description": "Optional commentary for maintainers."
     }
   },
   "additionalProperties": false

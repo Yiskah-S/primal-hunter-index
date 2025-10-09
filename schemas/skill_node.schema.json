@@ -1,19 +1,98 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/skill_node.schema.json",
   "title": "Skill Node",
-  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
-  "description": "Represents a specific form or upgrade of a skill within a skill family.",
+  "$comment": "See docs/contracts/skills_contract_v1.0.md#22-skill-node-sn",
   "type": "object",
+  "$defs": {
+    "stat_synergy": {
+      "type": "object",
+      "description": "Numeric scaling factors or qualitative stat relationships.",
+      "patternProperties": {
+        "^[A-Za-z0-9_]+$": {
+          "type": [
+            "number",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "effects": {
+      "type": "object",
+      "description": "Canonical effect payload for this skill manifestation.",
+      "properties": {
+        "stat_synergy": {
+          "$ref": "#/$defs/stat_synergy"
+        },
+        "param_rule": {
+          "$ref": "https://primal-hunter.local/schemas/shared/param_rule.schema.json#/$defs/param_rule"
+        },
+        "proficiency_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "passive_benefit": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lineage": {
+      "type": "object",
+      "description": "In-world evolution metadata for the node.",
+      "properties": {
+        "evolves_from": {
+          "allOf": [
+            {
+              "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+            },
+            {
+              "pattern": "^sn\\."
+            }
+          ],
+          "description": "Immediate predecessor node identifier."
+        },
+        "related_to": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+              },
+              {
+                "pattern": "^sn\\."
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Variant siblings or fused manifestations."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Narrative commentary explaining the relationship."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
   "required": [
-    "id",
+    "node_id",
     "family_id",
-    "label",
     "rarity",
-    "canon",
-    "source_ref"
+    "effects",
+    "granted_by",
+    "source_ref",
+    "record_log"
   ],
   "properties": {
-    "id": {
+    "node_id": {
       "allOf": [
         {
           "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
@@ -22,7 +101,7 @@
           "pattern": "^sn\\."
         }
       ],
-      "description": "Stable node identifier (sn.*)."
+      "description": "Stable identifier for the skill node (sn.*)."
     },
     "family_id": {
       "allOf": [
@@ -33,11 +112,7 @@
           "pattern": "^sf\\."
         }
       ],
-      "description": "Which skill family this node belongs to"
-    },
-    "label": {
-      "type": "string",
-      "description": "Readable label for the node, e.g. 'Meditation [Common]'"
+      "description": "Parent skill family identifier (sf.*)."
     },
     "rarity": {
       "type": "string",
@@ -50,77 +125,41 @@
         "Legendary",
         "Unique",
         "Transcendent"
-      ]
+      ],
+      "description": "Canonical rarity tier of the node."
     },
-    "prereqs": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "value": {}
-        },
-        "additionalProperties": false
-      }
+    "flavor": {
+      "$ref": "https://primal-hunter.local/schemas/shared/flavor.schema.json#/$defs/flavor"
     },
-    "param_rules": {
-      "type": "object",
-      "patternProperties": {
-        "^.+$": {
-          "$ref": "https://primal-hunter.local/schemas/shared/param_rule.schema.json#/$defs/param_rule"
-        }
-      },
-      "additionalProperties": false
+    "effects": {
+      "$ref": "#/$defs/effects"
     },
-    "upgrades_to": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "node_id"
-        ],
-        "properties": {
-          "node_id": {
-            "allOf": [
-              {
-                "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
-              },
-              {
-                "pattern": "^sn\\."
-              }
-            ]
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "type"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "value": {}
-              },
-              "additionalProperties": false
-            }
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    "canon": {
-      "type": "boolean",
-      "description": "Marks this node as quote-backed and accepted"
+    "granted_by": {
+      "$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
     },
     "source_ref": {
-      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref"
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
+      "description": "Provenance entries documenting this manifestation."
+    },
+    "record_log": {
+      "$ref": "https://primal-hunter.local/schemas/shared/record_log.schema.json#/$defs/record_log",
+      "description": "Audit history per the Record Log contract."
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Eventual tag IDs linked to this node.",
+      "items": {
+        "type": "string",
+        "pattern": "^tag\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional maintainer notes."
     }
   },
   "additionalProperties": false

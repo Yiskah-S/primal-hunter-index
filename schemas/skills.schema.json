@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Skill Metadata Schema",
-  "description": "Records definitions of all skills, indexed by skill name.",
+  "description": "Legacy aggregated view of skill nodes keyed by display name.",
+  "$comment": "Transitional schema; canonical source of truth lives in per-node files (see docs/contracts/skills_contract_v1.0.md).",
   "type": "object",
-  "$comment": "See docs/runbooks/context_summary.md#skills-are-families-not-constants",
   "$defs": {
     "entry": {
       "type": "object",
@@ -56,32 +56,8 @@
             "stat_synergy": {
               "type": "object",
               "description": "Numeric scaling factors or flat bonuses per stat (e.g., 'Per': 2)",
-              "properties": {
-                "Str": {
-                  "type": "number"
-                },
-                "Agi": {
-                  "type": "number"
-                },
-                "End": {
-                  "type": "number"
-                },
-                "Vit": {
-                  "type": "number"
-                },
-                "Int": {
-                  "type": "number"
-                },
-                "Wis": {
-                  "type": "number"
-                },
-                "Will": {
-                  "type": "number"
-                },
-                "Per": {
-                  "type": "number"
-                },
-                "Free point": {
+              "patternProperties": {
+                "^[A-Za-z0-9_ ]+$": {
                   "type": "number"
                 }
               },
@@ -139,7 +115,9 @@
             },
             {
               "type": "array",
-              "items": { "type": "string" },
+              "items": {
+                "type": "string"
+              },
               "uniqueItems": true
             }
           ]

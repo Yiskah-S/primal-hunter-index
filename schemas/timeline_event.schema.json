@@ -1,13 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/timeline_event.schema.json",
   "title": "Timeline Event",
-  "description": "Represents a change in a character's state over time, such as acquiring a skill, leveling up, or observing a stat.",
+  "$comment": "See docs/contracts/timeline_contract_v1.0.md#3-required-fields",
   "type": "object",
-  "$comment": "See docs/contracts/provenance_contract_v2.0.md#2-provenance-requirements",
   "required": [
     "event_id",
+    "scene_id",
+    "order",
     "type",
-    "character",
     "source_ref"
   ],
   "properties": {
@@ -20,22 +21,84 @@
           "pattern": "^ev\\."
         }
       ],
-      "description": "Stable event identifier (ev.character.scene.suffix)."
+      "description": "Stable event identifier (ev.<character>.<scene>.<slug>)."
+    },
+    "scene_id": {
+      "type": "string",
+      "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+      "description": "Canonical scene identifier (BB-CC-SS)."
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-based ordering of events within the scene."
     },
     "type": {
       "type": "string",
-      "description": "Type of event (e.g., skill_acquired, skill_upgraded, param_observed, class_changed, tier_changed)"
+      "enum": [
+        "insight_gained",
+        "belief_corrected",
+        "memory_lost",
+        "information_received",
+        "skill_acquired",
+        "skill_upgraded",
+        "class_changed",
+        "title_granted",
+        "quest_completed",
+        "combat_action",
+        "item_crafted",
+        "location_discovered",
+        "system_message_broadcast",
+        "conversation",
+        "training_session",
+        "deal_made",
+        "bond_formed",
+        "correction"
+      ],
+      "description": "Controlled event category per the timeline contract."
     },
-    "character": {
+    "source_ref": {
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
+      "description": "Provenance citations for this event."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Semantic tags applied to this event; must map to the tag registry.",
+      "items": {
+        "type": "string",
+        "pattern": "^tag\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional human-readable commentary for the event."
+    },
+    "related_to": {
+      "type": "array",
+      "description": "References to other timeline events that relate to this entry.",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+          },
+          {
+            "pattern": "^ev\\."
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "skill_id": {
       "allOf": [
         {
           "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
         },
         {
-          "pattern": "^pc\\."
+          "pattern": "^sn\\."
         }
       ],
-      "description": "Character stable ID (pc.*)."
+      "description": "Associated skill node identifier (sn.*) when applicable."
     },
     "family_id": {
       "allOf": [
@@ -46,62 +109,74 @@
           "pattern": "^sf\\."
         }
       ],
-      "description": "Skill family affected by this event."
+      "description": "Associated skill family identifier (sf.*) when applicable."
     },
-    "node_id": {
+    "class_id": {
       "allOf": [
         {
           "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
         },
         {
-          "pattern": "^sn\\."
+          "pattern": "^cl\\."
         }
       ],
-      "description": "Skill node affected by this event."
+      "description": "Class identifier referenced by the event."
     },
-    "param": {
-      "type": "string",
-      "description": "Name of the parameter observed or affected (e.g., resource_cost.mana)"
-    },
-    "value": {
-      "description": "Value of the parameter, if applicable"
-    },
-    "context": {
-      "type": "object",
-      "description": "Optional contextual information (e.g., level, affinity, class)",
-      "additionalProperties": true
-    },
-    "inference": {
-      "type": "object",
-      "required": [
-        "derived_from",
-        "justification",
-        "confidence"
+    "equipment_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^eq\\."
+        }
       ],
-      "properties": {
-        "derived_from": {
-          "type": "array",
-          "items": {
-            "type": "string"
+      "description": "Equipment identifier referenced by the event."
+    },
+    "location_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^loc\\."
+        }
+      ],
+      "description": "Location identifier referenced by the event."
+    },
+    "character_ids": {
+      "type": "array",
+      "description": "Additional characters involved in the event (pc.* IDs).",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+          },
+          {
+            "pattern": "^pc\\."
           }
-        },
-        "justification": {
-          "type": "string"
-        },
-        "confidence": {
-          "type": "string",
-          "enum": [
-            "low",
-            "medium",
-            "high"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "observed_params": {
+      "type": "object",
+      "description": "Inline quantitative or qualitative observations captured by the event.",
+      "patternProperties": {
+        "^[a-z0-9_.]+$": {
+          "type": [
+            "number",
+            "string",
+            "boolean"
           ]
         }
       },
       "additionalProperties": false
     },
-    "source_ref": {
-      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
-      "description": "Where this change was observed in canon"
+    "payload": {
+      "type": "object",
+      "description": "Event-specific payload for contract-aligned downstream tooling.",
+      "additionalProperties": true
     }
   },
   "additionalProperties": false

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/record_log.schema.json",
+  "title": "Record Log Fragment",
+  "$comment": "See docs/contracts/record_log_contract_v1.1.md#record-log-array",
+  "description": "Reusable definitions for record_log[] audit trails.",
+  "$defs": {
+    "record_log_entry": {
+      "type": "object",
+      "properties": {
+        "entry_keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Identifiers or keys touched by this batch."
+        },
+        "added_by": {
+          "type": "string",
+          "description": "Tool or human responsible for the batch."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Calendar date (YYYY-MM-DD) when the batch was applied."
+        },
+        "method": {
+          "type": "string",
+          "description": "Workflow or tooling used (manual, import, migration, etc.)."
+        },
+        "reviewed_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Reviewer of this batch, if any."
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "approved",
+            "rejected"
+          ],
+          "description": "Outcome of manual review."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Supplemental comment describing why the batch occurred."
+        }
+      },
+      "required": [
+        "entry_keys",
+        "added_by",
+        "date",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "record_log": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record_log_entry"
+      },
+      "description": "Append-only audit trail of record mutations."
+    }
+  }
+}
