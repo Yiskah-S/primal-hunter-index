@@ -1,5 +1,0 @@
-attrs
-jsonschema
-jsonschema-specifications
-referencing
-rpds-py

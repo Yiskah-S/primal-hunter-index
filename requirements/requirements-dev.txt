@@ -1,5 +1,0 @@
-ruff
-pre-commit
-tqdm
-requests
-python-dotenv

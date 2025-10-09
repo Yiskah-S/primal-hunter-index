@@ -41,6 +41,13 @@ _SHARED_SCHEMA_URIS = {
     "https://primal-hunter.local/schemas/shared/param_rule.schema.json": _SCHEMA_ROOT
     / "shared"
     / "param_rule.schema.json",
+    "https://primal-hunter.local/schemas/shared/record_log.schema.json": _SCHEMA_ROOT
+    / "shared"
+    / "record_log.schema.json",
+    "https://primal-hunter.local/schemas/timeline_event.schema.json": _SCHEMA_ROOT
+    / "timeline_event.schema.json",
+    "https://primal-hunter.local/schemas/skill_node.schema.json": _SCHEMA_ROOT
+    / "skill_node.schema.json",
 }
 
 _SHARED_SCHEMA_STORE = {}

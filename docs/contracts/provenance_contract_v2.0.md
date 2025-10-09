@@ -9,9 +9,11 @@
 
 ## Purpose
 
-This contract defines how **canonical facts, events, and tags** in the Primal Hunter Index (PHI) are tracked, justified, and aligned using provenance metadata.
+This contract defines how **canonical facts, events, and tags** in the Primal Hunter Index (PHI) are tracked, justified,
+and aligned using provenance metadata.
 
 It supports:
+
 - 🔗 Canon alignment via `source_ref[]`
 - 🧠 Narrative scaffolding via `tone_tag[]` and `scene_function[]`
 - 🧾 Change history via `record_log[]`
@@ -28,14 +30,15 @@ It supports:
 
 ---
 
-
 ## 1. Canon Data Philosophy
 
 ### ✅ Canon is quote-backed
+
 - Facts in `records/` are considered canonical **only if they have supporting `source_ref[]`**
 - The old `canon: true` boolean is **soft-deprecated** — provenance proves canon
 
 ### ✅ Canon is not fixed — it evolves
+
 - New scenes can add or revise understanding of a fact
 - **Timelines**, not static files, are the source of truth for progression or observed parameters
 
@@ -75,19 +78,19 @@ It supports:
 
 ### 🎯 Rules
 
-* `type` is required
-* `scene_id`, `line_start`, `line_end` are required for `type: scene`
-* `quote` is optional but recommended (≤ 400 characters)
-* If `inference_type` is set, `inference_note` is required
-* If `certainty` is `"low"`, review must confirm entry
+- `type` is required
+- `scene_id`, `line_start`, `line_end` are required for `type: scene`
+- `quote` is optional but recommended (≤ 400 characters)
+- If `inference_type` is set, `inference_note` is required
+- If `certainty` is `"low"`, review must confirm entry
 
-* Canon payloads (record.json) must not include source_ref[]. All provenance lives in:
+- Canon payloads (record.json) must not include source_ref[]. All provenance lives in:
   - timeline.json (for event-based facts)
   - .meta.json sidecar (for global facts)
   - tag_registry.meta.json (for tag definitions)
 
-Timeline events take precedence over record.json content when computing state at a given point in time.
-Canon records describe general properties. Timeline events log observed state and take priority when in conflict.
+Timeline events take precedence over record.json content when computing state at a given point in time. Canon records
+describe general properties. Timeline events log observed state and take priority when in conflict.
 
 ### ✅ Valid Inference Types
 
@@ -114,9 +117,9 @@ Lives in `.meta.json`. Required for every canonical ID.
 
 Enables:
 
-* Safe diffing
-* Historical audits
-* Human or Codex review trails
+- Safe diffing
+- Historical audits
+- Human or Codex review trails
 
 ---
 
@@ -131,15 +134,15 @@ Timeline events and scene index entries may include:
 
 These are NOT canon facts — they are narrative metadata to help:
 
-* RAG pipelines weight tone/stylistic alignment
-* QA workflows track genre drift
-* Codex-generated stories stay in character voice
+- RAG pipelines weight tone/stylistic alignment
+- QA workflows track genre drift
+- Codex-generated stories stay in character voice
 
-### 💡 All tags used must:
+### 💡 All tags used must
 
-* Appear in `tag_registry.json`
-* Be marked `"status": "approved"` or fail validation
-* Have `source_ref[]` in `.meta.json` unless `allow_inferred: true`
+- Appear in `tag_registry.json`
+- Be marked `"status": "approved"` or fail validation
+- Have `source_ref[]` in `.meta.json` unless `allow_inferred: true`
 
 ---
 
@@ -157,10 +160,9 @@ These are NOT canon facts — they are narrative metadata to help:
 
 ## 7. What Not to Do
 
-🚫 Don’t put `source_ref[]` inline in `records/**.json`
-🚫 Don’t use tags without approving them + providing provenance
-🚫 Don’t assert “canon” without a quote, even if “it’s obvious”
-🚫 Don’t override past facts — add new events with new provenance
+🚫 Don’t put `source_ref[]` inline in `records/**.json` 🚫 Don’t use tags without approving them + providing provenance 🚫
+Don’t assert “canon” without a quote, even if “it’s obvious” 🚫 Don’t override past facts — add new events with new
+provenance
 
 ---
 
@@ -168,10 +170,10 @@ These are NOT canon facts — they are narrative metadata to help:
 
 Provenance is not just a citation tool — it’s the foundation of *tone-faithful, canon-consistent generation*.
 
-* It lets us trace what’s quote vs inference
-* It allows weighting by certainty
-* It enables backtracking of hallucinations
-* It trains Codex to write faithfully to style rules without breaking them
+- It lets us trace what’s quote vs inference
+- It allows weighting by certainty
+- It enables backtracking of hallucinations
+- It trains Codex to write faithfully to style rules without breaking them
 
 ---
 
@@ -179,29 +181,32 @@ Provenance is not just a citation tool — it’s the foundation of *tone-faithf
 
 Validation tooling must:
 
-* Enforce `source_ref.type`
-* Require quote-backed references for `allow_inferred: false`
-* Require `record_log[]` in `.meta.json`
-* Fail if timeline events lack `source_ref[]`
-* Flag if `certainty` is low but no `inference_note` is given
-* Validate that every `source_ref.scene_id` matches an existing file in `scene_index/**`
-* Validate that `line_start` and `line_end` fall within that scene’s defined bounds
-* All sidecar files (.meta.json, .review.json, .provenance.json) must validate against their respective schemas before promotion or RAG export.
+- Enforce `source_ref.type`
+- Require quote-backed references for `allow_inferred: false`
+- Require `record_log[]` in `.meta.json`
+- Fail if timeline events lack `source_ref[]`
+- Flag if `certainty` is low but no `inference_note` is given
+- Validate that every `source_ref.scene_id` matches an existing file in `scene_index/**`
+- Validate that `line_start` and `line_end` fall within that scene’s defined bounds
+- All sidecar files (.meta.json, `.review.json`, `.provenance.json`) must validate against their respective schemas
+  before promotion or RAG export.
 
 ### 🔧 Provenance Validator Expectations
 
 The official validator (`tools/validate_provenance.py`) enforces the following:
 
-1. **Timeline coverage** — Every event must include a non-empty `source_ref[]` array with valid `scene_id`, `line_start`, and `line_end`.  
-2. **Inline provenance ban** — `source_ref` keys are disallowed in canonical payloads outside timelines or `.meta.json` sidecars.  
+1. **Timeline coverage** — Every event must include a non-empty `source_ref[]` array with valid `scene_id`, `line_start`,
+   and `line_end`.  
+2. **Inline provenance ban** — `source_ref` keys are disallowed in canonical payloads outside timelines or `.meta.json`
+   sidecars.  
 3. **Record log validation** — If present, `record_log[]` must be an array of objects with `timestamp` and `action`.  
 4. **Soft guidance** — Warn (not fail) if an event contains neither a `quote` nor an `inference` hint.  
 5. **Scene ID regex** — Enforce `^\d{2}-\d{2}-\d{2}$` for all `scene_id` strings.  
 
 Violations:
+
 - ❌ Hard fails (exit 1) on structural or inline-source_ref errors.  
 - ⚠️ Warnings for missing quotes or inference flags.
-
 
 ---
 
@@ -218,21 +223,21 @@ Violations:
 
 ## 11. Glossary
 
-* **Canon** — Quote-backed, structurally validated fact
-* **Provenance** — Scene/quote span that justifies a fact or tag
-* **Inference** — A claim that extrapolates from a quote (must be declared)
-* **Timeline** — Per-character event log of when canon facts were observed
-* **Sidecar** — Any contextual metadata file linked to a canon record:
+- **Canon** — Quote-backed, structurally validated fact
+- **Provenance** — Scene/quote span that justifies a fact or tag
+- **Inference** — A claim that extrapolates from a quote (must be declared)
+- **Timeline** — Per-character event log of when canon facts were observed
+- **Sidecar** — Any contextual metadata file linked to a canon record:
               - `.meta.json` — source refs, record log, who added/edited it
               - `.review.json` — QA, approvals, warnings, Codex notes
               - `.provenance.json` — optional reverse scene-to-ID lookup
-
 
 ---
 
 ## 12. Review Philosophy (Optional)
 
 Codex-generated facts may be marked as `"proposed"` until reviewed. Reviewers may:
+
 - Approve or reject entire records
 - Override inferred values with stricter quotes
 - Flag low-certainty sources

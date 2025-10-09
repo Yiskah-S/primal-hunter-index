@@ -91,9 +91,18 @@ SHARED_SCHEMA_STORE = {
     "https://primal-hunter.local/schemas/shared/source_ref.schema.json": read_json(
         SCHEMA_ROOT / "shared" / "source_ref.schema.json"
     ),
-    "https://primal-hunter.local/schemas/shared/id.schema.json": read_json(
-        SCHEMA_ROOT / "shared" / "id.schema.json"
-    ),
+	"https://primal-hunter.local/schemas/shared/id.schema.json": read_json(
+		SCHEMA_ROOT / "shared" / "id.schema.json"
+	),
+	"https://primal-hunter.local/schemas/shared/record_log.schema.json": read_json(
+		SCHEMA_ROOT / "shared" / "record_log.schema.json"
+	),
+	"https://primal-hunter.local/schemas/timeline_event.schema.json": read_json(
+		SCHEMA_ROOT / "timeline_event.schema.json"
+	),
+	"https://primal-hunter.local/schemas/skill_node.schema.json": read_json(
+		SCHEMA_ROOT / "skill_node.schema.json"
+	),
 }
 
 
