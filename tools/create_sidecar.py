@@ -5,10 +5,11 @@ Ensures provenance is recorded and validation tooling can run cleanly.
 """
 
 import argparse
-import json
 import sys
 from datetime import date
 from pathlib import Path
+
+from core.io_safe import write_json_atomic
 
 
 def main():
@@ -57,9 +58,8 @@ def main():
     if args.notes:
         sidecar_data["notes"] = args.notes
 
-    with sidecar_path.open("w", encoding="utf-8") as f:
-        json.dump(sidecar_data, f, indent="\t")
-        print(f"✅ Sidecar created: {sidecar_path}")
+    write_json_atomic(sidecar_path, sidecar_data, ensure_ascii=False)
+    print(f"✅ Sidecar created: {sidecar_path}")
 
 if __name__ == "__main__":
     main()

@@ -10,12 +10,13 @@ context excerpts) for each match.
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import shutil
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
+
+from core.io_safe import write_json_atomic
 
 SUPPORTED_EXTENSIONS = {".md", ".txt"}
 
@@ -32,6 +33,7 @@ def slugify(value: str) -> str:
 
 
 def iter_text_files(root: Path, extensions: Iterable[str]) -> Iterable[Path]:
+    """Yield text files under *root* matching the provided extensions."""
     for path in root.rglob("*"):
         if not path.is_file():
             continue
@@ -40,6 +42,7 @@ def iter_text_files(root: Path, extensions: Iterable[str]) -> Iterable[Path]:
 
 
 def build_excerpts(lines: Sequence[str], matches: Sequence[int], context: int) -> list[MatchRecord]:
+    """Build match records with optional context window."""
     records: list[MatchRecord] = []
     if context <= 0:
         for idx in matches:
@@ -65,6 +68,7 @@ def search_and_copy(
     extensions: set[str],
     slug: str | None,
 ) -> int:
+    """Search chapters for keyword hits, copy matching files, and emit a manifest."""
     if not chapters_root.is_dir():
         raise FileNotFoundError(f"Chapters root not found: {chapters_root}")
 
@@ -121,8 +125,7 @@ def search_and_copy(
         matches_found += 1
 
     manifest_path = destination_root / "manifest.json"
-    with manifest_path.open("w", encoding="utf-8") as manifest_file:
-        json.dump(manifest, manifest_file, indent=2, ensure_ascii=False)
+    write_json_atomic(manifest_path, manifest, ensure_ascii=False, indent=2)
 
     return matches_found
 
