@@ -1,0 +1,29 @@
+# --- requirements-dev.txt ---
+ruff
+pre-commit
+tqdm
+requests
+python-dotenv
+
+# --- requirements-schema.txt ---
+attrs
+jsonschema
+jsonschema-specifications
+referencing
+rpds-py
+
+# --- requirements-scraping.txt ---
+beautifulsoup4
+soupsieve
+cloudscraper
+playwright
+selenium
+webdriver-manager
+trio
+trio-websocket
+websocket-client
+pyee
+outcome
+h11
+sniffio
+
