@@ -1,35 +1,43 @@
-# === Content to keep private ===
+# === Canon/notes kept out of git ===
 chapters/
-z_codex_context
-z_codex_context/archived/
+z_codex_context/
 z_notes/
 
+# === Editor & workspace clutter ===
 .vscode/
-.editorconfig
-.codexignore
+.idea/
+*.swp
+.DS_Store
 
+# === Toolchain artifacts ===
+node_modules/
+package-lock.json
+package.json
+primal_hunter_index.code-workspace
+.pre-commit-config.yaml
 
-
-# === Python environment & metadata ===
+# === Python environment & caches ===
 __pycache__/
 *.pyc
 .venv/
 .env
-.idea/
 __sandbox__/
 fixtures/
-.DS_Store
-.pre-commit-config.yaml
-
-# === System/editor files ===
-.DS_Store
-*.swp
+.ruff_cache/
+.pytest_cache/
 
 # === Optional build artifacts ===
+dist/
+build/
+*.egg-info
+.mypy_cache/
+
+# === Archives / installers ===
 *.zip
 *.bak
-
-# local copies or compiled wheels
 *.whl
-*.egg-info
+config/codexignore
+config/markdownlint.yaml
+config/markdownlintignore
+config/ruff.toml
 

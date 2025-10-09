@@ -1,157 +1,129 @@
+# -----------------------------------------------------------------------------
+# Primal Hunter Index — Development Conveniences
+# -----------------------------------------------------------------------------
+# `make help` will list the most useful targets with a short description.
+# Python tooling automatically prefers the project virtualenv when available.
+# -----------------------------------------------------------------------------
 
-# === Primal Hunter Index Project ===
-# Useful CLI commands for development, validation, and packaging
+SHELL       := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+PY          := $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; \
+	elif command -v python >/dev/null 2>&1; then echo python; \
+	else command -v python3; fi)
+.DEFAULT_GOAL := help
 
-PYTHON := $(shell which python3)
+# Handy colour escapes for pretty help output.
+HELP_COLOUR := \033[36m
+HELP_RESET  := \033[0m
 
-# ─── Help ─────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Meta targets
+# -----------------------------------------------------------------------------
+.PHONY: help format lint test test-schemas validate \
+	validate-known-skills validate-timeline validate-provenance validate_all \
+	zip_bundle zip_bundle_dry zip_bundle_force commit_clean filetree \
+	setup-schemas add-skill assign-skill assign-skill-check add-equipment \
+	add-data add-data-form add-dataset add-scene add-timeline search-term \
+	scrape_categories scrape_tag_pages promote-tags promote-tags-grep \
+	promote-tags-all json-editor sync_status
 
-.PHONY: help
-help:  ## Show all available make targets
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+help: ## Display available targets
+	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | sort | \
+		a awk 'BEGIN {FS = ":.*## "} {printf "  $(HELP_COLOUR)%-20s$(HELP_RESET) %s\n", $$1, $$2}'
 
+# -----------------------------------------------------------------------------
+# Linting & tests
+# -----------------------------------------------------------------------------
+format: ## Auto-format Python sources with Ruff
+	ruff format --config config/ruff.toml
 
-# ─── Linting & Validation ────────────────────────────────────────────────
+lint: ## Run Ruff lint checks (auto-fix safe issues)
+	ruff check --fix --config config/ruff.toml
 
-.PHONY: lint
-lint:  ## Run Ruff linter and fix issues
-	ruff check . --fix
+test: ## Run the full pytest suite
+	$(PY) -m pytest -q
 
+test-schemas: ## Run schema-focused pytest suite
+	$(PY) -m pytest tests/schema
 
-# ─── JSON Schema Testing ─────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Validation entry points
+# -----------------------------------------------------------------------------
+validate: ## Validate canon JSON against schemas
+	PYTHONPATH=. $(PY) tools/validate_all_metadata.py
 
-.PHONY: test_schemas
-test_schemas:  ## Run schema tests via pytest
-	pytest tests/schema
+validate-known-skills: ## Cross-check legacy known_skills catalog entries
+	PYTHONPATH=. $(PY) tools/validate_known_skills.py
 
+validate-timeline: ## Validate character timeline files
+	PYTHONPATH=. $(PY) tools/validate_character_timeline.py
 
-# ─── Upload Bundle Creation ──────────────────────────────────────────────
+validate-provenance: ## Enforce provenance guardrails for canon records
+	PYTHONPATH=. $(PY) tools/validate_provenance.py
 
-.PHONY: zip_bundle
-zip_bundle:  ## Create upload ZIP bundle using manifest file
+validate_all: lint test-schemas validate-provenance ## One-shot: lint + schema tests + provenance
+	$(PY) -m tools.validate_all_metadata
+
+# -----------------------------------------------------------------------------
+# Packaging helpers
+# -----------------------------------------------------------------------------
+zip_bundle: ## Build release zip after running pre-commit checks
 	pre-commit run --all-files
-	python3 tools/make_upload_bundle.py
+	$(PY) tools/make_upload_bundle.py
 
-.PHONY: zip_bundle_dry
-zip_bundle_dry:  ## Dry-run: show what would go in the zip
+zip_bundle_dry: ## Show what would be included in the release zip
 	pre-commit run --all-files
-	python3 tools/make_upload_bundle.py --dry-run
+	$(PY) tools/make_upload_bundle.py --dry-run
 
-.PHONY: zip_bundle_force
-zip_bundle_force:  ## Force zip even if tab check fails
-	python3 tools/make_upload_bundle.py --force
+zip_bundle_force: ## Force bundle creation even if checks fail
+	$(PY) tools/make_upload_bundle.py --force
 
+commit_clean: ## Example clean commit recipe for core config files
+	@git add config/**/*.toml config/**/*.yaml .gitignore README.md
+	@git commit -m "chore: clean commit of config updates"
+	@git push
 
-
-# ─── Clean Commit (Safe Push) ────────────────────────────────────────────
-
-.PHONY: commit_clean
-commit_clean:  ## Commit known clean files with conventional message
-	git add .editorconfig .gitignore Makefile README.md
-	git add requirements/requirements-*.txt
-	git add schemas/*.schema.json
-	git commit -m "chore: clean commit of config and schemas"
-	git push
-
-
-# ─── File Tree Logging ───────────────────────────────────────────────────
-
-.PHONY: filetree
-filetree:  ## Write file tree to ../z_notes/project_zips
+filetree: ## Emit an abbreviated project tree under ../z_notes/project_zips
 	@mkdir -p ../z_notes/project_zips
-	@find . \
+	@find . \ 
 		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './z_notes/*' \) -prune -o -print \
 	| awk -F/ 'NF<=6' > ../z_notes/.treelist
 	@tree --fromfile ../z_notes/.treelist > ../z_notes/project_zips/file_structure.txt
 	@rm ../z_notes/.treelist
 	@echo "📁 Wrote ../z_notes/project_zips/file_structure.txt"
 
-
-# --- Makefile Header ---
-SHELL := /bin/bash
-.SHELLFLAGS := -eu -o pipefail -c
-PY := $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; elif command -v python >/dev/null 2>&1; then echo python; else command -v python3; fi)
-.DEFAULT_GOAL := help
-
-#.PHONY: validate_all
-#validate_all: lint test_schemas zip_bundle  ## Run linter, tests, and bundler
-#	@echo "✅ All validations complete."
-
-
-
-# --- Schema Setup ---
-.PHONY: setup-schemas
-setup-schemas:  ## Create empty schema files for common entities (if missing)
+# -----------------------------------------------------------------------------
+# Bootstrap utilities
+# -----------------------------------------------------------------------------
+setup-schemas: ## Ensure placeholder schema files exist (legacy scaffolding)
 	@mkdir -p schemas
 	@for file in skills classes known_skills character_timeline titles tiers stat_scaling chapters_to_posts aliases global_event_timeline ; do \
-		test -f "schemas/$$file.schema.json" || touch "schemas/$$file.schema.json"; \
-		echo "✅ schemas/$$file.schema.json"; \
+		 test -f "schemas/$$file.schema.json" || touch "schemas/$$file.schema.json"; \
+		 echo "✅ schemas/$$file.schema.json"; \
 	done
 
-# --- Validators ---
-.PHONY: validate
-validate:  ## Validate all records/**.json against schemas
-	@PYTHONPATH=. $(PY) tools/validate_all_metadata.py
-
-.PHONY: validate-known-skills
-validate-known-skills:  ## Cross-check known skills against catalog and scene IDs
-	@PYTHONPATH=. $(PY) tools/validate_known_skills.py
-
-.PHONY: validate-timeline
-validate-timeline:  ## Validate character timeline files
-	@PYTHONPATH=. $(PY) tools/validate_character_timeline.py
-
-.PHONY: validate-provenance
-validate-provenance:  ## Enforce provenance contract guardrails
-	@PYTHONPATH=. $(PY) tools/validate_provenance.py
-
-check: validate  ## Alias for validate
-
-# --- CLI Scripts ---
-.PHONY: add-skill
-add-skill:  ## Launch interactive skill creation CLI
+# -----------------------------------------------------------------------------
+# CLI helpers
+# -----------------------------------------------------------------------------
+add-skill: ## Launch interactive skill creation CLI
 	PYTHONPATH=. $(PY) cli/add_skill.py
 
-.PHONY: assign-skill
-assign-skill:  ## Assign skill to character's timeline
+assign-skill: ## Assign a skill to a character timeline
 	PYTHONPATH=. $(PY) cli/assign_skill_to_character_timeline.py
 
-.PHONY: assign-skill-check
-assign-skill-check:  ## Assign then validate timeline
-	make assign-skill && make validate-timeline
+assign-skill-check: ## Assign skill, then validate timeline
+	$(MAKE) assign-skill && $(MAKE) validate-timeline
 
-.PHONY: add-equipment
-add-equipment:  ## Launch interactive equipment CLI (if available)
+add-equipment: ## Launch interactive equipment CLI
 	PYTHONPATH=. $(PY) cli/add_equipment.py
 
-# --- Web Helpers ---
-.PHONY: json-editor
-json-editor:  ## Launch records JSON editor (http://localhost:8000/tools/json_editor/)
-	(sleep 1 && $(PY) -m webbrowser -t "http://localhost:8000/tools/json_editor/") &
-	$(PY) -m http.server 8000
-
-# --- Status Logs ---
-.PHONY: sync_status
-sync_status:  ## Copy latest z_codex_context/status_*.md into docs/logs/
-	@PYTHONPATH=. $(PY) tools/sync_status.py
-
-
-
-# --- Full Workflow ---
-.PHONY: all
-all: setup-schemas validate  ## Bootstrap all schemas and validate project
-
-# --- CLI helpers ---
-.PHONY: add-data
-add-data:  ## Launch prompt-driven wizard to add records data
+add-data: ## Prompt-driven wizard to add records data
 	PYTHONPATH=. $(PY) cli/add_dataset_entry.py
 
-.PHONY: add-data-form
-add-data-form:  ## Launch form-based editor for records data
+add-data-form: ## Form-based editor for records data
 	PYTHONPATH=. $(PY) cli/add_data_form.py
 
-.PHONY: add-dataset
-add-dataset:  ## Backward-compatible dataset helper (requires DATASET=...)
+add-dataset: ## Back-compat dataset helper (DATASET=..., optional KEY/EDIT/POSITION)
 	@if [ -z "$(DATASET)" ]; then \
 		 echo "Usage: make add-dataset DATASET=<name> [KEY=<key>] [EDIT=1] [POSITION=<n>]"; \
 		 exit 1; \
@@ -162,8 +134,7 @@ add-dataset:  ## Backward-compatible dataset helper (requires DATASET=...)
 	 if [ -n "$(POSITION)" ]; then CMD="$$CMD --position $(POSITION)"; fi; \
 	 eval "$$CMD"
 
-.PHONY: add-scene
-add-scene:  ## Create a new scene_index entry
+add-scene: ## Create a new scene_index entry (SCENE_ID=BB-CC-SS)
 	@if [ -z "$(SCENE_ID)" ]; then \
 		 echo "Usage: make add-scene SCENE_ID=BB-CC-SS [SOURCE=<path>]"; \
 		 exit 1; \
@@ -172,8 +143,7 @@ add-scene:  ## Create a new scene_index entry
 	 if [ -n "$(SOURCE)" ]; then CMD="$$CMD --source-file $(SOURCE)"; fi; \
 	 eval "$$CMD"
 
-.PHONY: add-timeline
-add-timeline:  ## Append a timeline entry for a character
+add-timeline: ## Append timeline entry for a character (CHARACTER required)
 	@if [ -z "$(CHARACTER)" ]; then \
 		 echo "Usage: make add-timeline CHARACTER=<name> [POSITION=<n>]"; \
 		 exit 1; \
@@ -182,69 +152,62 @@ add-timeline:  ## Append a timeline entry for a character
 	 if [ -n "$(POSITION)" ]; then CMD="$$CMD --position $(POSITION)"; fi; \
 	 eval "$$CMD"
 
+# -----------------------------------------------------------------------------
+# Web helpers & status sync
+# -----------------------------------------------------------------------------
+json-editor: ## Launch local JSON editor (http://localhost:8000/tools/json_editor/)
+	(sleep 1 && $(PY) -m webbrowser -t "http://localhost:8000/tools/json_editor/") &
+	$(PY) -m http.server 8000
 
-# ---- Search bundle wrapper for tools/search_term_mentions.py ----
-# Usage:
-#   make search-term SEARCH='Race: [Human'
-#   make search-term SEARCH='Identify' CONTEXT=2
-#   make search-term SEARCH='Identify II' REGEX=1       # treat SEARCH as regex
-#
-# Optional vars:
-#   CHAPTERS=chapters            # where your chapter files live
-#   OUT=search_results           # where bundles are written
-#   CONTEXT=0                    # lines of context in manifest
-#   EXT='.md,.txt'               # file extensions to scan
-#   SLUG=Race_Human              # override output folder name (else auto from term)
+sync_status: ## Copy latest status logs into docs (automation helper)
+	PYTHONPATH=. $(PY) tools/sync_status.py
 
-SEARCH       ?=
-REGEX        ?= 0
-CHAPTERS     ?= chapters
-OUT          ?= search_results
-CONTEXT      ?= 0
-EXT          ?= .md,.txt
-SLUG         ?=
+# -----------------------------------------------------------------------------
+# Search helpers
+# -----------------------------------------------------------------------------
+SEARCH ?=
+REGEX  ?= 0
+CHAPTERS ?= chapters
+OUT ?= search_results
+CONTEXT ?= 0
+EXT ?= .md,.txt
+SLUG ?=
 
-.PHONY: search-term
-
-search-term:
+search-term: ## Collect excerpts containing SEARCH term (supports REGEX=1)
 	@if [ -z "$(SEARCH)" ]; then \
 		echo "Error: provide SEARCH. Example:"; \
 		echo "  make search-term SEARCH='Race: [Human'"; \
 		exit 1; \
 	fi
-	@python3 tools/search_term_mentions.py \
+	@$(PY) tools/search_term_mentions.py \
 		$(if $(filter 1,$(REGEX)),--regex,) \
-		--chapters-root '$(CHAPTERS)' \
-		--output-root '$(OUT)' \
-		--context-lines '$(CONTEXT)' \
-		--extensions '$(EXT)' \
-		$(if $(SLUG),--slug '$(SLUG)',) \
-		'$(SEARCH)'
+		--chapters-root "$(CHAPTERS)" \
+		--output-root "$(OUT)" \
+		--context-lines "$(CONTEXT)" \
+		--extensions "$(EXT)" \
+		$(if $(SLUG),--slug "$(SLUG)",) \
+		"$(SEARCH)"
 
-.PHONY: scrape_categories
-scrape_categories:
-	python3 tools/extract_tag_targets.py --mode categories
+# -----------------------------------------------------------------------------
+# Tag scraping / promotion helpers
+# -----------------------------------------------------------------------------
+scrape_categories: ## Fetch wiki category list for tag seeds
+	$(PY) tools/extract_tag_targets.py --mode categories
 
-.PHONY: scrape_tag_pages
-scrape_tag_pages:
-	python3 tools/extract_tag_targets.py --mode pages
+scrape_tag_pages: ## Fetch wiki page titles for a category
+	$(PY) tools/extract_tag_targets.py --mode pages
 
-## Promote selected tags from candidates → registry (dry-run by default)
-promote-tags:
-	python3 -m tools.promote_tags --all
+promote-tags: ## Promote all tag candidates (dry-run by default)
+	$(PY) -m tools.promote_tags --all
 
-promote-tags-grep:
-	python3 -m tools.promote_tags --grep "$(grep)"
+promote-tags-grep: ## Promote tag candidates matching REGEX (grep=<pattern>)
+	$(PY) -m tools.promote_tags --grep "$(grep)"
 
-## Commit a full promotion of all candidates (use with care)
-promote-tags-all:
-	python3 -m tools.promote_tags --all --commit --backup
+promote-tags-all: ## Promote all tag candidates and commit
+	$(PY) -m tools.promote_tags --all --commit --backup
 
-## Provenance guardrail check (fails the build on violations)
-validate-provenance:
-	python3 -m tools.validate_provenance
-
-## One-shot: lint + schema + provenance validators
-validate_all: lint
-	python3 -m tools.validate_all_metadata
-	$(MAKE) validate-provenance
+# -----------------------------------------------------------------------------
+# Provenance guardrail shortcut (keep near tagging helpers for visibility)
+# -----------------------------------------------------------------------------
+validate-provenance: ## One-step provenance validation (alias retained for muscle memory)
+	$(PY) -m tools.validate_provenance
