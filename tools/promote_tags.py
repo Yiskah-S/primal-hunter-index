@@ -92,7 +92,7 @@ def promote_object(section: str, original: str, slug: str) -> dict:
 		"allow_inferred": False,
 		"description": original,
 		"source": "manual_review",
-		"notes": "Promoted from tag_candidates.json"
+		"notes": "Promoted from tag_candidates.json",
 	}
 
 
@@ -143,6 +143,7 @@ def main():
 		print(f"Dry-run: would add {len(to_promote)} new tags:")
 		for _, original, slug in selected:
 			print(f"  {original} → {slug}")
+
 
 if __name__ == "__main__":
 	main()

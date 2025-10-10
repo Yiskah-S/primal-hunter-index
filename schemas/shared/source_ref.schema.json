@@ -14,8 +14,8 @@
 		},
 		"scene_id": {
 			"type": "string",
-			"pattern": "^\\d{2}-\\d{2}-\\d{2}$",
-			"description": "Scene identifier in BB-CC-SS format (Book, Chapter, Scene)."
+			"pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+			"description": "Scene identifier in dotted BB.CC.SS format (Book, Chapter, Scene)."
 		},
 		"line_start": {
 			"type": "integer",

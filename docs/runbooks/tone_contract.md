@@ -1,18 +1,14 @@
-<!--
-───────────────────────────────────────────────────────────────────────────────
-🎭 CREATIVE CONTRACT — PH UNIVERSE TONE
-───────────────────────────────────────────────────────────────────────────────
-Defines the stylistic, tonal, and narrative constraints that make a scene feel
-authentically *Primal Hunter*. Used by LLMs and contributors when writing new
-arcs, character POVs, or world-consistent content.
+<!-- ─────────────────────────────────────────────────────────────────────────────── 🎭 CREATIVE CONTRACT — PH UNIVERSE
+TONE ─────────────────────────────────────────────────────────────────────────────── Defines the stylistic, tonal, and
+narrative constraints that make a scene feel authentically *Primal Hunter*. Used by LLMs and contributors when writing
+new arcs, character POVs, or world-consistent content.
 ───────────────────────────────────────────────────────────────────────────────
 -->
 
 # 📜 PH Tone Contract: How to Write Like *Primal Hunter*
 
-This is your **golden reference** when writing any new scene, character, or arc  
-meant to feel like it belongs in the *Primal Hunter* universe — whether it’s from  
-Jake’s POV, Arnold’s, or an original side protagonist.
+This is your **golden reference** when writing any new scene, character, or arc meant to feel like it belongs in the
+*Primal Hunter* universe — whether it’s from Jake’s POV, Arnold’s, or an original side protagonist.
 
 When in doubt, check here first.
 
@@ -21,6 +17,7 @@ When in doubt, check here first.
 ## ✅ Core Tone Principles
 
 ### 1. The System is **indifferent**, not a DM
+
 - It doesn’t bend for drama, pity, or personalities.  
 - When characters succeed, it’s because they planned, exploited, or risked.  
 - It punishes stupidity, greed, and delay — but only if **rules were broken**.  
@@ -30,6 +27,7 @@ When in doubt, check here first.
 ---
 
 ### 2. Power is **earned**, not given
+
 - Tier-ups, evolutions, and breakthroughs **require payment**:  
   - Injuries  
   - Time  
@@ -41,6 +39,7 @@ When in doubt, check here first.
 ---
 
 ### 3. Canon is **quote-backed observation**
+
 - The world isn’t a spreadsheet — it’s a foggy simulation glimpsed through POVs.  
 - What a character *believes* may not be true.  
 - If a rule is applied, cite where it was *seen*.  
@@ -48,19 +47,20 @@ When in doubt, check here first.
 ---
 
 ### 4. Progression is **nonlinear but logical**
+
 - Higher rarity ≠ stronger. Context, synergy, and timing matter more.  
 - Affinity, gear, domain conditions, Path, and even narrative tone affect outcome.
 
 ---
 
 ### 5. Characters are **POV-consistent**
+
 | Character | Core Traits | Writing Notes |
 |------------|-------------|----------------|
 | **Jake** | Adaptable, cunning, emotionally reactive, occasionally arrogant | Reacts fast, learns on the fly, weaponizes instinct |
 | **Arnold** | Analytical, recursive, engineer-mindset, legacy-aware | Experiments methodically, logs observations, builds logic trees |
 
-You can write anyone — as long as their decisions are grounded in internal logic,  
-not plot convenience.
+You can write anyone — as long as their decisions are grounded in internal logic, not plot convenience.
 
 ---
 
@@ -94,8 +94,7 @@ Don’t do this — it breaks tone and world logic:
 > He hadn’t found the boundary yet. The last time, it accepted his calm.  
 > This time, it didn’t.”
 
-This feels like *Primal Hunter*:  
-sharp, systemic, internally consistent, and **earned**.
+This feels like *Primal Hunter*: sharp, systemic, internally consistent, and **earned**.
 
 ---
 
@@ -114,6 +113,5 @@ sharp, systemic, internally consistent, and **earned**.
 > This document exists so that both humans and LLMs can *write in tone*.  
 > When in doubt, favor physics over plot, observation over assumption,  
 > and cost over convenience.
-```
 
 ---

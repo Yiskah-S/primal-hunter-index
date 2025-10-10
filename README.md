@@ -12,14 +12,14 @@ replicating processes (clones, partitions, instances).
 
 This project serves as both:
 
-* A **records-driven progression tracker** for Jake and others in the *Primal Hunter* universe
+- A **records-driven progression tracker** for Jake and others in the *Primal Hunter* universe
 
 It prioritizes:
 
-* ✅ Schema-first design
-* ✅ Chronological accuracy via scene- and day-level logging
-* ✅ Strong tooling (validation, CLI, auto-schema setup)
-* ✅ Developer learning (data modeling, CLI, Makefiles, etc.)
+- ✅ Schema-first design
+- ✅ Chronological accuracy via scene- and day-level logging
+- ✅ Strong tooling (validation, CLI, auto-schema setup)
+- ✅ Developer learning (data modeling, CLI, Makefiles, etc.)
 
 ---
 
@@ -124,19 +124,19 @@ We split metadata by purpose:
 
 Each `timeline.json` entry can include:
 
-* 🎯 Skill acquisition (`skill_log`)
-* 🧠 Stat allocation & deltas
-* 🧰 Equipment changes
-* 🎖 Title gains
-* 🧬 Resource max/current tracking
-* 👹 Enemies defeated (planned)
-* 🔄 Scene + day pointers for chronology
+- 🎯 Skill acquisition (`skill_log`)
+- 🧠 Stat allocation & deltas
+- 🧰 Equipment changes
+- 🎖 Title gains
+- 🧬 Resource max/current tracking
+- 👹 Enemies defeated (planned)
+- 🔄 Scene + day pointers for chronology
 
 ### 🧪 What’s NOT Canon
 
-* Any file in `fixtures/` or `sandbox/`
-* Any skill/gear/event without `source_ref[]`
-* Any `.json` without a passing schema validation
+- Any file in `fixtures/` or `sandbox/`
+- Any skill/gear/event without `source_ref[]`
+- Any `.json` without a passing schema validation
 
 ---
 
@@ -151,9 +151,9 @@ chmod +x .git/hooks/pre-commit
 
 ### Future Targets
 
-* `make test` → Run Pytest suite (schema validation, cross checks)
-* `make lint` → Code quality (e.g. Ruff or Flake8)
-* `make release` → Zip + archive `records/` + schema snapshot
+- `make test` → Run Pytest suite (schema validation, cross checks)
+- `make lint` → Code quality (e.g. Ruff or Flake8)
+- `make release` → Zip + archive `records/` + schema snapshot
 
 ---
 
@@ -161,10 +161,10 @@ chmod +x .git/hooks/pre-commit
 
 This is a **solo educational project** intended to practice:
 
-* 🧱 Schema-first data architecture
-* 🧪 Building LLM training datasets
-* 🛠 Best practices in project structure and CLI design
-* 📚 Systematic parsing of complex progression fantasy
+- 🧱 Schema-first data architecture
+- 🧪 Building LLM training datasets
+- 🛠 Best practices in project structure and CLI design
+- 📚 Systematic parsing of complex progression fantasy
 
 LLM training accuracy improves drastically when scenes are backed by structured metadata — and that's exactly what this
 toolchain is for.

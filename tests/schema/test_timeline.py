@@ -26,26 +26,22 @@ VALIDATOR = Draft202012Validator(SCHEMA, resolver=RESOLVER)
 
 
 def _collect_errors(instance_data):
-    return list(VALIDATOR.iter_errors(instance_data))
+	return list(VALIDATOR.iter_errors(instance_data))
 
 
 def test_valid_timeline_entry_passes():
 	minimal_timeline = [
 		{
-			"event_id": "ev.jake.01_02_01.acquire_meditation",
-			"scene_id": "01-02-01",
+			"event_id": "ev.jake.01.02.01.acquire_meditation",
+			"scene_id": "01.02.01",
 			"order": 1,
 			"type": "skill_acquired",
-			"skill_id": "sn.meditation.rank1",
+			"node_id": "sn.meditation.rank1",
+			"knowledge_delta": [
+				{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}
+			],
 			"tags": ["tag.timeline.system_message"],
-			"source_ref": [
-				{
-					"type": "scene",
-					"scene_id": "01-02-01",
-					"line_start": 100,
-					"line_end": 120
-				}
-			]
+			"source_ref": [{"type": "scene", "scene_id": "01.02.01", "line_start": 100, "line_end": 120}],
 		}
 	]
 	assert _collect_errors(minimal_timeline) == []
@@ -54,10 +50,10 @@ def test_valid_timeline_entry_passes():
 def test_missing_stats_fails():
 	timeline_missing_fields = [
 		{
-			"event_id": "ev.jake.01_02_01.acquire_meditation",
-			"scene_id": "01-02-01",
+			"event_id": "ev.jake.01.02.01.acquire_meditation",
+			"scene_id": "01.02.01",
 			"order": 1,
-			"type": "skill_acquired"
+			"type": "skill_acquired",
 		}
 	]
 	collected_errors = _collect_errors(timeline_missing_fields)

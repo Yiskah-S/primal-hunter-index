@@ -25,7 +25,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 73,
       "line_end": 73,
       "type": "scene"
@@ -53,7 +53,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 77,
       "line_end": 77,
       "type": "scene"
@@ -83,7 +83,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 81,
       "line_end": 81,
       "type": "scene"
@@ -113,7 +113,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 85,
       "line_end": 85,
       "type": "scene"
@@ -145,7 +145,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 89,
       "line_end": 89,
       "type": "scene"
@@ -175,7 +175,7 @@
     },
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 93,
       "line_end": 93,
       "type": "scene"

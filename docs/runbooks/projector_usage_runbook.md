@@ -1,5 +1,6 @@
 # DRAFT ACTIVE DISCUSSION IN PROGRESS
-## IDEAS:
+
+## IDEAS
 
 ### 2.3 Timelines (records/characters/*/timeline.json)
 
@@ -15,8 +16,8 @@ We could explicitly restate this example in docs/runbooks/projector_usage.md onc
 
 ### 2.3 Timelines (`records/characters/*/timeline.json`)
 
-* Events always reference `id`s (e.g. `node_id`, `eq_id`)
-* Each event can carry its own `tags`, `source_ref`, and metadata
+- Events always reference `id`s (e.g. `node_id`, `eq_id`)
+- Each event can carry its own `tags`, `source_ref`, and metadata
 
 ---
 
@@ -42,13 +43,13 @@ Events carry their own source_ref[] and can include tags.
 Example – character event:
 
 {
-  "event_id": "ev.jake.03_14_01.a",
-  "when": "03-14-01",
+  "event_id": "ev.jake.03.14.01.a",
+  "when": "03.14.01",
   "type": "skill_used",
   "node_id": "sn.spectral_displacement.rank1",
   "observed_params": { "duration_s": 0.5 },
   "tags": { "combat_context": ["ambush", "spectral"] },
   "source_ref": [
-    { "type": "scene", "scene_id": "03-14-01", "line_start": 212, "line_end": 225 }
+    { "type": "scene", "scene_id": "03.14.01", "line_start": 212, "line_end": 225 }
   ]
 }

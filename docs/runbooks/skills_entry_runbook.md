@@ -1,9 +1,12 @@
-Title: Skill Entry Runbook (PHI)  
-Status: Living  
-Linked Schema: schemas/skills.schema.json  
-Updated: 2025-10-08  
+# Skill Entry Runbook (PHI)
 
-This guide distils the working notes for capturing canon skill data into repeatable steps you can follow while reading chapters.
+**Status:** Living  
+**Updated:** 2025-10-08  
+**Linked Schemas:** `schemas/skills.schema.json`  
+**Linked Contract:** [skills_contract_v1.0.md](../contracts/skills_contract_v1.0.md)
+
+This guide distils the working notes for capturing canon skill data into repeatable steps you can follow while reading
+chapters.
 
 ## Granted By
 
@@ -22,7 +25,7 @@ This guide distils the working notes for capturing canon skill data into repeata
 
 ## Provenance & Scene IDs
 
-- `source_ref.scene_id` is the canonical scene identifier; keep it in `BB-CC-SS` format.
+- `source_ref.scene_id` is the canonical scene identifier; keep it in `BB.CC.SS` format.
 - Capture the precise quote span with `line_start` and `line_end`. If the mention is a single line, set both to the same value.
 - When provenance comes from dialogue describing a previous event, cite the dialogue scene, not the flashback location, and clarify the context in `notes`.
 
@@ -51,3 +54,11 @@ This guide distils the working notes for capturing canon skill data into repeata
 3. If schema changes were required, capture them with `python3 tools/diff_schemas.py schemas skills.schema.json` before committing.
 
 Cross-file alignment keeps the skill catalog trustworthy; update this document whenever the schema or workflow evolves.
+
+---
+
+### Related Docs
+
+- [Skills Contract](../contracts/skills_contract_v1.0.md)
+- [Skills Structure Runbook](./skills_structure_runbook.md)
+- [Skills Overview Design](../design/skills_overview_design.md)

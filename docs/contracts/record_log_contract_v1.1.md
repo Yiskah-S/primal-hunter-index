@@ -93,6 +93,8 @@ This field **lives in the `.meta.json` sidecar** and is **required** for every s
 - Required for all records in `records/`
 - Lives inside the `.meta.json` file **next to** the canonical `record.json`
 - Should be the **first field** in `.meta.json` for quick index scan
+- `record_log[]` entries MAY reference related provenance by pointer (e.g., event ID, short note), but MUST NOT embed full `source_ref[]` objects. Detailed citations live in timeline events or dedicated provenance sidecars. The log explains *what changed* and *why*; the provenance files provide the *evidence*.
+
 
 ---
 
@@ -210,3 +212,12 @@ aligned generation at scale.
 
 For enforcement logic, see `tools/validate_provenance.py` — it verifies that each `.meta.json` carries a well-formed
 `record_log[]` array per this contract.
+
+---
+
+### Related Docs
+
+- [Provenance Contract](./provenance_contract_v2.0.md)
+- [Source Ref Contract](./source_ref_contract_v1.1.md)
+- [Provenance Workflow Runbook](../runbooks/provenance_workflow_runbook.md)
+- [tools/validate_provenance.py](../tools/validate_provenance.py)

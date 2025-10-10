@@ -14,10 +14,10 @@ parseable, cross-referencable, immutable labels that uniquely identify all core 
 
 They enable:
 
-* 🔗 Canon-safe referencing across timelines, records, tags, and scenes
-* 🧾 Precise validation and schema enforcement
-* 🧠 LLM-friendly prompt structuring
-* 🎮 Future replay of character state and narrative progression
+- 🔗 Canon-safe referencing across timelines, records, tags, and scenes
+- 🧾 Precise validation and schema enforcement
+- 🧠 LLM-friendly prompt structuring
+- 🎮 Future replay of character state and narrative progression
 
 ---
 
@@ -48,17 +48,22 @@ They enable:
 | `pc.`  | Character (person) | `pc.jake`, `pc.arnold`            |
 | `loc.` | Location           | `loc.haven_city`, `loc.void_gate` |
 | `tag.` | Internal tag key   | `tag.skills.teleportation`        |
-| `ev.`  | Timeline event     | `ev.jake.01_02_01.a`              |
+| `ev.`  | Timeline event     | `ev.jake.01.02.01.a`              |
+
+> Style note: timeline event IDs express the scene triplet as three dotted numeric segments (`<BB>.<CC>.<SS>`).
 
 ---
 
 ## 🛠️ ID Placement
 
-* Every `record.json` in `records/**` must have an `id` field matching this contract
-* `id` must match the filename (without `.json`) or directory (if bundled)
-* Sidecars (`.meta.json`, `.review.json`, `.provenance.json`) are keyed by `id`
-* Timeline events (`timeline.json`) must reference skill/equipment/class IDs by `id`, not name
-* Tag definitions in `tag_registry.json` must use canonical `tag.`-prefixed keys
+### Provenance note
+ID records and other canonical payloads MUST NOT embed `source_ref[]`. Provenance for those records belongs in sidecars and timelines. All cross-references must use IDs, not names.
+
+- Every `record.json` in `records/**` must have an `id` field matching this contract
+- `id` must match the filename (without `.json`) or directory (if bundled)
+- Sidecars (`.meta.json`, `.review.json`, `.provenance.json`) are keyed by `id`
+- Timeline events (`timeline.json`) must reference skill/equipment/class IDs by `id`, not name
+- Tag definitions in `tag_registry.json` must use canonical `tag.`-prefixed keys
 
 ---
 
@@ -68,8 +73,8 @@ They enable:
 
 If an ID is renamed:
 
-* The old ID is **deprecated** but not deleted
-* A `links[]` array is added to the new `.meta.json`:
+- The old ID is **deprecated** but not deleted
+- A `links[]` array is added to the new `.meta.json`:
 
 ```json
 "links": [
@@ -89,11 +94,11 @@ IDs never “move” — they are replaced, forked, or aliased, but never overwr
 
 This system is the backbone of:
 
-* Canon traceability
-* Timelines that replay across chapters
-* RAG pipelines that don’t hallucinate names
-* Snapshot diffs of state at time `T`
-* LLMs that speak in stable symbols (`sn.meditation.rank1` > “Meditation”)
+- Canon traceability
+- Timelines that replay across chapters
+- RAG pipelines that don’t hallucinate names
+- Snapshot diffs of state at time `T`
+- LLMs that speak in stable symbols (`sn.meditation.rank1` > “Meditation”)
 
 Stable IDs make the PHI index **machine-safe**, not just human-readable.
 
@@ -133,8 +138,8 @@ Enforced by: `tools/validate_ids.py`
 
 ```json
 {
-  "event_id": "ev.jake.01_02_01.a",
-  "when": "01-02-01",
+  "event_id": "ev.jake.01.02.01.a",
+  "when": "01.02.01",
   "type": "skill_acquired",
   "node_id": "sn.blink.rank2"
 }
@@ -209,9 +214,9 @@ Enforced by: `tools/validate_ids.py`
 
 Stable IDs are:
 
-* Compact enough for Codex to read
-* Explicit enough for humans to trace
-* Rigid enough to prevent corruption or ambiguity
+- Compact enough for Codex to read
+- Explicit enough for humans to trace
+- Rigid enough to prevent corruption or ambiguity
 
 This is not just a naming convention. This is your **referential integrity layer.**
 
@@ -228,3 +233,82 @@ This is not just a naming convention. This is your **referential integrity layer
 | `tag_usage_map.py`    | Shows where each tag ID is referenced in canon            |
 
 ---
+
+---
+
+### Related Docs
+
+- [Skills Contract](./skills_contract_v1.0.md)
+- [Provenance Contract](./provenance_contract_v2.0.md)
+- [ID Usage Guidelines](../design/storage_layout_design.md)
+- [tools/validate_all_metadata.py](../tools/validate_all_metadata.py)
+
+
+Exactly — `cf.*` and `ci.*` were just shorthand to illustrate the distinction between *concept* and *instance.*
+In your actual repo, you still want the **ID to carry semantic weight**.
+That’s not redundancy; it’s free context for both humans and the LLM.
+
+Think of the prefix as a *linguistic affordance*, not just a namespace.
+It helps the model infer meaning even before it reads the metadata.
+
+---
+
+### 🧱 Example: explicit, language-rich IDs
+
+Instead of:
+
+```
+cf.teleportation
+ci.sn.teleportation.rank1
+```
+
+Use:
+
+```
+sf.teleportation           # skill family
+sn.teleportation.rank1     # skill node (concept instance)
+it.nanoblade.blackpoint    # item template
+eq.nanoblade.blackpoint_001  # item instance (equip)
+lc.haven_city_center       # location
+pc.jake                    # player character
+ev.jake.01.02.01.a                # event or scene
+```
+
+That’s not just naming; it’s *semantic compression.*
+When the model later embeds or retrieves from vector space, “sn.” already biases toward *skill node* context.
+It recognizes that “sn.teleportation.rank1” behaves like other `sn.*` things, not like `it.*` or `pc.*`.
+
+---
+
+### 🧩 Why we keep explicit type tags even with predicate edges
+
+| Reason                            | Description                                                                                                                        |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Natural language inference** | Models reason via token similarity. Seeing “skill_node” or “sn.” in the ID gives it cues about domain.                             |
+| **2. Human readability**          | You and Codex can grep, diff, and validate far faster with semantically meaningful prefixes.                                       |
+| **3. Schema modularity**          | Each prefix ties to a schema fragment (`skill_node.schema.json`, `location.schema.json`, etc.).                                    |
+| **4. Mixed retrieval**            | When a query references “teleportation,” the system can cluster results across families, nodes, items, etc., by matching prefixes. |
+
+So yes — keep the strong naming conventions:
+
+* they help the model semantically,
+* they help humans pragmatically,
+* and they reinforce your `id_contract_v1.1.md`.
+
+---
+
+### ⚙️ Synthesis with the concept/instance layer
+
+| Layer            | Prefix                | Schema                         | Example ID            | Example Edge                          |
+| ---------------- | --------------------- | ------------------------------ | --------------------- | ------------------------------------- |
+| Concept (family) | `sf.` / `it.` / `lc.` | `concept.schema.json`          | `sf.meditation`       | —                                     |
+| Instance (node)  | `sn.` / `eq.` / `ev.` | `concept_instance.schema.json` | `sn.meditation.rank1` | `is_instance_of: sf.meditation`       |
+| Meta / System    | `sys.`                | `system.schema.json`           | `sys.magic_system`    | `belongs_to_system: sys.magic_system` |
+
+The prefixes aren’t just cosmetic—they’re part of your semantic schema.
+They make your graph *linguistically self-documenting* and far easier to vectorize later.
+
+---
+
+So yes: **keep the long, explicit IDs**.
+They make PHI both more *machine-readable* and more *story-aware*—a rare combo.

@@ -67,12 +67,10 @@ validate_all: lint test-schemas validate-provenance ## One-shot: lint + schema t
 # -----------------------------------------------------------------------------
 # Packaging helpers
 # -----------------------------------------------------------------------------
-zip_bundle: ## Build release zip after running pre-commit checks
-	pre-commit run --all-files
+zip_bundle: ## Build release zip without running pre-commit hooks
 	$(PY) tools/make_upload_bundle.py
 
-zip_bundle_dry: ## Show what would be included in the release zip
-	pre-commit run --all-files
+zip_bundle_dry: ## Show what would be included in the release zip (no pre-commit)
 	$(PY) tools/make_upload_bundle.py --dry-run
 
 zip_bundle_force: ## Force bundle creation even if checks fail
@@ -85,7 +83,7 @@ commit_clean: ## Example clean commit recipe for core config files
 
 filetree: ## Emit an abbreviated project tree under ../z_notes/project_zips
 	@mkdir -p ../z_notes/project_zips
-	@find . \ 
+	@find . \
 		\( -path './.git' -o -path './.venv' -o -path './node_modules' -o -path './__pycache__' -o -path './chapters/*' -o -path './z_notes/*' \) -prune -o -print \
 	| awk -F/ 'NF<=6' > ../z_notes/.treelist
 	@tree --fromfile ../z_notes/.treelist > ../z_notes/project_zips/file_structure.txt
@@ -134,9 +132,9 @@ add-dataset: ## Back-compat dataset helper (DATASET=..., optional KEY/EDIT/POSIT
 	 if [ -n "$(POSITION)" ]; then CMD="$$CMD --position $(POSITION)"; fi; \
 	 eval "$$CMD"
 
-add-scene: ## Create a new scene_index entry (SCENE_ID=BB-CC-SS)
+add-scene: ## Create a new scene_index entry (SCENE_ID=BB.CC.SS)
 	@if [ -z "$(SCENE_ID)" ]; then \
-		 echo "Usage: make add-scene SCENE_ID=BB-CC-SS [SOURCE=<path>]"; \
+		 echo "Usage: make add-scene SCENE_ID=BB.CC.SS [SOURCE=<path>]"; \
 		 exit 1; \
 	 fi; \
 	 CMD="PYTHONPATH=. $(PY) cli/add_scene.py $(SCENE_ID)"; \

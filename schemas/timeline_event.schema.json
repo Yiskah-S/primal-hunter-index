@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://primal-hunter.local/schemas/timeline_event.schema.json",
   "title": "Timeline Event",
-  "$comment": "See docs/contracts/timeline_contract_v1.0.md#3-required-fields",
+  "$comment": "See docs/contracts/timeline_contract_v1.1.md#3-event-object-fields",
   "type": "object",
   "required": [
     "event_id",
@@ -13,20 +13,14 @@
   ],
   "properties": {
     "event_id": {
-      "allOf": [
-        {
-          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
-        },
-        {
-          "pattern": "^ev\\."
-        }
-      ],
-      "description": "Stable event identifier (ev.<character>.<scene>.<slug>)."
+      "type": "string",
+      "pattern": "^ev\\.[a-z0-9_]+\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[a-z0-9_]+$",
+      "description": "Stable event identifier (ev.<character>.<BB>.<CC>.<SS>.<slug>)."
     },
     "scene_id": {
       "type": "string",
-      "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
-      "description": "Canonical scene identifier (BB-CC-SS)."
+      "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+      "description": "Canonical scene identifier (dotted BB.CC.SS)."
     },
     "order": {
       "type": "integer",
@@ -41,6 +35,8 @@
         "memory_lost",
         "information_received",
         "skill_acquired",
+        "skill_observation",
+        "skill_evolved",
         "skill_upgraded",
         "class_changed",
         "title_granted",
@@ -56,6 +52,19 @@
         "correction"
       ],
       "description": "Controlled event category per the timeline contract."
+    },
+    "epistemic_at": {
+      "type": "object",
+      "description": "Overrides for when the character actually knew this (defaults to scene_id).",
+      "required": ["scene_id"],
+      "properties": {
+        "scene_id": {
+          "type": "string",
+          "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+          "description": "Epistemic clock anchor (dotted BB.CC.SS)."
+        }
+      },
+      "additionalProperties": false
     },
     "source_ref": {
       "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
@@ -179,5 +188,38 @@
       "additionalProperties": true
     }
   },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "skill_evolved" } } },
+      "then": {
+        "required": ["node_id", "knowledge_delta"],
+        "not": {
+          "anyOf": [
+            { "required": ["from_node_id"] },
+            { "required": ["to_node_id"] }
+          ]
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "skill_upgraded" } } },
+      "then": {
+        "required": ["from_node_id", "to_node_id"],
+        "not": { "required": ["node_id"] }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "skill_acquired" } } },
+      "then": { "required": ["node_id", "knowledge_delta"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "skill_observation" } } },
+      "then": { "required": ["node_id", "knowledge_delta"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "belief_corrected" } } },
+      "then": { "required": ["corrects_event_id", "knowledge_delta"] }
+    }
+  ],
   "additionalProperties": false
 }

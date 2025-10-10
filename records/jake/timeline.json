@@ -1,7 +1,7 @@
 [
   {
     "day": 0,
-    "scene_id": "01-01-01",
+    "scene_id": "01.01.01",
     "source_file": "chapters/Book 01 - PH/0001_Chapter_1_Another_Monday_Morning.md",
     "reason": "Pre-System routine (office life)",
     "tags": [
@@ -16,7 +16,7 @@
     "notes": "Normal commute; coworkers introduced; System message flashes at scene end.",
     "source_ref": [
       {
-        "scene_id": "01-01-01",
+        "scene_id": "01.01.01",
         "line_start": 1,
         "line_end": 83,
         "type": "scene"
@@ -25,7 +25,7 @@
   },
   {
     "day": 0,
-    "scene_id": "01-02-01",
+    "scene_id": "01.02.01",
     "source_file": "chapters/Book 01 - PH/0002_Chapter_2_Introduction.md",
     "reason": "Initial System introduction, class selection, and starter equipment received.",
     "level": 0,
@@ -131,7 +131,7 @@
     "notes": "Meets Introduction Entity, selects Archer, gains starter kit before tutorial transport.",
     "source_ref": [
       {
-        "scene_id": "01-02-01",
+        "scene_id": "01.02.01",
         "line_start": 1,
         "line_end": 159,
         "type": "scene"

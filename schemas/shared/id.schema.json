@@ -3,7 +3,14 @@
 	"$id": "https://primal-hunter.local/schemas/shared/id.schema.json",
 	"title": "Stable ID",
 	"$comment": "See docs/contracts/id_contract_v1.1.md#id-format",
-	"type": "string",
-	"pattern": "^(sn|sf|eq|cl|rc|pc|loc|tag|ev)\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$",
-	"description": "Stable dot-delimited identifier (prefix.namespace.slug) used across canon."
+	"$defs": {
+		"idString": {
+			"type": "string",
+			"pattern": "^(sn|sf|eq|cl|rc|pc|loc|tag|ev)\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$",
+			"description": "Stable dot-delimited identifier (prefix.namespace.slug) used across canon."
+		}
+	},
+	"allOf": [
+		{ "$ref": "#/$defs/idString" }
+	]
 }

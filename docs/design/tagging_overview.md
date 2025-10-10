@@ -2,7 +2,8 @@
 
 Status: Informational
 
-This document captures the finalized strategy for heuristic tagging, sidecar structure, and provenance management prior to the Golden Slice.
+This document captures the finalized strategy for heuristic tagging, sidecar structure, and provenance management prior
+to the Golden Slice.
 
 See [`tagging_contract.md`](./tagging_contract.md) for all tagging design rules.
 
@@ -19,7 +20,7 @@ See [`tagging_contract.md`](./tagging_contract.md) for all tagging design rules.
 
 **Rules:**
 
-- No inline `source_ref[]` in records like `skills.json` or `equipment.json`
+- No inline `source_ref[]` in canonical payloads like `records/skills/sn.*/record.json` or `records/equipment/*.json`
 - Detailed provenance lives in the timeline, or in `.meta.json` as needed
 - `.meta.json` = minimal metadata, not detailed scene mapping
 - All per-entry `source_ref[]` should go into timeline events or future `.provenance.json` files
@@ -28,10 +29,11 @@ See [`tagging_contract.md`](./tagging_contract.md) for all tagging design rules.
 
 ## 🏷 Heuristic Tagging Pipeline (Pre–Golden Slice)
 
-### Goal:
+### Goal
+
 Tag early chapters with characters, gods, skills, locations, etc., using a hybrid pipeline.
 
-### 🔄 Pipeline Flow:
+### 🔄 Pipeline Flow
 
 | Stage              | Role |
 |--------------------|------|
@@ -40,7 +42,7 @@ Tag early chapters with characters, gods, skills, locations, etc., using a hybri
 | ⚙️ Heuristic tagger| Match vocab in chapter text |
 | 🤖 LLM pass        | Classify context: POV mention, ability used, historical, etc. |
 | 👩‍💻 Human review  | Final approve/edit |
-| ✅ Save tags       | Output `tags` per scene file, validated via `tags.schema.json`
+| ✅ Save tags       | Output `tags` per scene file, validated via `tags.schema.json` |
 
 ---
 
@@ -56,10 +58,10 @@ Tag early chapters with characters, gods, skills, locations, etc., using a hybri
 
 ## ❌ What Not To Do
 
-- Don’t store `source_ref[]` inline in skills.json, equipment.json, etc.
+- Don’t store `source_ref[]` inline in per-entity payloads (`records/skills/sn.*/record.json`, equipment records, etc.)
 - Don’t rely on `canon: true` to mean anything without provenance
 - Don’t write the Golden Slice until tagging and vocab are prepped
 
 ---
 
-_Last updated: 2025-10-07_
+**Last updated:** 2025-10-07

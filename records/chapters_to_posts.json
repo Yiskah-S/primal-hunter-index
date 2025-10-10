@@ -3,7 +3,7 @@
 		"book": 1,
 		"chapter": 1,
 		"scene_range": [
-			"01-01-01"
+			"01.01.01"
 		],
 		"notes": "Covers Jake's ordinary Monday routine before the System activates."
 	},
@@ -11,7 +11,7 @@
 		"book": 1,
 		"chapter": 2,
 		"scene_range": [
-			"01-02-01"
+			"01.02.01"
 		],
 		"notes": "Jake meets the Introduction Entity, selects the Archer class, and gathers starter gear."
 	}

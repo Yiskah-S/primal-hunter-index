@@ -1,7 +1,7 @@
 [
   {
     "day": 0,
-    "scene_id": "01-01-01",
+    "scene_id": "01.01.01",
     "event": "Monday Office Routine",
     "summary": "Jake's commute and office interactions set the stage before the System triggers.",
     "characters": [
@@ -21,7 +21,7 @@
     ],
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 1,
       "line_end": 83,
       "type": "scene"
@@ -29,7 +29,7 @@
   },
   {
     "day": 0,
-    "scene_id": "01-02-01",
+    "scene_id": "01.02.01",
     "event": "System Introduction Broadcast",
     "summary": "The multiverse System initiates Universe 93, briefing Jake before transporting him to the tutorial.",
     "characters": [
@@ -48,7 +48,7 @@
     ],
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 1,
       "line_end": 159,
       "type": "scene"

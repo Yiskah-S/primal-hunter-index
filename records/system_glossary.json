@@ -6,7 +6,7 @@
     "notes": "Explained by the Introduction Entity during the first tutorial scene.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 20,
       "line_end": 159,
       "type": "scene"
@@ -18,7 +18,7 @@
     "example": "Jake instinctively knew how to activate Archer's Eye and understood what it did upon acquisition.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 119,
       "line_end": 119,
       "type": "scene"

@@ -6,26 +6,27 @@
 
 ## Purpose
 
-Defines the **canonical structure and validation rules** for `source_ref[]` entries used across PHI to justify facts, tags, and events.
+Defines the **canonical structure and validation rules** for `source_ref[]` entries used across PHI to justify facts,
+tags, and events.
 
 This doc is **atomic** and referenced by:
 
-* `provenance_contract.md` (placement & philosophy)
-* Schemas for `.meta.json`, `timeline.json`, and `tag_registry.meta.json`
+- `provenance_contract.md` (placement & philosophy)
+- Schemas for `.meta.json`, `timeline.json`, and `tag_registry.meta.json`
 
 ## Scope
 
-* Structure of a single `source_ref` object
-* Allowed `type` values
-* Validation rules (format, ranges, required fields)
-* Examples and anti‑patterns
+- Structure of a single `source_ref` object
+- Allowed `type` values
+- Validation rules (format, ranges, required fields)
+- Examples and anti‑patterns
 
 ## Object Definition
 
 ```json
 {
   "type": "scene",            // enum: scene | wiki | user | inferred | external
-  "scene_id": "BB-CC-SS",     // book-chapter-scene (e.g., "01-02-01"), required for type=scene
+  "scene_id": "BB.CC.SS",     // book-chapter-scene (e.g., "01.02.01"), required for type=scene
   "line_start": 120,          // 1-based inclusive
   "line_end": 132,            // 1-based inclusive, must be >= line_start
   "quote": "Jake vanished mid-dash...",  // optional; recommended; length-limited
@@ -37,38 +38,39 @@ This doc is **atomic** and referenced by:
 
 ### Field Notes
 
-* `type`:
+- `type`:
 
-  * `scene`: primary; references a scene span
-  * `wiki`: out‑of‑universe encyclopedia page (rare)
-  * `user`: editor/annotator assertion (must be low certainty unless co‑cited)
-  * `inferred`: computed from multiple refs; **must** include `inference_note`
-  * `external`: author comment, Patreon Q&A, etc. (must include how to locate it)
-* `scene_id`: strict `BB-CC-SS` (zero‑padded)
-* `quote`: truncate to stay token‑friendly; the span is authoritative, the quote is convenience
+  - `scene`: primary; references a scene span
+  - `wiki`: out‑of‑universe encyclopedia page (rare)
+  - `user`: editor/annotator assertion (must be low certainty unless co‑cited)
+  - `inferred`: computed from multiple refs; **must** include `inference_note`
+  - `external`: author comment, Patreon Q&A, etc. (must include how to locate it)
+- `scene_id`: strict `BB.CC.SS` (zero‑padded)
+- `quote`: truncate to stay token‑friendly; the span is authoritative, the quote is convenience
 
 ## Validation Rules (Schema)
 
-* `type` **required**; default to `"scene"` only if omitted by legacy data migration
-* If `type = "scene"`:
+- `type` **required**; default to `"scene"` only if omitted by legacy data migration
+- If `type = "scene"`:
 
-  * `scene_id` **required** and must match `^\d{2}-\d{2}-\d{2}$`
-  * `line_start` & `line_end` **required**, integers ≥ 1, and `line_start <= line_end`
-* `quote` optional but **preferred**; **max length: 320 characters**
-  (Rationale: keeps context chunks compact; 320 is a sweet spot between 280 and 400. If you want 400 later, we can bump, but set one number to end bikeshedding.)
-* If `inference_type` present → `inference_note` **required**
-* If `certainty = "low"` → record must be explicitly **reviewed** before downstream use
-* No HTML or Markdown except minimal italics/quotes; normalize smart quotes; strip spoilers
-* type: "inferred" is permitted only when the consuming schema or registry field (allow_inferred: true) explicitly allows it.
+  - `scene_id` **required** and must match `^\d{2}\.\d{2}\.\d{2}$`
+  - `line_start` & `line_end` **required**, integers ≥ 1, and `line_start <= line_end`
+- `quote` optional but **preferred**; **max length: 320 characters**
+(Rationale: keeps context chunks compact; 320 is a sweet spot between 280 and 400. If you want 400 later, we can bump,
+but set one number to end bikeshedding.)
+- If `inference_type` present → `inference_note` **required**
+- If `certainty = "low"` → record must be explicitly **reviewed** before downstream use
+- No HTML or Markdown except minimal italics/quotes; normalize smart quotes; strip spoilers
+- type: "inferred" is permitted only when the consuming schema or registry field (allow_inferred: true) explicitly allows it.
 
 ## Placement Rules (summary; see provenance contract for full)
 
-* Never store `source_ref[]` inside **canon** `record.json`
-* Allowed locations:
+- Never store `source_ref[]` inside **canon** `record.json`
+- Allowed locations:
 
-  * `.meta.json` sidecars (for global facts)
-  * `timeline.json` events (for observed state)
-  * `tag_registry.meta.json` (to justify approved tags)
+  - `.meta.json` sidecars (for global facts)
+  - `timeline.json` events (for observed state)
+  - `tag_registry.meta.json` (to justify approved tags)
 
 ## Examples
 
@@ -77,7 +79,7 @@ This doc is **atomic** and referenced by:
 ```json
 {
   "type": "scene",
-  "scene_id": "01-02-01",
+  "scene_id": "01.02.01",
   "line_start": 118,
   "line_end": 126,
   "quote": "System Message: Skill gained — Meditation."
@@ -89,7 +91,7 @@ This doc is **atomic** and referenced by:
 ```json
 {
   "type": "scene",
-  "scene_id": "01-05-02",
+  "scene_id": "01.05.02",
   "line_start": 170,
   "line_end": 182,
   "quote": "As he slept, the wound closed slowly. The System chimed...",
@@ -112,11 +114,11 @@ This doc is **atomic** and referenced by:
 
 ## Anti‑Patterns (Do Not Do)
 
-* ❌ Embedding `source_ref[]` inside `record.json`
-* ❌ `line_start > line_end`
-* ❌ `scene_id` like `"1-2-3"` (no zero‑padding)
-* ❌ `inference_type` without `inference_note`
-* ❌ Using `user` type for anything that should be `inferred` (be honest)
+- ❌ Embedding `source_ref[]` inside `record.json`
+- ❌ `line_start > line_end`
+- ❌ `scene_id` like `"1-2-3"` (no zero‑padding)
+- ❌ `inference_type` without `inference_note`
+- ❌ Using `user` type for anything that should be `inferred` (be honest)
 
 ## JSON Schema (fragment)
 
@@ -165,8 +167,8 @@ This doc is **atomic** and referenced by:
 
 ## Relationship to Provenance Contract
 
-* This doc defines **the shape** of a `source_ref`
-* `provenance_contract.md` defines **where** refs live and **how** they’re used (timeline precedence, review gates, etc.)
-* If the two conflict, **provenance contract wins on placement**, and this doc wins on **object validity**
+- This doc defines **the shape** of a `source_ref`
+- `provenance_contract.md` defines **where** refs live and **how** they’re used (timeline precedence, review gates, etc.)
+- If the two conflict, **provenance contract wins on placement**, and this doc wins on **object validity**
 
 ---

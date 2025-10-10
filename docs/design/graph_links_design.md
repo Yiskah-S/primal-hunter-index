@@ -1,7 +1,8 @@
-# DRAFT ACTIVE DISCUSSION IN PROGRESS
-## IDEAS:
+# Draft: Active Discussion in Progress
 
-## 5) Links (graph-style relations)
+## Ideas Backlog
+
+## Links (Graph-Style Relations)
 
 💡 This is the interesting survivor.
 
@@ -9,7 +10,6 @@
   { "type": "upgrades_to", "target": "sn.meditation.rank2" },
   { "type": "granted_by", "target": "eq.cloak_of_phasing" }
 ]
-
 
 This feature was discussed but not explicitly retained in our current finalized contracts.
 We have implicit linking via family_id and timeline events, but no formal contract defining relational links[].
@@ -27,10 +27,8 @@ We should define this in the future docs/design/graph_links.md or fold it into s
 For now, note it as “reserved for future schema expansion.”
 
 📍TODO:
-→ Add to storage_layout.md as an optional links.json or field inside .meta.json
+→ Add to storage_layout.md as an optional links.json or field inside .meta.json  
 → Cross-link from id_contract.md (since it defines inter-ID references)
-
-## 5) Links (graph-style relations)
 
 Lives in `.meta.json`:
 
@@ -69,7 +67,7 @@ Add "reason" (string, optional) to your draft schema in graph_links.md.
     "source_ref": [
       {
         "type": "scene",
-        "scene_id": "03-14-01",
+        "scene_id": "03.14.01",
         "line_start": 212,
         "line_end": 225,
         "quote": "Jake vanished mid-dash, flickering back into reality a meter behind the specter."
@@ -107,11 +105,10 @@ Use links[] to connect IDs.
 
 Note: links live in .meta.json so the canon stays lean.
 
-
 🟡 Action:
 Add "related_to" to the list of allowed link types in your graph_links.md draft table.
-That gives us:
-upgrades_to, granted_by, related_to, and potentially derived_from.
+
+That gives us the set: `upgrades_to`, `granted_by`, `related_to`, and potentially `derived_from`.
 
 Also, it reiterates:
 

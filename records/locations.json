@@ -12,7 +12,7 @@
     "flavor": "Jake's modest apartment on Earth before the System's arrival.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 7,
       "line_end": 13,
       "type": "scene"
@@ -33,7 +33,7 @@
     "flavor": "Morning traffic corridor Jake navigates on his commute.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 15,
       "line_end": 16,
       "type": "scene"
@@ -61,7 +61,7 @@
     "flavor": "The financial firm where Jake works, complete with lobby and shared office floor.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 17,
       "line_end": 35,
       "type": "scene"
@@ -87,7 +87,7 @@
     "flavor": "The cramped elevator ride just before the System announcement.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 61,
       "line_end": 79,
       "type": "scene"
@@ -113,7 +113,7 @@
     "flavor": "Sterile white room where new initiates receive their briefing before the tutorial.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 1,
       "line_end": 40,
       "type": "scene"

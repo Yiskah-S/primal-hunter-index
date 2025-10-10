@@ -1,0 +1,26 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://primal-hunter.local/schemas/shared/links.schema.json",
+	"title": "links[] (sidecar-only)",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"additionalProperties": false,
+		"required": ["type", "target"],
+		"properties": {
+			"type": {
+				"type": "string",
+				"enum": ["upgrades_to", "granted_by", "related_to", "derived_from"]
+			},
+			"target": {
+				"$ref": "https://primal-hunter.local/schemas/shared/id.schema.json#/$defs/idString"
+			},
+			"reason": {
+				"type": "string",
+				"maxLength": 200
+			}
+		}
+	},
+	"uniqueItems": true,
+	"unevaluatedItems": false
+}

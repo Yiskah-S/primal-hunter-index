@@ -34,7 +34,14 @@ It supports:
 
 ### ✅ Canon is quote-backed
 
-- Facts in `records/` are considered canonical **only if they have supporting `source_ref[]`**
+#### Storage separation (hard rule)
+Canonical payloads in `records/**` MUST NOT contain `source_ref[]`. Provenance MUST be recorded **only** in:
+- `timeline.json` events (subjective, per-event citations), or
+- sidecar metadata files (e.g., `.meta.json`, `.provenance.json`) for objective facts.
+
+This keeps canon lean and immutable while provenance captures the evidence and context that justify it.
+
+- Facts in records/ are canonical only if they are supported by provenance recorded in **timelines or sidecars** (not inline in the canon payload)
 - The old `canon: true` boolean is **soft-deprecated** — provenance proves canon
 
 ### ✅ Canon is not fixed — it evolves
@@ -66,7 +73,7 @@ It supports:
 ```json
 {
   "type": "scene",               // or: wiki, user, inferred, external
-  "scene_id": "01-02-01",
+  "scene_id": "01.02.01",
   "line_start": 111,
   "line_end": 120,
   "quote": "Jake vanished mid-dash...",
@@ -79,7 +86,7 @@ It supports:
 ### 🎯 Rules
 
 - `type` is required
-- `scene_id`, `line_start`, `line_end` are required for `type: scene`
+  - `scene_id`, `line_start`, `line_end` are required for `type: scene`
 - `quote` is optional but recommended (≤ 400 characters)
 - If `inference_type` is set, `inference_note` is required
 - If `certainty` is `"low"`, review must confirm entry
@@ -201,7 +208,7 @@ The official validator (`tools/validate_provenance.py`) enforces the following:
    sidecars.  
 3. **Record log validation** — If present, `record_log[]` must be an array of objects with `timestamp` and `action`.  
 4. **Soft guidance** — Warn (not fail) if an event contains neither a `quote` nor an `inference` hint.  
-5. **Scene ID regex** — Enforce `^\d{2}-\d{2}-\d{2}$` for all `scene_id` strings.  
+5. **Scene ID regex** — Enforce `^\d{2}\.\d{2}\.\d{2}$` for all `scene_id` strings.  
 
 Violations:
 
@@ -244,3 +251,12 @@ Codex-generated facts may be marked as `"proposed"` until reviewed. Reviewers ma
 - Add warnings to `review.json`
 
 Only `"approved"` records are eligible for downstream RAG or fine-tuning.
+
+---
+
+### Related Docs
+
+- [Source Ref Contract](./source_ref_contract_v1.1.md)
+- [Record Log Contract](./record_log_contract_v1.1.md)
+- [Provenance Workflow Runbook](../runbooks/provenance_workflow_runbook.md)
+- [tools/validate_provenance.py](../tools/validate_provenance.py)

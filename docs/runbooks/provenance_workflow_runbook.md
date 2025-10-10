@@ -1,5 +1,6 @@
 # 🧪 Provenance Workflow (Runbook)
 
+**Status:** Living  
 **Updated:** 2025-10-07  
 **Audience:** Human contributors and Codex prompting  
 **Maintainer:** PHI Data Engineering
@@ -8,7 +9,8 @@
 
 ## Purpose
 
-This runbook documents how to fill out `source_ref[]` blocks in `.meta.json` and `timeline.json` accurately, using tooling support and step-by-step heuristics.
+This runbook documents how to fill out `source_ref[]` blocks in `.meta.json` and `timeline.json` accurately, using
+tooling support and step-by-step heuristics.
 
 ---
 
@@ -24,8 +26,8 @@ Before bulk-tagging skills, pick **one skill** and:
 - Add at least one timeline event that reflects when the character gained or used this skill
 - Validate the record and preview in a browser/editor
 
-If any field is unquoteable, the schema or tagging pipeline might need to change.  
-This record becomes the **reference template** for future automation.
+If any field is unquoteable, the schema or tagging pipeline might need to change. This record becomes the **reference
+template** for future automation.
 
 ---
 
@@ -76,7 +78,7 @@ Make sure that:
 
 | Dataset                                 | Rationale                                     |
 |-----------------------------------------|-----------------------------------------------|
-| `records/skills.json`                   | Mechanics, upgrades, lore                     |
+| `records/skills/`                       | Per-node mechanics, upgrades, lore            |
 | `records/equipment.json`                | Item descriptions, origins                    |
 | `records/titles.json`                   | Acquisition method, effects                   |
 | `records/classes.json`                  | Class reveals, bonuses                        |
@@ -98,12 +100,13 @@ Any new canon dataset should follow the same pattern.
 
 ## 7) Sample Workflows
 
-* Add a skill → `sf.*` + `sn.*` + `.meta.json` + `timeline.json` (optional)
-* Update a skill → add `timeline` entry + amend `.meta.json`
-* Upgrade path → create new `sn.*` and link via `.meta.json`
-* Promote a tag → update `tag_registry.json` + tag’s `.meta.json`
+- Add a skill → `sf.*` + `sn.*` + `.meta.json` + `timeline.json` (optional)
+- Update a skill → add `timeline` entry + amend `.meta.json`
+- Upgrade path → create new `sn.*` and link via `.meta.json`
+- Promote a tag → update `tag_registry.json` + tag’s `.meta.json`
 
 ---
+
 ### Optional: Tag Justification Blocks
 
 Reviewers may include human-readable justifications per tag for LLM transparency:
@@ -128,13 +131,13 @@ We can schema-ize it later under `review.schema.json`.
 
 1. **Create the Family:**  
    - If `sf.*` doesn’t exist, create it under `records/skills/`.  
-2. **Add the Node:**  
+1. **Add the Node:**  
    - Create a new `sn.*` entry in `records/**` with minimal canon fields (`id`, `family_id`, `description`, `tags`).  
-3. **Attach Metadata:**  
+1. **Attach Metadata:**  
    - Create `.meta.json` beside it containing `index_meta`, `record_log[]`, and at least one `source_ref[]`.  
-4. **If Discovered In-Scene:**  
+1. **If Discovered In-Scene:**  
    - Add a timeline event referencing `node_id` with the same `source_ref`.  
-5. **Validate:**  
+1. **Validate:**  
    - Run `validate_all_metadata.py` before committing.
 
 ---
@@ -142,13 +145,13 @@ We can schema-ize it later under `review.schema.json`.
 ### 🔁 8.2 Enrich an Existing Skill After a New Chapter
 
 1. Append a new timeline event with updated or new `observed_params`.  
-2. Include a supporting `source_ref[]` quote for the new observation.  
-3. If the information stabilizes across multiple scenes or explicit System confirmation:  
+1. Include a supporting `source_ref[]` quote for the new observation.  
+1. If the information stabilizes across multiple scenes or explicit System confirmation:  
    - Update the skill node’s `record.json` fields.  
    - Log the change in `record_log[]` with `action: "edited"`.  
-4. **Review:**  
+1. **Review:**  
    - If the change alters interpretation, add a reviewer note in `.review.json`.  
-5. **Re-validate.**
+1. **Re-validate.**
 
 💡 **Stability Threshold:**  
 When a fact has been seen multiple times or explicitly stated by the System, it becomes “canon-level stable” and should migrate from `timeline` to `record.json`.
@@ -158,18 +161,19 @@ When a fact has been seen multiple times or explicitly stated by the System, it 
 ### ⛓️ 8.3 Create an Upgrade Path
 
 1. Add a new skill node (`sn.<skill>.rankX`).  
-2. In the prior node’s `.meta.json`, append:  
+1. In the prior node’s `.meta.json`, append:  
    ```json
    { "type": "upgrades_to", "target": "sn.<skill>.rankX" }
-  ````
+   ```
 
-3. Optionally, in the new node, add the reverse link:
+1. Optionally, in the new node, add the reverse link:
 
    ```json
    { "type": "upgrades_from", "target": "sn.<skill>.rankN" }
    ```
-4. Re-run `validate_all_metadata.py` to ensure both IDs resolve.
-5. Update the relevant character’s `timeline.json` to record the rank-up event.
+
+1. Re-run `validate_all_metadata.py` to ensure both IDs resolve.
+1. Update the relevant character’s `timeline.json` to record the rank-up event.
 
 ---
 
@@ -177,16 +181,16 @@ When a fact has been seen multiple times or explicitly stated by the System, it 
 
 1. Run `tools/promote_tags.py`.
 
-   * Choose the tag and namespace (`skills`, `scene_type`, etc.).
-   * Set the `status` to `"candidate"`.
-2. Decide whether it may be inferred (`allow_inferred: true | false`).
-3. Write the new tag to `tag_registry.json` with a `.meta.json` entry containing:
+   - Choose the tag and namespace (`skills`, `scene_type`, etc.).
+   - Set the `status` to `"candidate"`.
+1. Decide whether it may be inferred (`allow_inferred: true | false`).
+1. Write the new tag to `tag_registry.json` with a `.meta.json` entry containing:
 
-   * `index_meta` (who/when/method)
-   * `record_log[]` (added + approved)
-   * `source_ref[]` quote if `allow_inferred: false`
-4. During validation, any scene using a not-yet-approved tag should fail.
-5. Once reviewed, run `approve_tags.py` to flip `status: "approved"` and regenerate sidecar.
+   - `index_meta` (who/when/method)
+   - `record_log[]` (added + approved)
+   - `source_ref[]` quote if `allow_inferred: false`
+1. During validation, any scene using a not-yet-approved tag should fail.
+1. Once reviewed, run `approve_tags.py` to flip `status: "approved"` and regenerate sidecar.
 
 ---
 
@@ -207,6 +211,14 @@ When a fact has been seen multiple times or explicitly stated by the System, it 
 - [`contracts/provenance_contract.md`](../contracts/provenance_contract.md)
 - [`contracts/record_log_contract.md`](../contracts/record_log_contract.md)
 - [`contracts/source_ref_contract.md`](../contracts/source_ref_contract.md)
-```
 
 ---
+
+---
+
+### Related Docs
+
+- [Provenance Contract](../contracts/provenance_contract_v2.0.md)
+- [Source Ref Contract](../contracts/source_ref_contract_v1.1.md)
+- [Record Log Contract](../contracts/record_log_contract_v1.1.md)
+- [tools/validate_provenance.py](../tools/validate_provenance.py)

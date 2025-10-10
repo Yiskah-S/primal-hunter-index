@@ -1,4 +1,5 @@
 # DRAFT ACTIVE DISCUSSION IN PROGRESS
+
 ---
 
 ## Applications Beyond This Project
@@ -24,6 +25,3 @@ This project demonstrates:
 > 🧠 All in a reusable four-layer architecture  
 
 ---
-
-*This file is safe to share with recruiters or future projects as a reusable design pattern.*
-

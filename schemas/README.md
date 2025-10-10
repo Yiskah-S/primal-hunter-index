@@ -55,7 +55,7 @@ Also supports:
 
 Shared object for all quote-backed facts.
 
-- `scene_id`: `"BB-CC-SS"` format (e.g. `"01-02-03"`)
+- `scene_id`: `"BB.CC.SS"` format (e.g. `"01.02.03"`)
 - `line_start` / `line_end`: Line numbers in the scene file
 - `quote` (optional): Direct quote for human use or GPT scaffolding
 

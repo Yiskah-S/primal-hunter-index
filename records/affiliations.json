@@ -9,7 +9,7 @@
     "flavor": "A blue-green world where Jake lived an unremarkable but content life.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-01-01",
+      "scene_id": "01.01.01",
       "line_start": 1,
       "line_end": 83,
       "type": "scene"
@@ -23,7 +23,7 @@
     "flavor": "An all-encompassing framework that overlays initiated worlds, granting classes, skills, and quests.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 20,
       "line_end": 159,
       "type": "scene"

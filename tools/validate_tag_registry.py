@@ -69,9 +69,7 @@ def _validate_aliases(
 
 		alias_owner = alias_occurrences.get(alias)
 		if alias_owner and alias_owner != tag_name:
-			errors.append(
-				f"{registry_path}: {pointer}: alias '{alias}' already assigned to tag '{alias_owner}'"
-			)
+			errors.append(f"{registry_path}: {pointer}: alias '{alias}' already assigned to tag '{alias_owner}'")
 			continue
 
 		alias_occurrences[alias] = tag_name
@@ -111,9 +109,7 @@ def _validate_tag_entry(
 	allow_inferred = entry.get("allow_inferred")
 	status = entry.get("status")
 	if isinstance(allow_inferred, bool) and allow_inferred and status != "approved":
-		warnings.append(
-			f"{registry_path}: {pointer}: allow_inferred=true on non-approved tag '{tag_name}'"
-		)
+		warnings.append(f"{registry_path}: {pointer}: allow_inferred=true on non-approved tag '{tag_name}'")
 
 	alias_errors, alias_warnings = _validate_aliases(
 		registry_path,
@@ -175,8 +171,10 @@ def validate_tag_registry(registry_path: path, schema_path: path) -> ValidationR
 
 
 def parse_args(argv: Iterable[str] | None = None) -> argparse.Namespace:
-	parser = argparse.ArgumentParser(description="Validate the tag registry \
-								against schema and guardrails")
+	parser = argparse.ArgumentParser(
+		description="Validate the tag registry \
+								against schema and guardrails"
+	)
 	parser.add_argument(
 		"--registry",
 		type=path,

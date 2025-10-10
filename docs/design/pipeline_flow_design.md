@@ -1,5 +1,6 @@
 # DRAFT ACTIVE DISCUSSION IN PROGRESS
-## IDEAS:
+
+## IDEAS
 
 🧠 The inference object
 "inference": {
@@ -10,7 +11,6 @@
   "context_weight": 1.0
 }
 
-
 This is not covered in any current doc.
 It’s a potential future extension for Codex QA or fine-tuning weighting.
 
@@ -20,4 +20,3 @@ Perfect home: docs/design/pipeline_flow.md (section: Inference Weighting and Cer
 📍Action:
 
 Add this block (verbatim) to that doc’s drafts section, labeled “optional Codex inference fields for meta.json”.
-

@@ -52,15 +52,18 @@ def test_timeline_event_schema_enforces_enum_values():
 	}
 	validator = Draft202012Validator(schema, resolver=RefResolver.from_schema(schema, store=store))
 
-	valid_event = {
-		"event_id": "ev.test_char.01_02_01.acquire_skill",
-		"scene_id": "01-02-01",
-		"order": 1,
-		"type": "skill_acquired",
-		"skill_id": "sn.meditation.rank1",
-		"tags": ["tag.timeline.system_message"],
-		"source_ref": [{"type": "scene", "scene_id": "01-02-01", "line_start": 12, "line_end": 14}],
-	}
+valid_event = {
+	"event_id": "ev.test_char.01.02.01.acquire_skill",
+	"scene_id": "01.02.01",
+	"order": 1,
+	"type": "skill_acquired",
+	"node_id": "sn.meditation.rank1",
+	"knowledge_delta": [
+		{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0},
+	],
+	"tags": ["tag.timeline.system_message"],
+	"source_ref": [{"type": "scene", "scene_id": "01.02.01", "line_start": 12, "line_end": 14}],
+}
 	validator.validate(valid_event)
 
 	invalid_event = {**valid_event, "type": "unknown_event"}

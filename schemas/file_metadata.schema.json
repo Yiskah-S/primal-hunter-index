@@ -38,8 +38,8 @@
         },
         "scene_id": {
           "type": "string",
-          "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
-          "description": "Zero-padded scene identifier (BB-CC-SS)."
+          "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+          "description": "Zero-padded scene identifier (dotted BB.CC.SS)."
         },
         "line": {
           "type": [
@@ -79,6 +79,9 @@
     },
     "record_log": {
       "$ref": "https://primal-hunter.local/schemas/shared/record_log.schema.json#/$defs/record_log"
+    },
+    "links": {
+      "$ref": "https://primal-hunter.local/schemas/shared/links.schema.json"
     }
   },
   "required": [

@@ -23,7 +23,7 @@
     "flavor": "An Archer's best friend is the bow in his hand, and the arrow in his foe's heart.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 111,
       "line_end": 111,
       "type": "scene"
@@ -63,7 +63,7 @@
     "flavor": "The Archer may not be a master in close combat but is far from helpless.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 113,
       "line_end": 113,
       "type": "scene"
@@ -104,7 +104,7 @@
     "flavor": "The eyes of the Archer track prey and reveal weaknesses.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 115,
       "line_end": 115,
       "type": "scene"
@@ -139,7 +139,7 @@
     "flavor": "Basic identification skill, known by all but the smallest of children of the myriad races.",
     "canon": true,
     "source_ref": {
-      "scene_id": "01-02-01",
+      "scene_id": "01.02.01",
       "line_start": 127,
       "line_end": 127,
       "type": "scene"

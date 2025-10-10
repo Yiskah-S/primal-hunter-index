@@ -5,6 +5,14 @@ consistent. Treat it as the single source of truth for documentation hygiene.
 
 ---
 
+## How to Use This README
+
+1. Skim **Directory Roles** to confirm where your document belongs.
+2. Check **Required Front Matter** before creating or updating a doc.
+3. Use **Quick Navigation** tables to jump directly to contracts, designs, runbooks, or ADRs.
+
+---
+
 ## Directory Roles
 
 `contracts/` — Normative specifications that the codebase and schemas must follow.
@@ -54,6 +62,9 @@ Consequences: …
 Runbooks and designs generally use `Status: Living` while in active use, and shift to `Status: Deprecated` when
 archived.
 
+
+For formatting rules, see the [Documentation Style Guide](STYLE_GUIDE.md).
+
 ---
 
 ## Quick Navigation
@@ -65,7 +76,7 @@ archived.
 - `contracts/record_log_contract_v1.1.md`
 - `contracts/id_contract_v1.1.md`
 - `contracts/tagging_contract_v0.4.md`
-- Planned: `contracts/timeline_contract_v1.0.md`
+- `contracts/timeline_contract_v1.1.md`
 
 **Design references** (why decisions make sense):
 

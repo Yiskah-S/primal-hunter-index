@@ -9,36 +9,37 @@
 
 ## 📘 Why This Exists
 
-Tags are how we classify skills, scenes, characters, and other canon entities across the Primal Hunter Index. This contract defines:
+Tags are how we classify skills, scenes, characters, and other canon entities across the Primal Hunter Index. This
+contract defines:
 
-* The **tagging vocabulary**
-* The **schema for tag records**
-* The **promotion and approval process**
-* The **validation and enforcement rules**
-* The **tooling requirements and gating logic**
+- The **tagging vocabulary**
+- The **schema for tag records**
+- The **promotion and approval process**
+- The **validation and enforcement rules**
+- The **tooling requirements and gating logic**
 
 ---
 
 ## 🧾 Changelog
 
-**v0.4 (2025‑10‑07)**
+### v0.4 (2025‑10‑07)
 
-* 🔐 Added canonical tooling requirements for `promote_tags`, `approve_tags`, and validator behavior
-* 🗃 Defined `tag_registry.meta.json` sidecar structure (with `record_log[]` and `source_ref[]`)
-* 🔄 Formalized tag lifecycle state machine
-* 🔧 Added validation matrix and cross-file invariants
-* ❌ Prohibited LLMs from self-approving tags
+- 🔐 Added canonical tooling requirements for `promote_tags`, `approve_tags`, and validator behavior
+- 🗃 Defined `tag_registry.meta.json` sidecar structure (with `record_log[]` and `source_ref[]`)
+- 🔄 Formalized tag lifecycle state machine
+- 🔧 Added validation matrix and cross-file invariants
+- ❌ Prohibited LLMs from self-approving tags
 
 ---
 
 ## 🌱 Core Principles
 
-* **Design first:** docs → schemas → code
-* **Sidecars carry process, canon carries facts**
-* **Heuristic ≠ Canon:** tags start unapproved
-* **Everything referencable has a stable ID:** tags included
-* **Tag usage must be explainable and validated**
-* **Codex proposes — humans approve**
+- **Design first:** docs → schemas → code
+- **Sidecars carry process, canon carries facts**
+- **Heuristic ≠ Canon:** tags start unapproved
+- **Everything referencable has a stable ID:** tags included
+- **Tag usage must be explainable and validated**
+- **Codex proposes — humans approve**
 
 ---
 
@@ -46,13 +47,13 @@ Tags are how we classify skills, scenes, characters, and other canon entities ac
 
 ### 🆔 Identity
 
-* `tag_id` (string): Full stable ID (`tag.<namespace>.<slug>`)
-* `tag` (string): Local inline name (`slug` only)
+- `tag_id` (string): Full stable ID (`tag.<namespace>.<slug>`)
+- `tag` (string): Local inline name (`slug` only)
 
 ### 🧩 Classification
 
-* `type`: What this tag classifies (skill, scene_type, entity, etc.)
-* `tag_role`: Why it exists
+- `type`: What this tag classifies (skill, scene_type, entity, etc.)
+- `tag_role`: Why it exists
 
 | Value           | Meaning                                 |
 | --------------- | --------------------------------------- |
@@ -64,17 +65,18 @@ Tags are how we classify skills, scenes, characters, and other canon entities ac
 
 ### 🔁 Lifecycle
 
-* `status`: `candidate` | `approved` | `rejected`
-* `approved`: `true` only if `status == "approved"`
+- `status`: `candidate` | `approved` | `rejected`
+- `approved`: `true` only if `status == "approved"`
 
 ### 🧷 Metadata
 
-* `allow_inferred`: If true, tag may be applied contextually
-* `aliases[]`: Optional synonyms (not used in canon)
-* `description`: Required human-readable label
-* `source`: Where it came from
-* `notes`: Strict; avoid metaphorical use. Used for human guidance (e.g., usage restrictions, metaphor exclusions, domain context).
-* `reviewed_by` / `reviewed_at`: Optional, for audit trail
+- `allow_inferred`: If true, tag may be applied contextually
+- `aliases[]`: Optional synonyms (not used in canon)
+- `description`: Required human-readable label
+- `source`: Where it came from
+- `notes`: Strict; avoid metaphorical use. Used for human guidance (e.g., usage restrictions, metaphor exclusions,
+  domain context).
+- `reviewed_by` / `reviewed_at`: Optional, for audit trail
 
 ---
 
@@ -84,17 +86,17 @@ Tags are how we classify skills, scenes, characters, and other canon entities ac
 
 > Loose scraped/tagged vocab — not canon.
 
-* String or object entries
-* Minimal fields allowed
-* `approved: true` is forbidden here
+- String or object entries
+- Minimal fields allowed
+- `approved: true` is forbidden here
 
 ### 2) `tagging/tag_registry.json`
 
 > Canon tag definitions.
 
-* Fully typed objects
-* Must follow schema
-* Only `approved` tags may be used in canon files
+- Fully typed objects
+- Must follow schema
+- Only `approved` tags may be used in canon files
 
 ### 3) Inline usage in records / timelines
 
@@ -105,15 +107,13 @@ Tags are how we classify skills, scenes, characters, and other canon entities ac
 }
 ```
 
-Only `approved` tags may be used.
-Tag slug (`"basic_archery"`) must resolve to a `tag_id` in the registry.
+Only `approved` tags may be used. Tag slug (`"basic_archery"`) must resolve to a `tag_id` in the registry.
 
 ### 4) `tagging/tag_registry.meta.json`
 
 > Sidecar for all approved tags.
 
-Required for every `status: "approved"` tag.
-Must include:
+Required for every `status: "approved"` tag. Must include:
 
 ```json
 {
@@ -131,7 +131,7 @@ Must include:
     "source_ref": [
       {
         "type": "scene",
-        "scene_id": "01-01-03",
+        "scene_id": "01.01.03",
         "line_start": 80,
         "line_end": 94,
         "quote": "He loosed the arrow like he’d done it a hundred times before."
@@ -149,17 +149,17 @@ Must include:
 | ----------------- | ------------------------------------ | ------------------------- |
 | `promote_tags.py` | Normalize candidate → registry entry | - Must never auto-approve |
 
-* Must write `status: "candidate"`
-* Must generate `tag_id` from `tag` slug |
-  | `approve_tags.py` | Flip tag to canon | - Only humans may approve
-* Must write `status: "approved"` + `approved: true`
-* Must write/update meta sidecar with `record_log[]` and `source_ref[]` (unless `allow_inferred: true`) |
-  | `validate_tag_usage.py` | Enforce inline usage rules | - All inline tags must resolve to `status: "approved"`
-* If no literal match, tag must allow `allow_inferred: true` |
-  | `tag_registry_lint.py` | Registry QA | - Checks ID format
-* Enforces `status ↔ approved` invariant
-* Validates `tag_id` uniqueness
-* Flags orphaned sidecars or mismatches |
+- Must write `status: "candidate"`
+- Must generate `tag_id` from `tag` slug |
+| `approve_tags.py` | Flip tag to canon | - Only humans may approve
+- Must write `status: "approved"` + `approved: true`
+- Must write/update meta sidecar with `record_log[]` and `source_ref[]` (unless `allow_inferred: true`) |
+| `validate_tag_usage.py` | Enforce inline usage rules | - All inline tags must resolve to `status: "approved"`
+- If no literal match, tag must allow `allow_inferred: true` |
+| `tag_registry_lint.py` | Registry QA | - Checks ID format
+- Enforces `status ↔ approved` invariant
+- Validates `tag_id` uniqueness
+- Flags orphaned sidecars or mismatches |
 
 ---
 
@@ -172,20 +172,20 @@ stateDiagram
     approved --> candidate : rollback (rare, logged)
 ```
 
-### Requirements per transition:
+### Requirements per transition
 
-* `→ approved`:
+- `→ approved`:
 
-  * Set `approved: true`, `status: "approved"`
-  * Sidecar must exist
-  * `record_log[]` must include `"approved"` action by `"user"`
-* `→ rejected`:
+  - Set `approved: true`, `status: "approved"`
+  - Sidecar must exist
+  - `record_log[]` must include `"approved"` action by `"user"`
+- `→ rejected`:
 
-  * Keep for audit if needed
-  * Must not be used in canon
-* Rollbacks:
+  - Keep for audit if needed
+  - Must not be used in canon
+- Rollbacks:
 
-  * Must update sidecar with explanation
+  - Must update sidecar with explanation
 
 LLMs (Codex) **may not** flip status.
 
@@ -235,7 +235,8 @@ Violations of these rules are treated as **pipeline errors**, not user mistakes.
 
 ---
 
-## DRAFT:
+## Draft Notes
+
 These mini-schemas are fully redundant with your actual schema files (schemas/source_ref.schema.json and schemas/tags.schema.json).
 But the idea of keeping fragments inline in docs as reference examples is excellent. You can reuse them in the appendices section of any contract.
 
@@ -245,52 +246,69 @@ Copy the tags fragment to the bottom of tagging_contract.md as a fenced JSON ref
 
 You can drop the source_ref one, since your dedicated source_ref_contract.md already embeds that schema inline with better comments.
 
-11) Appendix — Mini Schemas
-11.1 source_ref (fragment)
-{
-  "type": "object",
-  "required": ["type"],
-  "properties": {
-    "type": { "enum": ["scene", "wiki", "user", "inferred", "external"] },
-    "scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
-    "line_start": { "type": "integer", "minimum": 1 },
-    "line_end": { "type": "integer", "minimum": 1 },
-    "quote": { "type": "string", "maxLength": 400 }
-  },
-  "allOf": [
-    { "if": { "properties": { "type": { "const": "scene" } } },
-      "then": { "required": ["scene_id", "line_start", "line_end"] } }
-  ]
-}
-11.2 tags (shared)
-{
-  "type": "object",
-  "patternProperties": {
-    "^[a-z_]+$": {
-      "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-      "uniqueItems": true
+- Appendix — Mini Schemas
+  - source_ref fragment:
+
+    ```json
+    {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["scene", "wiki", "user", "inferred", "external"] },
+        "scene_id": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$" },
+        "line_start": { "type": "integer", "minimum": 1 },
+        "line_end": { "type": "integer", "minimum": 1 },
+        "quote": { "type": "string", "maxLength": 400 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "scene" } } },
+          "then": { "required": ["scene_id", "line_start", "line_end"] }
+        }
+      ]
     }
-  },
-  "additionalProperties": false
-}
+    ```
 
+  - tags fragment:
 
+    ```json
+    {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+    ```
 
 ## 🧠 Design Notes
 
-* Canon tags are *not just keywords* — they are validated semantic objects with provenance.
-* Sidecars let us track who approved what and **why** — and let Codex propose tags safely without promotion.
-* You can train, tag, diff, and RAG off these without ever breaking canon.
+- Canon tags are *not just keywords* — they are validated semantic objects with provenance.
+- Sidecars let us track who approved what and **why** — and let Codex propose tags safely without promotion.
+- You can train, tag, diff, and RAG off these without ever breaking canon.
 
 ---
 
 ## 📎 Related Contracts
 
-* [`provenance_contract.md`](provenance_contract.md)
-* [`record_log_contract.md`](record_log_contract.md)
-* [`source_ref_contract.md`](source_ref_contract.md)
-* [`id_contract.md`](id_contract.md)
-**Related ADR:** [`ADR-0001: Tagging Dual Role & Status`](../adr/ADR-0001-tagging-dual-role-and-status.md) — decision record establishing separation of `tag_role` (purpose) and `status` (lifecycle) to clarify approval flows in v0.4.
+- [`provenance_contract.md`](provenance_contract.md)
+- [`record_log_contract.md`](record_log_contract.md)
+- [`source_ref_contract.md`](source_ref_contract.md)
+- [`id_contract.md`](id_contract.md)
+- **Related ADR:** [`ADR-0001: Tagging Dual Role & Status`](../adr/ADR-0001-tagging-dual-role-and-status.md) — decision
+  record establishing separation of `tag_role` (purpose) and `status` (lifecycle) to clarify approval flows in v0.4.
 
 ---
+
+---
+
+### Related Docs
+
+- [Tagging Process Runbook](../runbooks/tagging_process_runbook.md)
+- [Provenance Contract](./provenance_contract_v2.0.md)
+- [Tag Registry Schema](../design/tagging_overview.md)
+- [tools/promote_tags.py](../tools/promote_tags.py)
