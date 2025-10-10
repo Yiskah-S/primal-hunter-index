@@ -38,6 +38,17 @@ SOURCE_REF_ALLOWED_ROOTS = {
 }
 SCENE_ID_PATTERN = re.compile(r"^\d{2}\.\d{2}\.\d{2}$")
 MAX_QUOTE_LENGTH = 320
+ANCHOR_HASH_PATTERN = re.compile(r"^[a-f0-9]{16,64}$")
+ALLOWED_INFERENCE_TYPES = {
+	"none",
+	"character_misinterpretation",
+	"implied_system_rule",
+	"redaction_gap",
+	"sarcasm_literalized",
+	"unreliable_narrator",
+	"translation_noise",
+	"other",
+}
 
 
 @dataclass
@@ -83,6 +94,9 @@ def _check_source_ref_fields(
 	line_start = ref.get("line_start")
 	line_end = ref.get("line_end")
 	quote = ref.get("quote")
+	anchor_hash = ref.get("anchor_hash")
+	inference_type = ref.get("inference_type", "none")
+	inference_note = ref.get("inference_note")
 
 	if not isinstance(ref, dict):
 		errors.append(Finding(_normalize_path(path), f"{ref_prefix} must be an object"))
@@ -111,6 +125,35 @@ def _check_source_ref_fields(
 			Finding(
 				_normalize_path(path),
 				f"{ref_prefix}.quote exceeds {MAX_QUOTE_LENGTH} characters (len={len(quote)})",
+			)
+		)
+	if anchor_hash is not None:
+		if not isinstance(anchor_hash, str) or not ANCHOR_HASH_PATTERN.fullmatch(anchor_hash):
+			errors.append(
+				Finding(
+					_normalize_path(path),
+					f"{ref_prefix}.anchor_hash must be hex digest (16-64 chars), got {anchor_hash!r}",
+				)
+			)
+	if inference_type not in ALLOWED_INFERENCE_TYPES:
+		errors.append(
+			Finding(
+				_normalize_path(path),
+				f"{ref_prefix}.inference_type '{inference_type}' is invalid",
+			)
+		)
+	elif inference_type != "none" and not (isinstance(inference_note, str) and inference_note.strip()):
+		errors.append(
+			Finding(
+				_normalize_path(path),
+				f"{ref_prefix}.inference_note required when inference_type='{inference_type}'",
+			)
+		)
+	elif inference_type == "none" and inference_note:
+		warnings.append(
+			Finding(
+				_normalize_path(path),
+				f"{ref_prefix}.inference_note present while inference_type='none' (remove or set inference_type)",
 			)
 		)
 

@@ -133,7 +133,9 @@ but set one number to end bikeshedding.)
   "type": "object",
   "description": "Canonical citation object proving a fact, event, or tag.",
   "required": [
-    "type"
+    "scene_id",
+    "line_start",
+    "line_end"
   ],
   "properties": {
     "type": {
@@ -167,28 +169,38 @@ but set one number to end bikeshedding.)
       "maxLength": 320,
       "description": "Optional quote excerpt to provide immediate context."
     },
+    "anchor_hash": {
+      "type": "string",
+      "description": "Stable hash of the cited excerpt to survive line shifts.",
+      "pattern": "^[a-f0-9]{16,64}$"
+    },
     "certainty": {
       "type": "string",
       "enum": [
-        "low",
+        "high",
         "medium",
-        "high"
+        "low"
       ],
       "description": "Confidence rating for inferred or external citations."
     },
     "inference_type": {
       "type": "string",
       "enum": [
-        "character_assumption",
-        "system_behavior_guess",
-        "narrative_foreshadow",
+        "none",
+        "character_misinterpretation",
+        "implied_system_rule",
+        "redaction_gap",
+        "sarcasm_literalized",
+        "unreliable_narrator",
+        "translation_noise",
         "other"
       ],
+      "default": "none",
       "description": "Why this reference is inferred rather than explicit."
     },
     "inference_note": {
       "type": "string",
-      "minLength": 3,
+      "maxLength": 800,
       "description": "Supporting explanation for inferred references."
     }
   },
@@ -196,46 +208,22 @@ but set one number to end bikeshedding.)
     {
       "if": {
         "properties": {
-          "type": {
-            "const": "scene"
+          "inference_type": {
+            "const": "none"
           }
         },
-        "required": [
-          "type"
-        ]
-      },
-      "then": {
-        "required": [
-          "scene_id",
-          "line_start",
-          "line_end"
-        ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "type": {
-            "const": "inferred"
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "then": {
-        "required": [
-          "inference_note"
-        ]
-      }
-    },
-    {
-      "if": {
         "required": [
           "inference_type"
         ]
       },
       "then": {
+        "not": {
+          "required": [
+            "inference_note"
+          ]
+        }
+      },
+      "else": {
         "required": [
           "inference_note"
         ]

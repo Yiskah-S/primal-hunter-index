@@ -43,8 +43,7 @@ narrative identity, general description, and intent, but does not fix numerical 
 | `description`  | Narrative summary of purpose.                                                        |
 | `category`     | Broad grouping (`Combat Passive`, `Utility`, `Support`, etc.).                       |
 | `core_effects` | Optional baseline qualitative effects shared across all nodes.                       |
-| `source_ref[]` | First canonical appearance in text (must include scene ID + line range in sidecar)   |
-| `record_log[]` | Standard audit history per Record Log Contract. (In sidecar)                         |
+| `record_log[]` | Standard audit history per Record Log Contract. (Lives in `.meta.json` sidecar.)     |
 
 Skill Families never reference specific characters or quantitative mechanics; they are **system archetypes**, not
 instances.
@@ -64,8 +63,7 @@ behaves in-world.
 | `effects`      | Canonical effect data — `stat_synergy`, `param_rule`, `proficiency_with`, etc. |
 | `flavor`       | Narrative or flavor text tied to this node.                                    |
 | `granted_by[]` | Array of structured sources per `granted_by.schema.json`.                      |
-| `source_ref[]` | Provenance for this specific node (scene + line range). (In sidecar)           |
-| `record_log[]` | Audit trail of creation, review, and schema updates.(In sidecar)               |
+| `record_log[]` | Audit trail of creation, review, and schema updates. (Lives in `.meta.json`.)  |
 | `lineage`      | Optional object describing in-world evolution (see below).                     |
 
 Each Node must reference exactly one Family by `family_id`.
@@ -140,14 +138,13 @@ All earlier Families remain valid and queryable as historical artifacts of knowl
 Provenance for families/nodes follows source_ref_contract_v1.1; placement rules follow the Provenance contract; low-
 certainty refs require human review before downstream use.
 
-1. **Every Skill (Family or Node)** must include a non-empty `source_ref[]`.
+1. **Every Skill (Family or Node)** must include a non-empty `source_ref[]` **in its sidecar**, not inline in the canonical payload.
 
    - For Families: cite the *first conceptual introduction.*
    - For Nodes: cite the *first explicit manifestation or upgrade.*
    - Fuzzy references (e.g. inferred evolutions) must include `type: "inferred"` and `inference_note`.
 
-   *Provenance inside skill records captures the first canonical observation of that object.
-Subsequent discoveries or elaborations belong in character timelines, not as new `source_ref[]` entries.*
+   *Sidecar provenance captures the first canonical observation of that object. Subsequent discoveries or elaborations belong in character timelines, not as new `source_ref[]` entries.*
 
 2. **Record Logs** track changes to both Families and Nodes.
 Each entry follows `record_log_contract_v1.1.md` and must include:
@@ -167,7 +164,8 @@ Provenance belongs in per-skill JSON files under `records/skills/` or accompanyi
 | -------------------------------------------------------- | ---------------------------------------------- |
 | `family_id` and `node_id` must follow ID Contract regex. | Enforced by `schemas/shared/id.schema.json`.   |
 | Node `family_id` must exist in canon.                    | Validator cross-checks for matching `sf.*`.    |
-| `source_ref[]` must contain `type: scene` or `inferred`. | No blank or malformed entries.                 |
+| Canonical skill JSON files MUST NOT contain `source_ref`. | Validators hard-fail if inline provenance is detected. |
+| Sidecar `source_ref[]` must contain `type: scene` or `inferred`. | No blank or malformed entries.                 |
 | `effects.stat_synergy` values must be numbers.           | Object of numeric multipliers by stat name.    |
 | `param_rule` must reference known stats/resources.       | Free-form formula permitted if lints cleanly.  |
 | `granted_by[]` must use controlled type.                 | As defined in `granted_by.schema.json`.        |

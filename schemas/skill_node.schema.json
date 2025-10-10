@@ -137,14 +137,6 @@
     "granted_by": {
       "$ref": "https://primal-hunter.local/schemas/shared/granted_by.schema.json#/$defs/granted_by"
     },
-    "source_ref": {
-      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
-      "description": "Provenance entries documenting this manifestation."
-    },
-    "record_log": {
-      "$ref": "https://primal-hunter.local/schemas/shared/record_log.schema.json#/$defs/record_log",
-      "description": "Audit history per the Record Log contract."
-    },
     "lineage": {
       "$ref": "#/$defs/lineage"
     },
@@ -162,5 +154,10 @@
       "description": "Optional maintainer notes."
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "not": {
+    "required": [
+      "source_ref"
+    ]
+  }
 }

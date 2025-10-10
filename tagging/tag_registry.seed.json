@@ -1,0 +1,247 @@
+{
+  "version": "1.0",
+  "tags": [
+    /* ---------- narrative_style ---------- */
+    {
+      "id": "rule_explainer",
+      "category": "narrative_style",
+      "label": "Rule explainer",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","line"],
+      "definition": "Expository tone that states or derives a system rule.",
+      "use_when": ["Tutorials", "Mechanic summaries", "Cause→effect statements"],
+      "not_when": ["Character opinions about rules (use character_tone)"],
+      "generator_instruction": "Prefer declarative sentences; show premise→consequence; include one explicit rule.",
+      "aliases": [],
+      "examples": []
+    },
+    {
+      "id": "recursive_logic",
+      "category": "narrative_style",
+      "label": "Recursive logic",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Stepwise reasoning where conclusions feed the next step.",
+      "use_when": ["Planning", "Puzzle solving", "Meta-reasoning"],
+      "not_when": ["Vibes-only monologue"],
+      "generator_instruction": "Chain short logical clauses with clear therefore/so pivots."
+    },
+    {
+      "id": "dry_humor",
+      "category": "narrative_style",
+      "label": "Dry humor",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","line"],
+      "definition": "Understated irony; humor by contrast, not punchline.",
+      "use_when": ["Deadpan observations", "Noting absurdity without emphasis"],
+      "not_when": ["Mean sarcasm (use 'sardonic')", "Slapstick"],
+      "generator_instruction": "Insert understated mismatch per paragraph; avoid exclamation or lampshading.",
+      "aliases": ["deadpan_humor"]
+    },
+    {
+      "id": "pulp_grit",
+      "category": "narrative_style",
+      "label": "Pulp grit",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Kinetic action with tactile detail and pace.",
+      "use_when": ["Fights", "Dangerous traversal"],
+      "not_when": ["Mythic elevation"],
+      "generator_instruction": "Use short sentences, concrete verbs, sensory detail; low metaphor density."
+    },
+    {
+      "id": "mythic_elevation",
+      "category": "narrative_style",
+      "label": "Mythic elevation",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Elevated, heroic register; grand metaphor.",
+      "use_when": ["Legendary feats", "Threshold moments"],
+      "not_when": ["Routine fights or tutorials"],
+      "generator_instruction": "Broaden imagery; longer periodic sentences; 1–2 evocative metaphors per page."
+    },
+    {
+      "id": "clinical_report",
+      "category": "narrative_style",
+      "label": "Clinical report",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","line"],
+      "definition": "Logbook style; measurements and outcomes.",
+      "use_when": ["Experiments", "Cooldown tracking", "Stat deltas"],
+      "not_when": ["Emotional introspection"],
+      "generator_instruction": "Tabulate variables→result; use neutral lexicon."
+    },
+    {
+      "id": "suspense_tight",
+      "category": "narrative_style",
+      "label": "Tight suspense",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Withheld info, short beats, rising uncertainty.",
+      "use_when": ["Searches", "Stealth", "Unknowns"],
+      "not_when": ["Open exposition"],
+      "generator_instruction": "Shorten sentences; end some lines mid-thought; delay reveals."
+    },
+    {
+      "id": "dialogue_heavy",
+      "category": "narrative_style",
+      "label": "Dialogue-heavy",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Scene advances primarily via dialogue.",
+      "use_when": ["Negotiations", "Interrogations", "Team planning"],
+      "not_when": ["Solitary internal monologue"],
+      "generator_instruction": "Maximize spoken lines; trim narration to beats and cues."
+    },
+    {
+      "id": "introspective_lens",
+      "category": "narrative_style",
+      "label": "Introspective lens",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene"],
+      "definition": "Interior thought dominates; reflection and self-assessment.",
+      "use_when": ["Aftermaths", "Decisions", "Guilt/doubt"],
+      "not_when": ["External action focus"],
+      "generator_instruction": "Weight internal appraisal; reduce external detail density."
+    },
+
+    /* ---------- character_tone ---------- */
+    {
+      "id": "engineer_mindset",
+      "category": "character_tone",
+      "label": "Engineer mindset",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Operational thinking: variables and procedures.",
+      "use_when": ["Testing skills", "Planning", "Evaluation"],
+      "not_when": ["Gut-only decisions"],
+      "generator_instruction": "Translate observations to hypotheses; track results."
+    },
+    {
+      "id": "sardonic",
+      "category": "character_tone",
+      "label": "Sardonic",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Wry, slightly biting commentary.",
+      "use_when": ["Coping through humor", "Undercutting pomp"],
+      "not_when": ["Earnest uplift"],
+      "generator_instruction": "Add dry asides that deflate pretension; keep cruelty low."
+    },
+    {
+      "id": "earnest",
+      "category": "character_tone",
+      "label": "Earnest",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Sincere, straightforward, values-forward.",
+      "use_when": ["Helping", "Teaching", "Pledges"],
+      "not_when": ["Cynical digs"],
+      "generator_instruction": "Avoid irony; emphasize intent and care."
+    },
+    {
+      "id": "stoic",
+      "category": "character_tone",
+      "label": "Stoic",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Controlled affect; emotion acknowledged but contained.",
+      "use_when": ["Pain", "Loss", "Duty"],
+      "not_when": ["Outbursts"],
+      "generator_instruction": "State facts and choices; minimize emotive adjectives."
+    },
+    {
+      "id": "impulsive",
+      "category": "character_tone",
+      "label": "Impulsive",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Action before full analysis.",
+      "use_when": ["Snap decisions", "Fights", "Surprises"],
+      "not_when": ["Methodical planning"],
+      "generator_instruction": "Use reaction-first lines; justify after the fact."
+    },
+    {
+      "id": "paranoid_planner",
+      "category": "character_tone",
+      "label": "Paranoid planner",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Redundancy and threat modeling.",
+      "use_when": ["Heists", "Dangerous missions"],
+      "not_when": ["Relaxed banter"],
+      "generator_instruction": "Enumerate risks; add fallback plans."
+    },
+    {
+      "id": "compassionate_healer",
+      "category": "character_tone",
+      "label": "Compassionate healer",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Care-first, triage thinking.",
+      "use_when": ["Medical/aid scenes", "Moral harm decisions"],
+      "not_when": ["Ruthless min-max"],
+      "generator_instruction": "Prioritize safety and dignity in choices."
+    },
+    {
+      "id": "ruthless_pragmatist",
+      "category": "character_tone",
+      "label": "Ruthless pragmatist",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": ["scene","character_default"],
+      "definition": "Outcome over niceties.",
+      "use_when": ["Survival", "High stakes"],
+      "not_when": ["Sentimental beats"],
+      "generator_instruction": "Choose efficient, if harsh, options; minimal remorse text."
+    },
+
+    /* ---------- scene_function ---------- */
+    {"id":"exposition","category":"scene_function","label":"Exposition","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Conveys setting, context, or background knowledge.","use_when":["Readers need facts or orientation"],"not_when":["Action advances plot more than info"],"generator_instruction":"State necessary facts plainly; keep causal links explicit."},
+    {"id":"foreshadowing","category":"scene_function","label":"Foreshadowing","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Hints future events or twists.","use_when":["Planting setups"],"not_when":["Explicit reveals"],"generator_instruction":"Introduce subtle cues tied to future payoffs; avoid resolution."},
+    {"id":"power_scaling_moment","category":"scene_function","label":"Power scaling moment","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Demonstrates a capability increase or threshold.","use_when":["New skill tier","After training"],"not_when":["No before/after delta"],"generator_instruction":"Surface before/after capability delta and its consequences."},
+    {"id":"stat_gain_reveal","category":"scene_function","label":"Stat gain reveal","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Reveals a stat increase or new metric.","use_when":["System feedback scenes"],"not_when":["Ambiguous changes"],"generator_instruction":"Name the stat, the increment, and the trigger."},
+    {"id":"class_choice","category":"scene_function","label":"Class choice","status":"approved","allow_inferred":false,"scope":["scene"],"definition":"A class is selected or rejected.","use_when":["System UI offers class"],"not_when":["Pure speculation"],"generator_instruction":"Show options, criteria, and decision outcome."},
+    {"id":"tutorial_prompt","category":"scene_function","label":"Tutorial prompt","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"In-world walkthrough for a mechanic.","use_when":["First encounter with an interface"],"not_when":["Generic exposition"],"generator_instruction":"Enumerate steps with expected inputs/outputs."},
+    {"id":"training_montage","category":"scene_function","label":"Training montage","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Condensed practice across attempts.","use_when":["Repeated drills"],"not_when":["Single attempt"],"generator_instruction":"Aggregate attempts with outcome trend; minimal filler."},
+    {"id":"investigation","category":"scene_function","label":"Investigation","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Clue gathering and hypothesis testing.","use_when":["Mysteries","Unknown systems"],"not_when":["Action-resolved scenes"],"generator_instruction":"Pose explicit hypotheses; update them with each clue."},
+    {"id":"negotiation","category":"scene_function","label":"Negotiation","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Conflict resolved via dialogue terms.","use_when":["Bargains","Allies/enemies talk terms"],"not_when":["Pure combat"],"generator_instruction":"Clarify stakes, BATNA, and concessions."},
+    {"id":"confrontation","category":"scene_function","label":"Confrontation","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Direct opposition escalates.","use_when":["Rivals collide"],"not_when":["Subtle tension"],"generator_instruction":"Escalate pressure; force a decision or cost."},
+    {"id":"aftermath","category":"scene_function","label":"Aftermath","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Consequences processed post-conflict.","use_when":["Post-battle","Post-reveal"],"not_when":["Setup"],"generator_instruction":"Summarize wounds, resources, and social fallout."},
+    {"id":"worldbuilding_vignette","category":"scene_function","label":"Worldbuilding vignette","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Flavor detail of setting or culture.", "use_when":["Setting matters"],"not_when":["Mechanics focus"],"generator_instruction":"Highlight 1–2 vivid details tied to lore."},
+
+    /* ---------- system_mechanic (line-first) ---------- */
+    {"id":"class_selection_ui","category":"system_mechanic","label":"Class selection UI","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"Visible interface for class selection.","use_when":["UI appears"],"not_when":["Off-screen choice"],"generator_instruction":"Show menu items or selection affordances."},
+    {"id":"skill_description","category":"system_mechanic","label":"Skill description","status":"approved","allow_inferred":false,"scope":["line"],"definition":"Explicit text describing a skill.","use_when":["System displays description"],"not_when":["Player speculation"],"generator_instruction":"Include the canonical phrasing of the description if available."},
+    {"id":"title_award","category":"system_mechanic","label":"Title award","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"System confers a title.","use_when":["Award text present"],"not_when":["Rumors of a title"],"generator_instruction":"Show award text and triggering condition."},
+    {"id":"tier_threshold","category":"system_mechanic","label":"Tier threshold","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"Crossing a tier boundary with systemic effects.","use_when":["Threshold text present or numeric boundary hit"],"not_when":["Vague power creep"],"generator_instruction":"Name threshold, pre/post effects, and triggering metric."},
+    {"id":"cooldown_display","category":"system_mechanic","label":"Cooldown display","status":"approved","allow_inferred":false,"scope":["line"],"definition":"Visible cooldown timer/number.","use_when":["Numbers on screen"],"not_when":["Feeling that it 'takes a while'"],"generator_instruction":"Include explicit numeric cooldowns."},
+    {"id":"resource_pool_change","category":"system_mechanic","label":"Resource pool change","status":"approved","allow_inferred":false,"scope":["line"],"definition":"Numerical change to mana/stamina/etc.","use_when":["Resource value shown"],"not_when":["Vague fatigue"],"generator_instruction":"State pool name and delta."},
+    {"id":"stat_allocation","category":"system_mechanic","label":"Stat allocation","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"Assigning points to stats.","use_when":["Allocation UI or confirmed action"],"not_when":["Speculative planning"],"generator_instruction":"List stat, amount, and immediate effect if shown."},
+    {"id":"quest_prompt","category":"system_mechanic","label":"Quest prompt","status":"approved","allow_inferred":false,"scope":["line"],"definition":"System offers an objective with rewards.","use_when":["Prompt text visible"],"not_when":["Organic goals"],"generator_instruction":"Show objective and reward line."},
+    {"id":"perk_unlock","category":"system_mechanic","label":"Perk unlock","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"System grants a perk/feature.","use_when":["Unlock text shown"],"not_when":["Unclear gain"],"generator_instruction":"Name the perk and the unlock condition."},
+    {"id":"damage_formula_hint","category":"system_mechanic","label":"Damage formula hint","status":"approved","allow_inferred":false,"scope":["line"],"definition":"Direct hint of formulaic damage scaling.","use_when":["Numbers or formula cues appear"],"not_when":["Subjective 'hits harder'"],"generator_instruction":"State variables and proportionality if visible."},
+    {"id":"resistance_interaction","category":"system_mechanic","label":"Resistance interaction","status":"approved","allow_inferred":false,"scope":["line","scene"],"definition":"Element/resistance rules shown by effect changes.","use_when":["Explicit resistance result"],"not_when":["Rumored interactions"],"generator_instruction":"Name elements and observed effect shift."},
+    {"id":"crafting_recipe","category":"system_mechanic","label":"Crafting recipe","status":"approved","allow_inferred":false,"scope":["line"],"definition":"Recipe listing components and outputs.","use_when":["Recipe text visible"],"not_when":["Guesswork"],"generator_instruction":"List components and output, verbatim if possible."},
+
+    /* ---------- optional buckets used sparingly ---------- */
+    {"id":"power_scaling.grade_progression","category":"power_scaling","label":"Grade progression","status":"approved","allow_inferred":true,"scope":["scene"],"definition":"Skill/class grade increases along defined ladder.","use_when":["Grade label changes upward"],"not_when":["Temporary buff"],"generator_instruction":"State old→new grade and trigger."},
+    {"id":"lore_topic.system_terminology","category":"lore_topic","label":"System terminology","status":"approved","allow_inferred":true,"scope":["scene","line"],"definition":"Terminology that explains System semantics.","use_when":["Terms are defined or clarified"],"not_when":["Offhand slang"],"generator_instruction":"Present term and definition succinctly."}
+  ]
+}

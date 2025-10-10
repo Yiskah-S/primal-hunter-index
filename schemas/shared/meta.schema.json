@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/shared/meta.schema.json",
+  "title": "Canonical Sidecar Metadata",
+  "description": "Shared schema for record sidecars (.meta.json).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "record_log": {
+      "type": "array",
+      "description": "Change history entries per record_log contract.",
+      "items": {
+        "type": "object",
+        "required": ["date", "action"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "format": "date-time" },
+          "action": { "type": "string" },
+          "by": { "type": "string" },
+          "note": { "type": "string" },
+          "link": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "description": "Record-level provenance entries.",
+      "items": {
+        "$ref": "https://primal-hunter.local/schemas/shared/source_ref.schema.json"
+      }
+    },
+    "review": {
+      "type": "object",
+      "description": "Optional review metadata for the sidecar.",
+      "additionalProperties": false,
+      "properties": {
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "by": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

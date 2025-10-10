@@ -198,6 +198,57 @@
       "required": [
         "name"
       ]
+    },
+    "tone_tag": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Scene-level tone tags (matches tag registry entries)."
+    },
+    "scene_function": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Scene-level function tags (matches tag registry entries)."
+    },
+    "lines": {
+      "type": "array",
+      "description": "Optional per-line annotations with tone/mechanic tags.",
+      "items": {
+        "type": "object",
+        "required": [
+          "n",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "n": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "text": {
+            "type": "string"
+          },
+          "tone_tag": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "system_mechanic": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
     }
   },
   "additionalProperties": false

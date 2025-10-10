@@ -1,131 +1,123 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Tag Registry v0.3",
-  "description": "Validates canonical tag registry grouped by tag class with lifecycle metadata.",
+  "$id": "https://primal-hunter.local/schemas/tag_registry.schema.json",
+  "title": "Tag Registry",
+  "description": "Canonical tag registry grouped by domain with lifecycle metadata.",
   "type": "object",
-  "$comment": "See docs/contracts/tagging_contract_v0.4.md#2-taggingtag_registryjson",
-  "minProperties": 1,
-  "patternProperties": {
-    "^[a-z0-9_]+$": {
+  "additionalProperties": false,
+  "required": ["version", "tags"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the registry payload."
+    },
+    "tags": {
       "type": "array",
-      "description": "Tag definitions for this namespace (e.g., skills, scene_type, affinity).",
+      "description": "Flat list of tag definitions.",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
-          "tag_id",
-          "tag",
-          "type",
-          "tag_role",
+          "id",
+          "category",
+          "label",
           "status",
-          "approved",
           "allow_inferred",
-          "description"
+          "scope",
+          "definition",
+          "generator_instruction"
         ],
         "properties": {
-          "tag_id": {
-            "allOf": [
-              {
-                "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
-              },
-              {
-                "pattern": "^tag\\."
-              }
-            ],
-            "description": "Stable ID for this tag (e.g. tag.skills.basic_archery)."
-          },
-          "tag": {
+          "id": {
             "type": "string",
-            "pattern": "^[a-z0-9_]+$",
-            "description": "Short slug used inline (e.g. basic_archery)."
+            "pattern": "^[a-z0-9_\\.]+$",
+            "description": "Stable tag identifier (e.g. tag.narrative_style.dry_humor)."
           },
-          "type": {
-            "type": "string",
-            "pattern": "^[a-z0-9_]+$",
-            "description": "Namespace of this tag (e.g. skills, topic, scene_type)."
-          },
-          "tag_role": {
+          "category": {
             "type": "string",
             "enum": [
-              "heuristic",
-              "canonical",
-              "test_data",
-              "inferred_only",
-              "manual_only"
-            ],
-            "description": "Role or function of the tag in the tagging pipeline."
+              "narrative_style",
+              "character_tone",
+              "scene_function",
+              "system_mechanic",
+              "lore_topic",
+              "power_scaling"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable short name."
           },
           "status": {
             "type": "string",
-            "enum": [
-              "candidate",
-              "approved",
-              "rejected"
-            ],
-            "description": "Tag approval status for canon use."
-          },
-          "approved": {
-            "type": "boolean",
-            "description": "Redundant boolean gate; must be true iff status is approved."
+            "enum": ["approved", "candidate", "deprecated"]
           },
           "allow_inferred": {
             "type": "boolean",
-            "description": "If true, tag can be applied via context even if not explicitly quoted."
+            "description": "If true, tag may be applied via inference rather than direct quote."
           },
-          "description": {
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["scene", "line", "character_default"]
+            },
+            "uniqueItems": true,
+            "description": "Where this tag may be applied."
+          },
+          "definition": {
             "type": "string",
-            "description": "Human-readable summary or label."
+            "description": "One-line definition of the tag."
+          },
+          "use_when": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Positive guidance examples."
+          },
+          "not_when": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Negative guidance examples."
+          },
+          "generator_instruction": {
+            "type": "string",
+            "description": "Instruction that changes model behavior when this tag is active."
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["scene_id"],
+              "additionalProperties": false,
+              "properties": {
+                "scene_id": {
+                  "type": "string",
+                  "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "excerpt": {
+                  "type": "string",
+                  "maxLength": 320
+                }
+              }
+            }
           },
           "aliases": {
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^[a-z0-9_]+$"
+              "pattern": "^[a-z0-9_\\.]+$"
             },
             "uniqueItems": true
           },
-          "source": {
-            "type": "string"
-          },
           "notes": {
             "type": "string"
-          },
-          "reviewed_by": {
-            "type": "string"
-          },
-          "reviewed_at": {
-            "type": "string",
-            "format": "date"
           }
-        },
-        "allOf": [
-          {
-            "if": {
-              "properties": {
-                "status": {
-                  "const": "approved"
-                }
-              }
-            },
-            "then": {
-              "properties": {
-                "approved": {
-                  "const": true
-                }
-              }
-            },
-            "else": {
-              "properties": {
-                "approved": {
-                  "const": false
-                }
-              }
-            }
-          }
-        ],
-        "additionalProperties": false
-      },
-      "uniqueItems": true
+        }
+      }
     }
-  },
-  "additionalProperties": false
+  }
 }

@@ -87,7 +87,7 @@ This keeps canon lean and immutable while provenance captures the evidence and c
 
 - `type` is required
   - `scene_id`, `line_start`, `line_end` are required for `type: scene`
-- `quote` is optional but recommended (≤ 400 characters)
+- `quote` is optional but recommended (≤ 320 characters)
 - If `inference_type` is set, `inference_note` is required
 - If `certainty` is `"low"`, review must confirm entry
 
@@ -206,7 +206,7 @@ The official validator (`tools/validate_provenance.py`) enforces the following:
    and `line_end`.  
 2. **Inline provenance ban** — `source_ref` keys are disallowed in canonical payloads outside timelines or `.meta.json`
    sidecars.  
-3. **Record log validation** — If present, `record_log[]` must be an array of objects with `timestamp` and `action`.  
+3. **Record log validation** — If present, `record_log[]` must be an array of objects with `date` and `action`.  
 4. **Soft guidance** — Warn (not fail) if an event contains neither a `quote` nor an `inference` hint.  
 5. **Scene ID regex** — Enforce `^\d{2}\.\d{2}\.\d{2}$` for all `scene_id` strings.  
 

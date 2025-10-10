@@ -80,6 +80,19 @@ contract defines:
 
 ---
 
+## Enforcement Lifecycle
+
+Draft mode (authoring, CI "draft"):
+  - Unapproved (`status:"candidate"`) tags are permitted with WARNINGS.
+
+Export/Promotion (RAG bundle, training, "export"):
+  - Any tag not `status:"approved"` triggers a HARD FAIL.
+  
+Cardinality (enforced in both modes):
+  - narrative_style ≤ 3 (ranked), character_tone ≤ 2 (dominant+accent), scene_function ≤ 2.
+  - system_mechanic is line-level preferred; scene-level allowed only if pervasive.
+
+
 ## 📁 File Roles & Formats
 
 ### 1) `tagging/tag_candidates.json`
@@ -258,7 +271,7 @@ You can drop the source_ref one, since your dedicated source_ref_contract_v1.1.m
         "scene_id": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$" },
         "line_start": { "type": "integer", "minimum": 1 },
         "line_end": { "type": "integer", "minimum": 1 },
-        "quote": { "type": "string", "maxLength": 400 }
+        "quote": { "type": "string", "maxLength": 320 }
       },
       "allOf": [
         {

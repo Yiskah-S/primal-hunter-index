@@ -1,646 +1,834 @@
 {
-  "skills": [
+  "version": "1.0",
+  "tags": [
     {
-      "tag_id": "tag.skills.alchemical_flame",
-      "tag": "alchemical_flame",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Alchemical Flame",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.all_seeing_eye_of_oras",
-      "tag": "all_seeing_eye_of_oras",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "All-Seeing Eye of Oras",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.archers_eye",
-      "tag": "archers_eye",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Archer's Eye",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.basic_archery",
-      "tag": "basic_archery",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Basic Archery",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.basic_one_handed_weapon",
-      "tag": "basic_one_handed_weapon",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Basic One-Handed Weapon",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.basic_stealth",
-      "tag": "basic_stealth",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Basic Stealth",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.basic_tracking",
-      "tag": "basic_tracking",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Basic Tracking",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.basic_trapping",
-      "tag": "basic_trapping",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Basic Trapping",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.blood_of_the_malefic_viper",
-      "tag": "blood_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Blood of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.conjure_spectral_weaponry",
-      "tag": "conjure_spectral_weaponry",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Conjure Spectral Weaponry",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.descending_fang",
-      "tag": "descending_fang",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Descending Fang",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.determination_of_the_ambitious_hunter",
-      "tag": "determination_of_the_ambitious_hunter",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Determination of the Ambitious Hunter",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.dreams_of_the_verdant_lagoon",
-      "tag": "dreams_of_the_verdant_lagoon",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Dreams of the Verdant Lagoon",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.fangs_of_the_malefic_viper",
-      "tag": "fangs_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Fangs of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.gaze_of_the_apex_predator",
-      "tag": "gaze_of_the_apex_predator",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Gaze of the Apex Predator",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.grappling_shot",
-      "tag": "grappling_shot",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Grappling Shot",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.hunters_sight",
-      "tag": "hunters_sight",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Hunter's Sight",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.hunters_tracking",
-      "tag": "hunters_tracking",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Hunter's Tracking",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.malefic_vipers_poison",
-      "tag": "malefic_vipers_poison",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Malefic Viper's Poison",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.moment_of_the_primal_hunter",
-      "tag": "moment_of_the_primal_hunter",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Moment of the Primal Hunter",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.offering",
-      "tag": "offering",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Offering",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.one_step_mile",
-      "tag": "one_step_mile",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "One Step Mile",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.palate_of_the_malefic_viper",
-      "tag": "palate_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Palate of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.pride_of_the_malefic_viper",
-      "tag": "pride_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Pride of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.sagacity_of_the_malefic_viper",
-      "tag": "sagacity_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Sagacity of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.scales_of_the_malefic_viper",
-      "tag": "scales_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Scales of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.sense_of_the_malefic_viper",
-      "tag": "sense_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Sense of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.shroud_of_the_primordial",
-      "tag": "shroud_of_the_primordial",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Shroud of the Primordial",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.stealth_attack",
-      "tag": "stealth_attack",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Stealth Attack",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.the_demonic_contract",
-      "tag": "the_demonic_contract",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "The Demonic Contract",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.touch_of_the_malefic_viper",
-      "tag": "touch_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Touch of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    },
-    {
-      "tag_id": "tag.skills.wings_of_the_malefic_viper",
-      "tag": "wings_of_the_malefic_viper",
-      "type": "skills",
-      "tag_role": "heuristic",
-      "status": "candidate",
-      "approved": false,
-      "allow_inferred": false,
-      "description": "Wings of the Malefic Viper",
-      "source": "manual_review",
-      "notes": "Promoted from tag_candidates.json"
-    }
-  ],
-  "scene_type": [
-    {
-      "tag_id": "tag.scene_type.system_event",
-      "tag": "system_event",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "rule_explainer",
+      "category": "narrative_style",
+      "label": "Rule explainer",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "System broadcast or notification event",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "line"
+      ],
+      "definition": "Expository tone that states or derives a system rule.",
+      "use_when": [
+        "Tutorials",
+        "Mechanic summaries",
+        "Cause\u2192effect statements"
+      ],
+      "not_when": [
+        "Character opinions about rules (use character_tone)"
+      ],
+      "generator_instruction": "Prefer declarative sentences; show premise\u2192consequence; include one explicit rule.",
+      "aliases": [],
+      "examples": []
     },
     {
-      "tag_id": "tag.scene_type.system_initiation",
-      "tag": "system_initiation",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "recursive_logic",
+      "category": "narrative_style",
+      "label": "Recursive logic",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Scene covering initial system onboarding",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Stepwise reasoning where conclusions feed the next step.",
+      "use_when": [
+        "Planning",
+        "Puzzle solving",
+        "Meta-reasoning"
+      ],
+      "not_when": [
+        "Vibes-only monologue"
+      ],
+      "generator_instruction": "Chain short logical clauses with clear therefore/so pivots."
     },
     {
-      "tag_id": "tag.scene_type.class_selection",
-      "tag": "class_selection",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "dry_humor",
+      "category": "narrative_style",
+      "label": "Dry humor",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Class selection moment",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "line"
+      ],
+      "definition": "Understated irony; humor by contrast, not punchline.",
+      "use_when": [
+        "Deadpan observations",
+        "Noting absurdity without emphasis"
+      ],
+      "not_when": [
+        "Mean sarcasm (use 'sardonic')",
+        "Slapstick"
+      ],
+      "generator_instruction": "Insert understated mismatch per paragraph; avoid exclamation or lampshading.",
+      "aliases": [
+        "deadpan_humor"
+      ]
     },
     {
-      "tag_id": "tag.scene_type.tutorial_setup",
-      "tag": "tutorial_setup",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "pulp_grit",
+      "category": "narrative_style",
+      "label": "Pulp grit",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Tutorial configuration or staging scene",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Kinetic action with tactile detail and pace.",
+      "use_when": [
+        "Fights",
+        "Dangerous traversal"
+      ],
+      "not_when": [
+        "Mythic elevation"
+      ],
+      "generator_instruction": "Use short sentences, concrete verbs, sensory detail; low metaphor density."
     },
     {
-      "tag_id": "tag.scene_type.skill_gain",
-      "tag": "skill_gain",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "mythic_elevation",
+      "category": "narrative_style",
+      "label": "Mythic elevation",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Scene where a skill is gained",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Elevated, heroic register; grand metaphor.",
+      "use_when": [
+        "Legendary feats",
+        "Threshold moments"
+      ],
+      "not_when": [
+        "Routine fights or tutorials"
+      ],
+      "generator_instruction": "Broaden imagery; longer periodic sentences; 1\u20132 evocative metaphors per page."
     },
     {
-      "tag_id": "tag.scene_type.skill_mechanics",
-      "tag": "skill_mechanics",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "clinical_report",
+      "category": "narrative_style",
+      "label": "Clinical report",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Scene explaining mechanics",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "line"
+      ],
+      "definition": "Logbook style; measurements and outcomes.",
+      "use_when": [
+        "Experiments",
+        "Cooldown tracking",
+        "Stat deltas"
+      ],
+      "not_when": [
+        "Emotional introspection"
+      ],
+      "generator_instruction": "Tabulate variables\u2192result; use neutral lexicon."
     },
     {
-      "tag_id": "tag.scene_type.mana_use",
-      "tag": "mana_use",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "suspense_tight",
+      "category": "narrative_style",
+      "label": "Tight suspense",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Scene focused on mana usage",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Withheld info, short beats, rising uncertainty.",
+      "use_when": [
+        "Searches",
+        "Stealth",
+        "Unknowns"
+      ],
+      "not_when": [
+        "Open exposition"
+      ],
+      "generator_instruction": "Shorten sentences; end some lines mid-thought; delay reveals."
     },
     {
-      "tag_id": "tag.scene_type.office_life",
-      "tag": "office_life",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "dialogue_heavy",
+      "category": "narrative_style",
+      "label": "Dialogue-heavy",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Pre-System office life scene",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Scene advances primarily via dialogue.",
+      "use_when": [
+        "Negotiations",
+        "Interrogations",
+        "Team planning"
+      ],
+      "not_when": [
+        "Solitary internal monologue"
+      ],
+      "generator_instruction": "Maximize spoken lines; trim narration to beats and cues."
     },
     {
-      "tag_id": "tag.scene_type.character_intro",
-      "tag": "character_intro",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "introspective_lens",
+      "category": "narrative_style",
+      "label": "Introspective lens",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Introduces major character traits",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Interior thought dominates; reflection and self-assessment.",
+      "use_when": [
+        "Aftermaths",
+        "Decisions",
+        "Guilt/doubt"
+      ],
+      "not_when": [
+        "External action focus"
+      ],
+      "generator_instruction": "Weight internal appraisal; reduce external detail density."
     },
     {
-      "tag_id": "tag.scene_type.system_foreshadowing",
-      "tag": "system_foreshadowing",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "engineer_mindset",
+      "category": "character_tone",
+      "label": "Engineer mindset",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Hints about the System before activation",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Operational thinking: variables and procedures.",
+      "use_when": [
+        "Testing skills",
+        "Planning",
+        "Evaluation"
+      ],
+      "not_when": [
+        "Gut-only decisions"
+      ],
+      "generator_instruction": "Translate observations to hypotheses; track results."
     },
     {
-      "tag_id": "tag.scene_type.reflection",
-      "tag": "reflection",
-      "type": "scene_type",
-      "tag_role": "canonical",
+      "id": "sardonic",
+      "category": "character_tone",
+      "label": "Sardonic",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Character reflection or introspection",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
-    }
-  ],
-  "skill_traits": [
-    {
-      "tag_id": "tag.skill_traits.starter",
-      "tag": "starter",
-      "type": "skill_traits",
-      "tag_role": "canonical",
-      "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Starter-tier capability available at tutorial start",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Wry, slightly biting commentary.",
+      "use_when": [
+        "Coping through humor",
+        "Undercutting pomp"
+      ],
+      "not_when": [
+        "Earnest uplift"
+      ],
+      "generator_instruction": "Add dry asides that deflate pretension; keep cruelty low."
     },
     {
-      "tag_id": "tag.skill_traits.proficiency",
-      "tag": "proficiency",
-      "type": "skill_traits",
-      "tag_role": "canonical",
+      "id": "earnest",
+      "category": "character_tone",
+      "label": "Earnest",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Skill affecting proficiency",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Sincere, straightforward, values-forward.",
+      "use_when": [
+        "Helping",
+        "Teaching",
+        "Pledges"
+      ],
+      "not_when": [
+        "Cynical digs"
+      ],
+      "generator_instruction": "Avoid irony; emphasize intent and care."
     },
     {
-      "tag_id": "tag.skill_traits.utility",
-      "tag": "utility",
-      "type": "skill_traits",
-      "tag_role": "canonical",
+      "id": "stoic",
+      "category": "character_tone",
+      "label": "Stoic",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Utility-focused effect",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Controlled affect; emotion acknowledged but contained.",
+      "use_when": [
+        "Pain",
+        "Loss",
+        "Duty"
+      ],
+      "not_when": [
+        "Outbursts"
+      ],
+      "generator_instruction": "State facts and choices; minimize emotive adjectives."
     },
     {
-      "tag_id": "tag.skill_traits.perception",
-      "tag": "perception",
-      "type": "skill_traits",
-      "tag_role": "canonical",
+      "id": "impulsive",
+      "category": "character_tone",
+      "label": "Impulsive",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Perception-focused capability",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
-    }
-  ],
-  "item_traits": [
-    {
-      "tag_id": "tag.item_traits.archery",
-      "tag": "archery",
-      "type": "item_traits",
-      "tag_role": "canonical",
-      "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Archery-related equipment",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Action before full analysis.",
+      "use_when": [
+        "Snap decisions",
+        "Fights",
+        "Surprises"
+      ],
+      "not_when": [
+        "Methodical planning"
+      ],
+      "generator_instruction": "Use reaction-first lines; justify after the fact."
     },
     {
-      "tag_id": "tag.item_traits.weapon",
-      "tag": "weapon",
-      "type": "item_traits",
-      "tag_role": "canonical",
+      "id": "paranoid_planner",
+      "category": "character_tone",
+      "label": "Paranoid planner",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Weapon classification",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Redundancy and threat modeling.",
+      "use_when": [
+        "Heists",
+        "Dangerous missions"
+      ],
+      "not_when": [
+        "Relaxed banter"
+      ],
+      "generator_instruction": "Enumerate risks; add fallback plans."
     },
     {
-      "tag_id": "tag.item_traits.clothing",
-      "tag": "clothing",
-      "type": "item_traits",
-      "tag_role": "canonical",
+      "id": "compassionate_healer",
+      "category": "character_tone",
+      "label": "Compassionate healer",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Clothing or apparel",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Care-first, triage thinking.",
+      "use_when": [
+        "Medical/aid scenes",
+        "Moral harm decisions"
+      ],
+      "not_when": [
+        "Ruthless min-max"
+      ],
+      "generator_instruction": "Prioritize safety and dignity in choices."
     },
     {
-      "tag_id": "tag.item_traits.storage",
-      "tag": "storage",
-      "type": "item_traits",
-      "tag_role": "canonical",
+      "id": "ruthless_pragmatist",
+      "category": "character_tone",
+      "label": "Ruthless pragmatist",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Item providing storage capacity",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "character_default"
+      ],
+      "definition": "Outcome over niceties.",
+      "use_when": [
+        "Survival",
+        "High stakes"
+      ],
+      "not_when": [
+        "Sentimental beats"
+      ],
+      "generator_instruction": "Choose efficient, if harsh, options; minimal remorse text."
     },
     {
-      "tag_id": "tag.item_traits.potion",
-      "tag": "potion",
-      "type": "item_traits",
-      "tag_role": "canonical",
+      "id": "exposition",
+      "category": "scene_function",
+      "label": "Exposition",
       "status": "approved",
-      "approved": true,
-      "allow_inferred": false,
-      "description": "Potion consumable",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Conveys setting, context, or background knowledge.",
+      "use_when": [
+        "Readers need facts or orientation"
+      ],
+      "not_when": [
+        "Action advances plot more than info"
+      ],
+      "generator_instruction": "State necessary facts plainly; keep causal links explicit."
     },
     {
-      "tag_id": "tag.item_traits.mana",
-      "tag": "mana",
-      "type": "item_traits",
-      "tag_role": "canonical",
+      "id": "foreshadowing",
+      "category": "scene_function",
+      "label": "Foreshadowing",
       "status": "approved",
-      "approved": true,
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Hints future events or twists.",
+      "use_when": [
+        "Planting setups"
+      ],
+      "not_when": [
+        "Explicit reveals"
+      ],
+      "generator_instruction": "Introduce subtle cues tied to future payoffs; avoid resolution."
+    },
+    {
+      "id": "power_scaling_moment",
+      "category": "scene_function",
+      "label": "Power scaling moment",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Demonstrates a capability increase or threshold.",
+      "use_when": [
+        "New skill tier",
+        "After training"
+      ],
+      "not_when": [
+        "No before/after delta"
+      ],
+      "generator_instruction": "Surface before/after capability delta and its consequences."
+    },
+    {
+      "id": "stat_gain_reveal",
+      "category": "scene_function",
+      "label": "Stat gain reveal",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Reveals a stat increase or new metric.",
+      "use_when": [
+        "System feedback scenes"
+      ],
+      "not_when": [
+        "Ambiguous changes"
+      ],
+      "generator_instruction": "Name the stat, the increment, and the trigger."
+    },
+    {
+      "id": "class_choice",
+      "category": "scene_function",
+      "label": "Class choice",
+      "status": "approved",
       "allow_inferred": false,
-      "description": "Item interacting with mana",
-      "source": "manual_seed",
-      "notes": "Seeded for validation"
+      "scope": [
+        "scene"
+      ],
+      "definition": "A class is selected or rejected.",
+      "use_when": [
+        "System UI offers class"
+      ],
+      "not_when": [
+        "Pure speculation"
+      ],
+      "generator_instruction": "Show options, criteria, and decision outcome."
+    },
+    {
+      "id": "tutorial_prompt",
+      "category": "scene_function",
+      "label": "Tutorial prompt",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "In-world walkthrough for a mechanic.",
+      "use_when": [
+        "First encounter with an interface"
+      ],
+      "not_when": [
+        "Generic exposition"
+      ],
+      "generator_instruction": "Enumerate steps with expected inputs/outputs."
+    },
+    {
+      "id": "training_montage",
+      "category": "scene_function",
+      "label": "Training montage",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Condensed practice across attempts.",
+      "use_when": [
+        "Repeated drills"
+      ],
+      "not_when": [
+        "Single attempt"
+      ],
+      "generator_instruction": "Aggregate attempts with outcome trend; minimal filler."
+    },
+    {
+      "id": "investigation",
+      "category": "scene_function",
+      "label": "Investigation",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Clue gathering and hypothesis testing.",
+      "use_when": [
+        "Mysteries",
+        "Unknown systems"
+      ],
+      "not_when": [
+        "Action-resolved scenes"
+      ],
+      "generator_instruction": "Pose explicit hypotheses; update them with each clue."
+    },
+    {
+      "id": "negotiation",
+      "category": "scene_function",
+      "label": "Negotiation",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Conflict resolved via dialogue terms.",
+      "use_when": [
+        "Bargains",
+        "Allies/enemies talk terms"
+      ],
+      "not_when": [
+        "Pure combat"
+      ],
+      "generator_instruction": "Clarify stakes, BATNA, and concessions."
+    },
+    {
+      "id": "confrontation",
+      "category": "scene_function",
+      "label": "Confrontation",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Direct opposition escalates.",
+      "use_when": [
+        "Rivals collide"
+      ],
+      "not_when": [
+        "Subtle tension"
+      ],
+      "generator_instruction": "Escalate pressure; force a decision or cost."
+    },
+    {
+      "id": "aftermath",
+      "category": "scene_function",
+      "label": "Aftermath",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Consequences processed post-conflict.",
+      "use_when": [
+        "Post-battle",
+        "Post-reveal"
+      ],
+      "not_when": [
+        "Setup"
+      ],
+      "generator_instruction": "Summarize wounds, resources, and social fallout."
+    },
+    {
+      "id": "worldbuilding_vignette",
+      "category": "scene_function",
+      "label": "Worldbuilding vignette",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Flavor detail of setting or culture.",
+      "use_when": [
+        "Setting matters"
+      ],
+      "not_when": [
+        "Mechanics focus"
+      ],
+      "generator_instruction": "Highlight 1\u20132 vivid details tied to lore."
+    },
+    {
+      "id": "class_selection_ui",
+      "category": "system_mechanic",
+      "label": "Class selection UI",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "Visible interface for class selection.",
+      "use_when": [
+        "UI appears"
+      ],
+      "not_when": [
+        "Off-screen choice"
+      ],
+      "generator_instruction": "Show menu items or selection affordances."
+    },
+    {
+      "id": "skill_description",
+      "category": "system_mechanic",
+      "label": "Skill description",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "Explicit text describing a skill.",
+      "use_when": [
+        "System displays description"
+      ],
+      "not_when": [
+        "Player speculation"
+      ],
+      "generator_instruction": "Include the canonical phrasing of the description if available."
+    },
+    {
+      "id": "title_award",
+      "category": "system_mechanic",
+      "label": "Title award",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "System confers a title.",
+      "use_when": [
+        "Award text present"
+      ],
+      "not_when": [
+        "Rumors of a title"
+      ],
+      "generator_instruction": "Show award text and triggering condition."
+    },
+    {
+      "id": "tier_threshold",
+      "category": "system_mechanic",
+      "label": "Tier threshold",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "Crossing a tier boundary with systemic effects.",
+      "use_when": [
+        "Threshold text present or numeric boundary hit"
+      ],
+      "not_when": [
+        "Vague power creep"
+      ],
+      "generator_instruction": "Name threshold, pre/post effects, and triggering metric."
+    },
+    {
+      "id": "cooldown_display",
+      "category": "system_mechanic",
+      "label": "Cooldown display",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "Visible cooldown timer/number.",
+      "use_when": [
+        "Numbers on screen"
+      ],
+      "not_when": [
+        "Feeling that it 'takes a while'"
+      ],
+      "generator_instruction": "Include explicit numeric cooldowns."
+    },
+    {
+      "id": "resource_pool_change",
+      "category": "system_mechanic",
+      "label": "Resource pool change",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "Numerical change to mana/stamina/etc.",
+      "use_when": [
+        "Resource value shown"
+      ],
+      "not_when": [
+        "Vague fatigue"
+      ],
+      "generator_instruction": "State pool name and delta."
+    },
+    {
+      "id": "stat_allocation",
+      "category": "system_mechanic",
+      "label": "Stat allocation",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "Assigning points to stats.",
+      "use_when": [
+        "Allocation UI or confirmed action"
+      ],
+      "not_when": [
+        "Speculative planning"
+      ],
+      "generator_instruction": "List stat, amount, and immediate effect if shown."
+    },
+    {
+      "id": "quest_prompt",
+      "category": "system_mechanic",
+      "label": "Quest prompt",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "System offers an objective with rewards.",
+      "use_when": [
+        "Prompt text visible"
+      ],
+      "not_when": [
+        "Organic goals"
+      ],
+      "generator_instruction": "Show objective and reward line."
+    },
+    {
+      "id": "perk_unlock",
+      "category": "system_mechanic",
+      "label": "Perk unlock",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "System grants a perk/feature.",
+      "use_when": [
+        "Unlock text shown"
+      ],
+      "not_when": [
+        "Unclear gain"
+      ],
+      "generator_instruction": "Name the perk and the unlock condition."
+    },
+    {
+      "id": "damage_formula_hint",
+      "category": "system_mechanic",
+      "label": "Damage formula hint",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "Direct hint of formulaic damage scaling.",
+      "use_when": [
+        "Numbers or formula cues appear"
+      ],
+      "not_when": [
+        "Subjective 'hits harder'"
+      ],
+      "generator_instruction": "State variables and proportionality if visible."
+    },
+    {
+      "id": "resistance_interaction",
+      "category": "system_mechanic",
+      "label": "Resistance interaction",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line",
+        "scene"
+      ],
+      "definition": "Element/resistance rules shown by effect changes.",
+      "use_when": [
+        "Explicit resistance result"
+      ],
+      "not_when": [
+        "Rumored interactions"
+      ],
+      "generator_instruction": "Name elements and observed effect shift."
+    },
+    {
+      "id": "crafting_recipe",
+      "category": "system_mechanic",
+      "label": "Crafting recipe",
+      "status": "approved",
+      "allow_inferred": false,
+      "scope": [
+        "line"
+      ],
+      "definition": "Recipe listing components and outputs.",
+      "use_when": [
+        "Recipe text visible"
+      ],
+      "not_when": [
+        "Guesswork"
+      ],
+      "generator_instruction": "List components and output, verbatim if possible."
+    },
+    {
+      "id": "power_scaling.grade_progression",
+      "category": "power_scaling",
+      "label": "Grade progression",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene"
+      ],
+      "definition": "Skill/class grade increases along defined ladder.",
+      "use_when": [
+        "Grade label changes upward"
+      ],
+      "not_when": [
+        "Temporary buff"
+      ],
+      "generator_instruction": "State old\u2192new grade and trigger."
+    },
+    {
+      "id": "lore_topic.system_terminology",
+      "category": "lore_topic",
+      "label": "System terminology",
+      "status": "approved",
+      "allow_inferred": true,
+      "scope": [
+        "scene",
+        "line"
+      ],
+      "definition": "Terminology that explains System semantics.",
+      "use_when": [
+        "Terms are defined or clarified"
+      ],
+      "not_when": [
+        "Offhand slang"
+      ],
+      "generator_instruction": "Present term and definition succinctly."
     }
   ]
 }
