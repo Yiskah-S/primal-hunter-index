@@ -72,7 +72,7 @@ Example table row:
 
 ## 4. Links & Cross-References
 
-- Always prefer relative links within the repo (`[Runbook](../runbooks/provenance_workflow_runbook.md)`).
+- Always prefer relative links within the repo (`[Runbook](runbooks/provenance_workflow_runbook.md)`).
 - For tool references, point to the actual script under `tools/`.
 - When adding a new doc, update `docs/README.md` and the `Related Docs` section of peers.
 
@@ -103,8 +103,8 @@ Every doc should end with:
 
 ### Related Docs
 
-- [Example Contract](../contracts/example_contract.md)
-- [Example Runbook](../runbooks/example_runbook.md)
+- [Example Contract](contracts/source_ref_contract_v1.1.md)
+- [Example Runbook](runbooks/projector_usage_runbook.md)
 
 ---
 

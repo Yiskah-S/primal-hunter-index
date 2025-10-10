@@ -1,4 +1,4 @@
-# 📄 `contracts/source_ref_contract.md` (v1.1)
+# 📄 `contracts/source_ref_contract_v1.1.md` (v1.1)
 
 **Status:** Final (subcontract)
 **Updated:** 2025‑10‑07
@@ -116,7 +116,7 @@ but set one number to end bikeshedding.)
 
 - ❌ Embedding `source_ref[]` inside `record.json`
 - ❌ `line_start > line_end`
-- ❌ `scene_id` like `"1-2-3"` (no zero‑padding)
+- ❌ `scene_id` like "BB-CC-SS" (hyphenated) or "1.2.3" (missing zero-padding)
 - ❌ `inference_type` without `inference_note`
 - ❌ Using `user` type for anything that should be `inferred` (be honest)
 
@@ -127,35 +127,118 @@ but set one number to end bikeshedding.)
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://phi/schemas/source_ref.schema.json",
+  "$id": "https://primal-hunter.local/schemas/shared/source_ref.schema.json",
   "title": "source_ref",
+  "$comment": "See docs/contracts/source_ref_contract_v1.1.md#object-definition",
   "type": "object",
-  "required": ["type"],
+  "description": "Canonical citation object proving a fact, event, or tag.",
+  "required": [
+    "type"
+  ],
   "properties": {
-    "type": { "type": "string", "enum": ["scene", "wiki", "user", "inferred", "external"] },
-    "scene_id": { "type": "string", "pattern": "^\\d{2}-\\d{2}-\\d{2}$" },
-    "line_start": { "type": "integer", "minimum": 1 },
-    "line_end": { "type": "integer", "minimum": 1 },
-    "quote": { "type": "string", "maxLength": 320 },
-    "certainty": { "type": "string", "enum": ["low", "medium", "high"] },
-    "inference_type": { "type": "string", "enum": ["character_assumption", "system_behavior_guess", "narrative_foreshadow", "other"] },
-    "inference_note": { "type": "string", "minLength": 3 }
+    "type": {
+      "type": "string",
+      "enum": [
+        "scene",
+        "wiki",
+        "user",
+        "inferred",
+        "external"
+      ],
+      "description": "Where this citation originates."
+    },
+    "scene_id": {
+      "type": "string",
+      "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+      "description": "Scene identifier in dotted BB.CC.SS format (Book, Chapter, Scene)."
+    },
+    "line_start": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "First line number (inclusive) backing this reference."
+    },
+    "line_end": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Last line number (inclusive) backing this reference."
+    },
+    "quote": {
+      "type": "string",
+      "maxLength": 320,
+      "description": "Optional quote excerpt to provide immediate context."
+    },
+    "certainty": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Confidence rating for inferred or external citations."
+    },
+    "inference_type": {
+      "type": "string",
+      "enum": [
+        "character_assumption",
+        "system_behavior_guess",
+        "narrative_foreshadow",
+        "other"
+      ],
+      "description": "Why this reference is inferred rather than explicit."
+    },
+    "inference_note": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Supporting explanation for inferred references."
+    }
   },
   "allOf": [
     {
-      "if": { "properties": { "type": { "const": "scene" } }, "required": ["type"] },
-      "then": { "required": ["scene_id", "line_start", "line_end"] }
-    },
-    {
-      "if": { "required": ["inference_type"] },
-      "then": { "required": ["inference_note"] }
-    },
-    {
-      "if": { "required": ["line_start", "line_end"] },
-      "then": {
+      "if": {
         "properties": {
-          "line_end": { "type": "integer", "minimum": { "$data": "1/line_start" } }
-        }
+          "type": {
+            "const": "scene"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "scene_id",
+          "line_start",
+          "line_end"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "inferred"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "inference_note"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "inference_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "inference_note"
+        ]
       }
     }
   ],

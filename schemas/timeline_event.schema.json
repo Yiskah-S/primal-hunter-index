@@ -168,6 +168,83 @@
       },
       "uniqueItems": true
     },
+    "node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Skill node identifier tied to the event (sn.*)."
+    },
+    "from_node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Starting node for evolution/upgrade events."
+    },
+    "to_node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Destination node for evolution/upgrade events."
+    },
+    "corrects_event_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^ev\\."
+        }
+      ],
+      "description": "Target event identifier corrected by a belief_corrected entry."
+    },
+    "knowledge_delta": {
+      "type": "array",
+      "description": "Structured representation of knowledge updates.",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_path",
+          "new_value"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "field_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "new_value": {},
+          "old_value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "character_view",
+              "narrator_hint",
+              "system_tooltip"
+            ]
+          }
+        }
+      }
+    },
     "observed_params": {
       "type": "object",
       "description": "Inline quantitative or qualitative observations captured by the event.",

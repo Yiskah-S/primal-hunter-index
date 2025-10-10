@@ -34,9 +34,9 @@ def test_valid_timeline_entry_passes():
 		{
 			"event_id": "ev.jake.01.02.01.acquire_meditation",
 			"scene_id": "01.02.01",
+			"node_id": "sn.meditation.rank1",
 			"order": 1,
 			"type": "skill_acquired",
-			"node_id": "sn.meditation.rank1",
 			"knowledge_delta": [
 				{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}
 			],

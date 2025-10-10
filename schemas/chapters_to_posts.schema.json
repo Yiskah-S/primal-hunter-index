@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Chapter \u2194 Post Mapping",
   "type": "object",
-  "$comment": "See docs/runbooks/provenance_workflow.md#records",
+  "$comment": "See docs/runbooks/provenance_workflow_runbook.md#records",
   "$id": "https://primal-hunter.local/schemas/chapters_to_posts.schema.json",
   "patternProperties": {
     "^\\d{4}_Chapter_\\d+_.+$": {
@@ -20,7 +20,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$"
           },
           "minItems": 1
         },

@@ -75,7 +75,7 @@ TODO: define rules for moving from flat → bundle.
 
 ## 7. Related Docs
 
-- [`contracts/provenance_contract.md`](../contracts/provenance_contract.md)
-- [`contracts/record_log_contract.md`](../contracts/record_log_contract.md)
-- [`design/pipeline_flow.md`](pipeline_flow.md)
-- [`design/graph_links.md`](graph_links.md)
+- [`contracts/provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md)
+- [`contracts/record_log_contract_v1.1.md`](../contracts/record_log_contract_v1.1.md)
+- [`design/pipeline_flow_design.md`](pipeline_flow_design.md)
+- [`design/graph_links_design.md`](graph_links_design.md)

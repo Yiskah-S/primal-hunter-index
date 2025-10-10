@@ -5,7 +5,7 @@ Status: Informational
 This document captures the finalized strategy for heuristic tagging, sidecar structure, and provenance management prior
 to the Golden Slice.
 
-See [`tagging_contract.md`](./tagging_contract.md) for all tagging design rules.
+See [`tagging_contract_v0.4.md`](../contracts/tagging_contract_v0.4.md) for all tagging design rules.
 
 ---
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import re
 from pathlib import Path
 
 from core.schema_utils import load_schema, read_json, validate_instance, write_json_atomic
@@ -7,6 +8,7 @@ SKILLS_FILE = Path("records/skills.json")
 SCHEMA_FILE = Path("schemas/character_timeline.schema.json")
 CHAR_DIR = Path("records/characters")
 SCENE_DIR = Path("records/scene_index")
+SCENE_ID_PATTERN = re.compile(r"^\d{2}\.\d{2}\.\d{2}$")
 
 # ---------- small io helpers ----------
 
@@ -60,18 +62,28 @@ def parse_csv_list(raw: str) -> list[str]:
 # ---------- domain helpers ----------
 
 
+def _normalize_scene_id(raw: str) -> str | None:
+	candidate = raw.strip().replace("-", ".")
+	if SCENE_ID_PATTERN.fullmatch(candidate):
+		return candidate
+	return None
+
+
 def resolve_scene_id() -> tuple[str, Path]:
 	"""
 	Ask for a scene_id like '01.02.01', search recursively under records/scene_index.
 	Re-prompt until found.
 	"""
 	while True:
-		scene_id = prompt("Scene ID (e.g., 01.02.01)")
-		for candidate in {scene_id, scene_id.replace('.', '-')}:
-			scene_path = next(SCENE_DIR.rglob(f"{candidate}.json"), None)
-			if scene_path and scene_path.exists():
-				return scene_id, scene_path
-		print(f"❌ scene_id '{scene_id}' not found anywhere under {SCENE_DIR}")
+		raw = prompt("Scene ID (BB.CC.SS)", "01.01.01")
+		normalized = _normalize_scene_id(raw)
+		if not normalized:
+			print("❌ Scene IDs must be zero-padded and dotted, e.g., 01.02.03")
+			continue
+		scene_path = next(SCENE_DIR.rglob(f"{normalized}.json"), None)
+		if scene_path and scene_path.exists():
+			return normalized, scene_path
+		print(f"❌ scene_id '{normalized}' not found anywhere under {SCENE_DIR}")
 
 
 def choose_character() -> str:

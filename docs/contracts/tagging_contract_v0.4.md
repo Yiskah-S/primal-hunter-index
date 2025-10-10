@@ -1,4 +1,4 @@
-# 🏷️ `contracts/tagging_contract.md` (v0.4)
+# 🏷️ `contracts/tagging_contract_v0.4.md`
 
 **Status:** Final (v0.4)
 **Updated:** 2025‑10‑07
@@ -200,7 +200,7 @@ LLMs (Codex) **may not** flip status.
 | `tag_registry.meta.json` | One sidecar per approved tag; must include `source_ref[]` unless `allow_inferred: true`                |
 | Inline tags              | Must resolve to approved registry entry; if applied without literal match, tag must allow inferred use |
 
-> **See also:** [Provenance Contract §9 — Enforcement & Tooling](provenance_contract.md#9-enforcement--tooling)  
+> **See also:** [Provenance Contract §9 — Enforcement & Tooling](provenance_contract_v2.0.md#9-enforcement--tooling)  
 > When `allow_inferred` is `false`, all canonical uses of that tag require a `source_ref[]` quote.  
 > This rule ensures provenance consistency between tag approval and tag application.
 > promote_tags.py must always perform a dry-run validation before any write operation.
@@ -242,9 +242,9 @@ But the idea of keeping fragments inline in docs as reference examples is excell
 
 📍Action:
 
-Copy the tags fragment to the bottom of tagging_contract.md as a fenced JSON reference (under a heading like “Reference Schema Fragment”).
+Copy the tags fragment to the bottom of tagging_contract_v0.4.md as a fenced JSON reference (under a heading like “Reference Schema Fragment”).
 
-You can drop the source_ref one, since your dedicated source_ref_contract.md already embeds that schema inline with better comments.
+You can drop the source_ref one, since your dedicated source_ref_contract_v1.1.md already embeds that schema inline with better comments.
 
 - Appendix — Mini Schemas
   - source_ref fragment:
@@ -295,10 +295,10 @@ You can drop the source_ref one, since your dedicated source_ref_contract.md alr
 
 ## 📎 Related Contracts
 
-- [`provenance_contract.md`](provenance_contract.md)
-- [`record_log_contract.md`](record_log_contract.md)
-- [`source_ref_contract.md`](source_ref_contract.md)
-- [`id_contract.md`](id_contract.md)
+- [`provenance_contract_v2.0.md`](provenance_contract_v2.0.md)
+- [`record_log_contract_v1.1.md`](record_log_contract_v1.1.md)
+- [`source_ref_contract_v1.1.md`](source_ref_contract_v1.1.md)
+- [`id_contract_v1.1.md`](id_contract_v1.1.md)
 - **Related ADR:** [`ADR-0001: Tagging Dual Role & Status`](../adr/ADR-0001-tagging-dual-role-and-status.md) — decision
   record establishing separation of `tag_role` (purpose) and `status` (lifecycle) to clarify approval flows in v0.4.
 
@@ -311,4 +311,4 @@ You can drop the source_ref one, since your dedicated source_ref_contract.md alr
 - [Tagging Process Runbook](../runbooks/tagging_process_runbook.md)
 - [Provenance Contract](./provenance_contract_v2.0.md)
 - [Tag Registry Schema](../design/tagging_overview.md)
-- [tools/promote_tags.py](../tools/promote_tags.py)
+- [tools/promote_tags.py](../../tools/promote_tags.py)

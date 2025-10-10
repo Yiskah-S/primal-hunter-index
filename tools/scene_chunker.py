@@ -4,6 +4,7 @@ from pathlib import Path
 INPUT_DIR = Path("chapters")
 OUTPUT_DIR = Path("raw_scene_chunks")
 OUTPUT_DIR.mkdir(exist_ok=True)
+BOOK_NUMBER = 1  # Adjust to target book when chunking scenes.
 
 
 def chunk_scenes_from_markdown(file_path, chapter_number):
@@ -48,7 +49,7 @@ def process_all_chapters():
 		scene_chunks = chunk_scenes_from_markdown(fname, chapter_number)
 
 		for idx, scene in enumerate(scene_chunks, 1):
-			scene_id = f"{chapter_number}-{idx}"
+			scene_id = f"{BOOK_NUMBER:02d}.{chapter_number:02d}.{idx:02d}"
 			save_scene(scene, scene_id)
 
 

@@ -1,4 +1,4 @@
-# 📜 `contracts/record_log_contract.md` (v1.1)
+# 📜 `contracts/record_log_contract_v1.1.md` (v1.1)
 
 **Status:** Final
 **Updated:** 2025-10-07
@@ -178,8 +178,8 @@ Until it’s approved:
 
 | File                                               | Role                                                              |
 | -------------------------------------------------- | ----------------------------------------------------------------- |
-| [`provenance_contract.md`](provenance_contract.md) | Explains *why* provenance exists and *where* `record_log[]` lives |
-| [`source_ref_contract.md`](source_ref_contract.md) | Defines structure and rules of source citation                    |
+| [`provenance_contract_v2.0.md`](provenance_contract_v2.0.md) | Explains *why* provenance exists and *where* `record_log[]` lives |
+| [`source_ref_contract_v1.1.md`](source_ref_contract_v1.1.md) | Defines structure and rules of source citation                    |
 | `meta.schema.json`                                 | Enforces record_log[], authoring rules, review gating             |
 
 ---
@@ -220,4 +220,4 @@ For enforcement logic, see `tools/validate_provenance.py` — it verifies that e
 - [Provenance Contract](./provenance_contract_v2.0.md)
 - [Source Ref Contract](./source_ref_contract_v1.1.md)
 - [Provenance Workflow Runbook](../runbooks/provenance_workflow_runbook.md)
-- [tools/validate_provenance.py](../tools/validate_provenance.py)
+- [tools/validate_provenance.py](../../tools/validate_provenance.py)

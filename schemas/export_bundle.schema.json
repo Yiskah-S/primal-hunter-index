@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal-hunter.local/schemas/export_bundle.schema.json",
+  "title": "Export Bundle Row",
+  "type": "object",
+  "description": "Canonical JSONL row produced by export_rag_bundle.py.",
+  "required": [
+    "id",
+    "text",
+    "span",
+    "weights",
+    "tags",
+    "source_ids",
+    "provenance"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]+$",
+      "description": "Stable identifier for the bundle row."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary text payload for retrieval."
+    },
+    "span": {
+      "type": "object",
+      "required": [
+        "scene_id",
+        "line_start",
+        "line_end"
+      ],
+      "properties": {
+        "scene_id": {
+          "type": "string",
+          "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+          "description": "Scene identifier anchoring the excerpt."
+        },
+        "line_start": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Inclusive starting line number."
+        },
+        "line_end": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Inclusive ending line number."
+        },
+        "anchor_hash": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{6,64}$",
+          "description": "Optional stable hash to re-anchor derived spans."
+        }
+      },
+      "additionalProperties": false
+    },
+    "weights": {
+      "type": "object",
+      "required": [
+        "certainty",
+        "tone",
+        "mechanics"
+      ],
+      "properties": {
+        "certainty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score for the content."
+        },
+        "tone": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weight describing narrative tone relevance."
+        },
+        "mechanics": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weight describing system/mechanics relevance."
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9._-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Lightweight labels applied to the row."
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9._:-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Identifiers of source documents contributing to this row."
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "https://primal-hunter.local/schemas/shared/source_ref.schema.json"
+      },
+      "minItems": 1,
+      "description": "Source citations that back the exported text."
+    }
+  },
+  "additionalProperties": false
+}

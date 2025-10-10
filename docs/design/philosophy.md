@@ -94,7 +94,7 @@ It doesn’t just store Zogarth’s universe — it teaches the machine how to *
 
 For a deeper dive into the reusable pattern behind this architecture, see:
 
-📄 [`pattern_grounded_hallucination.md`](docs/design/pattern_grounded_hallucination.md)
+📄 [`pattern_grounded_hallucination.md`](pattern_grounded_hallucination.md)
 
 ---
 

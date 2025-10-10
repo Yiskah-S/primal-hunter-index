@@ -208,9 +208,9 @@ When a fact has been seen multiple times or explicitly stated by the System, it 
 
 ## See Also
 
-- [`contracts/provenance_contract.md`](../contracts/provenance_contract.md)
-- [`contracts/record_log_contract.md`](../contracts/record_log_contract.md)
-- [`contracts/source_ref_contract.md`](../contracts/source_ref_contract.md)
+- [`contracts/provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md)
+- [`contracts/record_log_contract_v1.1.md`](../contracts/record_log_contract_v1.1.md)
+- [`contracts/source_ref_contract_v1.1.md`](../contracts/source_ref_contract_v1.1.md)
 
 ---
 
@@ -221,4 +221,4 @@ When a fact has been seen multiple times or explicitly stated by the System, it 
 - [Provenance Contract](../contracts/provenance_contract_v2.0.md)
 - [Source Ref Contract](../contracts/source_ref_contract_v1.1.md)
 - [Record Log Contract](../contracts/record_log_contract_v1.1.md)
-- [tools/validate_provenance.py](../tools/validate_provenance.py)
+- [tools/validate_provenance.py](../../tools/validate_provenance.py)

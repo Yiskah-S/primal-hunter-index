@@ -221,10 +221,10 @@ Violations:
 
 | File                                               | Purpose                                     |
 | -------------------------------------------------- | ------------------------------------------- |
-| [`record_log_contract.md`](record_log_contract.md) | Format + rationale for `record_log[]`       |
-| [`source_ref_contract.md`](source_ref_contract.md) | Legacy source_ref structure                 |
-| [`tagging_contract.md`](tagging_contract.md)       | Tag structure, approval status, usage rules |
-| [`tone_contract.md`](PH_universe_rules.md)         | Writing constraints and tone logic          |
+| [`record_log_contract_v1.1.md`](record_log_contract_v1.1.md) | Format + rationale for `record_log[]`       |
+| [`source_ref_contract_v1.1.md`](source_ref_contract_v1.1.md) | Legacy source_ref structure                 |
+| [`tagging_contract_v0.4.md`](tagging_contract_v0.4.md)       | Tag structure, approval status, usage rules |
+| [`tone_contract.md`](../runbooks/tone_contract.md)           | Writing constraints and tone logic          |
 
 ---
 
@@ -259,4 +259,4 @@ Only `"approved"` records are eligible for downstream RAG or fine-tuning.
 - [Source Ref Contract](./source_ref_contract_v1.1.md)
 - [Record Log Contract](./record_log_contract_v1.1.md)
 - [Provenance Workflow Runbook](../runbooks/provenance_workflow_runbook.md)
-- [tools/validate_provenance.py](../tools/validate_provenance.py)
+- [tools/validate_provenance.py](../../tools/validate_provenance.py)

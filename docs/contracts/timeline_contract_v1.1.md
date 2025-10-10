@@ -251,90 +251,370 @@ Validators must assert:
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://phi/schemas/timeline_event.schema.json",
+  "$id": "https://primal-hunter.local/schemas/timeline_event.schema.json",
   "title": "Timeline Event",
+  "$comment": "See docs/contracts/timeline_contract_v1.1.md#3-event-object-fields",
   "type": "object",
-  "additionalProperties": false,
-  "required": ["event_id", "scene_id", "order", "type", "source_ref"],
+  "required": [
+    "event_id",
+    "scene_id",
+    "order",
+    "type",
+    "source_ref"
+  ],
   "properties": {
     "event_id": {
       "type": "string",
-      "pattern": "^ev\\.[a-z0-9_]+\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[a-z0-9_]+$"
+      "pattern": "^ev\\.[a-z0-9_]+\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[a-z0-9_]+$",
+      "description": "Stable event identifier (ev.<character>.<BB>.<CC>.<SS>.<slug>)."
     },
-    "scene_id": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$" },
-    "order": { "type": "integer", "minimum": 1 },
+    "scene_id": {
+      "type": "string",
+      "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+      "description": "Canonical scene identifier (dotted BB.CC.SS)."
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-based ordering of events within the scene."
+    },
     "type": {
       "type": "string",
       "enum": [
-        "skill_acquired", "skill_observation", "skill_evolved", "skill_upgraded",
-        "information_received", "belief_corrected", "memory_lost",
-        "system_message_broadcast", "class_changed", "title_granted", "quest_completed",
-        "conversation", "training_session", "deal_made", "combat_action", "location_discovered"
-      ]
-    },
-    "node_id": { "type": "string", "pattern": "^sn\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$" },
-    "from_node_id": { "type": "string", "pattern": "^sn\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$" },
-    "to_node_id": { "type": "string", "pattern": "^sn\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$" },
-    "from_id": { "type": "string", "pattern": "^(pc|npc|sys)\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$" },
-    "topic_id": { "type": "string", "pattern": "^(sf|sn|eq|cl|rc|loc)\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$" },
-    "corrects_event_id": { "type": "string", "pattern": "^ev\\.[a-z0-9_]+\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[a-z0-9_]+$" },
-    "knowledge_delta": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["field_path", "new_value"],
-        "additionalProperties": false,
-        "properties": {
-          "field_path": { "type": "string", "minLength": 1 },
-          "new_value": {},
-          "old_value": {},
-          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
-          "scope": { "type": "string", "enum": ["character_view", "narrator_hint", "system_tooltip"] }
-        }
-      }
-    },
-    "tags": {
-      "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
-      "uniqueItems": true
-    },
-    "notes": { "type": "string" },
-    "source_ref": {
-      "type": "array",
-      "$ref": "https://phi/schemas/source_ref.schema.json"
+        "insight_gained",
+        "belief_corrected",
+        "memory_lost",
+        "information_received",
+        "skill_acquired",
+        "skill_observation",
+        "skill_evolved",
+        "skill_upgraded",
+        "class_changed",
+        "title_granted",
+        "quest_completed",
+        "combat_action",
+        "item_crafted",
+        "location_discovered",
+        "system_message_broadcast",
+        "conversation",
+        "training_session",
+        "deal_made",
+        "bond_formed",
+        "correction"
+      ],
+      "description": "Controlled event category per the timeline contract."
     },
     "epistemic_at": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["scene_id"],
+      "description": "Overrides for when the character actually knew this (defaults to scene_id).",
+      "required": [
+        "scene_id"
+      ],
       "properties": {
-        "scene_id": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$" }
+        "scene_id": {
+          "type": "string",
+          "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+          "description": "Epistemic clock anchor (dotted BB.CC.SS)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "source_ref": {
+      "$ref": "https://primal-hunter.local/schemas/shared/provenance.schema.json#/$defs/source_ref_array",
+      "description": "Provenance citations for this event."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Semantic tags applied to this event; must map to the tag registry.",
+      "items": {
+        "type": "string",
+        "pattern": "^tag\\.[a-z0-9_]+(\\.[a-z0-9_]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional human-readable commentary for the event."
+    },
+    "related_to": {
+      "type": "array",
+      "description": "References to other timeline events that relate to this entry.",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+          },
+          {
+            "pattern": "^ev\\."
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "skill_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Associated skill node identifier (sn.*) when applicable."
+    },
+    "family_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sf\\."
+        }
+      ],
+      "description": "Associated skill family identifier (sf.*) when applicable."
+    },
+    "class_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^cl\\."
+        }
+      ],
+      "description": "Class identifier referenced by the event."
+    },
+    "equipment_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^eq\\."
+        }
+      ],
+      "description": "Equipment identifier referenced by the event."
+    },
+    "location_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^loc\\."
+        }
+      ],
+      "description": "Location identifier referenced by the event."
+    },
+    "character_ids": {
+      "type": "array",
+      "description": "Additional characters involved in the event (pc.* IDs).",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+          },
+          {
+            "pattern": "^pc\\."
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Skill node identifier tied to the event (sn.*)."
+    },
+    "from_node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Starting node for evolution/upgrade events."
+    },
+    "to_node_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^sn\\."
+        }
+      ],
+      "description": "Destination node for evolution/upgrade events."
+    },
+    "corrects_event_id": {
+      "allOf": [
+        {
+          "$ref": "https://primal-hunter.local/schemas/shared/id.schema.json"
+        },
+        {
+          "pattern": "^ev\\."
+        }
+      ],
+      "description": "Target event identifier corrected by a belief_corrected entry."
+    },
+    "knowledge_delta": {
+      "type": "array",
+      "description": "Structured representation of knowledge updates.",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_path",
+          "new_value"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "field_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "new_value": {},
+          "old_value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "character_view",
+              "narrator_hint",
+              "system_tooltip"
+            ]
+          }
+        }
       }
     },
-    "diegetic_hint": {
+    "observed_params": {
       "type": "object",
+      "description": "Inline quantitative or qualitative observations captured by the event.",
+      "patternProperties": {
+        "^[a-z0-9_.]+$": {
+          "type": [
+            "number",
+            "string",
+            "boolean"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific payload for contract-aligned downstream tooling.",
       "additionalProperties": true
     }
   },
   "allOf": [
-    { "if": { "properties": { "type": { "const": "skill_acquired" } } }, "then": { "required": ["node_id", "knowledge_delta"] } },
-    { "if": { "properties": { "type": { "const": "skill_observation" } } }, "then": { "required": ["node_id", "knowledge_delta"] } },
     {
-      "if": { "properties": { "type": { "const": "skill_evolved" } } },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "skill_evolved"
+          }
+        }
+      },
       "then": {
-        "required": ["node_id", "knowledge_delta"],
-        "not": { "anyOf": [ { "required": ["from_node_id"] }, { "required": ["to_node_id"] } ] }
+        "required": [
+          "node_id",
+          "knowledge_delta"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "from_node_id"
+              ]
+            },
+            {
+              "required": [
+                "to_node_id"
+              ]
+            }
+          ]
+        }
       }
     },
     {
-      "if": { "properties": { "type": { "const": "skill_upgraded" } } },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "skill_upgraded"
+          }
+        }
+      },
       "then": {
-        "required": ["from_node_id", "to_node_id"],
-        "not": { "required": ["node_id"] }
+        "required": [
+          "from_node_id",
+          "to_node_id"
+        ],
+        "not": {
+          "required": [
+            "node_id"
+          ]
+        }
       }
     },
-    { "if": { "properties": { "type": { "const": "belief_corrected" } } }, "then": { "required": ["corrects_event_id", "knowledge_delta"] } }
-  ]
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "skill_acquired"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "node_id",
+          "knowledge_delta"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "skill_observation"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "node_id",
+          "knowledge_delta"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "belief_corrected"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "corrects_event_id",
+          "knowledge_delta"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": false
 }
 ```
 

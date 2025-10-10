@@ -1,4 +1,4 @@
-# 🆔 `contracts/id_contract.md` (v1.1)
+# 🆔 `contracts/id_contract_v1.1.md` (v1.1)
 
 **Status:** Final
 **Updated:** 2025-10-07
@@ -202,9 +202,9 @@ Enforced by: `tools/validate_ids.py`
 | Contract                 | Role                                                      |
 | ------------------------ | --------------------------------------------------------- |
 | `provenance_contract.md` | Canon records must have `id`; provenance is tracked by ID |
-| `record_log_contract.md` | History is tracked per-ID in `.meta.json`                 |
-| `source_ref_contract.md` | Quotes justify the contents of the record for each ID     |
-| `tagging_contract.md`    | Tags are defined and approved using IDed keys             |
+| `record_log_contract_v1.1.md` | History is tracked per-ID in `.meta.json`                 |
+| `source_ref_contract_v1.1.md` | Quotes justify the contents of the record for each ID     |
+| `tagging_contract_v0.4.md`    | Tags are defined and approved using IDed keys             |
 
 ---
 
@@ -241,7 +241,7 @@ This is not just a naming convention. This is your **referential integrity layer
 - [Skills Contract](./skills_contract_v1.0.md)
 - [Provenance Contract](./provenance_contract_v2.0.md)
 - [ID Usage Guidelines](../design/storage_layout_design.md)
-- [tools/validate_all_metadata.py](../tools/validate_all_metadata.py)
+- [tools/validate_all_metadata.py](../../tools/validate_all_metadata.py)
 
 
 Exactly — `cf.*` and `ci.*` were just shorthand to illustrate the distinction between *concept* and *instance.*

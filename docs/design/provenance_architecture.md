@@ -162,11 +162,11 @@ tools/projector.py --character pc.jake --through 03.14.01
 
 ## 📚 Related Docs
 
-- [`contracts/id_contract.md`](../contracts/id_contract.md)
-- [`contracts/record_log_contract.md`](../contracts/record_log_contract.md)
-- [`contracts/provenance_contract.md`](../contracts/provenance_contract.md)
-- [`design/storage_layout.md`](storage_layout.md)
-- [`design/graph_links.md`](graph_links.md)
-- [`design/pipeline_flow.md`](pipeline_flow.md)
+- [`contracts/id_contract_v1.1.md`](../contracts/id_contract_v1.1.md)
+- [`contracts/record_log_contract_v1.1.md`](../contracts/record_log_contract_v1.1.md)
+- [`contracts/provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md)
+- [`design/storage_layout_design.md`](storage_layout_design.md)
+- [`design/graph_links_design.md`](graph_links_design.md)
+- [`design/pipeline_flow_design.md`](pipeline_flow_design.md)
 
 ---

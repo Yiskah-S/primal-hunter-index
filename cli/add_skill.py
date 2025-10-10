@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from core.schema_utils import load_schema, read_json, validate_instance, write_j
 SKILLS_FILE = Path("records/skills.json")
 SCHEMA_FILE = Path("schemas/skills.schema.json")
 SCENES_DIR = Path("records/scene_index")
+SCENE_ID_PATTERN = re.compile(r"^\d{2}\.\d{2}\.\d{2}$")
 
 # --- enums / maps -------------------------------------------------------------
 
@@ -170,17 +172,27 @@ def prompt_rarity() -> str:
 		print(f"❌ Invalid rarity: '{raw}'. Must be one of: {', '.join(RARITY_ENUM)}")
 
 
+def _normalize_scene_id(raw: str) -> str | None:
+	candidate = raw.strip().replace("-", ".")
+	if SCENE_ID_PATTERN.fullmatch(candidate):
+		return candidate
+	return None
+
+
 def prompt_scene_id() -> tuple[str, Path]:
 	"""
 	Resolves a scene_id like '01.01.01' anywhere under records/scene_index/**.
 	"""
 	while True:
-		scene_id = prompt("Scene ID", "01.01.01")
-		for candidate in {scene_id, scene_id.replace('.', '-')}:
-			scene_file = next(SCENES_DIR.rglob(f"{candidate}.json"), None)
-			if scene_file and scene_file.exists():
-				return scene_id, scene_file
-		print(f"❌ scene_id '{scene_id}' not found under {SCENES_DIR} (searched recursively).")
+		raw = prompt("Scene ID (BB.CC.SS)", "01.01.01")
+		normalized = _normalize_scene_id(raw)
+		if not normalized:
+			print("❌ Scene IDs must be zero-padded and dotted, e.g., 01.02.03")
+			continue
+		scene_file = next(SCENES_DIR.rglob(f"{normalized}.json"), None)
+		if scene_file and scene_file.exists():
+			return normalized, scene_file
+		print(f"❌ scene_id '{normalized}' not found under {SCENES_DIR} (searched recursively).")
 
 
 def build_resource_cost() -> dict | None:

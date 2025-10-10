@@ -85,7 +85,7 @@ python3 -m tools.validate_provenance
 1. Canonical payloads in `records/**.json` do **not** include inline `source_ref[]`.
 1. `.meta.json` sidecars carry valid `record_log[]` arrays.
 1. Warn if events lack `quote` or `inference` context.
-1. Enforce `scene_id` regex `^\d{2}-\d{2}-\d{2}$`.
+1. Enforce `scene_id` regex `^\d{2}\.\d{2}\.\d{2}$`.
 
 ---
 
@@ -202,11 +202,11 @@ $ make validate-provenance
 
 ## 🔗 Related Docs
 
-- [`contracts/tagging_contract.md`](../contracts/tagging_contract.md)
-- [`contracts/provenance_contract.md`](../contracts/provenance_contract.md)
-- [`contracts/record_log_contract.md`](../contracts/record_log_contract.md)
-- [`docs/runbooks/projector_usage.md`](./projector_usage.md)
-- [`docs/design/pipeline_flow.md`](../design/pipeline_flow.md)
+- [`contracts/tagging_contract_v0.4.md`](../contracts/tagging_contract_v0.4.md)
+- [`contracts/provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md)
+- [`contracts/record_log_contract_v1.1.md`](../contracts/record_log_contract_v1.1.md)
+- [`docs/runbooks/projector_usage.md`](projector_usage_runbook.md)
+- [`docs/design/pipeline_flow.md`](../design/pipeline_flow_design.md)
 
 ---
 
@@ -215,4 +215,4 @@ $ make validate-provenance
 - [Tagging Contract](../contracts/tagging_contract_v0.4.md)
 - [Provenance Contract](../contracts/provenance_contract_v2.0.md)
 - [Tagging Overview Design](../design/tagging_overview.md)
-- [tools/promote_tags.py](../tools/promote_tags.py)
+- [tools/promote_tags.py](../../tools/promote_tags.py)

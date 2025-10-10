@@ -8,7 +8,7 @@
 **Consequences:** …
 
 This file is a quick checklist / cheat sheet for tagging logic.
-For full rules, see [`tagging_contract.md`](./tagging_contract.md)
+For full rules, see [`tagging_contract_v0.4.md`](../contracts/tagging_contract_v0.4.md)
 
 ---
 
@@ -49,8 +49,8 @@ For full rules, see [`tagging_contract.md`](./tagging_contract.md)
 - Registry must validate against `tag_registry.schema.json`
 - Scene tags validated by `$ref: tags.schema.json`
 
-**Superseded By:** [`contracts/tagging_contract.md`](../contracts/tagging_contract.md)  
+**Superseded By:** [`contracts/tagging_contract_v0.4.md`](../contracts/tagging_contract_v0.4.md)  
 **Decision Summary:** Tag lifecycle (`status`) is decoupled from purpose (`tag_role`)
 to support heuristic vs canonical flows in tagging pipeline v0.4. For implementation details, see
-[`tagging_contract.md`](../contracts/tagging_contract.md) v0.4 and
-[`provenance_contract.md`](../contracts/provenance_contract.md) for how tags are quote-backed.
+[`tagging_contract_v0.4.md`](../contracts/tagging_contract_v0.4.md) and
+[`provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md) for how tags are quote-backed.

@@ -37,6 +37,7 @@ SOURCE_REF_ALLOWED_ROOTS = {
 	Path("tagging"),
 }
 SCENE_ID_PATTERN = re.compile(r"^\d{2}\.\d{2}\.\d{2}$")
+MAX_QUOTE_LENGTH = 320
 
 
 @dataclass
@@ -81,6 +82,7 @@ def _check_source_ref_fields(
 	scene_id = ref.get("scene_id")
 	line_start = ref.get("line_start")
 	line_end = ref.get("line_end")
+	quote = ref.get("quote")
 
 	if not isinstance(ref, dict):
 		errors.append(Finding(_normalize_path(path), f"{ref_prefix} must be an object"))
@@ -102,6 +104,13 @@ def _check_source_ref_fields(
 		errors.append(
 			Finding(
 				_normalize_path(path), f"{ref_prefix}.line_start ({line_start}) cannot exceed line_end ({line_end})"
+			)
+		)
+	if isinstance(quote, str) and len(quote) > MAX_QUOTE_LENGTH:
+		errors.append(
+			Finding(
+				_normalize_path(path),
+				f"{ref_prefix}.quote exceeds {MAX_QUOTE_LENGTH} characters (len={len(quote)})",
 			)
 		)
 
@@ -166,7 +175,8 @@ def _iter_canonical_files() -> Iterable[Path]:
 			continue
 		if name in ALLOWED_INLINE_FILENAMES:
 			continue
-		if any(_is_relative_to(json_path, root) for root in SOURCE_REF_ALLOWED_ROOTS):
+		allow_inline_root = any(_is_relative_to(json_path, root) for root in SOURCE_REF_ALLOWED_ROOTS)
+		if allow_inline_root and name != "record.json":
 			continue
 		yield json_path
 

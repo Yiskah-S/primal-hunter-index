@@ -102,10 +102,10 @@ This feels like *Primal Hunter*: sharp, systemic, internally consistent, and **e
 
 | Category | File |
 |-----------|------|
-| **Provenance & Canon** | [`../contracts/provenance_contract.md`](../contracts/provenance_contract.md) |
-| **Record & ID Systems** | [`../contracts/id_contract.md`](../contracts/id_contract.md) |
-| **Narrative Workflow** | [`../runbooks/provenance_workflow.md`](../runbooks/provenance_workflow.md) |
-| **Story Logic** | [`../overview/context_summary.md`](../overview/context_summary.md) |
+| **Provenance & Canon** | [`../contracts/provenance_contract_v2.0.md`](../contracts/provenance_contract_v2.0.md) |
+| **Record & ID Systems** | [`../contracts/id_contract_v1.1.md`](../contracts/id_contract_v1.1.md) |
+| **Narrative Workflow** | [`../runbooks/provenance_workflow.md`](../runbooks/provenance_workflow_runbook.md) |
+| **Story Logic** | [`../overview/context_summary.md`](../design/context_summary_design.md) |
 
 ---
 
