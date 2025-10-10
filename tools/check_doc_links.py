@@ -58,9 +58,7 @@ def collect_broken_links(docs_root: Path) -> list[str]:
 			if target_path is None:
 				return
 			if not target_path.exists():
-				errors.append(
-					f"{_relative(md_path)}: link '{label}' points to missing file '{_relative(target_path)}'"
-				)
+				errors.append(f"{_relative(md_path)}: link '{label}' points to missing file '{_relative(target_path)}'")
 
 		for label, target in INLINE_LINK_RE.findall(text):
 			_record(target, label)

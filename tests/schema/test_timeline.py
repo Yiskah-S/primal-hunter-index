@@ -37,9 +37,7 @@ def test_valid_timeline_entry_passes():
 			"node_id": "sn.meditation.rank1",
 			"order": 1,
 			"type": "skill_acquired",
-			"knowledge_delta": [
-				{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}
-			],
+			"knowledge_delta": [{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}],
 			"tags": ["tag.timeline.system_message"],
 			"source_ref": [{"type": "scene", "scene_id": "01.02.01", "line_start": 100, "line_end": 120}],
 		}

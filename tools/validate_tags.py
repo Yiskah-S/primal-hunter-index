@@ -106,9 +106,7 @@ def validate_tags(
 
 			status = reg_entry.get("status")
 			if status == "candidate":
-				message = (
-					f"{record_file}: {pointer} references candidate tag '{reg_entry.get('tag_id', tag_value)}'"
-				)
+				message = f"{record_file}: {pointer} references candidate tag '{reg_entry.get('tag_id', tag_value)}'"
 				if mode == "export":
 					errors.append(message)
 				else:

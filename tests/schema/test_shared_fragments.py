@@ -58,9 +58,7 @@ def test_timeline_event_schema_enforces_enum_values():
 		"scene_id": "01.02.01",
 		"order": 1,
 		"type": "skill_acquired",
-		"knowledge_delta": [
-			{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}
-		],
+		"knowledge_delta": [{"field_path": "rarity", "new_value": "Inferior", "confidence": 1.0}],
 		"tags": ["tag.timeline.system_message"],
 		"source_ref": [{"type": "scene", "scene_id": "01.02.01", "line_start": 12, "line_end": 14}],
 	}
